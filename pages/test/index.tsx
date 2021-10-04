@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-const index = () => {
+const Test = () => {
 const [test, setTest] = useState(0);
   return (
     <div>
@@ -18,4 +18,4 @@ const [test, setTest] = useState(0);
   )
 }
 
-export default index;
+export default Test;
