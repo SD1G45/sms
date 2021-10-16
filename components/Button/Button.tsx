@@ -1,9 +1,10 @@
 import React from "react";
 import { StyledButton } from "./styles";
+import { ButtonProps } from "./types";
 
-const Button: React.FC<React.HTMLProps<HTMLButtonElement>> = ({ ...other }) => {
+const Button: React.FC<ButtonProps> = ({ invert, ...other }) => {
   return (
-    <StyledButton invert={true} {...other}>
+    <StyledButton invert={invert} {...other}>
       Hello
     </StyledButton>
   );
