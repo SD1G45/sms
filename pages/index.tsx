@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import TextField from "../components/TextField";
 import Checkbox from "../components/Checkbox";
+import Selector from "../components/Selector";
 
 const Center = styled.div`
   display: flex;
@@ -13,31 +14,29 @@ const Center = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
+  flex-direction: column;
 `;
 
+const options = [
+  { name: "BOGO Chicken Sandwhich", id: "1" },
+  { name: "10% Off Entire Order", id: "2" },
+  { name: "Free Fries", id: "3" },
+  { name: "Free Drinks", id: "4" },
+];
+
 const Home: NextPage = () => {
-  const [text, setText] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedId, setSelectedId] = useState("");
   return (
     <Center style={{ width: 400 }}>
-      <Card>
-        {/* <Button style={{ width: 200 }} /> */}
-        {/* <TextField
-          error={true}
-          errorMessage="This field is required"
-          value={text}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setText(event.target.value)
-          }
-        /> */}
-        <Checkbox
-          label="cool"
-          checked={checked}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setChecked(event.target.checked)
-          }
-        />
-      </Card>
+      <Selector
+        options={options}
+        searchValue={searchValue}
+        onSearchValueChange={(id) => setSearchValue(id)}
+        onSelect={(id) => setSelectedId(id)}
+        selectedId={selectedId}
+      />
+      test
     </Center>
   );
 };
