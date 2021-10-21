@@ -25,8 +25,8 @@ const options = [
 ];
 
 const Home: NextPage = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [selectedId, setSelectedId] = useState("");
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   return (
     <Center style={{ width: 400 }}>
       <Selector
@@ -36,7 +36,6 @@ const Home: NextPage = () => {
         onSelect={(id) => setSelectedId(id)}
         selectedId={selectedId}
       />
-      test
     </Center>
   );
 };
