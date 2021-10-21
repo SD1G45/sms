@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Card from "../Card";
 import SearchBar from "../SearchBar";
-import TextField from "../TextField";
 
 export const SelectorContainer = styled.div`
   display: flex;
