@@ -6,37 +6,77 @@ import Card from "../components/Card";
 import TextField from "../components/TextField";
 import Checkbox from "../components/Checkbox";
 import Selector from "../components/Selector";
+import MultiSelector from "../components/MultiSelector";
 
 const Center = styled.div`
   display: flex;
   height: 100vh;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 20px;
   flex-direction: column;
 `;
 
 const options = [
-  { name: "BOGO Chicken Sandwhich", id: "1" },
-  { name: "10% Off Entire Order", id: "2" },
-  { name: "Free Fries", id: "3" },
-  { name: "Free Drinks", id: "4" },
+  { name: "VIP List", id: "1" },
+  { name: "Main List", id: "2" },
+  { name: "Super VIP List", id: "3" },
+];
+
+const selectorOptions = [
+  { name: "BOGO", id: "1" },
+  { name: "Free Fries", id: "2" },
+  { name: "Free Drinks", id: "2" },
 ];
 
 const Home: NextPage = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [selectedId, setSelectedId] = useState("");
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [selectedOptions, setSelectedOptions] = useState<
+    { name: string; id: string }[]
+  >([]);
+
+  const handleRemove = (id: string) => {
+    setSelectedOptions(selectedOptions.filter((value) => value.id !== id));
+  };
+
+  const handleSelect = (id: string, name: string) => {
+    setSelectedOptions([{ id, name }, ...selectedOptions]);
+  };
+
+  const filteredOptions = options.filter(
+    ({ id: id1 }) => !selectedOptions.some(({ id: id2 }) => id2 === id1)
+  );
+
+  const [selectorSearch, setSelectorSearch] = useState("");
+  const [selectedId, setSelectedId] = useState<string | null>("");
+
+  const [checked, setChecked] = useState(false);
+
   return (
     <Center style={{ width: 400 }}>
-      <Selector
-        options={options}
+      <MultiSelector
+        options={filteredOptions}
         searchValue={searchValue}
         onSearchValueChange={(id) => setSearchValue(id)}
+        onSelect={({ name, id }) => handleSelect(id, name)}
+        selectedOptions={selectedOptions}
+        onRemove={(id) => handleRemove(id)}
+      />
+      <Selector
+        options={selectorOptions}
+        searchValue={selectorSearch}
+        onSearchValueChange={setSelectorSearch}
         onSelect={(id) => setSelectedId(id)}
         selectedId={selectedId}
       />
-      test
+      <Card>
+        <Checkbox
+          label="Checkbox"
+          checked={checked}
+          onChange={(event: any) => setChecked(event.target.checked)}
+        />
+      </Card>
     </Center>
   );
 };

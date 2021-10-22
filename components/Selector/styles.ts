@@ -6,12 +6,16 @@ export const SelectorContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 `;
 
 export const DropDownCard = styled(Card)`
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0;
+  position: absolute;
+  width: 100%;
+  top: 40px;
 `;
 
 export const StyledSearchBar = styled(SearchBar)`

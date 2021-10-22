@@ -3,11 +3,20 @@ import { Icon } from "../Checkbox/styles";
 import { Input, InputContainer } from "./styles";
 import { SearchBarProps } from "./types";
 
-const SearchBar: React.FC<SearchBarProps> = ({ className }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  value,
+  onValueChange,
+  className,
+}) => {
   return (
     <InputContainer className={className}>
-      {/* <Icon>hello</Icon> */}
-      <Input placeholder="search..." />
+      <Input
+        placeholder="search..."
+        value={value}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          onValueChange(event.target.value)
+        }
+      />
     </InputContainer>
   );
 };

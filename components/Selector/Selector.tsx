@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Card from "../Card";
-import SearchBar from "../SearchBar";
+import useHideOnClickOutside from "../../hooks/useHideOnClickOutisde";
 import TextField from "../TextField";
-import {
-  DropDownCard,
-  Option,
-  SelectorContainer,
-  StyledSearchBar,
-} from "./styles";
+import { DropDownCard, Option, SelectorContainer } from "./styles";
 import { SelectorProps } from "./types";
 
 const Selector: React.FC<SelectorProps> = ({
@@ -17,57 +11,45 @@ const Selector: React.FC<SelectorProps> = ({
   onSelect,
   options,
 }) => {
-  const dropDownRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const wrapperRef = useRef(null);
-  const [dropDownIsVisible, setDropDownIsVisible] = useState(true);
+  const [isHidden, setIsHidden, ref] =
+    useHideOnClickOutside<HTMLDivElement>(true);
 
-  // below is the same as componentDidMount and componentDidUnmount
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, false);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, false);
-    };
-  }, []);
-
-  const handleClickOutside = (event: any) => {
-    console.log(dropDownRef.current?.contains(event.target));
-    console.log(inputRef.current?.contains(event.target));
-    if (dropDownRef.current && inputRef.current) {
-      if (
-        !dropDownRef.current.contains(event.target) &&
-        !inputRef.current.contains(event.target)
-      ) {
-        console.log("here");
-        setDropDownIsVisible(false);
-      }
-    }
-  };
+  const optionsFilter = options.filter(({ name }) =>
+    name.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   const handleOptionSelect = (id: string, name: string) => {
     onSearchValueChange(name);
+    onSelect(id);
+    setIsHidden(true);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (isHidden) {
+      setIsHidden(false);
+    }
+
+    onSearchValueChange(event.target.value);
   };
 
   return (
-    <SelectorContainer>
-      {dropDownIsVisible ? "true" : "false"}
+    <SelectorContainer ref={ref}>
       <TextField
         value={searchValue}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          onSearchValueChange(event.target.value)
-        }
-        ref={inputRef}
-        onFocus={() => setDropDownIsVisible(true)}
+        onChange={handleSearchChange}
+        onFocus={() => setIsHidden(false)}
       />
-      {dropDownIsVisible && (
-        <DropDownCard ref={dropDownRef}>
-          {options
-            .filter(({ name }) => name.includes(searchValue))
-            .map(({ id, name }) => (
+      {!isHidden && (
+        <DropDownCard>
+          {optionsFilter.length > 0 ? (
+            optionsFilter.map(({ id, name }) => (
               <Option key={id} onClick={() => handleOptionSelect(id, name)}>
                 {name}
               </Option>
-            ))}
+            ))
+          ) : (
+            <Option>No results match your search.</Option>
+          )}
         </DropDownCard>
       )}
     </SelectorContainer>
