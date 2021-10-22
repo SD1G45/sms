@@ -17,6 +17,8 @@ const lightTheme: ITheme = {
     lightGray: "#BEC8D2",
     textPrimary: "#000000",
     error: "#FF7F7F",
+    backgroundGray: "#F8FAFC",
+    textColor: "#3D4255",
   },
   screenWidth: { ...screenWidth },
 };

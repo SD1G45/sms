@@ -22,6 +22,8 @@ interface Colors {
   lightGray: string;
   textPrimary: string;
   error: string;
+  backgroundGray: string;
+  textColor: string;
 }
 
 interface ScreenWidth {
