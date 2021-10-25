@@ -70,4 +70,5 @@ export const Item = styled.p<{ active: boolean }>`
   color: ${(props) => (props.active ? "white" : props.theme.colors.textColor)};
   border-radius: 20px;
   padding: 5px 15px;
+  cursor: pointer;
 `;

@@ -12,9 +12,12 @@ import {
   SecondaryNavbarContainer,
   Item,
 } from "./styles";
-import Button from "../Button";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
+  const currentPath = router.asPath;
   return (
     <>
       <PrimaryNavbar>
@@ -31,11 +34,21 @@ const Navbar = () => {
       </PrimaryNavbar>
       <SecondaryNavbarContainer>
         <SecondaryNavbar>
-          <Item active={true}>Home</Item>
-          <Item active={false}>Coupons</Item>
-          <Item active={false}>Campaigns</Item>
-          <Item active={false}>Keywords</Item>
-          <Item active={false}>Customers</Item>
+          <Link href="/" passHref>
+            <Item active={currentPath === "/"}>Home</Item>
+          </Link>
+          <Link href="/coupons" passHref>
+            <Item active={currentPath.startsWith("/coupons")}>Coupons</Item>
+          </Link>
+          <Link href="/campaigns" passHref>
+            <Item active={currentPath.startsWith("/campaigns")}>Campaigns</Item>
+          </Link>
+          <Link href="/keywords" passHref>
+            <Item active={currentPath.startsWith("/keywords")}>Keywords</Item>
+          </Link>
+          <Link href="/customers" passHref>
+            <Item active={currentPath.startsWith("/customers")}>Customers</Item>
+          </Link>
         </SecondaryNavbar>
       </SecondaryNavbarContainer>
     </>
