@@ -59,7 +59,7 @@ export const SecondaryNavbarContainer = styled.div`
 
 export const SecondaryNavbar = styled.div`
   width: 100%;
-  padding: 20px 0px;
+  padding: 15px 0px;
   border-bottom: 1px solid ${(props) => props.theme.colors.lightGray};
   display: flex;
 `;
@@ -69,6 +69,7 @@ export const Item = styled.p<{ active: boolean }>`
     props.active ? props.theme.colors.primary : "none"};
   color: ${(props) => (props.active ? "white" : props.theme.colors.textColor)};
   border-radius: 20px;
-  padding: 5px 15px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
   cursor: pointer;
 `;
