@@ -5,7 +5,11 @@ export const TextFieldContainer = styled.div`
   width: 100%;
 `;
 
-export const StyledTextField = styled.input<TextFieldProps>`
+export const Label = styled.label`
+  margin-bottom: 50px;
+`;
+
+export const StyledTextField = styled.input<Omit<TextFieldProps, "label">>`
   padding: 12px;
   border: 1px solid
     ${(props) =>

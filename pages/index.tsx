@@ -70,7 +70,12 @@ const Home: NextPage = () => {
         onSelect={(id) => setSelectedId(id)}
         selectedId={selectedId}
       />
+      <TextField value="" onChange={() => {}} label="Coupons" />
+      <Card style={{ padding: 80 }}>This is a card</Card>
       <Card>
+        <TextField value="" onChange={() => {}} label="Coupons" />
+        <div style={{ marginBottom: 10 }} />
+
         <Checkbox
           label="Checkbox"
           checked={checked}
