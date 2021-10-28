@@ -70,6 +70,7 @@ const Home: NextPage = () => {
         onSelect={(id) => setSelectedId(id)}
         selectedId={selectedId}
       />
+      <Button>Click me!</Button>
       <TextField value="" onChange={() => {}} label="Coupons" />
       <Card style={{ padding: 80 }}>This is a card</Card>
       <Card>
