@@ -52,4 +52,28 @@ model Coupon {
   expirationDate  DateTime
   business        Business    @relation(fields: [businessId], references: [id])
   businessId      String
+  campaign        Campaign []
+}
+
+model Campaign {
+  id              String      @id @default(uuid())
+  name            String      
+  message         String
+  coupon          Coupon      @relation(fields: [couponId], references: [id]) 
+  couponId        String
+  customer_list   Campaign_Customer_List[]
+}
+
+model Campaign_Customer_List {
+  id              String        @id @default(uuid())
+  campaign        Campaign      @relation(fields: [campaignId], references: [id])
+  campaignId      String
+  customerList    Customer_List @relation(fields: [customerListId], references:[id])
+  customerListId  String
+}
+
+model Customer_List {
+  id                    String  @id @default(uuid())
+  name                  String
+  campaignCustomerList  Campaign_Customer_List [] 
 }
