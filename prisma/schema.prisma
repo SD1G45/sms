@@ -8,29 +8,30 @@ generator client {
 }
 
 model User {
-  id            String      @id @default(uuid())
-  firstName     String
-  lastName      String
-  email         String      @unique
-  password      String
-  businesses    Business_User[]
+  id              String      @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String      @unique
+  password        String
+  businesses      Business_User[]
 }
 
 model Business {
-  id            String      @id @default(uuid())
-  name          String
-  stripeId      String
-  phoneNumber   String      @unique
-  logoUrl       String
-  users         Business_User[]
+  id              String      @id @default(uuid())
+  name            String
+  stripeId        String
+  phoneNumber     String      @unique
+  logoUrl         String
+  users           Business_User[]
+  coupons         Coupon[]
 }
 
 model Business_User {
-  business      Business    @relation(fields: [businessId], references: [id])
-  businessId    String
-  user          User        @relation(fields: [userId], references: [id])
-  userId        String      
-  role          Role
+  business        Business    @relation(fields: [businessId], references: [id])
+  businessId      String
+  user            User        @relation(fields: [userId], references: [id])
+  userId          String      
+  role            Role
 
   @@id([businessId, userId])
 }
@@ -40,4 +41,15 @@ enum Role {
   ADMIN
   EDITOR
   VIEWER
+}
+
+model Coupon {
+  id              String      @id @default(uuid())
+  name            String
+  title           String
+  description     String
+  primaryColor    String
+  expirationDate  DateTime
+  business        Business    @relation(fields: [businessId], references: [id])
+  businessId      String
 }
