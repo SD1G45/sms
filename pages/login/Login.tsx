@@ -7,7 +7,7 @@ import {
   PasswordTextField,
   EmailTextField,
   StyledButton,
-} from "./styles";
+} from "../../page-styles/login/styles";
 
 const Login = () => {
   const [username, setUsername] = useState("");

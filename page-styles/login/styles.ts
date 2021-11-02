@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
-import Checkbox from "../../components/Checkbox";
 import TextField from "../../components/TextField";
 
 export const StyledCard = styled(Card)`
