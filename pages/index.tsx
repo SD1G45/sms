@@ -53,8 +53,10 @@ const Home: NextPage = () => {
 
   const [checked, setChecked] = useState(false);
 
+  const [username, setUsername] = useState("");
+
   return (
-    <Center style={{ width: 400 }}>
+    <Center style={{ width: 200 }}>
       <MultiSelector
         options={filteredOptions}
         searchValue={searchValue}
