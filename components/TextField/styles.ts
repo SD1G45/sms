@@ -5,8 +5,21 @@ export const TextFieldContainer = styled.div`
   width: 100%;
 `;
 
+export const LabelContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const Label = styled.label`
-  margin-bottom: 50px;
+  display: block;
+  padding-bottom: 7px;
+`;
+
+export const StyledLink = styled(Label)`
+  color: ${(props) => props.theme.colors.primary};
+  cursor: pointer;
 `;
 
 export const StyledTextField = styled.input<Omit<TextFieldProps, "label">>`

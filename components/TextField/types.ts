@@ -6,4 +6,7 @@ export interface TextFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   error?: boolean;
   errorMessage?: string;
   className?: string;
+  type?: string;
+  linkText?: string;
+  linkValue?: string;
 }
