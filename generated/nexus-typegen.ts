@@ -28,6 +28,13 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Business: { // root type
+    id?: string | null; // String
+    logoUrl?: string | null; // String
+    name?: string | null; // String
+    phoneNumber?: string | null; // String
+    stripeId?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -53,8 +60,16 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Business: { // field return type
+    id: string | null; // String
+    logoUrl: string | null; // String
+    name: string | null; // String
+    phoneNumber: string | null; // String
+    stripeId: string | null; // String
+  }
   Mutation: { // field return type
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
+    newBusiness: NexusGenRootTypes['Business'] | null; // Business
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -73,8 +88,16 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Business: { // field return type name
+    id: 'String'
+    logoUrl: 'String'
+    name: 'String'
+    phoneNumber: 'String'
+    stripeId: 'String'
+  }
   Mutation: { // field return type name
     loginUser: 'UserLoginPayload'
+    newBusiness: 'Business'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -97,6 +120,12 @@ export interface NexusGenArgTypes {
     loginUser: { // args
       email: string; // String!
       password: string; // String!
+    }
+    newBusiness: { // args
+      logoUrl: string; // String!
+      name: string; // String!
+      phoneNumber: string; // String!
+      stripeId: string; // String!
     }
     registerUser: { // args
       email: string; // String!

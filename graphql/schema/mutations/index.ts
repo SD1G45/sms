@@ -1,4 +1,5 @@
 import { registerUserMutation } from "./registerUserMutation";
 import { loginUserMutation } from "./loginUserMutation";
+import { newBusinessMutation } from "./newBusinessMutation";
 
-export { registerUserMutation, loginUserMutation };
+export { registerUserMutation, loginUserMutation, newBusinessMutation };
