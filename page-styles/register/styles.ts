@@ -6,6 +6,23 @@ import TextField from "../../components/TextField";
 export const StyledCard = styled(Card)`
   width: 500px;
   padding: 30px;
+  margin-left: 250px;
+  margin-right: 125px;
+`;
+
+export const Line = styled.div`
+border-left 4px dashed #ccc
+`;
+
+export const Background = styled.div`
+  display: box;
+  height: 100%;
+`;
+
+export const tiltedBackGround = styled.div`
+  background-color: black;
+  width: 100%;
+  border-right: ;
 `;
 
 export const Page = styled.div`
@@ -17,10 +34,8 @@ export const Page = styled.div`
 `;
 export const LeftTriangleDiv = styled.div`
   padding-top: 301px;
-  margin-top:100px
-  margin-left: 20px;
 `;
-export const RightTriangleDiv = styled.div`
+export const RightCircleDiv = styled.div`
   padding-bottom: 301px;
   margin-top:100px
   margin-left: 20px;

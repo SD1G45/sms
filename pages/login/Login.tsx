@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Checkbox from "../../components/Checkbox";
+import Image from "next/Image";
 import {
   Page,
   Heading,
@@ -7,6 +8,8 @@ import {
   PasswordTextField,
   EmailTextField,
   StyledButton,
+  LeftTriangleDiv,
+  RightCircleDiv,
 } from "../../page-styles/login/styles";
 
 const Login = () => {
@@ -17,6 +20,9 @@ const Login = () => {
   const [staySignedInChecked, setStaySignedInChecked] = useState(true);
   return (
     <Page>
+      <LeftTriangleDiv>
+        <Image src="/StackedTriangle-1.svg" width={200} height={300} />
+      </LeftTriangleDiv>
       <StyledCard>
         <Heading>Sign in to your account</Heading>
         <EmailTextField
@@ -45,6 +51,9 @@ const Login = () => {
         />
         <StyledButton>Continue</StyledButton>
       </StyledCard>
+      <RightCircleDiv>
+        <Image src="/StackedCircle.svg" width={300} height={300} />
+      </RightCircleDiv>
     </Page>
   );
 };

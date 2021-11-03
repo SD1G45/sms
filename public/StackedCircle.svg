@@ -6,14 +6,6 @@
 	.st0{fill:#48F0E6;}
 	.st1{fill:#4881F0;}
 </style>
-<g id="XMLID_2_">
-	<g>
-		<polygon class="st0" points="43.89,12.75 85.29,95.56 2.49,95.56 		"/>
-	</g>
-</g>
-<g id="XMLID_1_">
-	<g>
-		<polygon class="st1" points="64.59,1.45 106,84.26 23.19,84.26 		"/>
-	</g>
-</g>
+<circle class="st0" cx="38.88" cy="60.98" r="19.11"/>
+<circle class="st1" cx="56.36" cy="54.73" r="21.48"/>
 </svg>
