@@ -1,9 +1,11 @@
 import React from "react";
-import { StyledBackground, FirstColumn, Column } from "./styles";
+import { StyledBackground, FirstColumn, Column, TiltedDiv } from "./styles";
 
 const Background = () => {
   return (
     <StyledBackground>
+      <TiltedDiv />
+
       <FirstColumn />
 
       <Column />

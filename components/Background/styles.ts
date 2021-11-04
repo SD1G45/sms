@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FirstColumn = styled.div`
   height: 100vh;
-  width: 295px;
+  width: 260px;
 `;
 export const Column = styled.div`
   height: 100vh;
@@ -14,10 +14,20 @@ export const Line = styled.div`
   border-left: 4px dashed #ccc;
 `;
 
+export const TiltedDiv = styled.div`
+  height: 100vh;
+  width: 230vw;
+  position: absolute;
+  bottom: 80vh;
+  left: -100vh;
+
+  background-color: #f7f8ff;
+  transform: rotate(165deg);
+  z-index: -2;
+`;
 export const StyledBackground = styled.div`
   position: absolute;
   display: flex;
-  left: 0px;
-  top: 0px;
+  justify-content: center;
   z-index: -1;
 `;
