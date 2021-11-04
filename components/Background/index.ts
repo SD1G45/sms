@@ -1,3 +1,2 @@
-import { Background } from "../../page-styles/login/styles";
-
+import { StyledBackground } from "./styles";
 export { default } from "./Background";
