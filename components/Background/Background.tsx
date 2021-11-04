@@ -5,13 +5,9 @@ const Background = () => {
   return (
     <StyledBackground>
       <TiltedDiv />
-
       <FirstColumn />
-
       <Column />
-
       <Column />
-
       <Column />
       <Column />
     </StyledBackground>

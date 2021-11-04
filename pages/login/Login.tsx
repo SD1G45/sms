@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Checkbox from "../../components/Checkbox";
 import Background from "../../components/Background";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Page,
   Heading,
@@ -11,6 +12,8 @@ import {
   StyledButton,
   LeftTriangleDiv,
   RightCircleDiv,
+  StyledLink,
+  LinkDiv,
 } from "../../page-styles/login/styles";
 
 const Login = () => {
@@ -52,7 +55,12 @@ const Login = () => {
               setStaySignedInChecked(event.target.checked)
             }
           />
-          <StyledButton>Continue</StyledButton>
+          <LinkDiv>
+            <StyledButton>Continue</StyledButton>
+            <Link href="/register">
+              <StyledLink>New to us? Create an Account</StyledLink>
+            </Link>
+          </LinkDiv>
         </StyledCard>
         <RightCircleDiv>
           <Image src="/StackedCircle.svg" width={300} height={300} />
