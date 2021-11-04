@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Checkbox from "../../components/Checkbox";
 import Background from "../../components/Background";
-import Image from "next/Image";
+import Image from "next/image";
 import {
   Page,
   Heading,
