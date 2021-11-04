@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Checkbox from "../../components/Checkbox";
+import Background from "../../components/Background";
 import {
   Page,
   Heading,
@@ -14,8 +15,6 @@ import {
   LeftTriangleDiv,
   RightCircleDiv,
   tiltedBackGround,
-  Line,
-  Background,
 } from "../../page-styles/register/styles";
 import Image from "next/image";
 
@@ -29,67 +28,64 @@ const Register = () => {
 
   return (
     <>
-      <Background>
-        <Line>
-          <Page>
-            <LeftTriangleDiv>
-              <Image src="/StackedTriangle-1.svg" width={200} height={300} />
-            </LeftTriangleDiv>
-            <StyledCard>
-              <Heading>Create a new account</Heading>
-              <NameContainer>
-                <FirstNameTextField
-                  label="First Name"
-                  value={firstName}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setFirstName(event.target.value)
-                  }
-                />
-                <LastNameTextField
-                  label="Last Name"
-                  value={lastName}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setFirstName(event.target.value)
-                  }
-                />
-              </NameContainer>
-              <EmailTextField
-                label="Email"
-                value={email}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setEmail(event.target.value)
-                }
-              />
-              <UsernameTextField
-                label="Username"
-                value={username}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setUsername(event.target.value)
-                }
-              />
-              <PasswordTextField
-                label="Password"
-                value={password}
-                type="password"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setPassword(event.target.value)
-                }
-              />
-              <Checkbox
-                checked={loginChecked}
-                label="Log me in"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setLoginChecked(event.target.checked)
-                }
-              />
-              <StyledButton>Continue</StyledButton>
-            </StyledCard>
-            <RightCircleDiv>
-              <Image src="/StackedCircle.svg" width={300} height={300} />
-            </RightCircleDiv>
-          </Page>
-        </Line>
-      </Background>
+      <Background />
+      <Page>
+        <LeftTriangleDiv>
+          <Image src="/StackedTriangle-1.svg" width={200} height={300} />
+        </LeftTriangleDiv>
+        <StyledCard>
+          <Heading>Create a new account</Heading>
+          <NameContainer>
+            <FirstNameTextField
+              label="First Name"
+              value={firstName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setFirstName(event.target.value)
+              }
+            />
+            <LastNameTextField
+              label="Last Name"
+              value={lastName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setFirstName(event.target.value)
+              }
+            />
+          </NameContainer>
+          <EmailTextField
+            label="Email"
+            value={email}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(event.target.value)
+            }
+          />
+          <UsernameTextField
+            label="Username"
+            value={username}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setUsername(event.target.value)
+            }
+          />
+          <PasswordTextField
+            label="Password"
+            value={password}
+            type="password"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(event.target.value)
+            }
+          />
+          <Checkbox
+            checked={loginChecked}
+            label="Log me in"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setLoginChecked(event.target.checked)
+            }
+          />
+          <StyledButton>Continue</StyledButton>
+        </StyledCard>
+        <RightCircleDiv>
+          <Image src="/StackedCircle.svg" width={300} height={300} />
+        </RightCircleDiv>
+      </Page>
     </>
   );
 };

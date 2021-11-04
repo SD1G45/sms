@@ -12,11 +12,14 @@ export const StyledCard = styled(Card)`
 
 export const Line = styled.div`
 border-left 4px dashed #ccc
+
 `;
 
 export const Background = styled.div`
-  display: box;
-  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  color: rgba(0, 0, 0, 0.29);
 `;
 
 export const tiltedBackGround = styled.div`
@@ -32,6 +35,7 @@ export const Page = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export const LeftTriangleDiv = styled.div`
   padding-top: 301px;
 `;
