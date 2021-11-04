@@ -24,7 +24,7 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginChecked, setLoginChecked] = useState("");
+  const [loginChecked, setLoginChecked] = useState(true);
 
   return (
     <>

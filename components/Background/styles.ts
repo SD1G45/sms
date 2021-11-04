@@ -8,10 +8,7 @@ export const Column = styled.div`
   height: 100vh;
 
   width: 250px;
-  border-left: 4px dashed #ccc;
-`;
-export const Line = styled.div`
-  border-left: 4px dashed #ccc;
+  border-left: 1px dashed #ccc;
 `;
 
 export const TiltedDiv = styled.div`
@@ -19,7 +16,7 @@ export const TiltedDiv = styled.div`
   width: 230vw;
   position: absolute;
   bottom: 80vh;
-  left: -100vh;
+  left: -60vw;
 
   background-color: #f7f8ff;
   transform: rotate(165deg);

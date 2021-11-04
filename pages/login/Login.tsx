@@ -18,7 +18,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [staySignedInChecked, setStaySignedInChecked] = useState(true);
+  const [staySignedInChecked, setStaySignedInChecked] = useState(false);
   return (
     <>
       <Page>
