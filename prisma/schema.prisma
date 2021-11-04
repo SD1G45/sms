@@ -8,30 +8,30 @@ generator client {
 }
 
 model User {
-  id              String      @id @default(uuid())
-  firstName       String
-  lastName        String
-  email           String      @unique
-  password        String
-  businesses      Business_User[]
+  id         String          @id @default(uuid())
+  firstName  String
+  lastName   String
+  email      String          @unique
+  password   String
+  businesses Business_User[]
 }
 
 model Business {
-  id              String      @id @default(uuid())
-  name            String
-  stripeId        String
-  phoneNumber     String      @unique
-  logoUrl         String
-  users           Business_User[]
-  coupons         Coupon[]
+  id          String          @id @default(uuid())
+  name        String
+  stripeId    String
+  phoneNumber String          @unique
+  logoUrl     String
+  users       Business_User[]
+  coupons     Coupon[]
 }
 
 model Business_User {
-  business        Business    @relation(fields: [businessId], references: [id])
-  businessId      String
-  user            User        @relation(fields: [userId], references: [id])
-  userId          String      
-  role            Role
+  business   Business @relation(fields: [businessId], references: [id])
+  businessId String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  role       Role
 
   @@id([businessId, userId])
 }
@@ -44,36 +44,52 @@ enum Role {
 }
 
 model Coupon {
-  id              String      @id @default(uuid())
-  name            String
-  title           String
-  description     String
-  primaryColor    String
-  expirationDate  DateTime
-  business        Business    @relation(fields: [businessId], references: [id])
-  businessId      String
-  campaign        Campaign []
+  id             String     @id @default(uuid())
+  name           String
+  title          String
+  description    String
+  primaryColor   String
+  expirationDate DateTime
+  business       Business   @relation(fields: [businessId], references: [id])
+  businessId     String
+  campaign       Campaign[]
 }
 
 model Campaign {
-  id              String      @id @default(uuid())
-  name            String      
-  message         String
-  coupon          Coupon      @relation(fields: [couponId], references: [id]) 
-  couponId        String
-  customer_list   Campaign_Customer_List[]
+  id            String                   @id @default(uuid())
+  name          String
+  message       String
+  coupon        Coupon                   @relation(fields: [couponId], references: [id])
+  couponId      String
+  customer_list Campaign_Customer_List[]
 }
 
 model Campaign_Customer_List {
-  id              String        @id @default(uuid())
-  campaign        Campaign      @relation(fields: [campaignId], references: [id])
-  campaignId      String
-  customerList    Customer_List @relation(fields: [customerListId], references:[id])
-  customerListId  String
+  id             String        @id @default(uuid())
+  campaign       Campaign      @relation(fields: [campaignId], references: [id])
+  campaignId     String
+  customerList   Customer_List @relation(fields: [customerListId], references: [id])
+  customerListId String
 }
 
 model Customer_List {
-  id                    String  @id @default(uuid())
-  name                  String
-  campaignCustomerList  Campaign_Customer_List [] 
+  id                   String                   @id @default(uuid())
+  name                 String
+  campaignCustomerList Campaign_Customer_List[]
+  keyWordCustomerList  Keyword_Customer_List[]
+}
+
+model Keyword {
+  id                  String                  @id @default(uuid())
+  keyword             String
+  description         String
+  keyWordCustomerList Keyword_Customer_List[]
+}
+
+model Keyword_Customer_List {
+  id             String        @id @default(uuid())
+  customerList   Customer_List @relation(fields: [customerListId], references: [id])
+  customerListId String
+  keyword        Keyword       @relation(fields: [keywordId], references: [id])
+  keywordId      String
 }
