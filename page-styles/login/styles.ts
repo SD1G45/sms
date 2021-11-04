@@ -36,7 +36,7 @@ export const Label = styled.label`
 `;
 
 export const LinkDiv = styled.div`
-  align-items: center;
+  text-align: center;
 `;
 export const StyledLink = styled(Label)`
   color: ${(props) => props.theme.colors.primary};
