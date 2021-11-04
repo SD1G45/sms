@@ -18,6 +18,10 @@ import { useRouter } from "next/router";
 const Navbar = () => {
   const router = useRouter();
   const currentPath = router.asPath;
+
+  if (currentPath === "/login") return <></>;
+  if (currentPath === "/register") return <></>;
+
   return (
     <>
       <PrimaryNavbar>
