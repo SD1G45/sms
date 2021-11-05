@@ -4,8 +4,6 @@ import * as objects from "./objects";
 import * as queries from "./queries";
 import * as mutations from "./mutations";
 
-console.log(mutations);
-
 export const schema = makeSchema({
   types: [objects, queries, mutations],
   outputs: {

@@ -132,7 +132,6 @@ export interface NexusGenArgTypes {
       firstName: string; // String!
       lastName: string; // String!
       password: string; // String!
-      username: string; // String!
     }
   }
 }

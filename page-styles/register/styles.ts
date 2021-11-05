@@ -54,10 +54,10 @@ export const PasswordTextField = styled(TextField)`
 `;
 
 export const EmailTextField = styled(TextField)`
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 `;
 export const UsernameTextField = styled(TextField)`
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 `;
 export const FirstNameTextField = styled(TextField)`
   margin-bottom: 30px;

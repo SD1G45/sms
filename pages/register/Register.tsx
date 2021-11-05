@@ -17,14 +17,67 @@ import {
   tiltedBackGround,
 } from "../../page-styles/register/styles";
 import Image from "next/image";
+import { useMutation } from "@apollo/client";
+import { REGISTER_MUTATION } from "./mutations";
+import { useUserDispatch } from "../../context/UserContext";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginChecked, setLoginChecked] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [emptyError, setEmptyError] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const userDispatch = useUserDispatch();
+
+  const [registerMutation] = useMutation(REGISTER_MUTATION, {
+    errorPolicy: "all",
+  });
+
+  const onRegister = async () => {
+    if (
+      firstName.length === 0 ||
+      email.length === 0 ||
+      password.length === 0 ||
+      confirmPassword.length === 0
+    ) {
+      setEmptyError(true);
+      return;
+    }
+    setEmptyError(false);
+    setLoading(true);
+    setError(false);
+    try {
+      const { data, errors } = await registerMutation({
+        variables: {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      });
+
+      if (errors && errors.length > 0) {
+        setError(true);
+        setLoading(false);
+        return;
+      }
+
+      userDispatch({
+        type: "login",
+        payload: {
+          jid: data.registerUser.token,
+        },
+      });
+      setLoading(false);
+    } catch (error) {
+      setError(true);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -47,7 +100,7 @@ const Register = () => {
               label="Last Name"
               value={lastName}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setFirstName(event.target.value)
+                setLastName(event.target.value)
               }
             />
           </NameContainer>
@@ -58,13 +111,6 @@ const Register = () => {
               setEmail(event.target.value)
             }
           />
-          <UsernameTextField
-            label="Username"
-            value={username}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setUsername(event.target.value)
-            }
-          />
           <PasswordTextField
             label="Password"
             value={password}
@@ -73,14 +119,18 @@ const Register = () => {
               setPassword(event.target.value)
             }
           />
-          <Checkbox
-            checked={loginChecked}
-            label="Log me in"
+          <PasswordTextField
+            label="Confirm password"
+            value={confirmPassword}
+            type="password"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setLoginChecked(event.target.checked)
+              setConfirmPassword(event.target.value)
             }
+            error={confirmPassword !== password}
+            errorMessage="Passwords don't match"
           />
-          <StyledButton>Continue</StyledButton>
+
+          <StyledButton onClick={() => onRegister()}>Continue</StyledButton>
         </StyledCard>
         <RightCircleDiv>
           <Image src="/StackedCircle.svg" width={300} height={300} />
