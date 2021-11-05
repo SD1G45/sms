@@ -25,6 +25,7 @@ export const TiltedDiv = styled.div`
 export const StyledBackground = styled.div`
   position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
   z-index: -1;
 `;

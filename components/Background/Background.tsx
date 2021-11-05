@@ -10,6 +10,9 @@ const Background = () => {
       <Column />
       <Column />
       <Column />
+      <Column />
+      <Column />
+      <Column />
     </StyledBackground>
   );
 };
