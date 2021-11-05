@@ -72,11 +72,29 @@ model Campaign_Customer_List {
   customerListId String
 }
 
+model Customer {
+  id                     String                   @id @default(uuid())
+  phoneNumber            String                   @unique
+  firstName              String?
+  lastName               String?
+  password               String?
+  Customer_List_Customer Customer_List_Customer[]
+}
+
+model Customer_List_Customer {
+  id             String        @id @default(uuid())
+  customerListId String
+  customerList   Customer_List @relation(fields: [customerListId], references: [id])
+  customerId     String
+  customer       Customer      @relation(fields: [customerId], references: [id])
+}
+
 model Customer_List {
-  id                   String                   @id @default(uuid())
-  name                 String
-  campaignCustomerList Campaign_Customer_List[]
-  keyWordCustomerList  Keyword_Customer_List[]
+  id                     String                   @id @default(uuid())
+  name                   String
+  campaignCustomerList   Campaign_Customer_List[]
+  keyWordCustomerList    Keyword_Customer_List[]
+  Customer_List_Customer Customer_List_Customer[]
 }
 
 model Keyword {
