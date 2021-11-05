@@ -15,7 +15,7 @@ export const TiltedDiv = styled.div`
   height: 100vh;
   width: 230vw;
   position: absolute;
-  bottom: 80vh;
+  bottom: 55vh;
   left: -60vw;
 
   background-color: #f7f8ff;
