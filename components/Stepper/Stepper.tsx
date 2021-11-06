@@ -10,7 +10,7 @@ const Stepper: React.FC<StepperProps> = ({ steps, activeIndex, className }) => {
           <Step active={activeIndex === index} key={index}>
             {index + 1}
           </Step>
-          <StepTitle>{value}</StepTitle>
+          <StepTitle key={`title${index}`}>{value}</StepTitle>
           {index !== steps.length - 1 && <Line />}
         </>
       ))}

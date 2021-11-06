@@ -7,25 +7,30 @@ export const newBusinessMutation = extendType({
       type: "Business",
       args: {
         name: nonNull(stringArg()),
-        stripeId: nonNull(stringArg()),
-        phoneNumber: nonNull(stringArg()),
-        logoUrl: nonNull(stringArg()),
-      }, 
-      resolve: async (
-        _,
-        { name, stripeId, phoneNumber, logoUrl },
-        ctx
-      ) => {
+      },
+      resolve: async (_, { name }, ctx) => {
+        if (ctx.currentUser == null || ctx.currentUser.id == null)
+          throw new Error("User is not logged in.");
+
         const newBusiness = await ctx.prisma.business.create({
           data: {
             name,
-            stripeId,
-            phoneNumber,
-            logoUrl,
-          }
+            users: {
+              create: [
+                {
+                  role: "OWNER",
+                  user: {
+                    connect: {
+                      id: ctx.currentUser.id,
+                    },
+                  },
+                },
+              ],
+            },
+          },
         });
 
-        return newBusiness
+        return newBusiness;
       },
     });
   },

@@ -1,6 +1,12 @@
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
+import {
+  CREATE_BUSINESS_MUTATION,
+  EDIT_BUSINESS_MUTATION,
+} from "../../page-mutations/create-business";
 import {
   Heading,
   StyledCard,
@@ -25,6 +31,46 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
   onBusinessNameChange,
   onNext,
 }) => {
+  const router = useRouter();
+  const business_id = router.query.business_id;
+  const [createBusinessMutation] = useMutation(CREATE_BUSINESS_MUTATION, {
+    errorPolicy: "all",
+  });
+  const [editBusinessMutation] = useMutation(EDIT_BUSINESS_MUTATION, {
+    errorPolicy: "all",
+  });
+
+  const mutationMode: "CREATE" | "EDIT" =
+    business_id != null ? "EDIT" : "CREATE";
+
+  console.log(mutationMode);
+
+  const onNextClick = async () => {
+    switch (mutationMode) {
+      case "CREATE": {
+        try {
+          const { data, errors } = await createBusinessMutation({
+            variables: { name: businessName },
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      case "EDIT": {
+        try {
+          const { data, errors } = await editBusinessMutation({
+            variables: { name: businessName, id: business_id },
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      default: {
+        console.log("FIX THIS - should do something here, not sure what yet");
+      }
+    }
+  };
+
   return (
     <>
       <TextField
@@ -34,7 +80,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         }
         label="Business Name"
       />
-      <StyledButton onClick={onNext}>Next</StyledButton>
+      <StyledButton onClick={() => onNextClick()}>Next</StyledButton>
     </>
   );
 };

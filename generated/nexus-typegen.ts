@@ -68,6 +68,7 @@ export interface NexusGenFieldTypes {
     stripeId: string | null; // String
   }
   Mutation: { // field return type
+    editBusiness: NexusGenRootTypes['Business'] | null; // Business
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
@@ -96,6 +97,7 @@ export interface NexusGenFieldTypeNames {
     stripeId: 'String'
   }
   Mutation: { // field return type name
+    editBusiness: 'Business'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
     registerUser: 'UserLoginPayload'
@@ -117,15 +119,16 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    editBusiness: { // args
+      id: string; // String!
+      name: string; // String!
+    }
     loginUser: { // args
       email: string; // String!
       password: string; // String!
     }
     newBusiness: { // args
-      logoUrl: string; // String!
       name: string; // String!
-      phoneNumber: string; // String!
-      stripeId: string; // String!
     }
     registerUser: { // args
       email: string; // String!
