@@ -11,7 +11,7 @@ import {
   LinkDiv,
 } from "../../page-styles/login/styles";
 import { useMutation } from "@apollo/client";
-import { LOGIN_MUTATION } from "./mutations";
+import { LOGIN_MUTATION } from "../../page-mutations/login";
 import { useUserDispatch } from "../../context/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 

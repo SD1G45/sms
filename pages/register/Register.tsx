@@ -12,7 +12,7 @@ import {
 } from "../../page-styles/register/styles";
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
-import { REGISTER_MUTATION } from "./mutations";
+import { REGISTER_MUTATION } from "../../page-mutations/register";
 import { useUserDispatch } from "../../context/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 
