@@ -74,6 +74,7 @@ export interface NexusGenFieldTypes {
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
+    business: NexusGenRootTypes['Business'] | null; // Business
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -103,6 +104,7 @@ export interface NexusGenFieldTypeNames {
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
+    business: 'Business'
     viewer: 'User'
   }
   User: { // field return type name
@@ -135,6 +137,11 @@ export interface NexusGenArgTypes {
       firstName: string; // String!
       lastName: string; // String!
       password: string; // String!
+    }
+  }
+  Query: {
+    business: { // args
+      id: string; // String!
     }
   }
 }

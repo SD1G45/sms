@@ -58,3 +58,9 @@ export const UploadLogoButton = styled(Button)`
   border-radius: 9px;
   margin-bottom: 10px;
 `;
+
+export const ErrorMessage = styled.p`
+  color: ${(props) => props.theme.colors.error};
+  text-align: center;
+  margin-top: 20px;
+`;

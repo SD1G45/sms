@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { GraphQLError } from "graphql";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import SingleCardPage from "../../components/SingleCardPage";
@@ -17,15 +18,15 @@ import {
   LogoCircle,
   LogoPickerContainer,
   UploadLogoButton,
+  ErrorMessage,
 } from "../../page-styles/create-business/styles";
-
-const steps = ["Name", "Logo", "Phone number"];
 
 interface SetBusinessNameProps {
   businessName: string;
   onBusinessNameChange: (value: string) => void;
   onNext: () => void;
 }
+
 const SetBusinessName: React.FC<SetBusinessNameProps> = ({
   businessName,
   onBusinessNameChange,
@@ -33,6 +34,9 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 }) => {
   const router = useRouter();
   const business_id = router.query.business_id;
+  const [nameSetError, setNameSetError] = useState(false);
+  const [emtpyNameError, setEmptyNameError] = useState(false);
+
   const [createBusinessMutation] = useMutation(CREATE_BUSINESS_MUTATION, {
     errorPolicy: "all",
   });
@@ -43,30 +47,55 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
   const mutationMode: "CREATE" | "EDIT" =
     business_id != null ? "EDIT" : "CREATE";
 
-  console.log(mutationMode);
+  const handleRequestErrors = (errors: readonly GraphQLError[] | undefined) => {
+    if (errors && errors.length > 0) {
+      setNameSetError(true);
+      return true;
+    }
+    return false;
+  };
+
+  const resetErrors = () => {
+    setEmptyNameError(false);
+    setNameSetError(false);
+  };
 
   const onNextClick = async () => {
-    switch (mutationMode) {
-      case "CREATE": {
-        try {
-          const { data, errors } = await createBusinessMutation({
-            variables: { name: businessName },
-          });
-        } catch (error) {
-          console.log(error);
+    resetErrors();
+    if (businessName.length === 0) {
+      setEmptyNameError(true);
+      return;
+    }
+
+    if (mutationMode === "CREATE") {
+      try {
+        const { data, errors } = await createBusinessMutation({
+          variables: { name: businessName },
+        });
+
+        if (handleRequestErrors(errors)) {
+          return;
         }
+
+        router.query.business_id = data.newBusiness.id;
+        router.push(router);
+        onNext();
+      } catch (error) {
+        setNameSetError(true);
       }
-      case "EDIT": {
-        try {
-          const { data, errors } = await editBusinessMutation({
-            variables: { name: businessName, id: business_id },
-          });
-        } catch (error) {
-          console.log(error);
+    } else if (mutationMode === "EDIT") {
+      try {
+        const { data, errors } = await editBusinessMutation({
+          variables: { name: businessName, id: business_id },
+        });
+
+        if (handleRequestErrors(errors)) {
+          return;
         }
-      }
-      default: {
-        console.log("FIX THIS - should do something here, not sure what yet");
+
+        onNext();
+      } catch (error) {
+        setNameSetError(true);
       }
     }
   };
@@ -79,8 +108,16 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
           onBusinessNameChange(event.target.value)
         }
         label="Business Name"
+        error={emtpyNameError}
+        errorMessage="Please enter a business name"
       />
       <StyledButton onClick={() => onNextClick()}>Next</StyledButton>
+      {nameSetError && (
+        <ErrorMessage>
+          There was an error setting the name of your business. Please try again
+          later.
+        </ErrorMessage>
+      )}
     </>
   );
 };
@@ -110,9 +147,30 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
   );
 };
 
-const Createbusiness = () => {
-  const [activeStepperIndex, setActiveStepperIndex] = useState(0);
-  const [businessName, setBusinessName] = useState("");
+const steps = ["Name", "Logo", "Phone number"];
+
+interface Business {
+  name: string;
+  logoUrl: string;
+}
+
+interface CreateBusinessProps {
+  business?: Business;
+}
+
+const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
+  const router = useRouter();
+  const [activeStepperIndex, setActiveStepperIndex] = useState(
+    parseInt(router.query.step as string) || 0
+  );
+  const [businessName, setBusinessName] = useState(business?.name || "");
+
+  const updateActiveStepperIndex = (factor: 1 | -1) => {
+    const newStepIndex = activeStepperIndex + factor;
+    setActiveStepperIndex(newStepIndex);
+    router.query.step = `${newStepIndex}`;
+    router.push(router);
+  };
 
   return (
     <SingleCardPage>
@@ -123,12 +181,12 @@ const Createbusiness = () => {
           <SetBusinessName
             businessName={businessName}
             onBusinessNameChange={(value) => setBusinessName(value)}
-            onNext={() => setActiveStepperIndex(activeStepperIndex + 1)}
+            onNext={() => updateActiveStepperIndex(1)}
           />
         ) : activeStepperIndex === 1 ? (
           <SetBusinessLogo
-            onBack={() => setActiveStepperIndex(activeStepperIndex - 1)}
-            onNext={() => setActiveStepperIndex(activeStepperIndex + 1)}
+            onBack={() => updateActiveStepperIndex(-1)}
+            onNext={() => updateActiveStepperIndex(1)}
           />
         ) : (
           <div />
@@ -138,4 +196,4 @@ const Createbusiness = () => {
   );
 };
 
-export default Createbusiness;
+export default CreateBusiness;

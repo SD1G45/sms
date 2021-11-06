@@ -18,6 +18,7 @@ type Mutation {
 }
 
 type Query {
+  business(id: String!): Business
   viewer: User
 }
 
