@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Background from "../../components/Background";
 import {
-  Page,
   Heading,
   StyledCard,
   PasswordTextField,
@@ -10,8 +9,6 @@ import {
   FirstNameTextField,
   LastNameTextField,
   NameContainer,
-  LeftTriangleDiv,
-  RightCircleDiv,
 } from "../../page-styles/register/styles";
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
