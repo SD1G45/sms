@@ -10,9 +10,23 @@ type Business {
   stripeId: String
 }
 
+type Campaign {
+  couponId: String
+  customers: CustomerList
+  id: String
+  message: String
+  name: String
+}
+
+type CustomerList {
+  id: String
+  name: String
+}
+
 type Mutation {
   loginUser(email: String!, password: String!): UserLoginPayload
   newBusiness(logoUrl: String!, name: String!, phoneNumber: String!, stripeId: String!): Business
+  newCampaign(couponId: String!, message: String!, name: String!): Campaign
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }
 
