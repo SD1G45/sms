@@ -7,6 +7,7 @@ import TextField from "../components/TextField";
 import Checkbox from "../components/Checkbox";
 import Selector from "../components/Selector";
 import MultiSelector from "../components/MultiSelector";
+import TextArea from "../components/TextArea";
 
 const Center = styled.div`
   display: flex;
@@ -72,8 +73,16 @@ const Home: NextPage = () => {
         onSelect={(id) => setSelectedId(id)}
         selectedId={selectedId}
       />
+
+      <TextArea
+        value={username}
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+          setUsername(event.target.value)
+        }
+        height={"200px"}
+        label="Area"
+      />
       <Button>Click me!</Button>
-      <TextField value="" onChange={() => {}} label="Coupons" />
       <Card style={{ padding: 80 }}>This is a card</Card>
       <Card>
         <TextField value="" onChange={() => {}} label="Coupons" />
