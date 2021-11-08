@@ -35,6 +35,15 @@ export interface NexusGenObjects {
     phoneNumber?: string | null; // String
     stripeId?: string | null; // String
   }
+  Coupon: { // root type
+    businessId?: string | null; // String
+    description?: string | null; // String
+    expirationDate?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    primaryColor?: string | null; // String
+    title?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -67,9 +76,19 @@ export interface NexusGenFieldTypes {
     phoneNumber: string | null; // String
     stripeId: string | null; // String
   }
+  Coupon: { // field return type
+    businessId: string | null; // String
+    description: string | null; // String
+    expirationDate: string | null; // String
+    id: string | null; // String
+    name: string | null; // String
+    primaryColor: string | null; // String
+    title: string | null; // String
+  }
   Mutation: { // field return type
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
+    newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -95,9 +114,19 @@ export interface NexusGenFieldTypeNames {
     phoneNumber: 'String'
     stripeId: 'String'
   }
+  Coupon: { // field return type name
+    businessId: 'String'
+    description: 'String'
+    expirationDate: 'String'
+    id: 'String'
+    name: 'String'
+    primaryColor: 'String'
+    title: 'String'
+  }
   Mutation: { // field return type name
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
+    newCoupon: 'Coupon'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -126,6 +155,14 @@ export interface NexusGenArgTypes {
       name: string; // String!
       phoneNumber: string; // String!
       stripeId: string; // String!
+    }
+    newCoupon: { // args
+      businessId: string; // String!
+      description: string; // String!
+      expirationDate: string; // String!
+      name: string; // String!
+      primaryColor: string; // String!
+      title: string; // String!
     }
     registerUser: { // args
       email: string; // String!
