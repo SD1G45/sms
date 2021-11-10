@@ -15,6 +15,8 @@ import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "../../page-mutations/register";
 import { useUserDispatch } from "../../context/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
+import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
+import Link from "next/link";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -120,7 +122,11 @@ const Register = () => {
           errorMessage="Passwords don't match"
         />
 
-        <StyledButton onClick={() => onRegister()}>Continue</StyledButton>
+        <LinkDiv>
+          <Link href="/login">
+            <StyledLink>Already have an account? Log in instead</StyledLink>
+          </Link>
+        </LinkDiv>
       </StyledCard>
     </SingleCardPage>
   );
