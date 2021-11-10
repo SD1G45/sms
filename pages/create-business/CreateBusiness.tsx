@@ -124,18 +124,26 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 };
 
 interface SetBusinessLogoProps {
+  openLogoEditor: () => void;
   onNext: () => void;
   onBack: () => void;
 }
 const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
   onNext,
   onBack,
+  openLogoEditor,
 }) => {
+  const router = useRouter();
+  const { business_id } = router.query;
   return (
     <>
       <LogoPickerContainer>
-        <LogoCircle />
-        <UploadLogoButton invert>Upload logo</UploadLogoButton>
+        <LogoCircle
+          src={`https://smsmp-business-logos-local.s3.amazonaws.com/${business_id}.png`}
+        />
+        <UploadLogoButton invert onClick={() => openLogoEditor()}>
+          Upload logo
+        </UploadLogoButton>
       </LogoPickerContainer>
       <ButtonContainer>
         <StyledButton onClick={onBack} invert>
@@ -165,6 +173,7 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
     parseInt(router.query.step as string) || 0
   );
   const [businessName, setBusinessName] = useState(business?.name || "");
+  const [logoEditorOpen, setLogoEditorOpen] = useState(false);
 
   const updateActiveStepperIndex = (factor: 1 | -1) => {
     const newStepIndex = activeStepperIndex + factor;
@@ -176,23 +185,29 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
   return (
     <SingleCardPage>
       <StyledCard>
-        <BusinessLogoEditor onClose={() => {}} />
-        {/* <Heading>Create your new business account</Heading>
-        <StyledStepper steps={steps} activeIndex={activeStepperIndex} />
-        {activeStepperIndex === 0 ? (
-          <SetBusinessName
-            businessName={businessName}
-            onBusinessNameChange={(value) => setBusinessName(value)}
-            onNext={() => updateActiveStepperIndex(1)}
-          />
-        ) : activeStepperIndex === 1 ? (
-          <SetBusinessLogo
-            onBack={() => updateActiveStepperIndex(-1)}
-            onNext={() => updateActiveStepperIndex(1)}
-          />
+        {logoEditorOpen ? (
+          <BusinessLogoEditor onClose={() => setLogoEditorOpen(false)} />
         ) : (
-          <div />
-        )} */}
+          <>
+            <Heading>Create your new business account</Heading>
+            <StyledStepper steps={steps} activeIndex={activeStepperIndex} />
+            {activeStepperIndex === 0 ? (
+              <SetBusinessName
+                businessName={businessName}
+                onBusinessNameChange={(value) => setBusinessName(value)}
+                onNext={() => updateActiveStepperIndex(1)}
+              />
+            ) : activeStepperIndex === 1 ? (
+              <SetBusinessLogo
+                onBack={() => updateActiveStepperIndex(-1)}
+                onNext={() => updateActiveStepperIndex(1)}
+                openLogoEditor={() => setLogoEditorOpen(true)}
+              />
+            ) : (
+              <div />
+            )}
+          </>
+        )}
       </StyledCard>
     </SingleCardPage>
   );

@@ -42,7 +42,7 @@ export const LogoPickerContainer = styled.div`
   align-items: center;
 `;
 
-export const LogoCircle = styled.div`
+export const LogoCircle = styled.img`
   width: 100px;
   height: 100px;
   background-color: white;

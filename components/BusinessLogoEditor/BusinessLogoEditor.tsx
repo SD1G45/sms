@@ -2,15 +2,8 @@ import React from "react";
 import AvatarEditor from "react-avatar-editor";
 import Button from "../Button";
 import Slider from "../Slider";
-import Router, { useRouter } from "next/router";
-import {
-  Container,
-  SaveButton,
-  TopSection,
-  BottomSection,
-  ErrorText,
-  ButtonContainer,
-} from "./styles";
+import { useRouter } from "next/router";
+import { Container, BottomSection, ErrorText, ButtonContainer } from "./styles";
 
 export interface Props {
   onClose: () => void;
@@ -25,7 +18,7 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
   const uploadInput = React.useRef<any>(null);
   const router = useRouter();
 
-  const { id } = router.query;
+  const { business_id } = router.query;
 
   const handleUpload = (ev: any) => {
     let file = uploadInput.current.files[0];
@@ -37,12 +30,15 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
       setLoading(true);
       setErrorMsg("");
 
-      const data = { base64: editor.current.getImage().toDataURL(), petId: id };
+      const data = {
+        base64: editor.current.getImage().toDataURL(),
+        businessId: business_id,
+      };
 
       const rootUrl =
         process.env.NODE_ENV === "development"
-          ? "http://localhost:3000/"
-          : "https://www.bytetag.co/";
+          ? "http://localhost:3001/"
+          : "https://www.smsasdflkjasdf.co/";
 
       fetch(rootUrl + "api/picture", {
         method: "POST",
@@ -53,7 +49,6 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
         .then((res) => {
           setLoading(false);
           onClose();
-          Router.push(`/pets/${id}`);
         })
         .catch(() => {
           setLoading(false);
