@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { GraphQLError } from "graphql";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import BusinessLogoEditor from "../../components/BusinessLogoEditor";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
 import {
@@ -175,7 +176,8 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
   return (
     <SingleCardPage>
       <StyledCard>
-        <Heading>Create your new business account</Heading>
+        <BusinessLogoEditor onClose={() => {}} />
+        {/* <Heading>Create your new business account</Heading>
         <StyledStepper steps={steps} activeIndex={activeStepperIndex} />
         {activeStepperIndex === 0 ? (
           <SetBusinessName
@@ -190,7 +192,7 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
           />
         ) : (
           <div />
-        )}
+        )} */}
       </StyledCard>
     </SingleCardPage>
   );

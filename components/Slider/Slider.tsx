@@ -18,6 +18,7 @@ const Styles = styled.div`
   color: #888;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
   .value {
     flex: 1;
     font-size: 2rem;
@@ -46,8 +47,10 @@ const Slider: React.FC<SliderProps> = ({ value, onChange }) => {
     <Styles>
       <input
         type="range"
-        min={0}
-        max={100}
+        min={1}
+        max={5}
+        step={0.001}
+        aria-labelledby="continuous-slider"
         value={value}
         className="slider"
         onChange={onChange}
