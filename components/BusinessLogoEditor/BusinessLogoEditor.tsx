@@ -35,10 +35,7 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
         businessId: business_id,
       };
 
-      const rootUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:3001/"
-          : "https://www.smsasdflkjasdf.co/";
+      const rootUrl = process.env.ROOT_URL;
 
       fetch(rootUrl + "api/picture", {
         method: "POST",
