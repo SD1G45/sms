@@ -44,6 +44,17 @@ export interface NexusGenObjects {
     primaryColor?: string | null; // String
     title?: string | null; // String
   }
+  KeyWordCustomerList: { // root type
+    customer_list_id?: string | null; // String
+    id?: string | null; // String
+    keyword_id?: string | null; // String
+  }
+  Keyword: { // root type
+    description?: string | null; // String
+    id?: string | null; // String
+    keyWordCustomerList?: NexusGenRootTypes['KeyWordCustomerList'] | null; // KeyWordCustomerList
+    keyword?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -85,10 +96,22 @@ export interface NexusGenFieldTypes {
     primaryColor: string | null; // String
     title: string | null; // String
   }
+  KeyWordCustomerList: { // field return type
+    customer_list_id: string | null; // String
+    id: string | null; // String
+    keyword_id: string | null; // String
+  }
+  Keyword: { // field return type
+    description: string | null; // String
+    id: string | null; // String
+    keyWordCustomerList: NexusGenRootTypes['KeyWordCustomerList'] | null; // KeyWordCustomerList
+    keyword: string | null; // String
+  }
   Mutation: { // field return type
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
+    newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -123,10 +146,22 @@ export interface NexusGenFieldTypeNames {
     primaryColor: 'String'
     title: 'String'
   }
+  KeyWordCustomerList: { // field return type name
+    customer_list_id: 'String'
+    id: 'String'
+    keyword_id: 'String'
+  }
+  Keyword: { // field return type name
+    description: 'String'
+    id: 'String'
+    keyWordCustomerList: 'KeyWordCustomerList'
+    keyword: 'String'
+  }
   Mutation: { // field return type name
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
     newCoupon: 'Coupon'
+    newKeyWord: 'Keyword'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -163,6 +198,10 @@ export interface NexusGenArgTypes {
       name: string; // String!
       primaryColor: string; // String!
       title: string; // String!
+    }
+    newKeyWord: { // args
+      description: string; // String!
+      keyword: string; // String!
     }
     registerUser: { // args
       email: string; // String!

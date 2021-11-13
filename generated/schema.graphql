@@ -20,10 +20,24 @@ type Coupon {
   title: String
 }
 
+type KeyWordCustomerList {
+  customer_list_id: String
+  id: String
+  keyword_id: String
+}
+
+type Keyword {
+  description: String
+  id: String
+  keyWordCustomerList: KeyWordCustomerList
+  keyword: String
+}
+
 type Mutation {
   loginUser(email: String!, password: String!): UserLoginPayload
   newBusiness(logoUrl: String!, name: String!, phoneNumber: String!, stripeId: String!): Business
   newCoupon(businessId: String!, description: String!, expirationDate: String!, name: String!, primaryColor: String!, title: String!): Coupon
+  newKeyWord(description: String!, keyword: String!): Keyword
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }
 
