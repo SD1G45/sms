@@ -35,6 +35,17 @@ export interface NexusGenObjects {
     phoneNumber?: string | null; // String
     stripeId?: string | null; // String
   }
+  Campaign: { // root type
+    couponId?: string | null; // String
+    customers?: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    id?: string | null; // String
+    message?: string | null; // String
+    name?: string | null; // String
+  }
+  CustomerList: { // root type
+    id?: string | null; // String
+    name?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -67,10 +78,22 @@ export interface NexusGenFieldTypes {
     phoneNumber: string | null; // String
     stripeId: string | null; // String
   }
+  Campaign: { // field return type
+    couponId: string | null; // String
+    customers: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    id: string | null; // String
+    message: string | null; // String
+    name: string | null; // String
+  }
+  CustomerList: { // field return type
+    id: string | null; // String
+    name: string | null; // String
+  }
   Mutation: { // field return type
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
+    newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -97,10 +120,22 @@ export interface NexusGenFieldTypeNames {
     phoneNumber: 'String'
     stripeId: 'String'
   }
+  Campaign: { // field return type name
+    couponId: 'String'
+    customers: 'CustomerList'
+    id: 'String'
+    message: 'String'
+    name: 'String'
+  }
+  CustomerList: { // field return type name
+    id: 'String'
+    name: 'String'
+  }
   Mutation: { // field return type name
     editBusiness: 'Business'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
+    newCampaign: 'Campaign'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -130,6 +165,11 @@ export interface NexusGenArgTypes {
       password: string; // String!
     }
     newBusiness: { // args
+      name: string; // String!
+    }
+    newCampaign: { // args
+      couponId: string; // String!
+      message: string; // String!
       name: string; // String!
     }
     registerUser: { // args
