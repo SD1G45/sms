@@ -6,6 +6,6 @@ export const Keyword = objectType({
     t.string("id");
     t.string("keyword");
     t.string("description");
-    t.field("keyWordCustomerList", { type: "KeyWordCustomerList" });
+    t.field("keyWordCustomerList", { type: "KeyWord_CustomerList" });
   },
 });

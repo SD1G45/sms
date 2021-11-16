@@ -44,7 +44,7 @@ export interface NexusGenObjects {
     primaryColor?: string | null; // String
     title?: string | null; // String
   }
-  KeyWordCustomerList: { // root type
+  KeyWord_CustomerList: { // root type
     customer_list_id?: string | null; // String
     id?: string | null; // String
     keyword_id?: string | null; // String
@@ -52,7 +52,7 @@ export interface NexusGenObjects {
   Keyword: { // root type
     description?: string | null; // String
     id?: string | null; // String
-    keyWordCustomerList?: NexusGenRootTypes['KeyWordCustomerList'] | null; // KeyWordCustomerList
+    keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword?: string | null; // String
   }
   Mutation: {};
@@ -96,7 +96,7 @@ export interface NexusGenFieldTypes {
     primaryColor: string | null; // String
     title: string | null; // String
   }
-  KeyWordCustomerList: { // field return type
+  KeyWord_CustomerList: { // field return type
     customer_list_id: string | null; // String
     id: string | null; // String
     keyword_id: string | null; // String
@@ -104,7 +104,7 @@ export interface NexusGenFieldTypes {
   Keyword: { // field return type
     description: string | null; // String
     id: string | null; // String
-    keyWordCustomerList: NexusGenRootTypes['KeyWordCustomerList'] | null; // KeyWordCustomerList
+    keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword: string | null; // String
   }
   Mutation: { // field return type
@@ -146,7 +146,7 @@ export interface NexusGenFieldTypeNames {
     primaryColor: 'String'
     title: 'String'
   }
-  KeyWordCustomerList: { // field return type name
+  KeyWord_CustomerList: { // field return type name
     customer_list_id: 'String'
     id: 'String'
     keyword_id: 'String'
@@ -154,7 +154,7 @@ export interface NexusGenFieldTypeNames {
   Keyword: { // field return type name
     description: 'String'
     id: 'String'
-    keyWordCustomerList: 'KeyWordCustomerList'
+    keyWordCustomerList: 'KeyWord_CustomerList'
     keyword: 'String'
   }
   Mutation: { // field return type name

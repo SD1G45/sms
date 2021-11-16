@@ -20,7 +20,7 @@ type Coupon {
   title: String
 }
 
-type KeyWordCustomerList {
+type KeyWord_CustomerList {
   customer_list_id: String
   id: String
   keyword_id: String
@@ -29,7 +29,7 @@ type KeyWordCustomerList {
 type Keyword {
   description: String
   id: String
-  keyWordCustomerList: KeyWordCustomerList
+  keyWordCustomerList: KeyWord_CustomerList
   keyword: String
 }
 
