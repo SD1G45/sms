@@ -90,12 +90,14 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
   }
   Mutation: { // field return type
+    editBusiness: NexusGenRootTypes['Business'] | null; // Business
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
+    business: NexusGenRootTypes['Business'] | null; // Business
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -130,12 +132,14 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
   }
   Mutation: { // field return type name
+    editBusiness: 'Business'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
     newCampaign: 'Campaign'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
+    business: 'Business'
     viewer: 'User'
   }
   User: { // field return type name
@@ -152,15 +156,16 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    editBusiness: { // args
+      id: string; // String!
+      name: string; // String!
+    }
     loginUser: { // args
       email: string; // String!
       password: string; // String!
     }
     newBusiness: { // args
-      logoUrl: string; // String!
       name: string; // String!
-      phoneNumber: string; // String!
-      stripeId: string; // String!
     }
     newCampaign: { // args
       couponId: string; // String!
@@ -172,6 +177,11 @@ export interface NexusGenArgTypes {
       firstName: string; // String!
       lastName: string; // String!
       password: string; // String!
+    }
+  }
+  Query: {
+    business: { // args
+      id: string; // String!
     }
   }
 }

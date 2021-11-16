@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Checkbox from "../../components/Checkbox";
 import Background from "../../components/Background";
 import {
-  Page,
   Heading,
   StyledCard,
   PasswordTextField,
@@ -11,15 +9,14 @@ import {
   FirstNameTextField,
   LastNameTextField,
   NameContainer,
-  UsernameTextField,
-  LeftTriangleDiv,
-  RightCircleDiv,
-  tiltedBackGround,
 } from "../../page-styles/register/styles";
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
-import { REGISTER_MUTATION } from "./mutations";
+import { REGISTER_MUTATION } from "../../page-mutations/register";
 import { useUserDispatch } from "../../context/UserContext";
+import SingleCardPage from "../../components/SingleCardPage";
+import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
+import Link from "next/link";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -80,63 +77,58 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Background />
-      <Page>
-        <LeftTriangleDiv>
-          <Image src="/StackedTriangle-1.svg" width={200} height={300} />
-        </LeftTriangleDiv>
-        <StyledCard>
-          <Heading>Create a new account</Heading>
-          <NameContainer>
-            <FirstNameTextField
-              label="First Name"
-              value={firstName}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setFirstName(event.target.value)
-              }
-            />
-            <LastNameTextField
-              label="Last Name"
-              value={lastName}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setLastName(event.target.value)
-              }
-            />
-          </NameContainer>
-          <EmailTextField
-            label="Email"
-            value={email}
+    <SingleCardPage>
+      <StyledCard>
+        <Heading>Create a new account</Heading>
+        <NameContainer>
+          <FirstNameTextField
+            label="First Name"
+            value={firstName}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(event.target.value)
+              setFirstName(event.target.value)
             }
           />
-          <PasswordTextField
-            label="Password"
-            value={password}
-            type="password"
+          <LastNameTextField
+            label="Last Name"
+            value={lastName}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(event.target.value)
+              setLastName(event.target.value)
             }
           />
-          <PasswordTextField
-            label="Confirm password"
-            value={confirmPassword}
-            type="password"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setConfirmPassword(event.target.value)
-            }
-            error={confirmPassword !== password}
-            errorMessage="Passwords don't match"
-          />
+        </NameContainer>
+        <EmailTextField
+          label="Email"
+          value={email}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(event.target.value)
+          }
+        />
+        <PasswordTextField
+          label="Password"
+          value={password}
+          type="password"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(event.target.value)
+          }
+        />
+        <PasswordTextField
+          label="Confirm password"
+          value={confirmPassword}
+          type="password"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setConfirmPassword(event.target.value)
+          }
+          error={confirmPassword !== password}
+          errorMessage="Passwords don't match"
+        />
 
-          <StyledButton onClick={() => onRegister()}>Continue</StyledButton>
-        </StyledCard>
-        <RightCircleDiv>
-          <Image src="/StackedCircle.svg" width={300} height={300} />
-        </RightCircleDiv>
-      </Page>
-    </>
+        <LinkDiv>
+          <Link href="/login">
+            <StyledLink>Already have an account? Log in instead</StyledLink>
+          </Link>
+        </LinkDiv>
+      </StyledCard>
+    </SingleCardPage>
   );
 };
 

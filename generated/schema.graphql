@@ -24,13 +24,15 @@ type CustomerList {
 }
 
 type Mutation {
+  editBusiness(id: String!, name: String!): Business
   loginUser(email: String!, password: String!): UserLoginPayload
-  newBusiness(logoUrl: String!, name: String!, phoneNumber: String!, stripeId: String!): Business
   newCampaign(couponId: String!, message: String!, name: String!): Campaign
+  newBusiness(name: String!): Business
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }
 
 type Query {
+  business(id: String!): Business
   viewer: User
 }
 
