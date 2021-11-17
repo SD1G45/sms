@@ -10,6 +10,29 @@ type Business {
   stripeId: String
 }
 
+type Coupon {
+  businessId: String
+  description: String
+  expirationDate: String
+  id: String
+  name: String
+  primaryColor: String
+  title: String
+}
+
+type KeyWord_CustomerList {
+  customer_list_id: String
+  id: String
+  keyword_id: String
+}
+
+type Keyword {
+  description: String
+  id: String
+  keyWordCustomerList: KeyWord_CustomerList
+  keyword: String
+}
+
 type Campaign {
   couponId: String
   customers: CustomerList
@@ -26,6 +49,9 @@ type CustomerList {
 type Mutation {
   editBusiness(id: String!, name: String!): Business
   loginUser(email: String!, password: String!): UserLoginPayload
+  newBusiness(logoUrl: String!, name: String!, phoneNumber: String!, stripeId: String!): Business
+  newCoupon(businessId: String!, description: String!, expirationDate: String!, name: String!, primaryColor: String!, title: String!): Coupon
+  newKeyWord(description: String!, keyword: String!): Keyword
   newCampaign(couponId: String!, message: String!, name: String!): Campaign
   newBusiness(name: String!): Business
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
