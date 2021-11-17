@@ -55,6 +55,17 @@ export interface NexusGenObjects {
     keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword?: string | null; // String
   }
+  Campaign: { // root type
+    couponId?: string | null; // String
+    customers?: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    id?: string | null; // String
+    message?: string | null; // String
+    name?: string | null; // String
+  }
+  CustomerList: { // root type
+    id?: string | null; // String
+    name?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
@@ -107,14 +118,28 @@ export interface NexusGenFieldTypes {
     keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword: string | null; // String
   }
+  Campaign: { // field return type
+    couponId: string | null; // String
+    customers: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    id: string | null; // String
+    message: string | null; // String
+    name: string | null; // String
+  }
+  CustomerList: { // field return type
+    id: string | null; // String
+    name: string | null; // String
+  }
   Mutation: { // field return type
+    editBusiness: NexusGenRootTypes['Business'] | null; // Business
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
+    newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
+    business: NexusGenRootTypes['Business'] | null; // Business
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -157,14 +182,28 @@ export interface NexusGenFieldTypeNames {
     keyWordCustomerList: 'KeyWord_CustomerList'
     keyword: 'String'
   }
+  Campaign: { // field return type name
+    couponId: 'String'
+    customers: 'CustomerList'
+    id: 'String'
+    message: 'String'
+    name: 'String'
+  }
+  CustomerList: { // field return type name
+    id: 'String'
+    name: 'String'
+  }
   Mutation: { // field return type name
+    editBusiness: 'Business'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
     newCoupon: 'Coupon'
     newKeyWord: 'Keyword'
+    newCampaign: 'Campaign'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
+    business: 'Business'
     viewer: 'User'
   }
   User: { // field return type name
@@ -181,15 +220,21 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    editBusiness: { // args
+      id: string; // String!
+      name: string; // String!
+    }
     loginUser: { // args
       email: string; // String!
       password: string; // String!
     }
     newBusiness: { // args
-      logoUrl: string; // String!
       name: string; // String!
-      phoneNumber: string; // String!
-      stripeId: string; // String!
+    }
+    newCampaign: { // args
+      couponId: string; // String!
+      message: string; // String!
+      name: string; // String!
     }
     newCoupon: { // args
       businessId: string; // String!
@@ -208,6 +253,11 @@ export interface NexusGenArgTypes {
       firstName: string; // String!
       lastName: string; // String!
       password: string; // String!
+    }
+  }
+  Query: {
+    business: { // args
+      id: string; // String!
     }
   }
 }

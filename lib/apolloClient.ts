@@ -12,10 +12,8 @@ function createApolloClient() {
   // Declare variable to store authToken
   let token: string | null;
 
-  const rootUrl =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3001/"
-      : "https://www.sms.co/";
+  const rootUrl = process.env.ROOT_URL;
+
   const httpLink = createHttpLink({
     uri: rootUrl + "api/graphql",
     credentials: "include",

@@ -14,6 +14,7 @@ export const Heading = styled.h1`
   font-size: 1.4rem;
   margin-bottom: 20px;
 `;
+
 export const Label = styled.label`
   display: block;
   padding-bottom: 7px;

@@ -19,9 +19,9 @@ model User {
 model Business {
   id          String          @id @default(uuid())
   name        String
-  stripeId    String
-  phoneNumber String          @unique
-  logoUrl     String
+  stripeId    String?
+  phoneNumber String?          @unique
+  logoUrl     String?
   users       Business_User[]
   coupons     Coupon[]
 }

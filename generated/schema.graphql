@@ -33,15 +33,32 @@ type Keyword {
   keyword: String
 }
 
+type Campaign {
+  couponId: String
+  customers: CustomerList
+  id: String
+  message: String
+  name: String
+}
+
+type CustomerList {
+  id: String
+  name: String
+}
+
 type Mutation {
+  editBusiness(id: String!, name: String!): Business
   loginUser(email: String!, password: String!): UserLoginPayload
   newBusiness(logoUrl: String!, name: String!, phoneNumber: String!, stripeId: String!): Business
   newCoupon(businessId: String!, description: String!, expirationDate: String!, name: String!, primaryColor: String!, title: String!): Coupon
   newKeyWord(description: String!, keyword: String!): Keyword
+  newCampaign(couponId: String!, message: String!, name: String!): Campaign
+  newBusiness(name: String!): Business
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }
 
 type Query {
+  business(id: String!): Business
   viewer: User
 }
 
