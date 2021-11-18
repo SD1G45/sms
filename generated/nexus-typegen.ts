@@ -35,6 +35,26 @@ export interface NexusGenObjects {
     phoneNumber?: string | null; // String
     stripeId?: string | null; // String
   }
+  Coupon: { // root type
+    businessId?: string | null; // String
+    description?: string | null; // String
+    expirationDate?: string | null; // String
+    id?: string | null; // String
+    name?: string | null; // String
+    primaryColor?: string | null; // String
+    title?: string | null; // String
+  }
+  KeyWord_CustomerList: { // root type
+    customer_list_id?: string | null; // String
+    id?: string | null; // String
+    keyword_id?: string | null; // String
+  }
+  Keyword: { // root type
+    description?: string | null; // String
+    id?: string | null; // String
+    keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
+    keyword?: string | null; // String
+  }
   Campaign: { // root type
     couponId?: string | null; // String
     customers?: NexusGenRootTypes['CustomerList'] | null; // CustomerList
@@ -85,6 +105,26 @@ export interface NexusGenFieldTypes {
     phoneNumber: string | null; // String
     stripeId: string | null; // String
   }
+  Coupon: { // field return type
+    businessId: string | null; // String
+    description: string | null; // String
+    expirationDate: string | null; // String
+    id: string | null; // String
+    name: string | null; // String
+    primaryColor: string | null; // String
+    title: string | null; // String
+  }
+  KeyWord_CustomerList: { // field return type
+    customer_list_id: string | null; // String
+    id: string | null; // String
+    keyword_id: string | null; // String
+  }
+  Keyword: { // field return type
+    description: string | null; // String
+    id: string | null; // String
+    keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
+    keyword: string | null; // String
+  }
   Campaign: { // field return type
     couponId: string | null; // String
     customers: NexusGenRootTypes['CustomerList'] | null; // CustomerList
@@ -107,6 +147,8 @@ export interface NexusGenFieldTypes {
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
+    newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
+    newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
@@ -135,6 +177,26 @@ export interface NexusGenFieldTypeNames {
     phoneNumber: 'String'
     stripeId: 'String'
   }
+  Coupon: { // field return type name
+    businessId: 'String'
+    description: 'String'
+    expirationDate: 'String'
+    id: 'String'
+    name: 'String'
+    primaryColor: 'String'
+    title: 'String'
+  }
+  KeyWord_CustomerList: { // field return type name
+    customer_list_id: 'String'
+    id: 'String'
+    keyword_id: 'String'
+  }
+  Keyword: { // field return type name
+    description: 'String'
+    id: 'String'
+    keyWordCustomerList: 'KeyWord_CustomerList'
+    keyword: 'String'
+  }
   Campaign: { // field return type name
     couponId: 'String'
     customers: 'CustomerList'
@@ -157,6 +219,8 @@ export interface NexusGenFieldTypeNames {
     editBusiness: 'Business'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
+    newCoupon: 'Coupon'
+    newKeyWord: 'Keyword'
     newCampaign: 'Campaign'
     newCustomer: 'Customer'
     registerUser: 'UserLoginPayload'
@@ -197,6 +261,18 @@ export interface NexusGenArgTypes {
     }
     newCustomer: { // args
       phoneNumber: string; // String!
+    }
+    newCoupon: { // args
+      businessId: string; // String!
+      description: string; // String!
+      expirationDate: string; // String!
+      name: string; // String!
+      primaryColor: string; // String!
+      title: string; // String!
+    }
+    newKeyWord: { // args
+      description: string; // String!
+      keyword: string; // String!
     }
     registerUser: { // args
       email: string; // String!
