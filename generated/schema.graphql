@@ -18,6 +18,14 @@ type Campaign {
   name: String
 }
 
+type Customer {
+  firstName: String
+  id: String
+  lastName: String
+  password: String
+  phoneNumber: String
+}
+
 type CustomerList {
   id: String
   name: String
@@ -26,8 +34,9 @@ type CustomerList {
 type Mutation {
   editBusiness(id: String!, name: String!): Business
   loginUser(email: String!, password: String!): UserLoginPayload
-  newCampaign(couponId: String!, message: String!, name: String!): Campaign
   newBusiness(name: String!): Business
+  newCampaign(couponId: String!, message: String!, name: String!): Campaign
+  newCustomer(phoneNumber: String!): Customer
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }
 

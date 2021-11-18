@@ -42,6 +42,13 @@ export interface NexusGenObjects {
     message?: string | null; // String
     name?: string | null; // String
   }
+  Customer: { // root type
+    firstName?: string | null; // String
+    id?: string | null; // String
+    lastName?: string | null; // String
+    password?: string | null; // String
+    phoneNumber?: string | null; // String
+  }
   CustomerList: { // root type
     id?: string | null; // String
     name?: string | null; // String
@@ -85,6 +92,13 @@ export interface NexusGenFieldTypes {
     message: string | null; // String
     name: string | null; // String
   }
+  Customer: { // field return type
+    firstName: string | null; // String
+    id: string | null; // String
+    lastName: string | null; // String
+    password: string | null; // String
+    phoneNumber: string | null; // String
+  }
   CustomerList: { // field return type
     id: string | null; // String
     name: string | null; // String
@@ -94,6 +108,7 @@ export interface NexusGenFieldTypes {
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
+    newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -127,6 +142,13 @@ export interface NexusGenFieldTypeNames {
     message: 'String'
     name: 'String'
   }
+  Customer: { // field return type name
+    firstName: 'String'
+    id: 'String'
+    lastName: 'String'
+    password: 'String'
+    phoneNumber: 'String'
+  }
   CustomerList: { // field return type name
     id: 'String'
     name: 'String'
@@ -136,6 +158,7 @@ export interface NexusGenFieldTypeNames {
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
     newCampaign: 'Campaign'
+    newCustomer: 'Customer'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -171,6 +194,9 @@ export interface NexusGenArgTypes {
       couponId: string; // String!
       message: string; // String!
       name: string; // String!
+    }
+    newCustomer: { // args
+      phoneNumber: string; // String!
     }
     registerUser: { // args
       email: string; // String!

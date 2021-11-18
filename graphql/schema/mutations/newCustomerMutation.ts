@@ -8,7 +8,7 @@ export const newCustomerMutation = extendType({
       args: {
         phoneNumber: nonNull(stringArg()),
       },
-      resolve: async (_, phoneNumber, ctx) => {
+      resolve: async (_, { phoneNumber }, ctx) => {
         const newCustomer = await ctx.prisma.customer.create({
           data: {
             phoneNumber
