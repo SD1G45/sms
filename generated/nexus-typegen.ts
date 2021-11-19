@@ -62,6 +62,13 @@ export interface NexusGenObjects {
     message?: string | null; // String
     name?: string | null; // String
   }
+  Customer: { // root type
+    firstName?: string | null; // String
+    id?: string | null; // String
+    lastName?: string | null; // String
+    password?: string | null; // String
+    phoneNumber?: string | null; // String
+  }
   CustomerList: { // root type
     id?: string | null; // String
     name?: string | null; // String
@@ -125,6 +132,13 @@ export interface NexusGenFieldTypes {
     message: string | null; // String
     name: string | null; // String
   }
+  Customer: { // field return type
+    firstName: string | null; // String
+    id: string | null; // String
+    lastName: string | null; // String
+    password: string | null; // String
+    phoneNumber: string | null; // String
+  }
   CustomerList: { // field return type
     id: string | null; // String
     name: string | null; // String
@@ -136,6 +150,7 @@ export interface NexusGenFieldTypes {
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
+    newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -189,6 +204,13 @@ export interface NexusGenFieldTypeNames {
     message: 'String'
     name: 'String'
   }
+  Customer: { // field return type name
+    firstName: 'String'
+    id: 'String'
+    lastName: 'String'
+    password: 'String'
+    phoneNumber: 'String'
+  }
   CustomerList: { // field return type name
     id: 'String'
     name: 'String'
@@ -200,6 +222,7 @@ export interface NexusGenFieldTypeNames {
     newCoupon: 'Coupon'
     newKeyWord: 'Keyword'
     newCampaign: 'Campaign'
+    newCustomer: 'Customer'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -235,6 +258,9 @@ export interface NexusGenArgTypes {
       couponId: string; // String!
       message: string; // String!
       name: string; // String!
+    }
+    newCustomer: { // args
+      phoneNumber: string; // String!
     }
     newCoupon: { // args
       businessId: string; // String!

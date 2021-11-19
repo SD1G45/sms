@@ -1,15 +1,11 @@
 import { User } from "./User";
 import { UserLoginPayload } from "./UserLoginPayload";
 import { Business } from "./Business";
-<<<<<<< HEAD
 import { Coupon } from "./Coupon";
 import { Keyword } from "./Keyword";
-import { KeyWord_CustomerList } from "./Keyword_CustomerList";
-
-export { User, UserLoginPayload, Business, Coupon, Keyword, KeyWord_CustomerList };
-=======
 import { CustomerList } from "./CustomerList";
+import { KeyWord_CustomerList } from "./Keyword_CustomerList";
 import { Campaign } from "./Campaign";
+import { Customer } from "./Customer";
 
-export { User, UserLoginPayload, Business, CustomerList, Campaign };
->>>>>>> origin/develop
+export { User, UserLoginPayload, Business, Coupon, Keyword, KeyWord_CustomerList, CustomerList, Campaign, Customer };
