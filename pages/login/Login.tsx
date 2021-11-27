@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from "../../components/Checkbox";
+import ErrorPopup from "../../components/ErrorPopup";
 import Link from "next/link";
 import {
   Heading,
@@ -9,6 +10,7 @@ import {
   StyledButton,
   StyledLink,
   LinkDiv,
+  ErrorDiv,
 } from "../../page-styles/login/styles";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../page-mutations/login";
@@ -19,11 +21,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [staySignedInChecked, setStaySignedInChecked] = useState(false);
-  const [emptyError, setEmptyError] = useState(false);
-  const [error, setError] = useState(false);
+  const [errorState, setError] = useState({error: false, message: ''});
   const [loading, setLoading] = useState(false);
 
   const userDispatch = useUserDispatch();
+
+  useEffect(() => {
+    setTimeout(() => setError({...errorState, error: false, message: ''}), 10000);
+  })
 
   const [loginMutation] = useMutation(LOGIN_MUTATION, {
     errorPolicy: "all",
@@ -31,11 +36,9 @@ const Login = () => {
 
   const onLogin = async () => {
     if (email.length === 0 || password.length === 0) {
-      setEmptyError(true);
+      setError({...errorState, error: true, message: "Missing email and/or password"});
       return;
     }
-    setEmptyError(false);
-    setError(false);
     setLoading(true);
     try {
       const { data, errors } = await loginMutation({
@@ -46,7 +49,7 @@ const Login = () => {
       });
 
       if (errors && errors.length > 0) {
-        setError(true);
+        setError({...errorState, error: true, message: "error"});
         setLoading(false);
         return;
       }
@@ -60,7 +63,7 @@ const Login = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      setError(true);
+      setError({...errorState, error: true, message: "error"});
     }
   };
 
@@ -85,6 +88,7 @@ const Login = () => {
           linkText="Forgot your password?"
           linkValue="/reset-password"
         />
+        <ErrorPopup error={errorState.error} message={errorState.message} />
         <Checkbox
           checked={staySignedInChecked}
           label="Stay signed in"
@@ -93,7 +97,7 @@ const Login = () => {
           }
         />
         <LinkDiv>
-          <StyledButton onClick={() => onLogin()}>Continue</StyledButton>
+           <StyledButton onClick={() => onLogin()}>Continue</StyledButton>
           <Link href="/register" passHref>
             <StyledLink>New to us? Create an Account</StyledLink>
           </Link>
