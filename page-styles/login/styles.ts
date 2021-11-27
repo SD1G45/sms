@@ -24,11 +24,6 @@ export const LinkDiv = styled.div`
   text-align: center;
 `;
 
-export const ErrorDiv = styled.div`
-  text-align: center;
-  color: red;
-`;
-
 export const StyledLink = styled(Label)`
   color: ${(props) => props.theme.colors.primary};
   cursor: pointer;

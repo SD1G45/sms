@@ -10,7 +10,6 @@ import {
   StyledButton,
   StyledLink,
   LinkDiv,
-  ErrorDiv,
 } from "../../page-styles/login/styles";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../page-mutations/login";
