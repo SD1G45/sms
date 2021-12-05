@@ -3,6 +3,7 @@ import { GraphQLError } from "graphql";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import BusinessLogoEditor from "../../components/BusinessLogoEditor";
+import SearchBar from "../../components/SearchBar";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
 import {
@@ -50,6 +51,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 
   const handleRequestErrors = (errors: readonly GraphQLError[] | undefined) => {
     if (errors && errors.length > 0) {
+      console.log(errors);
       setNameSetError(true);
       return true;
     }
@@ -156,6 +158,14 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
   );
 };
 
+const PickPhoneNumber: React.FC = () => {
+  return (
+    <div>
+      <SearchBar value="" onValueChange={() => {}} />
+    </div>
+  );
+};
+
 const steps = ["Name", "Logo", "Phone number"];
 
 interface Business {
@@ -204,7 +214,7 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
                 openLogoEditor={() => setLogoEditorOpen(true)}
               />
             ) : (
-              <div />
+              <PickPhoneNumber />
             )}
           </>
         )}

@@ -7,5 +7,17 @@ import { CustomerList } from "./CustomerList";
 import { KeyWord_CustomerList } from "./Keyword_CustomerList";
 import { Campaign } from "./Campaign";
 import { Customer } from "./Customer";
+import { AvailablePhoneNumber } from "./AvailablePhoneNumber";
 
-export { User, UserLoginPayload, Business, Coupon, Keyword, KeyWord_CustomerList, CustomerList, Campaign, Customer };
+export {
+  AvailablePhoneNumber,
+  User,
+  UserLoginPayload,
+  Business,
+  Coupon,
+  Keyword,
+  KeyWord_CustomerList,
+  CustomerList,
+  Campaign,
+  Customer,
+};
