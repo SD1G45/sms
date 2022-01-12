@@ -64,3 +64,24 @@ export const ErrorMessage = styled.p`
   text-align: center;
   margin-top: 20px;
 `;
+
+export const PhoneSearchFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const PhoneNumberList = styled.div`
+  max-height: 300px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+`;
+
+export const PhoneNumberContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 20px 0 0;
+`;
+
+export const PhoneNumber = styled.p`
+  font-size: 1rem;
+`;

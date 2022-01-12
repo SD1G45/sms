@@ -15,3 +15,12 @@ export const EDIT_BUSINESS_MUTATION = gql`
     }
   }
 `;
+
+export const PROVISION_PHONE_NUMBER_MUTATION = gql`
+  mutation ProvisionPhoneNumber($phoneNumber: String!, $businessId: String!) {
+    provisionPhoneNumber(phoneNumber: $phoneNumber, businessId: $businessId) {
+      phoneNumber
+      friendlyName
+    }
+  }
+`;

@@ -4,12 +4,18 @@ import { ButtonProps } from "./types";
 
 const Button: React.FC<ButtonProps> = ({
   invert,
+  disabled,
   className,
   children,
   ...other
 }) => {
   return (
-    <StyledButton invert={invert} className={className} {...other}>
+    <StyledButton
+      invert={invert}
+      disabled={disabled}
+      className={className}
+      {...other}
+    >
       {children}
     </StyledButton>
   );

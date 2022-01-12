@@ -9,3 +9,12 @@ export const BUSINESS_QUERY = gql`
     }
   }
 `;
+
+export const AVAILABLE_PHONE_NUMBERS_QUERY = gql`
+  query AvailablePhoneNumbers($areaCode: String!) {
+    availablePhoneNumbers(areaCode: $areaCode) {
+      friendlyName
+      phoneNumber
+    }
+  }
+`;

@@ -1,15 +1,19 @@
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { GraphQLError } from "graphql";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import BusinessLogoEditor from "../../components/BusinessLogoEditor";
+import Button from "../../components/Button";
+import Radio from "../../components/Radio";
 import SearchBar from "../../components/SearchBar";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
 import {
   CREATE_BUSINESS_MUTATION,
   EDIT_BUSINESS_MUTATION,
+  PROVISION_PHONE_NUMBER_MUTATION,
 } from "../../page-mutations/create-business";
+import { AVAILABLE_PHONE_NUMBERS_QUERY } from "../../page-queries/create-business";
 import {
   Heading,
   StyledCard,
@@ -21,6 +25,10 @@ import {
   LogoPickerContainer,
   UploadLogoButton,
   ErrorMessage,
+  PhoneSearchFlex,
+  PhoneNumberContainer,
+  PhoneNumber,
+  PhoneNumberList,
 } from "../../page-styles/create-business/styles";
 
 interface SetBusinessNameProps {
@@ -159,9 +167,72 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
 };
 
 const PickPhoneNumber: React.FC = () => {
+  const [areaCode, setAreaCode] = useState("");
+  const [selectedPhoneNumber, setSelectedPhoneNumber] = useState<string | null>(
+    null
+  );
+
+  const router = useRouter();
+  const business_id = router.query.business_id;
+
+  const [getPhoneNumbers, { loading, error, data }] = useLazyQuery(
+    AVAILABLE_PHONE_NUMBERS_QUERY
+  );
+
+  const [provisionPhoneNumberMutation] = useMutation(
+    PROVISION_PHONE_NUMBER_MUTATION,
+    {
+      errorPolicy: "all",
+    }
+  );
+
+  const updateSearch = (value: string) => {
+    getPhoneNumbers({ variables: { areaCode: value } });
+    setAreaCode(value);
+  };
+
+  const provisionPhoneNumber = async () => {
+    const { data, errors } = await provisionPhoneNumberMutation({
+      variables: { phoneNumber: selectedPhoneNumber, businessId: business_id },
+    });
+
+    if (data) {
+      router.push("/");
+    }
+  };
+
   return (
     <div>
-      <SearchBar value="" onValueChange={() => {}} />
+      <PhoneSearchFlex>
+        <SearchBar
+          value={areaCode}
+          onValueChange={(value) => updateSearch(value)}
+        />
+      </PhoneSearchFlex>
+      <PhoneNumberList>
+        {data &&
+          data.availablePhoneNumbers &&
+          data.availablePhoneNumbers.map(
+            (value: { phoneNumber: string; friendlyName: string }) => (
+              <PhoneNumberContainer key={value.phoneNumber}>
+                <PhoneNumber>{value.friendlyName}</PhoneNumber>
+                <Radio
+                  checked={selectedPhoneNumber === value.phoneNumber}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    event.target.checked &&
+                    setSelectedPhoneNumber(value.phoneNumber)
+                  }
+                />
+              </PhoneNumberContainer>
+            )
+          )}
+      </PhoneNumberList>
+      <Button
+        disabled={selectedPhoneNumber === null}
+        onClick={() => provisionPhoneNumber()}
+      >
+        Select
+      </Button>
     </div>
   );
 };

@@ -291,6 +291,7 @@ export interface NexusGenArgTypes {
       keyword: string; // String!
     }
     provisionPhoneNumber: { // args
+      businessId: string; // String!
       phoneNumber: string; // String!
     }
     registerUser: { // args

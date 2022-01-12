@@ -9,10 +9,11 @@ export const StyledButton = styled.button<ButtonProps>`
   border-radius: 18px;
   border: 2px solid ${(props) => (props.invert ? "#4881F0" : "white")};
   color: ${(props) => (props.invert ? "#4881F0" : "white")};
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   font-size: 1rem;
+  opacity: ${(props) => (props.disabled ? "40%" : "100%")};
 
   &:hover {
-    opacity: 70%;
+    opacity: ${(props) => (props.disabled ? "40%" : "70%")};
   }
 `;
