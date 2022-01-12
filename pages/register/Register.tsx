@@ -50,7 +50,6 @@ const Register = () => {
     setLoading(true);
     setError(false);
     try {
-      console.log("trying to register");
       const { data, errors } = await registerMutation({
         variables: {
           firstName,
@@ -59,14 +58,14 @@ const Register = () => {
           password,
         },
       });
-      console.log("Checking for errors");
+
       if (errors && errors.length > 0) {
         console.log(errors);
         setError(true);
         setLoading(false);
         return;
       }
-      console.log("dispatching");
+      
       userDispatch({
         type: "login",
         payload: {
