@@ -159,6 +159,7 @@ export interface NexusGenFieldTypes {
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
+    provisionPhoneNumber: NexusGenRootTypes['AvailablePhoneNumber'] | null; // AvailablePhoneNumber
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
   }
   Query: { // field return type
@@ -236,6 +237,7 @@ export interface NexusGenFieldTypeNames {
     newCoupon: 'Coupon'
     newCustomer: 'Customer'
     newKeyWord: 'Keyword'
+    provisionPhoneNumber: 'AvailablePhoneNumber'
     registerUser: 'UserLoginPayload'
   }
   Query: { // field return type name
@@ -287,6 +289,9 @@ export interface NexusGenArgTypes {
     newKeyWord: { // args
       description: string; // String!
       keyword: string; // String!
+    }
+    provisionPhoneNumber: { // args
+      phoneNumber: string; // String!
     }
     registerUser: { // args
       email: string; // String!

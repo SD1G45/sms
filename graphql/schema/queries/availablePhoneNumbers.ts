@@ -10,7 +10,7 @@ export const availablePhoneNumbersQuery = extendType({
       args: {
         areaCode: nonNull(stringArg()),
       },
-      resolve: async (_, { areaCode }, ctx) => {
+      resolve: async (_parent, { areaCode }, _ctx) => {
         const response = await client
           .availablePhoneNumbers("US")
           .local.list({ areaCode, limit: 20 });

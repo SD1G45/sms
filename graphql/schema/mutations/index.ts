@@ -6,6 +6,7 @@ import { newKeyWordMutation } from "./newKeyWordMutation";
 import { newCampaignMutation } from "./newCampaignMutation";
 import { editBusinessMutation } from "./editBusinessMutation";
 import { newCustomerMutation } from "./newCustomerMutation";
+import { provisionPhoneNumberMutation } from "./provisionPhoneNumberMutation";
 
 export {
   registerUserMutation,
@@ -16,4 +17,5 @@ export {
   newCustomerMutation,
   newCouponMutation,
   newKeyWordMutation,
+  provisionPhoneNumberMutation,
 };
