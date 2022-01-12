@@ -14,6 +14,7 @@ import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../page-mutations/login";
 import { useUserDispatch } from "../../context/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,6 +25,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const userDispatch = useUserDispatch();
+  const router = useRouter();
 
   const [loginMutation] = useMutation(LOGIN_MUTATION, {
     errorPolicy: "all",
@@ -58,6 +60,7 @@ const Login = () => {
         },
       });
       setLoading(false);
+      router.push("/home");
     } catch (error) {
       setLoading(false);
       setError(true);
