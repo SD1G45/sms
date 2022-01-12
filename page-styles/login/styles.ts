@@ -37,4 +37,5 @@ export const EmailTextField = styled(TextField)`
 
 export const StyledButton = styled(Button)`
   margin-top: 30px;
+  margin-bottom: 30px;
 `;

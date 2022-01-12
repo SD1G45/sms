@@ -17,6 +17,7 @@ import { useUserDispatch } from "../../context/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const userDispatch = useUserDispatch();
+  const router = useRouter();
 
   const [registerMutation] = useMutation(REGISTER_MUTATION, {
     errorPolicy: "all",
@@ -52,17 +54,18 @@ const Register = () => {
         variables: {
           firstName,
           lastName,
-          email,
+          email: email.toLowerCase(),
           password,
         },
       });
 
       if (errors && errors.length > 0) {
+        console.log(errors);
         setError(true);
         setLoading(false);
         return;
       }
-
+      
       userDispatch({
         type: "login",
         payload: {
@@ -70,6 +73,7 @@ const Register = () => {
         },
       });
       setLoading(false);
+      router.push("/welcome");
     } catch (error) {
       setError(true);
       setLoading(false);
@@ -123,6 +127,7 @@ const Register = () => {
         />
 
         <LinkDiv>
+          <StyledButton onClick={() => onRegister()}>Continue</StyledButton>
           <Link href="/login">
             <StyledLink>Already have an account? Log in instead</StyledLink>
           </Link>
