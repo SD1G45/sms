@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 
 export interface JWT {
   id: string;
-  username: string;
   email: string;
   exp: Date;
 }
@@ -11,7 +10,6 @@ export interface JWT {
 export function generateJWTToken(user: {
   id: string;
   email: string;
-  username: string;
 }) {
   const today = new Date();
   const exp = new Date(today);
@@ -20,7 +18,6 @@ export function generateJWTToken(user: {
   return jwt.sign(
     {
       id: user.id,
-      username: user.username,
       email: user.email,
       exp: exp.getTime() / 1000,
     },

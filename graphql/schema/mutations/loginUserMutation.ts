@@ -21,15 +21,14 @@ export const loginUserMutation = extendType({
         if (userBasedOnEmail == null) {
           throw new Error("A user with this email or password doesn't exist");
         }
-
+        
         const validPassword = compareSync(password, userBasedOnEmail?.password);
 
         if (validPassword) {
           const { id, email } = userBasedOnEmail;
           const token = generateJWTToken({
             id,
-            email,
-            username: "NEED TO SET USERNAME THIS IS CURRENTLY WRONG",
+            email 
           });
 
           return {
@@ -39,7 +38,7 @@ export const loginUserMutation = extendType({
         } else {
           throw new Error("The email or password is incorrect");
         }
-      },
+      }, 
     });
   },
 });

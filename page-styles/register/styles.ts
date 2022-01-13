@@ -42,5 +42,5 @@ export const NameContainer = styled.div`
   align-items: center;
 `;
 export const StyledButton = styled(Button)`
-  margin-top: 30px;
+  margin-top: 5px;
 `;

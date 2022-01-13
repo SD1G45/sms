@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @next/next/link-passhref */
+import React, { useState, useEffect } from "react";
 import Background from "../../components/Background";
 import {
   Heading,
@@ -17,6 +18,7 @@ import { useUserDispatch } from "../../context/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
 import Link from "next/link";
+import ErrorPopup from "../../components/ErrorPopup";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -24,11 +26,14 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [emptyError, setEmptyError] = useState(false);
-  const [error, setError] = useState(false);
+  const [errorState, setErrorState] = useState({error: false, message: ''});
   const [loading, setLoading] = useState(false);
 
   const userDispatch = useUserDispatch();
+
+  useEffect(() => {
+    setTimeout(() => setErrorState({...errorState, error: false, message: ''}), 10000);
+  })
 
   const [registerMutation] = useMutation(REGISTER_MUTATION, {
     errorPolicy: "all",
@@ -41,12 +46,10 @@ const Register = () => {
       password.length === 0 ||
       confirmPassword.length === 0
     ) {
-      setEmptyError(true);
+      setErrorState({...errorState, error: true, message: 'All fields must be filled in'});
       return;
     }
-    setEmptyError(false);
     setLoading(true);
-    setError(false);
     try {
       const { data, errors } = await registerMutation({
         variables: {
@@ -58,7 +61,7 @@ const Register = () => {
       });
 
       if (errors && errors.length > 0) {
-        setError(true);
+        setErrorState({...errorState, error: true, message: errors[0].message});
         setLoading(false);
         return;
       }
@@ -71,7 +74,7 @@ const Register = () => {
       });
       setLoading(false);
     } catch (error) {
-      setError(true);
+      setErrorState({...errorState, error: true, message: "Something went wrong"});
       setLoading(false);
     }
   };
@@ -121,7 +124,8 @@ const Register = () => {
           error={confirmPassword !== password}
           errorMessage="Passwords don't match"
         />
-
+        <ErrorPopup error={errorState.error} message={errorState.message} />
+        <StyledButton onClick={() => onRegister()}>Create Account</StyledButton>
         <LinkDiv>
           <Link href="/login">
             <StyledLink>Already have an account? Log in instead</StyledLink>

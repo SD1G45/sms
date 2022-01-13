@@ -12,7 +12,7 @@ function createApolloClient() {
   // Declare variable to store authToken
   let token: string | null;
 
-  const rootUrl = process.env.ROOT_URL;
+  const rootUrl = process.env.ROOT_URL || "http://localhost:3001/";
 
   const httpLink = createHttpLink({
     uri: rootUrl + "api/graphql",
