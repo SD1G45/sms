@@ -14,6 +14,7 @@ import {
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Navbar = () => {
   const router = useRouter();
@@ -33,9 +34,9 @@ const Navbar = () => {
         </BusinessInfoSection>
         <ControlsSection>
           <CreateButton invert>Create</CreateButton>
-          <Icon />
+          <Image src="/icons/settings.svg" width={50} height={50} />
           <Spacing />
-          <Icon />
+          <Image src="/icons/profile.svg" width={70} height={50} />
         </ControlsSection>
       </PrimaryNavbar>
       <SecondaryNavbarContainer>
