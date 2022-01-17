@@ -17,14 +17,15 @@ model User {
 }
 
 model Business {
-  id          String          @id @default(uuid())
-  name        String
-  stripeId    String?
-  phoneNumber String?         @unique
-  logoUrl     String?
-  users       Business_User[]
-  coupons     Coupon[]
-  keywords    Keyword[]
+  id           String          @id @default(uuid())
+  name         String
+  stripeId     String?
+  phoneNumber  String?         @unique
+  logoUrl      String?
+  users        Business_User[]
+  coupons      Coupon[]
+  keywords     Keyword[]
+  customerList Customer_List[]
 }
 
 model Business_User {
@@ -93,6 +94,8 @@ model Customer_List_Customer {
 model Customer_List {
   id                     String                   @id @default(uuid())
   name                   String
+  business               Business                 @relation(fields: [businessId], references: [id])
+  businessId             String
   campaignCustomerList   Campaign_Customer_List[]
   keyWordCustomerList    Keyword_Customer_List[]
   Customer_List_Customer Customer_List_Customer[]

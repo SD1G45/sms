@@ -158,6 +158,7 @@ export interface NexusGenFieldTypes {
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
+    newCustomerList: NexusGenRootTypes['CustomerList'] | null; // CustomerList
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     provisionPhoneNumber: NexusGenRootTypes['AvailablePhoneNumber'] | null; // AvailablePhoneNumber
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
@@ -236,6 +237,7 @@ export interface NexusGenFieldTypeNames {
     newCampaign: 'Campaign'
     newCoupon: 'Coupon'
     newCustomer: 'Customer'
+    newCustomerList: 'CustomerList'
     newKeyWord: 'Keyword'
     provisionPhoneNumber: 'AvailablePhoneNumber'
     registerUser: 'UserLoginPayload'
@@ -286,8 +288,13 @@ export interface NexusGenArgTypes {
     newCustomer: { // args
       phoneNumber: string; // String!
     }
+    newCustomerList: { // args
+      businessId: string; // String!
+      name: string; // String!
+    }
     newKeyWord: { // args
       businessId: string; // String!
+      customerListId: string; // String!
       description: string; // String!
       keyword: string; // String!
     }
