@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../../graphql/context/prisma";
+import client from "../../../../lib/twilioClient";
 
 export default async function handler(
   req: NextApiRequest,
@@ -61,6 +62,12 @@ export default async function handler(
         customerListId,
         customerId: customerWithPhoneNumber.id,
       },
+    });
+
+    await client.messages.create({
+      body: "Hi there",
+      from: businessPhoneNumber,
+      to: customerPhoneNumber,
     });
 
     return res.send(200);
