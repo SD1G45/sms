@@ -46,7 +46,7 @@ export const loginUserMutation = extendType({
             user: null,
           };
         }
-      },
+      }, 
     });
   },
 });
