@@ -6,8 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    console.log(req.body);
-
     const businessPhoneNumber = req.body.To;
 
     const businessWithPhoneNumber = await prisma.business.findUnique({
