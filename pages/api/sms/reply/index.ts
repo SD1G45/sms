@@ -34,15 +34,36 @@ export default async function handler(
 
     const customerPhoneNumber = req.body.From;
 
-    const customerWithPhoneNumber = await prisma.customer.findUnique({
+    let customerWithPhoneNumber = await prisma.customer.findUnique({
       where: { phoneNumber: customerPhoneNumber },
     });
 
-    // If customer doesn't exist, create a new customer.
+    if (customerWithPhoneNumber == null) {
+      customerWithPhoneNumber = await prisma.customer.create({
+        data: {
+          phoneNumber: customerPhoneNumber,
+        },
+      });
+    }
 
-    // Get customer list for keyword and add customer to all of them.
+    const keyword_Customer_List = await prisma.keyword_Customer_List.findFirst({
+      where: { keyword },
+    });
 
-    // Send appropriate autoresponse for keyword.
+    if (keyword_Customer_List == null) {
+      return res
+        .status(404)
+        .send("Keyword doesn't have a customer list attached");
+    }
+
+    const customerListId = keyword_Customer_List.customerListId;
+
+    await prisma.customer_List_Customer.create({
+      data: {
+        customerListId,
+        customerId: customerWithPhoneNumber.id,
+      },
+    });
 
     return res.send(200);
   }
