@@ -66,7 +66,7 @@ type Mutation {
   newCampaign(couponId: String!, message: String!, name: String!): Campaign
   newCoupon(businessId: String!, description: String!, expirationDate: String!, name: String!, primaryColor: String!, title: String!): Coupon
   newCustomer(phoneNumber: String!): Customer
-  newKeyWord(description: String!, keyword: String!): Keyword
+  newKeyWord(businessId: String!, description: String!, keyword: String!): Keyword
   provisionPhoneNumber(businessId: String!, phoneNumber: String!): AvailablePhoneNumber
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }

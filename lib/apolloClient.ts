@@ -15,7 +15,6 @@ function createApolloClient() {
   const rootUrl = process.env.ROOT_URL;
 
   const uri = rootUrl + "api/graphql";
-  console.log(uri);
 
   const httpLink = createHttpLink({
     uri: "http://localhost:3001/api/graphql",

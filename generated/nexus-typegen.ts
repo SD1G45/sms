@@ -287,6 +287,7 @@ export interface NexusGenArgTypes {
       phoneNumber: string; // String!
     }
     newKeyWord: { // args
+      businessId: string; // String!
       description: string; // String!
       keyword: string; // String!
     }

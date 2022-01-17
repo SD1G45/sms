@@ -20,10 +20,11 @@ model Business {
   id          String          @id @default(uuid())
   name        String
   stripeId    String?
-  phoneNumber String?          @unique
+  phoneNumber String?         @unique
   logoUrl     String?
   users       Business_User[]
   coupons     Coupon[]
+  keywords    Keyword[]
 }
 
 model Business_User {
@@ -101,6 +102,8 @@ model Keyword {
   id                  String                  @id @default(uuid())
   keyword             String
   description         String
+  business            Business                @relation(fields: [businessId], references: [id])
+  businessId          String
   keyWordCustomerList Keyword_Customer_List[]
 }
 

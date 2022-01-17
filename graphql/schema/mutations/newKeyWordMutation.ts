@@ -8,12 +8,14 @@ export const newKeyWordMutation = extendType({
       args: {
         keyword: nonNull(stringArg()),
         description: nonNull(stringArg()),
+        businessId: nonNull(stringArg()),
       },
-      resolve: async (_, { keyword, description }, ctx) => {
+      resolve: async (_, { keyword, description, businessId }, ctx) => {
         const newKeyWord = await ctx.prisma.keyword.create({
           data: {
             keyword,
             description,
+            businessId,
           },
         });
 
