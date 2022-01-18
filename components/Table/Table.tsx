@@ -1,8 +1,8 @@
 import React from "react";
-import { DivContainer, DataTable, TableBody, Header, HeaderLong } from "./styles";
+import { DivContainer, DataTable, TableBody, Header, HeaderLong, BodyLong, Body } from "./styles";
 import { TableProps } from "./types";
 
-function mapDataToComponent(data: string[]): JSX.Element[] {
+function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
     const mapping: JSX.Element[] =[];
 
     data.map((value, i) => {
@@ -10,6 +10,20 @@ function mapDataToComponent(data: string[]): JSX.Element[] {
         <HeaderLong>{value}</HeaderLong>
         :
         <Header>{value}</Header>;
+        mapping.push(newItem);
+    })
+
+    return mapping;
+}
+
+function mapDataToBodyComponent(data: string[]): JSX.Element[] {
+    const mapping: JSX.Element[] =[];
+
+    data.map((value, i) => {
+        const newItem = i == 0 ? 
+        <BodyLong>{value}</BodyLong>
+        :
+        <Body>{value}</Body>;
         mapping.push(newItem);
     })
 
@@ -26,12 +40,12 @@ const Table: React.FC<TableProps> = ({
                 <TableBody>
                     <tr>
                         {
-                            mapDataToComponent(headers)
+                            mapDataToHeaderComponent(headers)
                         }
                     </tr>
                     <tr>
                         {
-                            mapDataToComponent(data)
+                            mapDataToBodyComponent(data)
                         }
                     </tr>
                 </TableBody>
