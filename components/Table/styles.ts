@@ -29,5 +29,20 @@ export const HeaderLong = styled.th`
     padding-right: 100px;
     padding-top: 15px;
     font-size: 14px;
-    text-content: left;
+    text-align: left;
+`;
+
+export const Body = styled.th`
+    border-bottom: 2.75px solid #C4C4C4;
+    padding-bottom: 15px;
+    padding-right: 60px;
+    padding-top: 15px;
+    font-size: 14px;
+    font-weight: 500;
+`;
+
+export const BodyLong = styled(Body)`
+    padding-right: 100px;
+    font-weight: 500;
+    text-align: left;
 `;
