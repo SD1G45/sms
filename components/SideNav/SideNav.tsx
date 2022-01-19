@@ -16,10 +16,12 @@ const SideNav: React.FC<SideNavProps> = ({
     if (currentPath.startsWith("/register")) return <></>;
     if (currentPath.startsWith("/welcome")) return <></>;
     if (currentPath.startsWith("/create-business")) return <></>;
+
     return (
         <StyledDiv>
             <Header>{heading}</Header>
                 <StyledTable>
+                    <tbody>
                     {items.map((item, i) => (
                         <Link key={i} href={routes[i]} passHref>
                             <tr>
@@ -30,6 +32,7 @@ const SideNav: React.FC<SideNavProps> = ({
                         </Link>
                     )
                     )}
+                    </tbody>
                 </StyledTable>
         </StyledDiv>);
 };
