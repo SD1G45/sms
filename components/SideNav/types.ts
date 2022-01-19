@@ -1,5 +1,5 @@
 export interface SideNavProps extends React.HTMLAttributes<HTMLDivElement> {
-    items?: string[];
-    index?: number;
+    items: string[];
+    routes: string[];
     heading: string;
 };
