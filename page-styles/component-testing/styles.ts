@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Card from "../../components/Card";
+import Timer from "../../components/Timer";
 
 export const Page = styled.div`
   width: 100%;
@@ -11,4 +12,8 @@ export const Page = styled.div`
 
 export const StyledCard = styled(Card)`
   width: 500px;
+`;
+
+export const TimerBox = styled(Timer)`
+  width: 700px;
 `;

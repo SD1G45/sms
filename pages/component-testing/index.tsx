@@ -3,7 +3,7 @@ import Card from "../../components/Card";
 import { StyledCard } from "../../components/Card/styles";
 import Slider from "../../components/Slider";
 import Stepper from "../../components/Stepper";
-import { Page } from "../../page-styles/component-testing/styles";
+import { Page, TimerBox } from "../../page-styles/component-testing/styles";
 
 const Test = () => {
   const [value, setValue] = useState(9);
@@ -15,6 +15,8 @@ const Test = () => {
           onChange={(event: any) => setValue(event.target.value)}
         />
       </StyledCard>
+
+      <TimerBox></TimerBox>
     </Page>
   );
 };
