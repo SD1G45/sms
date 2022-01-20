@@ -13,7 +13,7 @@ import Table from "../../components/Table";
 
 const index = () => {
   const list: string[] = ["Analytics", "Create new", "FAQ"];
-  const routes: string[] = ["/coupons", "/create/coupon", "/faq-coupon"];
+  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
   const headers: string[] = [
     "Name",
     "Date Created",
