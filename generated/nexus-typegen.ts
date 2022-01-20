@@ -4,7 +4,7 @@
  */
 
 
- import type { Context } from "./../graphql/context"
+import type { Context } from "./../graphql/context"
 
 
 
@@ -165,6 +165,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
+    campaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -243,6 +244,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
+    campaign: 'Campaign'
     viewer: 'User'
   }
   User: { // field return type name
@@ -307,6 +309,12 @@ export interface NexusGenArgTypes {
     }
     business: { // args
       id: string; // String!
+    }
+    campaign: { // args
+      couponId: string; // String!
+      id: string; // String!
+      message: string; // String!
+      name: string; // String!
     }
   }
 }
