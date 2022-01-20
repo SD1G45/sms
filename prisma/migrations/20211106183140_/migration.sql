@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Business" ALTER COLUMN "stripeId" DROP NOT NULL,
-ALTER COLUMN "phoneNumber" DROP NOT NULL,
-ALTER COLUMN "logoUrl" DROP NOT NULL;

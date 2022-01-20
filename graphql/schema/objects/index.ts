@@ -8,6 +8,7 @@ import { KeyWord_CustomerList } from "./Keyword_CustomerList";
 import { Campaign } from "./Campaign";
 import { Customer } from "./Customer";
 import { AvailablePhoneNumber } from "./AvailablePhoneNumber";
+import { DateScalar } from "./DateScalar";
 
 export {
   AvailablePhoneNumber,
@@ -20,4 +21,5 @@ export {
   CustomerList,
   Campaign,
   Customer,
+  DateScalar,
 };

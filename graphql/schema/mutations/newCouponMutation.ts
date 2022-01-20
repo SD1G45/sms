@@ -24,8 +24,11 @@ export const newCouponMutation = extendType({
             title,
             description,
             primaryColor,
-            expirationDate,
+            expirationDate: new Date(),
             businessId,
+            redeemed: 0,
+            sent: 0,
+            opened: 0,
           },
         });
         return newCoupon;

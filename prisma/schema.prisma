@@ -17,13 +17,15 @@ model User {
 }
 
 model Business {
-  id          String          @id @default(uuid())
-  name        String
-  stripeId    String?
-  phoneNumber String?          @unique
-  logoUrl     String?
-  users       Business_User[]
-  coupons     Coupon[]
+  id           String          @id @default(uuid())
+  name         String
+  stripeId     String?
+  phoneNumber  String?         @unique
+  logoUrl      String?
+  users        Business_User[]
+  coupons      Coupon[]
+  keywords     Keyword[]
+  customerList Customer_List[]
 }
 
 model Business_User {
@@ -50,9 +52,13 @@ model Coupon {
   description    String
   primaryColor   String
   expirationDate DateTime
+  sent           Int 
+  opened         Int
+  redeemed       Int
   business       Business   @relation(fields: [businessId], references: [id])
   businessId     String
   campaign       Campaign[]
+  keyword        Keyword[]
 }
 
 model Campaign {
@@ -92,6 +98,8 @@ model Customer_List_Customer {
 model Customer_List {
   id                     String                   @id @default(uuid())
   name                   String
+  business               Business                 @relation(fields: [businessId], references: [id])
+  businessId             String
   campaignCustomerList   Campaign_Customer_List[]
   keyWordCustomerList    Keyword_Customer_List[]
   Customer_List_Customer Customer_List_Customer[]
@@ -101,6 +109,11 @@ model Keyword {
   id                  String                  @id @default(uuid())
   keyword             String
   description         String
+  message             String
+  coupon              Coupon                  @relation(fields: [couponId], references:  [id]) 
+  couponId            String 
+  business            Business                @relation(fields: [businessId], references: [id])
+  businessId          String
   keyWordCustomerList Keyword_Customer_List[]
 }
 
