@@ -17,18 +17,28 @@ import CouponPreview from "../../../components/CouponPreview";
 import Button from "../../../components/Button";
 import { ColumnDiv, ContainerDiv } from "../../../page-styles/coupons/styles";
 import SideNav from "../../../components/SideNav";
+import { useMutation } from "@apollo/client";
+import { NEW_COUPON } from "../../../page-mutations/coupons/create";
+import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
 
 const CreateCoupon: React.FC = () => {
+  const businessState = useBusinessState();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const initDate = new Date();
   initDate.setDate(initDate.getDate() + 7);
   const [date, setDate] = useState(initDate.toISOString().split("T")[0]);
+
   const [time, setTime] = useState("23:59");
   const [color, setColor] = useState("#4881F0");
   const list: string[] = ["Analytics", "Create new", "FAQ"];
   const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
+
+  const [newCouponMutation] = useMutation(NEW_COUPON, {
+    errorPolicy: "all",
+  });
 
   const dateTime = new Date(
     Number(date.split("-")[0]),
@@ -38,7 +48,18 @@ const CreateCoupon: React.FC = () => {
     Number(time.split(":")[1])
   );
 
-  console.log(dateTime);
+  const handleCreate = () => {
+    newCouponMutation({
+      variables: {
+        name: title,
+        title,
+        description,
+        expirationDate: dateTime,
+        primaryColor: color,
+        businessId: businessState?.businessId,
+      },
+    });
+  };
 
   return (
     <ContainerDiv>
@@ -89,7 +110,9 @@ const CreateCoupon: React.FC = () => {
             onChange={(color: any) => setColor(color.hex)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }}>Create coupon</Button>
+            <Button style={{ width: 250 }} onClick={() => handleCreate()}>
+              Create coupon
+            </Button>
           </ButtonContainer>
         </HalfPage>
 

@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "../../page-mutations/register";
-import { useUserDispatch } from "../../context/UserContext";
+import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
 import Link from "next/link";
@@ -27,15 +27,18 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorState, setErrorState] = useState({error: false, message: ''});
+  const [errorState, setErrorState] = useState({ error: false, message: "" });
   const [loading, setLoading] = useState(false);
 
   const userDispatch = useUserDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => setErrorState({...errorState, error: false, message: ''}), 10000);
-  })
+    setTimeout(
+      () => setErrorState({ ...errorState, error: false, message: "" }),
+      10000
+    );
+  });
 
   const [registerMutation] = useMutation(REGISTER_MUTATION, {
     errorPolicy: "all",
@@ -48,7 +51,11 @@ const Register = () => {
       password.length === 0 ||
       confirmPassword.length === 0
     ) {
-      setErrorState({...errorState, error: true, message: 'All fields must be filled in'});
+      setErrorState({
+        ...errorState,
+        error: true,
+        message: "All fields must be filled in",
+      });
       return;
     }
     setLoading(true);
@@ -63,11 +70,15 @@ const Register = () => {
       });
 
       if (errors && errors.length > 0) {
-        setErrorState({...errorState, error: true, message: errors[0].message});
+        setErrorState({
+          ...errorState,
+          error: true,
+          message: errors[0].message,
+        });
         setLoading(false);
         return;
       }
-      
+
       userDispatch({
         type: "login",
         payload: {
@@ -77,7 +88,11 @@ const Register = () => {
       setLoading(false);
       router.push("/welcome");
     } catch (error) {
-      setErrorState({...errorState, error: true, message: "Something went wrong"});
+      setErrorState({
+        ...errorState,
+        error: true,
+        message: "Something went wrong",
+      });
       setLoading(false);
     }
   };

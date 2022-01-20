@@ -4,7 +4,8 @@ import Theme from "../components/styles/Theme";
 import Navbar from "../components/Navbar";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/apolloClient";
-import { UserProvider } from "../context/UserContext";
+import { UserProvider } from "../context/UserContext/UserContext";
+import { BusinessProvider } from "../context/BusinessContext/BusinessContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -12,11 +13,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={apolloClient}>
       <UserProvider>
-        <GlobalStyles />
-        <Theme>
-          <Navbar />
-          <Component {...pageProps} />
-        </Theme>
+        <BusinessProvider>
+          <GlobalStyles />
+          <Theme>
+            <Navbar />
+            <Component {...pageProps} />
+          </Theme>
+        </BusinessProvider>
       </UserProvider>
     </ApolloProvider>
   );

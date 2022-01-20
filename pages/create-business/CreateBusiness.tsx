@@ -8,6 +8,7 @@ import Radio from "../../components/Radio";
 import SearchBar from "../../components/SearchBar";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
+import { useBusinessDispatch } from "../../context/BusinessContext/BusinessContext";
 import {
   CREATE_BUSINESS_MUTATION,
   EDIT_BUSINESS_MUTATION,
@@ -54,6 +55,8 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
     errorPolicy: "all",
   });
 
+  const businessDispatch = useBusinessDispatch();
+
   const mutationMode: "CREATE" | "EDIT" =
     business_id != null ? "EDIT" : "CREATE";
 
@@ -90,6 +93,12 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 
         router.query.business_id = data.newBusiness.id;
         router.push(router);
+
+        businessDispatch({
+          type: "setBusinessId",
+          payload: { businessId: data.newBusiness.id },
+        });
+
         onNext();
       } catch (error) {
         setNameSetError(true);
