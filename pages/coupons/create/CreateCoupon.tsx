@@ -15,22 +15,34 @@ import { ChromePicker } from "react-color";
 import { Label } from "../../../components/TextField/styles";
 import CouponPreview from "../../../components/CouponPreview";
 import Button from "../../../components/Button";
+import { ColumnDiv, ContainerDiv } from "../../../page-styles/coupons/styles";
+import SideNav from "../../../components/SideNav";
 
 const CreateCoupon: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+
+  const initDate = new Date();
+  initDate.setDate(initDate.getDate() + 7);
+  const [date, setDate] = useState(initDate.toISOString().split("T")[0]);
   const [time, setTime] = useState("23:59");
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("#4881F0");
+  const list: string[] = ["Analytics", "Create new", "FAQ"];
+  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
 
-  console.log(time);
-  console.log(date);
+  const dateTime = new Date(
+    Number(date.split("-")[0]),
+    Number(date.split("-")[1]) - 1,
+    Number(date.split("-")[2]),
+    Number(time.split(":")[0]),
+    Number(time.split(":")[1])
+  );
 
-  // const list: string[] = ["Analytics", "Create new", "FAQ"];
-  // const routes: string[] = ["/coupons", "/create-coupon", "/faq-coupon"];
+  console.log(dateTime);
 
   return (
-    <>
+    <ContainerDiv>
+      <SideNav items={list} routes={routes} heading={"Coupons"} />
       <FlexContainer>
         <HalfPage>
           <Heading>Create new coupon</Heading>
@@ -82,17 +94,17 @@ const CreateCoupon: React.FC = () => {
         </HalfPage>
 
         <HalfPage>
-          <PhoneSection style={{ paddingTop: 50 }}>
+          <PhoneSection style={{ paddingTop: 70 }}>
             <CouponPreview
               title={title}
               description={description}
-              expirationDate={new Date(date)}
+              expirationDate={dateTime}
               primaryColor={color}
             />
           </PhoneSection>
         </HalfPage>
       </FlexContainer>
-    </>
+    </ContainerDiv>
   );
 };
 

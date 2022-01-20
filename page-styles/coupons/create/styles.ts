@@ -4,6 +4,8 @@ import TextField from "../../../components/TextField";
 export const FlexContainer = styled.div`
   display: flex;
   padding: 50px 80px;
+  width: 100%;
+  /* background-color: green; */
 `;
 
 export const HalfPage = styled.div`
