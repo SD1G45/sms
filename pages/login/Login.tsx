@@ -50,7 +50,7 @@ const Login = () => {
       });
 
       if (errors && errors.length > 0) {
-        setError({...errorState, error: true, message: "error"});
+        setError({...errorState, error: true, message: errors[0].message});
         setLoading(false);
         return;
       }
