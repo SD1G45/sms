@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import { useState } from "react";
 import { CREATE_KEYWORD_MUTATION } from "../../page-mutations/create-keyword";
 import { useMutation } from "@apollo/client";
+import { ContainerDiv, MiddleDiv, MainHeader, SubHeader, SmallHeader } from "../../page-styles/create-keywords/styles";
 
 const CreateKeyWord = () => {
     const list: string[] = ["Analytics", "Create new", "FAQ"];
@@ -38,25 +39,21 @@ const CreateKeyWord = () => {
     }
 
     return (
-    <div style={{ display:"flex" }}>
+    <ContainerDiv>
         <SideNav items={list} routes={routes} heading={"Keywords"}/>
-        <div style={{ paddingLeft: '50px' }}>
-            <h1 style={{ paddingTop: '50px' }}>Create new keyword</h1>
-            <h3 style={{ paddingTop: '30px' }} >Information</h3>
-            <br/>
-            <br/>
-            <h4>Message</h4>
+        <MiddleDiv>
+            <MainHeader>Create new keyword</MainHeader>
+            <SubHeader>Information</SubHeader>
+            <SmallHeader>Message</SmallHeader>
             <TextField value={description} onChange={(x: React.ChangeEvent<HTMLInputElement>) => setDescription(x.target.value)}/>
-            <br/>
-            <h4>Coupon</h4>
+            <SmallHeader>Coupon</SmallHeader>
             <TextField value={keyword} onChange={(x: React.ChangeEvent<HTMLInputElement>) => setKeyword(x.target.value)}/>
-            <br/>
             <MultiSelector searchValue="" onSearchValueChange={() => {}} selectedOptions={[{name: "option", id: "id"}]}
             onSelect={() => {}} onRemove={() => {}} options={[{name: "option", id: "id"},{name: "Main List", id: "ID"}]}/>
             <br/>
             <Button onClick={() => onCreate()}>Create keyword</Button>
-        </div>
-    </div>
+        </MiddleDiv>
+    </ContainerDiv>
     );
 }
 
