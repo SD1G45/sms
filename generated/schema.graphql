@@ -26,7 +26,7 @@ type Campaign {
 type Coupon {
   businessId: String
   description: String
-  expirationDate: String
+  expirationDate: Date
   id: String
   name: String
   primaryColor: String
@@ -45,6 +45,9 @@ type CustomerList {
   id: String
   name: String
 }
+
+"""Date custom scalar type"""
+scalar Date
 
 type KeyWord_CustomerList {
   customer_list_id: String
@@ -67,7 +70,7 @@ type Mutation {
   newCoupon(businessId: String!, description: String!, expirationDate: String!, name: String!, primaryColor: String!, title: String!): Coupon
   newCustomer(phoneNumber: String!): Customer
   newCustomerList(businessId: String!, name: String!): CustomerList
-  newKeyWord(businessId: String!, customerListId: String!, description: String!, keyword: String!): Keyword
+  newKeyWord(businessId: String!, couponId: String!, customerListId: String!, description: String!, keyword: String!, message: String!): Keyword
   provisionPhoneNumber(businessId: String!, phoneNumber: String!): AvailablePhoneNumber
   registerUser(email: String!, firstName: String!, lastName: String!, password: String!): UserLoginPayload
 }

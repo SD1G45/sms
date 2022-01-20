@@ -52,9 +52,13 @@ model Coupon {
   description    String
   primaryColor   String
   expirationDate DateTime
+  sent           Int 
+  opened         Int
+  redeemed       Int
   business       Business   @relation(fields: [businessId], references: [id])
   businessId     String
   campaign       Campaign[]
+  keyword        Keyword[]
 }
 
 model Campaign {
@@ -105,6 +109,9 @@ model Keyword {
   id                  String                  @id @default(uuid())
   keyword             String
   description         String
+  message             String
+  coupon              Coupon                  @relation(fields: [couponId], references:  [id]) 
+  couponId            String 
   business            Business                @relation(fields: [businessId], references: [id])
   businessId          String
   keyWordCustomerList Keyword_Customer_List[]

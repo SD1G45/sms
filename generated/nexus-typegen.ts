@@ -5,8 +5,23 @@
 
 
 import type { Context } from "./../graphql/context"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Date";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Date";
+  }
+}
 
 
 declare global {
@@ -25,6 +40,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  Date: any
 }
 
 export interface NexusGenObjects {
@@ -49,7 +65,7 @@ export interface NexusGenObjects {
   Coupon: { // root type
     businessId?: string | null; // String
     description?: string | null; // String
-    expirationDate?: string | null; // String
+    expirationDate?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     name?: string | null; // String
     primaryColor?: string | null; // String
@@ -123,7 +139,7 @@ export interface NexusGenFieldTypes {
   Coupon: { // field return type
     businessId: string | null; // String
     description: string | null; // String
-    expirationDate: string | null; // String
+    expirationDate: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     name: string | null; // String
     primaryColor: string | null; // String
@@ -202,7 +218,7 @@ export interface NexusGenFieldTypeNames {
   Coupon: { // field return type name
     businessId: 'String'
     description: 'String'
-    expirationDate: 'String'
+    expirationDate: 'Date'
     id: 'String'
     name: 'String'
     primaryColor: 'String'
@@ -294,9 +310,11 @@ export interface NexusGenArgTypes {
     }
     newKeyWord: { // args
       businessId: string; // String!
+      couponId: string; // String!
       customerListId: string; // String!
       description: string; // String!
       keyword: string; // String!
+      message: string; // String!
     }
     provisionPhoneNumber: { // args
       businessId: string; // String!

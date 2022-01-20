@@ -65,7 +65,7 @@ export default async function handler(
     });
 
     await client.messages.create({
-      body: "Hi there",
+      body: keyword.message,
       from: businessPhoneNumber,
       to: customerPhoneNumber,
     });
