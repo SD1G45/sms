@@ -34,3 +34,10 @@ export const PhoneSection = styled.div`
   justify-content: flex-end;
   padding-right: 80px;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: 30px;
+  width: 100%;
+  justify-content: flex-end;
+`;

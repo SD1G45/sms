@@ -9,10 +9,12 @@ import {
   PhoneSection,
   StyledTimePicker,
   SubHeading,
+  ButtonContainer,
 } from "../../../page-styles/coupons/create/styles";
 import { ChromePicker } from "react-color";
 import { Label } from "../../../components/TextField/styles";
 import CouponPreview from "../../../components/CouponPreview";
+import Button from "../../../components/Button";
 
 const CreateCoupon: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -74,7 +76,11 @@ const CreateCoupon: React.FC = () => {
             color={color}
             onChange={(color: any) => setColor(color.hex)}
           />
+          <ButtonContainer>
+            <Button style={{ width: 250 }}>Create coupon</Button>
+          </ButtonContainer>
         </HalfPage>
+
         <HalfPage>
           <PhoneSection style={{ paddingTop: 50 }}>
             <CouponPreview
