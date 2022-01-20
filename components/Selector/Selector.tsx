@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutisde";
 import TextField from "../TextField";
+import { Label, LabelContainer } from "../TextField/styles";
 import { DropDownCard, Option, SelectorContainer } from "./styles";
 import { SelectorProps } from "./types";
 
 const Selector: React.FC<SelectorProps> = ({
+  label,
   searchValue,
   onSearchValueChange,
   selectedId,
@@ -34,6 +36,9 @@ const Selector: React.FC<SelectorProps> = ({
 
   return (
     <SelectorContainer ref={ref}>
+      <LabelContainer>
+        <Label>{label || ""}</Label>
+      </LabelContainer>
       <TextField
         value={searchValue}
         onChange={handleSearchChange}

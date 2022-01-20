@@ -15,7 +15,7 @@ export const DropDownCard = styled(Card)`
   padding: 0;
   position: absolute;
   width: 100%;
-  top: 40px;
+  top: 70px;
 `;
 
 export const StyledSearchBar = styled(SearchBar)`
