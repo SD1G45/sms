@@ -64,8 +64,16 @@ export default async function handler(
       },
     });
 
+    const link =
+      process.env.ROOT_URL +
+      keyword.couponId +
+      "?customer=" +
+      customerPhoneNumber;
+
+    const messageWithLink = keyword.message.replace("{coupon}", link);
+
     await client.messages.create({
-      body: keyword.message,
+      body: messageWithLink,
       from: businessPhoneNumber,
       to: customerPhoneNumber,
     });
