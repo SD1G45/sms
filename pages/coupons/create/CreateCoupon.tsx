@@ -20,6 +20,7 @@ import SideNav from "../../../components/SideNav";
 import { useMutation } from "@apollo/client";
 import { NEW_COUPON } from "../../../page-mutations/coupons/create";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
+import ErrorPopup from "../../../components/ErrorPopup";
 
 const CreateCoupon: React.FC = () => {
   const businessState = useBusinessState();
@@ -33,6 +34,9 @@ const CreateCoupon: React.FC = () => {
 
   const [time, setTime] = useState("23:59");
   const [color, setColor] = useState("#4881F0");
+
+  const [errorState, setError] = useState({error: false, message: ''});
+
   const list: string[] = ["Analytics", "Create new", "FAQ"];
   const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
 
@@ -48,8 +52,24 @@ const CreateCoupon: React.FC = () => {
     Number(time.split(":")[1])
   );
 
-  const handleCreate = () => {
-    newCouponMutation({
+    
+    
+
+  const handleCreate = async () => {
+
+    if (title.length == 0) {
+      setError({...errorState, error: true, message: "Missing title or message"});
+      return;
+    }
+
+    const today = new Date();
+    if (dateTime.getDate() < today.getDate()) {
+      setError({...errorState, error: true, message: "Invalid date: Expiration date has passed."})
+      return;
+    }
+
+    try {
+    const {data, errors} = await newCouponMutation({
       variables: {
         name: title,
         title,
@@ -59,6 +79,15 @@ const CreateCoupon: React.FC = () => {
         businessId: businessState?.businessId,
       },
     });
+
+    if (errors && errors.length > 0) {
+      setError({...errorState, error: true, message: errors[0].message});
+      return;
+    }
+
+    } catch (error) {
+      setError({...errorState, error: true, message: "Something went wrong, please try again later."});
+    }
   };
 
   return (
@@ -114,6 +143,7 @@ const CreateCoupon: React.FC = () => {
               Create coupon
             </Button>
           </ButtonContainer>
+          <ErrorPopup error={errorState.error} message={errorState.message} />
         </HalfPage>
 
         <HalfPage>
