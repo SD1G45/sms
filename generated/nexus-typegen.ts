@@ -5,8 +5,23 @@
 
 
 import type { Context } from "./../graphql/context"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Date";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Date";
+  }
+}
 
 
 declare global {
@@ -25,6 +40,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  Date: any
 }
 
 export interface NexusGenObjects {
@@ -49,7 +65,7 @@ export interface NexusGenObjects {
   Coupon: { // root type
     businessId?: string | null; // String
     description?: string | null; // String
-    expirationDate?: string | null; // String
+    expirationDate?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     name?: string | null; // String
     primaryColor?: string | null; // String
@@ -123,7 +139,7 @@ export interface NexusGenFieldTypes {
   Coupon: { // field return type
     businessId: string | null; // String
     description: string | null; // String
-    expirationDate: string | null; // String
+    expirationDate: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     name: string | null; // String
     primaryColor: string | null; // String
@@ -158,6 +174,7 @@ export interface NexusGenFieldTypes {
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
+    newCustomerList: NexusGenRootTypes['CustomerList'] | null; // CustomerList
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     provisionPhoneNumber: NexusGenRootTypes['AvailablePhoneNumber'] | null; // AvailablePhoneNumber
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
@@ -165,6 +182,9 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
+    campaign: NexusGenRootTypes['Campaign'] | null; // Campaign
+    coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
+    customerLists: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -201,7 +221,7 @@ export interface NexusGenFieldTypeNames {
   Coupon: { // field return type name
     businessId: 'String'
     description: 'String'
-    expirationDate: 'String'
+    expirationDate: 'Date'
     id: 'String'
     name: 'String'
     primaryColor: 'String'
@@ -236,6 +256,7 @@ export interface NexusGenFieldTypeNames {
     newCampaign: 'Campaign'
     newCoupon: 'Coupon'
     newCustomer: 'Customer'
+    newCustomerList: 'CustomerList'
     newKeyWord: 'Keyword'
     provisionPhoneNumber: 'AvailablePhoneNumber'
     registerUser: 'UserLoginPayload'
@@ -243,6 +264,9 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
+    campaign: 'Campaign'
+    coupons: 'Coupon'
+    customerLists: 'Coupon'
     viewer: 'User'
   }
   User: { // field return type name
@@ -271,7 +295,9 @@ export interface NexusGenArgTypes {
       name: string; // String!
     }
     newCampaign: { // args
+      businessId: string; // String!
       couponId: string; // String!
+      customerListId: string; // String!
       message: string; // String!
       name: string; // String!
     }
@@ -286,9 +312,17 @@ export interface NexusGenArgTypes {
     newCustomer: { // args
       phoneNumber: string; // String!
     }
+    newCustomerList: { // args
+      businessId: string; // String!
+      name: string; // String!
+    }
     newKeyWord: { // args
+      businessId: string; // String!
+      couponId: string; // String!
+      customerListId: string; // String!
       description: string; // String!
       keyword: string; // String!
+      message: string; // String!
     }
     provisionPhoneNumber: { // args
       businessId: string; // String!
@@ -307,6 +341,18 @@ export interface NexusGenArgTypes {
     }
     business: { // args
       id: string; // String!
+    }
+    campaign: { // args
+      couponId: string; // String!
+      id: string; // String!
+      message: string; // String!
+      name: string; // String!
+    }
+    coupons: { // args
+      businessId: string; // String!
+    }
+    customerLists: { // args
+      businessId: string; // String!
     }
   }
 }
