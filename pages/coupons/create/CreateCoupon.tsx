@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import TextArea from "../../../components/TextArea";
 import TextField from "../../../components/TextField";
+import Image from "next/image";
+import { useRouter } from "next/router";
+
 import {
   ExpirationContainer,
   FlexContainer,
@@ -10,11 +13,16 @@ import {
   StyledTimePicker,
   SubHeading,
   ButtonContainer,
+  StyledCard,
+  CardDescription,
+  ConnectButton,
+  CardHeading,
+  SetupLaterButton,
+  CreateButton,
 } from "../../../page-styles/coupons/create/styles";
 import { ChromePicker } from "react-color";
 import { Label } from "../../../components/TextField/styles";
 import CouponPreview from "../../../components/CouponPreview";
-import Button from "../../../components/Button";
 import { ColumnDiv, ContainerDiv } from "../../../page-styles/coupons/styles";
 import SideNav from "../../../components/SideNav";
 import { useMutation } from "@apollo/client";
@@ -24,6 +32,7 @@ import ErrorPopup from "../../../components/ErrorPopup";
 
 const CreateCoupon: React.FC = () => {
   const businessState = useBusinessState();
+  const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -35,7 +44,7 @@ const CreateCoupon: React.FC = () => {
   const [time, setTime] = useState("23:59");
   const [color, setColor] = useState("#4881F0");
 
-  const [errorState, setError] = useState({error: false, message: ''});
+  const [errorState, setError] = useState({ error: false, message: "" });
 
   const list: string[] = ["Analytics", "Create new", "FAQ"];
   const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
@@ -52,41 +61,89 @@ const CreateCoupon: React.FC = () => {
     Number(time.split(":")[1])
   );
 
-    
-    
+  const Search = () => {
+    const [showCards, setShowCards] = React.useState(false);
+    const onClick = () => setShowCards(true);
+    return (
+      <>
+        <CreateButton
+          onClick={() => {
+            onClick();
+            // handleCreate();
+          }}
+        >
+          Create Coupon
+        </CreateButton>
+        {showCards ? <Results /> : null}
+      </>
+    );
+  };
+
+  const Results = () => (
+    <StyledCard>
+      <Image src="/check.png" width={100} height={100} />
+      <CardHeading>New coupon created!</CardHeading>
+      <CardDescription>
+        You can now use "{title}" in a campaign message or an auto response via
+        a keyword.
+      </CardDescription>
+      <div>
+        <ConnectButton onClick={() => router.push("/campaigns")}>
+          Connect to campaign
+        </ConnectButton>
+        <ConnectButton onClick={() => router.push("/keywords")}>
+          Connect to keyword
+        </ConnectButton>
+      </div>
+
+      <SetupLaterButton onClick={() => router.push("/")}>
+        Setup later
+      </SetupLaterButton>
+    </StyledCard>
+  );
 
   const handleCreate = async () => {
-
     if (title.length == 0 || description.length == 0) {
-      setError({...errorState, error: true, message: "Missing title or message"});
+      setError({
+        ...errorState,
+        error: true,
+        message: "Missing title or message",
+      });
       return;
     }
 
     const today = new Date();
     if (dateTime.getDate() < today.getDate()) {
-      setError({...errorState, error: true, message: "Invalid date: Expiration date has passed."})
+      setError({
+        ...errorState,
+        error: true,
+        message: "Invalid date: Expiration date has passed.",
+      });
       return;
     }
 
     try {
-    const {data, errors} = await newCouponMutation({
-      variables: {
-        name: title,
-        title,
-        description,
-        expirationDate: dateTime,
-        primaryColor: color,
-        businessId: businessState?.businessId,
-      },
-    });
+      const { data, errors } = await newCouponMutation({
+        variables: {
+          name: title,
+          title,
+          description,
+          expirationDate: dateTime,
+          primaryColor: color,
+          businessId: businessState?.businessId,
+        },
+      });
 
-    if (errors && errors.length > 0) {
-      setError({...errorState, error: true, message: errors[0].message});
-      return;
-    }
-
+      if (errors && errors.length > 0) {
+        setError({ ...errorState, error: true, message: errors[0].message });
+        return;
+      }
     } catch (error) {
-      setError({...errorState, error: true, message: "Something went wrong, please try again later."});
+      setError({
+        ...errorState,
+        error: true,
+        message: "Something went wrong, please try again later.",
+      });
     }
   };
 
@@ -139,9 +196,10 @@ const CreateCoupon: React.FC = () => {
             onChange={(color: any) => setColor(color.hex)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()}>
+            {/* <Button style={{ width: 250 }} onClick={() => handleCreate()}>
               Create coupon
-            </Button>
+            </Button> */}
+            <Search />
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />
         </HalfPage>
