@@ -15,7 +15,10 @@ export const DropDownCard = styled(Card)`
   padding: 0;
   position: absolute;
   width: 100%;
-  top: 40px;
+  top: 70px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
 `;
 
 export const StyledSearchBar = styled(SearchBar)`

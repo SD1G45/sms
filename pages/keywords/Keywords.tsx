@@ -8,7 +8,7 @@ import { ColumnDiv, ContainerDiv, RowDiv, SearchDiv, StyledHeader } from "../../
 const Keywords = () => {
 
   const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
-  const routes: string[] = ["/keywords", "/create-keywords", "/faq-keywords"];
+  const routes: string[] = ["/keywords", "/keywords/create", "/keywords/faq"];
   const tableHeaders: string[] = ["Keyword", "Date created", "Messages sent", "Message success rate", "Coupons opened", "Coupons redeemed", "Coupon open %", "Coupon redeem %"]; 
   const dummyData: string[] = ["5OFF", "10/20/21", "8,123", "99%", "5,400", "400", "66%", "0.5%"];
 

@@ -13,7 +13,7 @@ import {
 } from "../../page-styles/login/styles";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../page-mutations/login";
-import { useUserDispatch } from "../../context/UserContext";
+import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { useRouter } from "next/router";
 
@@ -21,15 +21,18 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [staySignedInChecked, setStaySignedInChecked] = useState(false);
-  const [errorState, setError] = useState({error: false, message: ''});
+  const [errorState, setError] = useState({ error: false, message: "" });
   const [loading, setLoading] = useState(false);
 
   const userDispatch = useUserDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => setError({...errorState, error: false, message: ''}), 10000);
-  })
+    setTimeout(
+      () => setError({ ...errorState, error: false, message: "" }),
+      10000
+    );
+  });
 
   const [loginMutation] = useMutation(LOGIN_MUTATION, {
     errorPolicy: "all",
@@ -37,7 +40,11 @@ const Login = () => {
 
   const onLogin = async () => {
     if (email.length === 0 || password.length === 0) {
-      setError({...errorState, error: true, message: "Missing email and/or password"});
+      setError({
+        ...errorState,
+        error: true,
+        message: "Missing email and/or password",
+      });
       return;
     }
     setLoading(true);
@@ -50,7 +57,7 @@ const Login = () => {
       });
 
       if (errors && errors.length > 0) {
-        setError({...errorState, error: true, message: errors[0].message});
+        setError({ ...errorState, error: true, message: errors[0].message });
         setLoading(false);
         return;
       }
@@ -65,7 +72,7 @@ const Login = () => {
       router.push("/home");
     } catch (error) {
       setLoading(false);
-      setError({...errorState, error: true, message: "error"});
+      setError({ ...errorState, error: true, message: "error" });
     }
   };
 
@@ -99,7 +106,7 @@ const Login = () => {
           }
         />
         <LinkDiv>
-           <StyledButton onClick={() => onLogin()}>Continue</StyledButton>
+          <StyledButton onClick={() => onLogin()}>Continue</StyledButton>
           <Link href="/register" passHref>
             <StyledLink>New to us? Create an Account</StyledLink>
           </Link>

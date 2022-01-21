@@ -10,14 +10,14 @@ import {
   ValidForText,
 } from "./styles";
 
-const PhonePreview = () => {
+const Timer: React.FC<{ expirationDate: Date }> = ({ expirationDate }) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const target = new Date("12/31/2022 23:59:59");
+    const target = expirationDate;
     const interval = setInterval(() => {
       const now = new Date();
       const difference = target.getTime() - now.getTime();
@@ -37,7 +37,7 @@ const PhonePreview = () => {
       setSeconds(s);
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [expirationDate]);
   return (
     <>
       <RedeemCard>
@@ -65,4 +65,4 @@ const PhonePreview = () => {
   );
 };
 
-export default PhonePreview;
+export default Timer;

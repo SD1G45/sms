@@ -25,7 +25,7 @@ const options = [
 ];
 
 const selectorOptions = [
-  { name: "BOGO", id: "1" },
+  { name: "BOGO2", id: "1" },
   { name: "Free Fries", id: "2" },
   { name: "Free Drinks", id: "2" },
 ];
@@ -66,6 +66,7 @@ const Home: NextPage = () => {
         onRemove={(id) => handleRemove(id)}
       />
       <Selector
+        label="Test"
         options={selectorOptions}
         searchValue={selectorSearch}
         onSearchValueChange={setSelectorSearch}
