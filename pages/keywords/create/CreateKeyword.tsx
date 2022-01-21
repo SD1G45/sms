@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextArea from "../../../components/TextArea";
 import TextField from "../../../components/TextField";
 import {
@@ -15,23 +15,24 @@ import CouponPreview from "../../../components/CouponPreview";
 import Button from "../../../components/Button";
 import { ContainerDiv } from "../../../page-styles/coupons/styles";
 import SideNav from "../../../components/SideNav";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { NEW_KEYWORD } from "../../../page-mutations/keywords/create";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
 import Selector from "../../../components/Selector";
 import MultiSelector from "../../../components/MultiSelector";
+import {
+  COUPONS_QUERY,
+  CUSTOMER_LIST_QUERY,
+} from "../../../page-queries/keywords/create";
 
-const selectorOptions = [
-  { name: "BOGO", id: "1" },
-  { name: "Free Fries", id: "2" },
-  { name: "Free Drinks", id: "3" },
-];
-
-const options = [
-  { name: "VIP List", id: "1" },
-  { name: "Main List", id: "2" },
-  { name: "Super VIP List", id: "3" },
-];
+interface Coupon {
+  id: string;
+  title: string;
+  name: string;
+  description: string;
+  primaryColor: string;
+  expirationDate: number;
+}
 
 const CreateKeyword: React.FC = () => {
   const businessState = useBusinessState();
@@ -40,7 +41,7 @@ const CreateKeyword: React.FC = () => {
   const [description, setDescription] = useState("");
 
   const [selectorSearch, setSelectorSearch] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>("1");
+  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<
@@ -55,16 +56,45 @@ const CreateKeyword: React.FC = () => {
     setSelectedOptions([{ id, name }, ...selectedOptions]);
   };
 
-  const filteredOptions = options.filter(
-    ({ id: id1 }) => !selectedOptions.some(({ id: id2 }) => id2 === id1)
-  );
-
   const list: string[] = ["Analytics", "Create new", "FAQ"];
   const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
 
   const [newKeywordMutation] = useMutation(NEW_KEYWORD, {
     errorPolicy: "all",
   });
+
+  const [getCoupons, couponQueryResult] = useLazyQuery(COUPONS_QUERY);
+  const [getCustomerLists, customerListQueryResult] =
+    useLazyQuery(CUSTOMER_LIST_QUERY);
+
+  useEffect(() => {
+    getCoupons({
+      variables: {
+        businessId: businessState?.businessId || "",
+      },
+    });
+  }, [getCoupons, businessState]);
+
+  useEffect(() => {
+    getCustomerLists({
+      variables: {
+        businessId: businessState?.businessId || "",
+      },
+    });
+  }, [getCustomerLists, businessState]);
+
+  const couponOptions: Coupon[] =
+    (couponQueryResult.data && couponQueryResult.data.coupons) || [];
+
+  const customerListOptions =
+    (customerListQueryResult.data &&
+      customerListQueryResult.data.customerLists) ||
+    [];
+
+  const filteredOptions = customerListOptions.filter(
+    ({ id: id1 }: { id: string }) =>
+      !selectedOptions.some(({ id: id2 }) => id2 === id1)
+  );
 
   const handleCreate = () => {
     newKeywordMutation({
@@ -75,6 +105,23 @@ const CreateKeyword: React.FC = () => {
       },
     });
   };
+
+  let couponTitle = "";
+  let couponDescription = "";
+  let couponPrimaryColor = "";
+  let couponExpirationDate = 0;
+  for (let index = 0; index < couponOptions.length; index++) {
+    const currentCoupon = couponOptions[index];
+    if (currentCoupon.id === selectedCouponId) {
+      couponTitle = currentCoupon.title;
+      couponDescription = currentCoupon.description;
+      couponPrimaryColor = currentCoupon.primaryColor;
+      couponExpirationDate = currentCoupon.expirationDate;
+    }
+  }
+
+  for (const coupon in couponOptions) {
+  }
 
   return (
     <ContainerDiv>
@@ -101,11 +148,11 @@ const CreateKeyword: React.FC = () => {
           />
           <StyledSelector
             label="Coupon"
-            options={selectorOptions}
+            options={couponOptions}
             searchValue={selectorSearch}
             onSearchValueChange={setSelectorSearch}
-            onSelect={(id) => setSelectedId(id)}
-            selectedId={selectedId}
+            onSelect={(id) => setSelectedCouponId(id)}
+            selectedId={selectedCouponId}
           />
           <StyledMultiSelector
             label="Customer list(s)"
@@ -125,12 +172,14 @@ const CreateKeyword: React.FC = () => {
 
         <HalfPage>
           <PhoneSection style={{ paddingTop: 70 }}>
-            {/* <CouponPreview
-              title={title}
-              description={description}
-              expirationDate={dateTime}
-              primaryColor={color}
-            /> */}
+            {selectedCouponId && (
+              <CouponPreview
+                title={couponTitle}
+                description={couponDescription}
+                expirationDate={new Date(couponExpirationDate)}
+                primaryColor={couponPrimaryColor}
+              />
+            )}
           </PhoneSection>
         </HalfPage>
       </FlexContainer>
