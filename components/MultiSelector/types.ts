@@ -5,6 +5,7 @@ export interface MultiSelectorProps {
   onSelect: (option: Option) => void;
   onRemove: (id: string) => void;
   options: Option[];
+  label: string;
 }
 
 type Option = { name: string; id: string };

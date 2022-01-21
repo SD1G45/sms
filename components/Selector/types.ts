@@ -1,4 +1,5 @@
 export interface SelectorProps {
+  className?: string;
   label: string;
   searchValue: string;
   onSearchValueChange: (value: string) => void;

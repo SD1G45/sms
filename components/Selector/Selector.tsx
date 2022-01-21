@@ -12,6 +12,7 @@ const Selector: React.FC<SelectorProps> = ({
   selectedId,
   onSelect,
   options,
+  className,
 }) => {
   const [isHidden, setIsHidden, ref] =
     useHideOnClickOutside<HTMLDivElement>(true);
@@ -35,7 +36,7 @@ const Selector: React.FC<SelectorProps> = ({
   };
 
   return (
-    <SelectorContainer ref={ref}>
+    <SelectorContainer ref={ref} className={className}>
       <LabelContainer>
         <Label>{label || ""}</Label>
       </LabelContainer>
