@@ -16,15 +16,19 @@ function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
     return mapping;
 }
 
-function mapDataToBodyComponent(data: string[]): JSX.Element[] {
-    const mapping: JSX.Element[] =[];
+function mapDataToBodyComponent(data: string[][]): JSX.Element[] {
+    const mapping: JSX.Element[] = [];
 
-    data.map((value, i) => {
-        const newItem = i == 0 ? 
-        <DataLong>{value}</DataLong>
-        :
-        <Data>{value}</Data>;
-        mapping.push(newItem);
+    data.map((value) => { 
+        const map: JSX.Element[] = [];
+        value.map((val, i) => {
+            const newItem = i == 0 ? 
+            <DataLong>{val}</DataLong>
+            :
+            <Data>{val}</Data>;
+            map.push(newItem);
+        })
+        mapping.push(<tr>{ map }</tr>)
     })
 
     return mapping;
@@ -45,11 +49,9 @@ const Table: React.FC<TableProps> = ({
                     </tr>
                 </TableHeader>
                 <TableBody>
-                    <tr>
-                        {
-                            mapDataToBodyComponent(data)
-                        }
-                    </tr>
+                    {
+                        mapDataToBodyComponent(data)
+                    }
                 </TableBody>
             </DataTable>
         </DivContainer>

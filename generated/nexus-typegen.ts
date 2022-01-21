@@ -185,6 +185,7 @@ export interface NexusGenFieldTypes {
     campaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerLists: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
+    keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -267,6 +268,7 @@ export interface NexusGenFieldTypeNames {
     campaign: 'Campaign'
     coupons: 'Coupon'
     customerLists: 'Coupon'
+    keywords: 'Keyword'
     viewer: 'User'
   }
   User: { // field return type name
@@ -352,6 +354,9 @@ export interface NexusGenArgTypes {
       businessId: string; // String!
     }
     customerLists: { // args
+      businessId: string; // String!
+    }
+    keywords: { // args
       businessId: string; // String!
     }
   }

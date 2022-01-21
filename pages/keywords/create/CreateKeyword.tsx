@@ -61,7 +61,7 @@ const CreateKeyword: React.FC = () => {
   };
 
   const list: string[] = ["Analytics", "Create new", "FAQ"];
-  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
+  const routes: string[] = ["/keywords", "/keywords/create", "/faq-keywords"];
 
   const [newKeywordMutation] = useMutation(NEW_KEYWORD, {
     errorPolicy: "all",
