@@ -18,8 +18,6 @@ import SideNav from "../../../components/SideNav";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { NEW_KEYWORD } from "../../../page-mutations/keywords/create";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
-import Selector from "../../../components/Selector";
-import MultiSelector from "../../../components/MultiSelector";
 import {
   COUPONS_QUERY,
   CUSTOMER_LIST_QUERY,
@@ -38,22 +36,25 @@ const CreateKeyword: React.FC = () => {
   const businessState = useBusinessState();
 
   const [keyword, setKeyword] = useState("");
+  const [message, setMessage] = useState("");
   const [description, setDescription] = useState("");
 
   const [selectorSearch, setSelectorSearch] = useState("");
   const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
 
   const [searchValue, setSearchValue] = useState<string>("");
-  const [selectedOptions, setSelectedOptions] = useState<
+  const [selectedCustomerLists, setSelectedCustomerLists] = useState<
     { name: string; id: string }[]
   >([]);
 
   const handleRemove = (id: string) => {
-    setSelectedOptions(selectedOptions.filter((value) => value.id !== id));
+    setSelectedCustomerLists(
+      selectedCustomerLists.filter((value) => value.id !== id)
+    );
   };
 
   const handleSelect = (id: string, name: string) => {
-    setSelectedOptions([{ id, name }, ...selectedOptions]);
+    setSelectedCustomerLists([{ id, name }, ...selectedCustomerLists]);
   };
 
   const list: string[] = ["Analytics", "Create new", "FAQ"];
@@ -93,15 +94,18 @@ const CreateKeyword: React.FC = () => {
 
   const filteredOptions = customerListOptions.filter(
     ({ id: id1 }: { id: string }) =>
-      !selectedOptions.some(({ id: id2 }) => id2 === id1)
+      !selectedCustomerLists.some(({ id: id2 }) => id2 === id1)
   );
 
   const handleCreate = () => {
     newKeywordMutation({
       variables: {
         keyword,
+        message,
         description,
         businessId: businessState?.businessId,
+        couponId: selectedCouponId,
+        customerListId: selectedCustomerLists[0].id,
       },
     });
   };
@@ -120,9 +124,6 @@ const CreateKeyword: React.FC = () => {
     }
   }
 
-  for (const coupon in couponOptions) {
-  }
-
   return (
     <ContainerDiv>
       <SideNav items={list} routes={routes} heading={"Keywords"} />
@@ -136,6 +137,14 @@ const CreateKeyword: React.FC = () => {
             style={{ marginBottom: 30 }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setKeyword(event.target.value)
+            }
+          />
+          <TextArea
+            label="Auto response"
+            style={{ marginBottom: 30 }}
+            value={message}
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+              setMessage(event.target.value)
             }
           />
           <TextArea
@@ -160,7 +169,7 @@ const CreateKeyword: React.FC = () => {
             searchValue={searchValue}
             onSearchValueChange={(id) => setSearchValue(id)}
             onSelect={({ name, id }) => handleSelect(id, name)}
-            selectedOptions={selectedOptions}
+            selectedOptions={selectedCustomerLists}
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
