@@ -46,8 +46,8 @@ const CreateCoupon: React.FC = () => {
 
   const [errorState, setError] = useState({ error: false, message: "" });
 
-  const list: string[] = ["Analytics", "Create new", "FAQ"];
-  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
+  const list: string[] = ["Analytics", "Create New", "FAQ"];
+  const routes: string[] = ["/coupons", "/coupons/create", "/coupons/faq"];
 
   const [newCouponMutation] = useMutation(NEW_COUPON, {
     errorPolicy: "all",
