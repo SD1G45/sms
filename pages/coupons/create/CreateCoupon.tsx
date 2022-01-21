@@ -57,7 +57,7 @@ const CreateCoupon: React.FC = () => {
 
   const handleCreate = async () => {
 
-    if (title.length == 0) {
+    if (title.length == 0 || description.length == 0) {
       setError({...errorState, error: true, message: "Missing title or message"});
       return;
     }

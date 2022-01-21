@@ -101,16 +101,36 @@ const CreateKeyword: React.FC = () => {
   );
 
   const handleCreate = () => {
-    newKeywordMutation({
-      variables: {
-        keyword,
-        message,
-        description,
-        businessId: businessState?.businessId,
-        couponId: selectedCouponId,
-        customerListId: selectedCustomerLists[0].id,
-      },
-    });
+
+    if (keyword.length == 0 || message.length == 0 || description.length == 0) {
+      setError({...errorState, error:true, message: "Missing information."});
+      return;
+    }
+
+    if (!selectedCouponId) {
+      setError({...errorState, error: true, message: "No coupon selected."});
+      return;
+    }
+
+    if (selectedCouponId.length < 1) {
+      setError({...errorState, error: true, message: "No customer list(s) selected."});
+    }
+
+    try {
+
+      newKeywordMutation({
+        variables: {
+          keyword,
+          message,
+          description,
+          businessId: businessState?.businessId,
+          couponId: selectedCouponId,
+          customerListId: selectedCustomerLists[0].id,
+        },
+      });
+    } catch (error) {
+      setError({...errorState, error: true, message: "Something went wrong, please try again later."});
+    }
   };
 
   let couponTitle = "";
