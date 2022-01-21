@@ -6,8 +6,8 @@ const FaqCampaign = () => {
 
   const router = useRouter();
 
-  const list: string[] = ["Analytics", "Create new", "FAQ"];
-  const routes: string[] = ["/campaigns", router.asPath + "/create", router.asPath + "/faq"];
+  const list: string[] = ["Analytics", "Create New", "FAQ"];
+  const routes: string[] = ["/campaigns", "/campaigns/create", "/campaigns/faq"];
 
   return (
     <SideNav items={list} routes={routes} heading={"FAQ Campaigns"}/>
