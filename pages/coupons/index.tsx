@@ -12,8 +12,8 @@ import Button from "../../components/Button";
 import Table from "../../components/Table";
 
 const index = () => {
-  const list: string[] = ["Analytics", "Create new", "FAQ"];
-  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
+  const list: string[] = ["Analytics", "Create New", "FAQ"];
+  const routes: string[] = ["/coupons", "/coupons/create", "/coupons/faq"];
   const headers: string[] = [
     "Name",
     "Date Created",
