@@ -1,5 +1,5 @@
 import React from "react";
-import { DivContainer, DataTable, TableBody, Header, HeaderLong, BodyLong, Body } from "./styles";
+import { DivContainer, DataTable, TableHeader, TableBody, Header, HeaderLong, DataLong, Data } from "./styles";
 import { TableProps } from "./types";
 
 function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
@@ -21,9 +21,9 @@ function mapDataToBodyComponent(data: string[]): JSX.Element[] {
 
     data.map((value, i) => {
         const newItem = i == 0 ? 
-        <BodyLong>{value}</BodyLong>
+        <DataLong>{value}</DataLong>
         :
-        <Body>{value}</Body>;
+        <Data>{value}</Data>;
         mapping.push(newItem);
     })
 
@@ -37,12 +37,14 @@ const Table: React.FC<TableProps> = ({
     return (
         <DivContainer>
             <DataTable>
-                <TableBody>
+                <TableHeader>
                     <tr>
                         {
                             mapDataToHeaderComponent(headers)
                         }
                     </tr>
+                </TableHeader>
+                <TableBody>
                     <tr>
                         {
                             mapDataToBodyComponent(data)

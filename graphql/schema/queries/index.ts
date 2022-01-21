@@ -1,6 +1,7 @@
 import { viewerQuery } from "./viewerQuery";
 import { businessQuery } from "./businessQuery";
 import { availablePhoneNumbersQuery } from "./availablePhoneNumbers";
+import { campaignQuery } from "./campaignQuery";
 import { couponsQuery } from "./couponsQuery";
 import { customerListQuery } from "./customerListQuery";
 
@@ -10,4 +11,5 @@ export {
   availablePhoneNumbersQuery,
   couponsQuery,
   customerListQuery,
+  campaignQuery
 };

@@ -11,6 +11,10 @@ export const DataTable = styled.table`
     borderCollapse: collapse; 
 `;
 
+export const TableHeader = styled.thead`
+    
+`;
+
 export const TableBody = styled.tbody`
 
 `;
@@ -32,7 +36,7 @@ export const HeaderLong = styled.th`
     text-align: left;
 `;
 
-export const Body = styled.th`
+export const Data = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
     padding-right: 60px;
@@ -41,7 +45,7 @@ export const Body = styled.th`
     font-weight: 500;
 `;
 
-export const BodyLong = styled(Body)`
+export const DataLong = styled(Data)`
     padding-right: 100px;
     font-weight: 500;
     text-align: left;
