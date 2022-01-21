@@ -22,6 +22,7 @@ import {
   COUPONS_QUERY,
   CUSTOMER_LIST_QUERY,
 } from "../../../page-queries/keywords/create";
+import ErrorPopup from "../../../components/ErrorPopup";
 
 interface Coupon {
   id: string;
@@ -46,6 +47,8 @@ const CreateKeyword: React.FC = () => {
   const [selectedCustomerLists, setSelectedCustomerLists] = useState<
     { name: string; id: string }[]
   >([]);
+
+  const [errorState, setError] = useState({error: false, message: ''});
 
   const handleRemove = (id: string) => {
     setSelectedCustomerLists(
@@ -177,6 +180,7 @@ const CreateKeyword: React.FC = () => {
               Create keyword
             </Button>
           </ButtonContainer>
+          <ErrorPopup error={errorState.error} message={errorState.message} />
         </HalfPage>
 
         <HalfPage>
