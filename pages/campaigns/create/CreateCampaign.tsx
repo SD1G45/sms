@@ -60,8 +60,8 @@ const CreateCampaign: React.FC = () => {
     setSelectedCustomerLists([{ id, name }, ...selectedCustomerLists]);
   };
 
-  const list: string[] = ["Analytics", "Create new", "FAQ"];
-  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
+  const list: string[] = ["Analytics", "Create New", "FAQ"];
+  const routes: string[] = ["/campaigns", "/campaigns/create", "/campaigns/faq"];
 
   const [newCampaignMutation] = useMutation(NEW_CAMPAIGN, {
     errorPolicy: "all",

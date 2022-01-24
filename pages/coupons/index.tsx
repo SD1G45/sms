@@ -10,10 +10,17 @@ import {
 } from "../../page-styles/coupons/styles";
 import Button from "../../components/Button";
 import Table from "../../components/Table";
+import { useRouter } from "next/router";
 
 const index = () => {
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const router = useRouter();
+  const createPath = router.asPath + "/create";
+  const faqPath = router.asPath + "/faq"
+
   const list: string[] = ["Analytics", "Create New", "FAQ"];
-  const routes: string[] = ["/coupons", "/coupons/create", "/faq-coupon"];
+  const routes: string[] = ["/coupons", createPath, faqPath];
   const headers: string[] = [
     "Name",
     "Date Created",
@@ -34,6 +41,11 @@ const index = () => {
     "46%",
     "2.3%",]
   ];
+
+  const onClick = () => {
+    router.push(createPath);
+  };
+
   return (
     <ContainerDiv>
       <SideNav items={list} routes={routes} heading={"Coupons"} />
@@ -43,7 +55,7 @@ const index = () => {
           <SearchDiv>
             <SearchBar value={""} onValueChange={() => {}} />
           </SearchDiv>
-          <Button>Create new coupon</Button>
+          <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
         <Table headers={headers} data={data} />
       </ColumnDiv>

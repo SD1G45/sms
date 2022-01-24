@@ -8,6 +8,10 @@ import Radio from "../../components/Radio";
 import SearchBar from "../../components/SearchBar";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
+import { config } from "../../config";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
 import { useBusinessDispatch } from "../../context/BusinessContext/BusinessContext";
 import {
   CREATE_BUSINESS_MUTATION,
@@ -31,6 +35,7 @@ import {
   PhoneNumber,
   PhoneNumberList,
 } from "../../page-styles/create-business/styles";
+import SetupForm from "../billing/SetupForm";
 
 interface SetBusinessNameProps {
   businessName: string;
@@ -96,7 +101,10 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 
         businessDispatch({
           type: "setBusinessId",
-          payload: { businessId: data.newBusiness.id },
+          payload: {
+            businessId: data.newBusiness.id,
+            name: businessName,
+          },
         });
 
         onNext();
@@ -246,7 +254,7 @@ const PickPhoneNumber: React.FC = () => {
   );
 };
 
-const steps = ["Name", "Logo", "Phone number"];
+const steps = ["Name", "Logo", "Payment Method", "Phone number"];
 
 interface Business {
   name: string;
@@ -293,6 +301,8 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
                 onNext={() => updateActiveStepperIndex(1)}
                 openLogoEditor={() => setLogoEditorOpen(true)}
               />
+            ) : activeStepperIndex === 2 ? (
+              <SetPaymentInfo />
             ) : (
               <PickPhoneNumber />
             )}
