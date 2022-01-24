@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 
 const index = () => {
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const createPath = router.asPath + "/create";
   const faqPath = router.asPath + "/faq"

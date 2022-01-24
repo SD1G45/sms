@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DivContainer = styled.div`
     padding-left: 50px;
-    padding-top: 30px;
+    width: 100%;
 `;
 
 export const DataTable = styled.table`

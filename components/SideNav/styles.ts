@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const StyledDiv = styled.div`
   margin-left: 10px;
-  padding-left: 80px;
   padding-top: 40px;
+  margin-right: 10px;
 `;
 
 export const StyledTable = styled.table`
@@ -16,6 +16,7 @@ export const Item = styled.td<{ active: boolean }>`
   padding-bottom: 4px;
   padding-left: 10px;
   cursor: pointer;
+  white-space: nowrap;
 `;
 
 export const Header = styled.h1`
