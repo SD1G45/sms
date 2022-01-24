@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledDiv = styled.div`
   margin-left: 10px;
   padding-top: 40px;
-  margin-right: 10px;
 `;
 
 export const StyledTable = styled.table`
@@ -23,4 +22,8 @@ export const Header = styled.h1`
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 17.5px;
+`;
+
+export const HeaderDiv = styled.div`
+  width: 100px;
 `;

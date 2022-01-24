@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledTable, Item, Header, StyledDiv } from "./styles";
+import { StyledTable, Item, Header, StyledDiv, HeaderDiv } from "./styles";
 import { SideNavProps } from "./types";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,7 +15,9 @@ const SideNav: React.FC<SideNavProps> = ({ items, routes, heading }) => {
 
   return (
     <StyledDiv>
-      <Header>{heading}</Header>
+      <HeaderDiv>
+        <Header>{heading}</Header>
+      </HeaderDiv>
       <StyledTable>
         <tbody>
           {items.map((item, i) => (
