@@ -3,7 +3,8 @@ import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
 import Table from "../../components/Table";
-import { ColumnDiv, ContainerDiv, RowDiv, SearchDiv, StyledHeader } from "../../page-styles/coupons/styles";
+import { ColumnDiv, ContainerDiv, RowDiv, SearchDiv } from "../../page-styles/coupons/styles";
+import { CampaignHeader } from "./styles";
 
 const Campaigns = () => {
 
@@ -17,7 +18,7 @@ const Campaigns = () => {
       <SideNav items={sideNavItems} routes={routes} heading={"Campaigns"}/>
       <ColumnDiv>
           <RowDiv>
-            <StyledHeader>Campaign Analytics</StyledHeader>
+            <CampaignHeader>Campaign Analytics</CampaignHeader>
             <SearchDiv>
               <SearchBar value={""} onValueChange={() => {}}/>
             </SearchDiv>
