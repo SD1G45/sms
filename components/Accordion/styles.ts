@@ -1,5 +1,21 @@
 import styled from "styled-components";
 import Button from "../../components/Button";
+import Chevron from "../../components/Accordion/Chevron";
+
+export const StyledChevron = styled(Chevron)`{
+	border-style: solid;
+	border-width: 0.25em 0.25em 0 0;
+	content: '';
+	display: inline-block;
+	height: 0.45em;
+	left: 0.15em;
+	position: relative;
+	top: 0.15em;
+
+	vertical-align: top;
+	width: 0.45em;
+  transform: ${(props) => (props.rotated ? "rotate(90deg)" : "rotate(0deg)")};
+`;
 
 export const AccordionSection = styled.div`
   display: flex;

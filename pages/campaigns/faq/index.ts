@@ -1,1 +1,1 @@
-export { default } from "./FaqCampaign";
+export { default } from "./FAQ";
