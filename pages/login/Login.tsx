@@ -69,7 +69,7 @@ const Login = () => {
         },
       });
       setLoading(false);
-      router.push("/home");
+      router.push("/dashboard");
     } catch (error) {
       setLoading(false);
       setError({ ...errorState, error: true, message: "error" });
