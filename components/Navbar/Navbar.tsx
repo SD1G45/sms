@@ -14,6 +14,7 @@ import {
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Navbar = () => {
   const router = useRouter();
@@ -33,30 +34,41 @@ const Navbar = () => {
         </BusinessInfoSection>
         <ControlsSection>
           <CreateButton invert>Create</CreateButton>
-          <Icon />
+          <Link href="/settings">
+            <Image src="/icons/settings.svg" width={50} height={50} />
+          </Link>
           <Spacing />
-          <Icon />
+          <Image src="/icons/profile.svg" width={70} height={50} />
         </ControlsSection>
       </PrimaryNavbar>
-      <SecondaryNavbarContainer>
-        <SecondaryNavbar>
-          <Link href="/" passHref>
-            <Item active={currentPath === "/"}>Home</Item>
-          </Link>
-          <Link href="/coupons" passHref>
-            <Item active={currentPath.startsWith("/coupons")}>Coupons</Item>
-          </Link>
-          <Link href="/campaigns" passHref>
-            <Item active={currentPath.startsWith("/campaigns")}>Campaigns</Item>
-          </Link>
-          <Link href="/keywords" passHref>
-            <Item active={currentPath.startsWith("/keywords")}>Keywords</Item>
-          </Link>
-          <Link href="/customers" passHref>
-            <Item active={currentPath.startsWith("/customers")}>Customers</Item>
-          </Link>
-        </SecondaryNavbar>
-      </SecondaryNavbarContainer>
+      {!currentPath.startsWith("/settings") &&
+        !currentPath.startsWith("/billing") && (
+          <SecondaryNavbarContainer>
+            <SecondaryNavbar>
+              <Link href="/" passHref>
+                <Item active={currentPath === "/"}>Home</Item>
+              </Link>
+              <Link href="/coupons" passHref>
+                <Item active={currentPath.startsWith("/coupons")}>Coupons</Item>
+              </Link>
+              <Link href="/campaigns" passHref>
+                <Item active={currentPath.startsWith("/campaigns")}>
+                  Campaigns
+                </Item>
+              </Link>
+              <Link href="/keywords" passHref>
+                <Item active={currentPath.startsWith("/keywords")}>
+                  Keywords
+                </Item>
+              </Link>
+              <Link href="/customers" passHref>
+                <Item active={currentPath.startsWith("/customers")}>
+                  Customers
+                </Item>
+              </Link>
+            </SecondaryNavbar>
+          </SecondaryNavbarContainer>
+        )}
     </>
   );
 };

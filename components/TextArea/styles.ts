@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import { TextAreaProps } from "./types";
 
-export const TextAreaContainer = styled.div`
-  width: 100%;
-`;
-
 export const LabelContainer = styled.div`
   width: 100%;
   display: flex;
