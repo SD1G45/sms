@@ -10,7 +10,7 @@ export const StyledCard = styled(Card)`
     translate: ;
   }
   text-align: center;
-  cursor: grab;
+  cursor: pointer;
 `;
 export const ContainerDiv = styled.div`
   display: flex;

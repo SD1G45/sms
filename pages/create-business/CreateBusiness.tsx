@@ -8,6 +8,10 @@ import Radio from "../../components/Radio";
 import SearchBar from "../../components/SearchBar";
 import SingleCardPage from "../../components/SingleCardPage";
 import TextField from "../../components/TextField";
+import { config } from "../../config";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
 import { useBusinessDispatch } from "../../context/BusinessContext/BusinessContext";
 import {
   CREATE_BUSINESS_MUTATION,
@@ -31,6 +35,7 @@ import {
   PhoneNumber,
   PhoneNumberList,
 } from "../../page-styles/create-business/styles";
+import SetupForm from "../billing/SetupForm";
 
 interface SetBusinessNameProps {
   businessName: string;
@@ -171,6 +176,23 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
         <ButtonDivider />
         <StyledButton onClick={onNext}>Next</StyledButton>
       </ButtonContainer>
+    </>
+  );
+};
+
+const BillingInformation: React.FC = () => {
+  const pk =
+    "pk_test_51KHFPRHwoWyhJ69QRzdbMz2lcKa1GMQqgIUc9Cn1eGO7bpvV3uLgQcrOjo31aJEttDD4zBqoxMo1XkH3TzIutujd00u3HnhXtG";
+  const stripePromise = loadStripe(pk);
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: config.stripe_sk,
+  };
+  return (
+    <>
+      <Elements stripe={stripePromise} options={options}>
+        <SetupForm />
+      </Elements>
     </>
   );
 };

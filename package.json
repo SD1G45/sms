@@ -32,6 +32,7 @@
     "react-avatar-editor": "^12.0.0",
     "react-dom": "17.0.2",
     "sharp": "^0.29.2",
+    "stripe": "^8.199.0",
     "styled-components": "^5.3.1",
     "twilio": "^3.73.0"
   },
