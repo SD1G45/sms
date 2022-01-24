@@ -101,7 +101,10 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 
         businessDispatch({
           type: "setBusinessId",
-          payload: { businessId: data.newBusiness.id },
+          payload: {
+            businessId: data.newBusiness.id,
+            name: businessName,
+          },
         });
 
         onNext();
@@ -180,23 +183,6 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
   );
 };
 
-const BillingInformation: React.FC = () => {
-  const pk =
-    "pk_test_51KHFPRHwoWyhJ69QRzdbMz2lcKa1GMQqgIUc9Cn1eGO7bpvV3uLgQcrOjo31aJEttDD4zBqoxMo1XkH3TzIutujd00u3HnhXtG";
-  const stripePromise = loadStripe(pk);
-  const options = {
-    // passing the client secret obtained from the server
-    clientSecret: config.stripe_sk,
-  };
-  return (
-    <>
-      <Elements stripe={stripePromise} options={options}>
-        <SetupForm />
-      </Elements>
-    </>
-  );
-};
-
 const PickPhoneNumber: React.FC = () => {
   const [areaCode, setAreaCode] = useState("");
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState<string | null>(
@@ -268,7 +254,7 @@ const PickPhoneNumber: React.FC = () => {
   );
 };
 
-const steps = ["Name", "Logo", "Phone number"];
+const steps = ["Name", "Logo", "Payment Method", "Phone number"];
 
 interface Business {
   name: string;
@@ -315,6 +301,8 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
                 onNext={() => updateActiveStepperIndex(1)}
                 openLogoEditor={() => setLogoEditorOpen(true)}
               />
+            ) : activeStepperIndex === 2 ? (
+              <SetPaymentInfo />
             ) : (
               <PickPhoneNumber />
             )}

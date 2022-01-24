@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import SingleCardPage from "../../components/SingleCardPage";
 import Image from "next/image";
@@ -11,12 +11,19 @@ import {
 } from "../../page-styles/dashboard/styles";
 import { StyledHeader } from "../../page-styles/coupons/styles";
 import Link from "next/link";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 
 const Dashboard = () => {
+  const businessState = useBusinessState();
+  const [businessName, setBusinessName] = useState("");
+  useEffect(() => {
+    setBusinessName(businessState?.name || "");
+    console.log(businessName);
+  });
   return (
     <>
       <ContainerDiv>
-        <StyledHeader>[COMPANY_NAME]</StyledHeader>
+        <StyledHeader>{businessName}</StyledHeader>
       </ContainerDiv>
       <ContainerDiv>
         <ColumnDiv>
