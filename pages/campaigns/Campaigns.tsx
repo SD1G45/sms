@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 import {
   RowDiv,
   SearchDiv,
-  StyledHeader,
   ColumnDiv,
   ContainerDiv,
 } from "../../page-styles/coupons/styles";
+import { CampaignHeader } from "./styles";
 
 const Campaigns = () => {
   const router = useRouter();
@@ -48,14 +48,14 @@ const Campaigns = () => {
     <ContainerDiv>
       <SideNav items={sideNavItems} routes={routes} heading={"Campaigns"} />
       <ColumnDiv>
-        <RowDiv>
-          <StyledHeader>Campaign Analytics</StyledHeader>
-          <SearchDiv>
-            <SearchBar value={""} onValueChange={() => {}} />
-          </SearchDiv>
-          <Button onClick={onClick}>Create New Campaign</Button>
-        </RowDiv>
-        <Table headers={tableHeaders} data={dummyData} />
+          <RowDiv>
+            <CampaignHeader>Campaign Analytics</CampaignHeader>
+            <SearchDiv>
+              <SearchBar value={""} onValueChange={() => {}}/>
+            </SearchDiv>
+            <Button>Create New Campaign</Button>
+          </RowDiv>
+          <Table headers={tableHeaders} data={dummyData}/>
       </ColumnDiv>
     </ContainerDiv>
   );
