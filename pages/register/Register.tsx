@@ -45,6 +45,14 @@ const Register = () => {
   });
 
   const onRegister = async () => {
+
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000)
+
+    return;
     if (
       firstName.length === 0 ||
       email.length === 0 ||
@@ -143,7 +151,10 @@ const Register = () => {
           errorMessage="Passwords don't match"
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
-        <StyledButton onClick={() => onRegister()}>Create Account</StyledButton>
+        <StyledButton onClick={() => onRegister()} disabled={loading}>
+          { loading && <span>Loading</span>}
+          { !loading && <span>Create Account</span>}
+        </StyledButton>
         <LinkDiv>
           <Link href="/login">
             <StyledLink>Already have an account? Log in instead</StyledLink>
