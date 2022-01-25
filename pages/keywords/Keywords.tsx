@@ -15,15 +15,6 @@ import {
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
-
-import Table from "../../components/Table";
-import {
-  ColumnDiv,
-  ContainerDiv,
-  RowDiv,
-  SearchDiv,
-  StyledHeader,
-} from "../../page-styles/coupons/styles";
 import { HeaderDiv } from "../../page-styles/keywords/create/styles";
 const Keywords = () => {
   const router = useRouter();
