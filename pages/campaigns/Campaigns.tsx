@@ -31,7 +31,7 @@ const Campaigns = () => {
     "Coupon open %",
     "Coupon redeem %",
   ];
-  const dummyData: string[] = [
+  const dummyData: string[][] = [[
     "Main List - 10% OFF",
     "10/20/21",
     "8,123",
@@ -40,7 +40,7 @@ const Campaigns = () => {
     "400",
     "66%",
     "0.5%",
-  ];
+  ]];
 
   const onClick = () => {
     router.push(createPath);

@@ -31,15 +31,15 @@ const index = () => {
     "Open %",
     "Redeem %",
   ];
-  const data: string[] = [
-    "BOGO Fries",
+  const data: string[][] = [
+    ["BOGO Fries",
     "10/10/10",
     "10/20/21",
     "4321",
     "2001",
     "103",
     "46%",
-    "2.3%",
+    "2.3%",]
   ];
 
   const onClick = () => {

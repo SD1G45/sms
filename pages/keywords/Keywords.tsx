@@ -3,6 +3,18 @@ import React from "react";
 import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
+import Table from "../../components/Table";
+import { useState, useEffect } from "react";
+import {
+  ColumnDiv,
+  ContainerDiv,
+  RowDiv,
+  SearchDiv,
+  StyledHeader,
+} from "../../page-styles/coupons/styles";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
+import { useLazyQuery } from "@apollo/client";
 
 import Table from "../../components/Table";
 import {
@@ -30,16 +42,38 @@ const Keywords = () => {
     "Coupon open %",
     "Coupon redeem %",
   ];
-  const dummyData: string[] = [
-    "5OFF",
-    "10/20/21",
-    "8,123",
-    "99%",
-    "5,400",
-    "400",
-    "66%",
-    "0.5%",
-  ];
+  const dummyData: string[][] = [[]];
+  const [data, setData] = useState<string[]>([]);
+  const businessState = useBusinessState();
+
+  const [getKeywords, keywordsQueryResult] = useLazyQuery(KEYWORD_QUERY);
+  useEffect(() => {
+    getKeywords({
+      variables: {
+        businessId:
+          businessState?.businessId || "029c9ee3-3c24-4687-8962-b050ba4d0af0",
+      },
+    });
+  }, [getKeywords, businessState]);
+
+  const keywords =
+    keywordsQueryResult.data != undefined
+      ? keywordsQueryResult.data.keywords
+      : [];
+
+  for (let i = 0; i < keywords.length; i++) {
+    console.log(keywords[i]);
+    dummyData.push([
+      keywords[i].keyword,
+      "10/20/21",
+      "8,123",
+      "99%",
+      "5,400",
+      "400" + i,
+      "66%",
+      "0.5%",
+    ]);
+  }
 
   const onClick = () => {
     router.push(createPath);
