@@ -145,7 +145,6 @@ const Register = () => {
         <ErrorPopup error={errorState.error} message={errorState.message} />
         <StyledButton onClick={() => onRegister()}>Create Account</StyledButton>
         <LinkDiv>
-          <StyledButton onClick={() => onRegister()}>Continue</StyledButton>
           <Link href="/login">
             <StyledLink>Already have an account? Log in instead</StyledLink>
           </Link>
