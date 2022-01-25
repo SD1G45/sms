@@ -10,6 +10,7 @@ import {
   FirstNameTextField,
   LastNameTextField,
   NameContainer,
+  LoadingContainer,
 } from "../../page-styles/register/styles";
 import Image from "next/image";
 import { useMutation } from "@apollo/client";
@@ -20,6 +21,7 @@ import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ErrorPopup from "../../components/ErrorPopup";
+import Spinner from "../../components/Spinner";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -45,14 +47,6 @@ const Register = () => {
   });
 
   const onRegister = async () => {
-
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000)
-
-    return;
     if (
       firstName.length === 0 ||
       email.length === 0 ||
@@ -152,7 +146,12 @@ const Register = () => {
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
         <StyledButton onClick={() => onRegister()} disabled={loading}>
-          { loading && <span>Loading</span>}
+          { loading && 
+            <LoadingContainer>
+              <Spinner size={20} sizeUnit="px" color="#fff"/>
+              <div>Loading</div>
+            </LoadingContainer>
+          }
           { !loading && <span>Create Account</span>}
         </StyledButton>
         <LinkDiv>
