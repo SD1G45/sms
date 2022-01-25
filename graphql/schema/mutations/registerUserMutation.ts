@@ -37,7 +37,7 @@ export const registerUserMutation = extendType({
 
         const token = generateJWTToken({
           id: newRegisteredUser.id,
-          email: email
+          email: email,
         });
 
         return {
