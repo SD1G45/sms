@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BusinessInfoSection,
   BusinessLogo,
@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 
 const Navbar = () => {
   const router = useRouter();
@@ -25,12 +26,19 @@ const Navbar = () => {
   if (currentPath.startsWith("/welcome")) return <></>;
   if (currentPath.startsWith("/create-business")) return <></>;
 
+  const businessState = useBusinessState();
+  const [businessName, setBusinessName] = useState("");
+  useEffect(() => {
+    setBusinessName(businessState?.name || "");
+    console.log(businessName);
+  });
+
   return (
     <>
       <PrimaryNavbar>
         <BusinessInfoSection>
           <BusinessLogo />
-          <BusinessName>Chick-Fil-A</BusinessName>
+          <BusinessName>{businessName}</BusinessName>
         </BusinessInfoSection>
         <ControlsSection>
           <CreateButton invert>Create</CreateButton>
