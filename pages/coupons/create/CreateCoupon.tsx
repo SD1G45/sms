@@ -20,6 +20,7 @@ import {
   CardHeading,
   SetupLaterButton,
   CreateButton,
+  HeaderDiv,
 } from "../../../page-styles/coupons/create/styles";
 import { TwitterPicker } from "react-color";
 import { Label } from "../../../components/TextField/styles";

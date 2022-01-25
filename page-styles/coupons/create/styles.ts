@@ -8,6 +8,9 @@ export const FlexContainer = styled.div`
   width: 100%;
   /* background-color: green; */
 `;
+export const HeaderDiv = styled.div`
+  width: 200%;
+`;
 
 export const HalfPage = styled.div`
   width: 100%;

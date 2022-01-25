@@ -9,8 +9,10 @@ import {
   SearchDiv,
   ColumnDiv,
   ContainerDiv,
+  StyledHeader,
 } from "../../page-styles/coupons/styles";
 import { CampaignHeader } from "./styles";
+import { HeaderDiv } from "../../page-styles/campaigns/styles";
 
 const Campaigns = () => {
   const router = useRouter();
@@ -48,14 +50,16 @@ const Campaigns = () => {
     <ContainerDiv>
       <SideNav items={sideNavItems} routes={routes} heading={"Campaigns"} />
       <ColumnDiv>
-          <RowDiv>
-            <CampaignHeader>Campaign Analytics</CampaignHeader>
-            <SearchDiv>
-              <SearchBar value={""} onValueChange={() => {}}/>
-            </SearchDiv>
-            <Button>Create New Campaign</Button>
-          </RowDiv>
-          <Table headers={tableHeaders} data={dummyData}/>
+        <RowDiv>
+          <HeaderDiv>
+            <StyledHeader>Campaign Analytics</StyledHeader>
+          </HeaderDiv>
+          <SearchDiv>
+            <SearchBar value={""} onValueChange={() => {}} />
+          </SearchDiv>
+          <Button>Create New Campaign</Button>
+        </RowDiv>
+        <Table headers={tableHeaders} data={dummyData} />
       </ColumnDiv>
     </ContainerDiv>
   );

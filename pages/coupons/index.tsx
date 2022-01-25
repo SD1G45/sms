@@ -8,16 +8,16 @@ import {
   RowDiv,
   SearchDiv,
 } from "../../page-styles/coupons/styles";
+import { HeaderDiv } from "../../page-styles/keywords/create/styles";
 import Button from "../../components/Button";
 import Table from "../../components/Table";
 import { useRouter } from "next/router";
 
 const index = () => {
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const createPath = router.asPath + "/create";
-  const faqPath = router.asPath + "/faq"
+  const faqPath = router.asPath + "/faq";
 
   const list: string[] = ["Analytics", "Create New", "FAQ"];
   const routes: string[] = ["/coupons", createPath, faqPath];
@@ -51,7 +51,9 @@ const index = () => {
       <SideNav items={list} routes={routes} heading={"Coupons"} />
       <ColumnDiv>
         <RowDiv>
-          <StyledHeader>Coupon Analytics</StyledHeader>
+          <HeaderDiv>
+            <StyledHeader>Coupon Analytics</StyledHeader>
+          </HeaderDiv>
           <SearchDiv>
             <SearchBar value={""} onValueChange={() => {}} />
           </SearchDiv>

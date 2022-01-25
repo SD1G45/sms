@@ -3,6 +3,10 @@ import MultiSelector from "../../../components/MultiSelector";
 import Selector from "../../../components/Selector";
 import TextField from "../../../components/TextField";
 
+export const HeaderDiv = styled.div`
+  width: 200%;
+`;
+
 export const FlexContainer = styled.div`
   display: flex;
   padding: 50px 80px;
