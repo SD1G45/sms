@@ -24,6 +24,8 @@ import {
 } from "../../../page-queries/keywords/create";
 import ErrorPopup from "../../../components/ErrorPopup";
 import { NEW_CAMPAIGN } from "../../../page-mutations/campaigns/create";
+import { LoadingContainer } from "../../../page-styles/register/styles";
+import Spinner from "../../../components/Spinner";
 
 interface Coupon {
   id: string;
@@ -48,6 +50,7 @@ const CreateCampaign: React.FC = () => {
     { name: string; id: string }[]
   >([]);
 
+  const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({ error: false, message: "" });
 
   const handleRemove = (id: string) => {
@@ -119,6 +122,8 @@ const CreateCampaign: React.FC = () => {
       });
     }
 
+    setLoading(true);
+
     try {
       newCampaignMutation({
         variables: {
@@ -129,12 +134,14 @@ const CreateCampaign: React.FC = () => {
           customerListId: selectedCustomerLists[0].id,
         },
       });
+      setLoading(false);
     } catch (error) {
       setError({
         ...errorState,
         error: true,
         message: "Something went wrong, please try again later.",
       });
+      setLoading(false);
     }
   };
 
@@ -193,8 +200,14 @@ const CreateCampaign: React.FC = () => {
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()}>
-              Create campaign
+            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading}>
+              { loading && 
+                <LoadingContainer>
+                  <Spinner size={20} sizeUnit="px" color="#fff"/>
+                  <div>Loading</div>
+                </LoadingContainer>
+              }
+              { !loading && <span>Create Campaign</span>}
             </Button>
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />
