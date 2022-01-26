@@ -4,6 +4,8 @@ import TextField from "../../../components/TextField";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import reactCSS from "reactcss";
+import Spinner from "../../../components/Spinner";
+import { LoadingContainer } from "../../../page-styles/register/styles";
 
 import {
   ExpirationContainer,
@@ -46,6 +48,7 @@ const CreateCoupon: React.FC = () => {
   const [time, setTime] = useState("23:59");
   const [color, setColor] = useState("#4881F0");
 
+  const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({ error: false, message: "" });
 
   const list: string[] = ["Analytics", "Create New", "FAQ"];
@@ -149,8 +152,15 @@ const CreateCoupon: React.FC = () => {
             onClick();
             // handleCreate();
           }}
+          disabled={loading}
         >
-          Create Coupon
+          { loading && 
+            <LoadingContainer>
+              <Spinner size={20} sizeUnit="px" color="#fff"/>
+              <div>Loading</div>
+            </LoadingContainer>
+          }
+          { !loading && <span>Create Coupon</span>}
         </CreateButton>
         {showCards ? <Results /> : null}
       </>
@@ -200,6 +210,8 @@ const CreateCoupon: React.FC = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const { data, errors } = await newCouponMutation({
         variables: {
@@ -214,14 +226,18 @@ const CreateCoupon: React.FC = () => {
 
       if (errors && errors.length > 0) {
         setError({ ...errorState, error: true, message: errors[0].message });
+        setLoading(false);
         return;
       }
+
+      setLoading(false);
     } catch (error) {
       setError({
         ...errorState,
         error: true,
         message: "Something went wrong, please try again later.",
       });
+      setLoading(false);
     }
   };
 
@@ -271,8 +287,14 @@ const CreateCoupon: React.FC = () => {
           <Label>Primary color</Label>
           <ColorPicker />
           <ButtonContainer>
-            {/* <Button style={{ width: 250 }} onClick={() => handleCreate()}>
-              Create coupon
+            {/* <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading}>
+              { loading && 
+                <LoadingContainer>
+                  <Spinner size={20} sizeUnit="px" color="#fff"/>
+                  <div>Loading</div>
+                </LoadingContainer>
+              }
+              { !loading && <span>Create Coupon</span>}
             </Button> */}
             <Search />
           </ButtonContainer>
