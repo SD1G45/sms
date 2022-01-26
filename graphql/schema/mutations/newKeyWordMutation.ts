@@ -23,6 +23,7 @@ export const newKeyWordMutation = extendType({
             keyword,
             message,
             description,
+            dateCreated: new Date(),
             businessId,
             couponId,
           },

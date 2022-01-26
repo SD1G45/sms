@@ -6,6 +6,7 @@ export const Keyword = objectType({
     t.string("id");
     t.string("keyword");
     t.string("description");
+    t.date("dateCreated");
     t.field("keyWordCustomerList", { type: "KeyWord_CustomerList" });
   },
 });

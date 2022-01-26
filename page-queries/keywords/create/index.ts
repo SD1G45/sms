@@ -26,6 +26,7 @@ export const KEYWORD_QUERY = gql`
   query Keyword($businessId: String!) {
     keywords(businessId: $businessId) {
       keyword
+      dateCreated
     }
   }
 `

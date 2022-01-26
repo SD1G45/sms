@@ -42,7 +42,7 @@ const Keywords = () => {
     getKeywords({
       variables: {
         businessId:
-          businessState?.businessId || "029c9ee3-3c24-4687-8962-b050ba4d0af0",
+          businessState?.businessId || "9dd9e243-8055-486c-bcd6-d59948604693",
       },
     });
   }, [getKeywords, businessState]);
@@ -56,7 +56,7 @@ const Keywords = () => {
     console.log(keywords[i]);
     dummyData.push([
       keywords[i].keyword,
-      "10/20/21",
+      new Date(keywords[i].dateCreated).toDateString(),
       "8,123",
       "99%",
       "5,400",

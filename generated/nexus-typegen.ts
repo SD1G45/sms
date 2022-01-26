@@ -88,6 +88,7 @@ export interface NexusGenObjects {
     keyword_id?: string | null; // String
   }
   Keyword: { // root type
+    dateCreated?: NexusGenScalars['Date'] | null; // Date
     description?: string | null; // String
     id?: string | null; // String
     keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
@@ -162,6 +163,7 @@ export interface NexusGenFieldTypes {
     keyword_id: string | null; // String
   }
   Keyword: { // field return type
+    dateCreated: NexusGenScalars['Date'] | null; // Date
     description: string | null; // String
     id: string | null; // String
     keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
@@ -245,6 +247,7 @@ export interface NexusGenFieldTypeNames {
     keyword_id: 'String'
   }
   Keyword: { // field return type name
+    dateCreated: 'Date'
     description: 'String'
     id: 'String'
     keyWordCustomerList: 'KeyWord_CustomerList'
