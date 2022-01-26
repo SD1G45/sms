@@ -1,4 +1,4 @@
-import { compareSync } from "bcrypt";
+import { compareSync, hashSync } from "bcrypt";
 import { extendType, nonNull, stringArg } from "nexus";
 export const resetPasswordMutation = extendType({
   type: "Mutation",
@@ -24,14 +24,15 @@ export const resetPasswordMutation = extendType({
         }
         try {
           const validPassword = compareSync(oldPassword, user.password);
-
           if (validPassword) {
+            var hashedPassword = hashSync(newPassword, 10);
+            console.log("test");
             return ctx.prisma.user.update({
               where: {
                 id: ctx.currentUser.id,
               },
               data: {
-                password: newPassword,
+                password: hashedPassword,
               },
             });
           } else {
