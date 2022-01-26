@@ -15,6 +15,8 @@ import ErrorPopup from "../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
 import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
 import { resetPasswordMutation } from "../../graphql/schema/mutations";
+import { LoadingContainer } from "../../page-styles/register/styles";
+import Spinner from "../../components/Spinner";
 
 const PasswordReset = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -24,6 +26,7 @@ const PasswordReset = () => {
   const [updatePassword, setUpdatePassword] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [updatePasswordMutation] = useMutation(RESET_PASSWORD_MUTATION, {
     errorPolicy: "all",
   });
@@ -48,7 +51,6 @@ const PasswordReset = () => {
       });
       return;
     }
-
     if (oldPassword != confirmOldPassword) {
       setErrorState({
         ...errorState,
@@ -57,6 +59,7 @@ const PasswordReset = () => {
       });
       return;
     }
+    setLoading(true);
     try {
       const { data, errors } = await updatePasswordMutation({
         variables: {
@@ -71,14 +74,18 @@ const PasswordReset = () => {
           error: true,
           message: errors[0].message,
         });
+        setLoading(false);
         return;
       }
+      
+      setLoading(false);
     } catch (error) {
       setErrorState({
         ...errorState,
         error: true,
         message: "Something went wrong, please try again later.",
       });
+      setLoading(false);
     }
   };
 
@@ -116,7 +123,15 @@ const PasswordReset = () => {
               setEmail(event.target.value)
             }
           />
-          <StyledButton>Send Email</StyledButton>
+          <StyledButton disabled={loading}>
+            { loading && 
+              <LoadingContainer>
+                <Spinner size={20} sizeUnit="px" color="#fff"/>
+                <div>Loading</div>
+              </LoadingContainer>
+            }
+            { !loading && <span>Send Email</span>}
+          </StyledButton>
           <BackButton onClick={() => setForgotPassword(false)}>Back</BackButton>
         </StyledCard>
       </>
@@ -155,7 +170,15 @@ const PasswordReset = () => {
               setNewPassword(event.target.value)
             }
           />
-          <Button onClick={() => onReset()}>Reset Password</Button>
+          <Button onClick={() => onReset()} disabled={loading}>
+            { loading && 
+              <LoadingContainer>
+                <Spinner size={20} sizeUnit="px" color="#fff"/>
+                <div>Loading</div>
+              </LoadingContainer>
+            }
+            { !loading && <span>Reset Password</span>}
+          </Button>
           <BackButton onClick={() => setUpdatePassword(false)}>back</BackButton>
         </StyledCard>
       </>
