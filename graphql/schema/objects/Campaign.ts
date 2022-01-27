@@ -6,6 +6,9 @@ export const Campaign = objectType({
     t.string("id");
     t.string("name");
     t.string("message");
+    t.date("dateSent");
+    t.int("couponsOpened");
+    t.int("couponsRedeemed");
     t.string("couponId");
     t.field("customers", { type: "CustomerList" });
   },

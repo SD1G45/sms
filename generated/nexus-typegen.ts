@@ -57,7 +57,10 @@ export interface NexusGenObjects {
   }
   Campaign: { // root type
     couponId?: string | null; // String
+    couponsOpened?: number | null; // Int
+    couponsRedeemed?: number | null; // Int
     customers?: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    dateSent?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     message?: string | null; // String
     name?: string | null; // String
@@ -135,7 +138,10 @@ export interface NexusGenFieldTypes {
   }
   Campaign: { // field return type
     couponId: string | null; // String
+    couponsOpened: number | null; // Int
+    couponsRedeemed: number | null; // Int
     customers: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    dateSent: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     message: string | null; // String
     name: string | null; // String
@@ -222,7 +228,10 @@ export interface NexusGenFieldTypeNames {
   }
   Campaign: { // field return type name
     couponId: 'String'
+    couponsOpened: 'Int'
+    couponsRedeemed: 'Int'
     customers: 'CustomerList'
+    dateSent: 'Date'
     id: 'String'
     message: 'String'
     name: 'String'

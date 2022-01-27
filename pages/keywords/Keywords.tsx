@@ -42,7 +42,7 @@ const Keywords = () => {
     getKeywords({
       variables: {
         businessId:
-          businessState?.businessId || "984f78ee-6128-4712-afbd-1c60d94dc3b2",
+          businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d",
       },
     });
   }, [getKeywords, businessState]);
