@@ -88,6 +88,9 @@ export interface NexusGenObjects {
     keyword_id?: string | null; // String
   }
   Keyword: { // root type
+    couponsOpened?: number | null; // Int
+    couponsRedeemed?: number | null; // Int
+    customersOnboarded?: number | null; // Int
     dateCreated?: NexusGenScalars['Date'] | null; // Date
     description?: string | null; // String
     id?: string | null; // String
@@ -163,6 +166,9 @@ export interface NexusGenFieldTypes {
     keyword_id: string | null; // String
   }
   Keyword: { // field return type
+    couponsOpened: number | null; // Int
+    couponsRedeemed: number | null; // Int
+    customersOnboarded: number | null; // Int
     dateCreated: NexusGenScalars['Date'] | null; // Date
     description: string | null; // String
     id: string | null; // String
@@ -247,6 +253,9 @@ export interface NexusGenFieldTypeNames {
     keyword_id: 'String'
   }
   Keyword: { // field return type name
+    couponsOpened: 'Int'
+    couponsRedeemed: 'Int'
+    customersOnboarded: 'Int'
     dateCreated: 'Date'
     description: 'String'
     id: 'String'

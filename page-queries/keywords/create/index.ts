@@ -27,6 +27,9 @@ export const KEYWORD_QUERY = gql`
     keywords(businessId: $businessId) {
       keyword
       dateCreated
+      customersOnboarded
+      couponsOpened
+      couponsRedeemed
     }
   }
 `

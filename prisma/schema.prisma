@@ -110,6 +110,9 @@ model Keyword {
   keyword             String
   description         String
   message             String
+  customersOnboarded  Int
+  couponsOpened       Int
+  couponsRedeemed     Int
   dateCreated         DateTime
   coupon              Coupon                  @relation(fields: [couponId], references:  [id]) 
   couponId            String 

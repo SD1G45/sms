@@ -26,7 +26,7 @@ const Keywords = () => {
   const tableHeaders: string[] = [
     "Keyword",
     "Date created",
-    "Messages sent",
+    "Customers Onboarded",
     "Message success rate",
     "Coupons opened",
     "Coupons redeemed",
@@ -42,7 +42,7 @@ const Keywords = () => {
     getKeywords({
       variables: {
         businessId:
-          businessState?.businessId || "9dd9e243-8055-486c-bcd6-d59948604693",
+          businessState?.businessId || "984f78ee-6128-4712-afbd-1c60d94dc3b2",
       },
     });
   }, [getKeywords, businessState]);
@@ -53,14 +53,14 @@ const Keywords = () => {
       : [];
 
   for (let i = 0; i < keywords.length; i++) {
-    console.log(keywords[i]);
+    const curr = keywords[i];
     dummyData.push([
-      keywords[i].keyword,
-      new Date(keywords[i].dateCreated).toDateString(),
-      "8,123",
+      curr.keyword,
+      new Date(curr.dateCreated).toDateString(),
+      curr.customersOnboarded,
       "99%",
-      "5,400",
-      "400" + i,
+      curr.couponsOpened,
+      curr.couponsRedeemed,
       "66%",
       "0.5%",
     ]);
