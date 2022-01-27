@@ -44,10 +44,3 @@ export const StyledButton = styled(Button)`
   margin-top: 5px;
   margin-bottom: 30px;
 `;
-
-export const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-`;

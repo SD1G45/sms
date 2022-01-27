@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
 import React, { useState, useEffect } from "react";
-import Background from "../../components/Background";
 import {
   Heading,
   StyledCard,
@@ -10,9 +9,7 @@ import {
   FirstNameTextField,
   LastNameTextField,
   NameContainer,
-  LoadingContainer,
 } from "../../page-styles/register/styles";
-import Image from "next/image";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "../../page-mutations/register";
 import { useUserDispatch } from "../../context/UserContext/UserContext";
@@ -21,7 +18,6 @@ import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ErrorPopup from "../../components/ErrorPopup";
-import Spinner from "../../components/Spinner";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -145,14 +141,8 @@ const Register = () => {
           errorMessage="Passwords don't match"
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
-        <StyledButton onClick={() => onRegister()} disabled={loading}>
-          { loading && 
-            <LoadingContainer>
-              <Spinner size={20} sizeUnit="px" color="#fff"/>
-              <div>Loading</div>
-            </LoadingContainer>
-          }
-          { !loading && <span>Create Account</span>}
+        <StyledButton onClick={() => onRegister()} disabled={loading} loading={loading}>
+          Create Account
         </StyledButton>
         <LinkDiv>
           <Link href="/login">

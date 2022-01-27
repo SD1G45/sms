@@ -4,8 +4,6 @@ import TextField from "../../../components/TextField";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import reactCSS from "reactcss";
-import Spinner from "../../../components/Spinner";
-import { LoadingContainer } from "../../../page-styles/register/styles";
 
 import {
   ExpirationContainer,
@@ -153,14 +151,9 @@ const CreateCoupon: React.FC = () => {
             // handleCreate();
           }}
           disabled={loading}
+          loading={loading}
         >
-          { loading && 
-            <LoadingContainer>
-              <Spinner size={20} sizeUnit="px" color="#fff"/>
-              <div>Loading</div>
-            </LoadingContainer>
-          }
-          { !loading && <span>Create Coupon</span>}
+          Create Coupon
         </CreateButton>
         {showCards ? <Results /> : null}
       </>
@@ -287,15 +280,6 @@ const CreateCoupon: React.FC = () => {
           <Label>Primary color</Label>
           <ColorPicker />
           <ButtonContainer>
-            {/* <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading}>
-              { loading && 
-                <LoadingContainer>
-                  <Spinner size={20} sizeUnit="px" color="#fff"/>
-                  <div>Loading</div>
-                </LoadingContainer>
-              }
-              { !loading && <span>Create Coupon</span>}
-            </Button> */}
             <Search />
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />

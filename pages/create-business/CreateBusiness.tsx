@@ -36,8 +36,6 @@ import {
   PhoneNumberList,
 } from "../../page-styles/create-business/styles";
 import SetupForm from "../billing/SetupForm";
-import { LoadingContainer } from "../../page-styles/register/styles";
-import Spinner from "../../components/Spinner";
 
 interface SetBusinessNameProps {
   businessName: string;
@@ -148,14 +146,8 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         error={emtpyNameError}
         errorMessage="Please enter a business name"
       />
-      <StyledButton onClick={() => onNextClick()} disabled={loading}>
-        { loading && 
-          <LoadingContainer>
-            <Spinner size={20} sizeUnit="px" color="#fff"/>
-            <div>Loading</div>
-          </LoadingContainer>
-        }
-        { !loading && <span>Next</span>}
+      <StyledButton onClick={() => onNextClick()} disabled={loading} loading={loading}>
+        Next
       </StyledButton>
       {nameSetError && (
         <ErrorMessage>
@@ -202,7 +194,7 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
 
 const PickPhoneNumber: React.FC = () => {
   const [areaCode, setAreaCode] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [pickLoading, setPickLoading] = useState(false);
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState<string | null>(
     null
   );
@@ -227,12 +219,12 @@ const PickPhoneNumber: React.FC = () => {
   };
 
   const provisionPhoneNumber = async () => {
-    setLoading(true);
+    setPickLoading(true);
     const { data, errors } = await provisionPhoneNumberMutation({
       variables: { phoneNumber: selectedPhoneNumber, businessId: business_id },
     });
 
-    setLoading(false);
+    setPickLoading(false);
     if (data) {
       router.push("/");
     }
@@ -265,16 +257,11 @@ const PickPhoneNumber: React.FC = () => {
           )}
       </PhoneNumberList>
       <Button
-        disabled={selectedPhoneNumber === null || loading}
+        disabled={selectedPhoneNumber === null || pickLoading}
         onClick={() => provisionPhoneNumber()}
+        loading={pickLoading}
       >
-        { loading && 
-          <LoadingContainer>
-            <Spinner size={20} sizeUnit="px" color="#fff"/>
-            <div>Loading</div>
-          </LoadingContainer>
-        }
-        { !loading && <span>Create Account</span>}
+        Create Account
       </Button>
     </div>
   );

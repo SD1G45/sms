@@ -15,8 +15,6 @@ import ErrorPopup from "../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
 import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
 import { resetPasswordMutation } from "../../graphql/schema/mutations";
-import { LoadingContainer } from "../../page-styles/register/styles";
-import Spinner from "../../components/Spinner";
 
 const PasswordReset = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -123,14 +121,8 @@ const PasswordReset = () => {
               setEmail(event.target.value)
             }
           />
-          <StyledButton disabled={loading}>
-            { loading && 
-              <LoadingContainer>
-                <Spinner size={20} sizeUnit="px" color="#fff"/>
-                <div>Loading</div>
-              </LoadingContainer>
-            }
-            { !loading && <span>Send Email</span>}
+          <StyledButton disabled={loading} loading={loading}>
+            Send Email
           </StyledButton>
           <BackButton onClick={() => setForgotPassword(false)}>Back</BackButton>
         </StyledCard>
@@ -170,14 +162,8 @@ const PasswordReset = () => {
               setNewPassword(event.target.value)
             }
           />
-          <Button onClick={() => onReset()} disabled={loading}>
-            { loading && 
-              <LoadingContainer>
-                <Spinner size={20} sizeUnit="px" color="#fff"/>
-                <div>Loading</div>
-              </LoadingContainer>
-            }
-            { !loading && <span>Reset Password</span>}
+          <Button onClick={() => onReset()} disabled={loading} loading={loading}>
+            Reset Password
           </Button>
           <BackButton onClick={() => setUpdatePassword(false)}>back</BackButton>
         </StyledCard>

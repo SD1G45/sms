@@ -23,8 +23,6 @@ import {
   CUSTOMER_LIST_QUERY,
 } from "../../../page-queries/keywords/create";
 import ErrorPopup from "../../../components/ErrorPopup";
-import { LoadingContainer } from "../../../page-styles/register/styles";
-import Spinner from "../../../components/Spinner";
 
 interface Coupon {
   id: string;
@@ -203,14 +201,8 @@ const CreateKeyword: React.FC = () => {
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading}>
-              { loading && 
-                <LoadingContainer>
-                  <Spinner size={20} sizeUnit="px" color="#fff"/>
-                  <div>Loading</div>
-                </LoadingContainer>
-              }
-              { !loading && <span>Create Keyword</span>}
+            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading} loading={loading}>
+              Create Keyword
             </Button>
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />

@@ -16,8 +16,6 @@ import { LOGIN_MUTATION } from "../../page-mutations/login";
 import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { useRouter } from "next/router";
-import { LoadingContainer } from "../../page-styles/register/styles";
-import Spinner from "../../components/Spinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -107,14 +105,8 @@ const Login = () => {
             setStaySignedInChecked(event.target.checked)
           }
         />
-        <StyledButton onClick={() => onLogin()} disabled={loading}>
-          { loading && 
-            <LoadingContainer>
-              <Spinner size={20} sizeUnit="px" color="#fff"/>
-              <div>Loading</div>
-            </LoadingContainer>
-          }
-          { !loading && <span>Login</span>}
+        <StyledButton onClick={() => onLogin()} disabled={loading} loading={loading}>
+          Login
         </StyledButton>
         <LinkDiv>
           <Link href="/register" passHref>
