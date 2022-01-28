@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SideNav from "../../components/SideNav";
 import SearchBar from "../../components/SearchBar";
 import {
@@ -12,6 +12,10 @@ import { HeaderDiv } from "../../page-styles/keywords/create/styles";
 import Button from "../../components/Button";
 import Table from "../../components/Table";
 import { useRouter } from "next/router";
+import { COUPON_QUERY } from "../../page-queries/coupons"
+import { useLazyQuery } from "@apollo/client";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+
 
 const index = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -31,16 +35,38 @@ const index = () => {
     "Open %",
     "Redeem %",
   ];
-  const data: string[][] = [
-    ["BOGO Fries",
-    "10/10/10",
-    "10/20/21",
-    "4321",
-    "2001",
-    "103",
-    "46%",
-    "2.3%",]
-  ];
+  const data: string[][] = [[]];
+
+  const businessState = useBusinessState();
+  const [getCoupons, couponsQueryResult] = useLazyQuery(COUPON_QUERY);
+  useEffect(() => {
+    getCoupons({
+      variables: {
+        businessId:
+          businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d"
+      }
+    })
+  }, [getCoupons, businessState]);
+
+  const coupons = 
+    couponsQueryResult.data != undefined
+    ? couponsQueryResult.data.coupons
+    : [];
+  
+  
+  for (let i = 0; i < coupons.length; i++) {
+    const curr = coupons[i];
+    data.push([
+      curr.name,
+      "10/10/10",
+      "10/20/21",
+      "4321",
+      curr.sent,
+      curr.opened,
+      curr.redeemed,
+      "2.3%",
+    ])
+  }
 
   const onClick = () => {
     router.push(createPath);

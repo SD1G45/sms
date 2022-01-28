@@ -11,7 +11,6 @@ import {
   ContainerDiv,
   StyledHeader,
 } from "../../page-styles/coupons/styles";
-import { CampaignHeader } from "./styles";
 import { HeaderDiv } from "../../page-styles/campaigns/styles";
 
 const Campaigns = () => {

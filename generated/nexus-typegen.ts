@@ -71,7 +71,10 @@ export interface NexusGenObjects {
     expirationDate?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     name?: string | null; // String
+    opened?: number | null; // Int
     primaryColor?: string | null; // String
+    redeemed?: number | null; // Int
+    sent?: number | null; // Int
     title?: string | null; // String
   }
   Customer: { // root type
@@ -152,7 +155,10 @@ export interface NexusGenFieldTypes {
     expirationDate: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     name: string | null; // String
+    opened: number | null; // Int
     primaryColor: string | null; // String
+    redeemed: number | null; // Int
+    sent: number | null; // Int
     title: string | null; // String
   }
   Customer: { // field return type
@@ -242,7 +248,10 @@ export interface NexusGenFieldTypeNames {
     expirationDate: 'Date'
     id: 'String'
     name: 'String'
+    opened: 'Int'
     primaryColor: 'String'
+    redeemed: 'Int'
+    sent: 'Int'
     title: 'String'
   }
   Customer: { // field return type name
