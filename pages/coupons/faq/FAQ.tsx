@@ -14,18 +14,9 @@ const FAQ = () => {
     <ContainerDiv>
       <SideNav items={list} routes={routes} heading={"Coupons"} />
       <FlexContainer>
-        <StyledAccordion
-          title="How to create a coupon"
-          content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-        />
-        <StyledAccordion
-          title="How to create a coupon"
-          content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-        />
-        <StyledAccordion
-          title="How to create a coupon"
-          content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-        />
+        <StyledAccordion title="How to create a coupon" content="Click " />
+        <StyledAccordion title="How to create a coupon" content="Click " />
+        <StyledAccordion title="How to create a coupon" content="Click " />
       </FlexContainer>
     </ContainerDiv>
   );
