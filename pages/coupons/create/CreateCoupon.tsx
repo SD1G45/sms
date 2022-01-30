@@ -85,6 +85,9 @@ const CreateCoupon: React.FC = () => {
     handleChange = (color) => {
       this.setState({ color: color.rgb });
     };
+    handleChangeComplete = (color, event) => {
+      this.setState({ background: color.hex });
+    };
 
     render() {
       const styles = reactCSS({
@@ -131,6 +134,7 @@ const CreateCoupon: React.FC = () => {
                   setColor(color.hex);
                   this.handleChange(color);
                 }}
+                onChangeComplete={this.handleChangeComplete}
               />
             </div>
           ) : null}
