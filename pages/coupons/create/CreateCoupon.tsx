@@ -129,7 +129,7 @@ const CreateCoupon: React.FC = () => {
                 color={this.state.color}
                 onChange={(color: any) => {
                   setColor(color.hex);
-                  this.handleChange;
+                  this.handleChange(color);
                 }}
               />
             </div>

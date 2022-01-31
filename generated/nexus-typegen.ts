@@ -202,6 +202,7 @@ export interface NexusGenFieldTypes {
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     provisionPhoneNumber: NexusGenRootTypes['AvailablePhoneNumber'] | null; // AvailablePhoneNumber
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
+    resetPassword: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
@@ -297,6 +298,7 @@ export interface NexusGenFieldTypeNames {
     newKeyWord: 'Keyword'
     provisionPhoneNumber: 'AvailablePhoneNumber'
     registerUser: 'UserLoginPayload'
+    resetPassword: 'User'
   }
   Query: { // field return type name
     availablePhoneNumbers: 'AvailablePhoneNumber'
@@ -371,6 +373,10 @@ export interface NexusGenArgTypes {
       firstName: string; // String!
       lastName: string; // String!
       password: string; // String!
+    }
+    resetPassword: { // args
+      newPassword: string; // String!
+      oldPassword: string; // String!
     }
   }
   Query: {
