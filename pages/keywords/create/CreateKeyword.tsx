@@ -74,7 +74,7 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId: businessState?.businessId || "",
+        businessId: businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d",
       },
     });
   }, [getCoupons, businessState]);
@@ -82,7 +82,7 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCustomerLists({
       variables: {
-        businessId: businessState?.businessId || "",
+        businessId: businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d",
       },
     });
   }, [getCustomerLists, businessState]);
@@ -123,7 +123,7 @@ const CreateKeyword: React.FC = () => {
           keyword,
           message,
           description,
-          businessId: businessState?.businessId,
+          businessId: businessState?.businessId == null ? "6d1faded-428f-4374-bd2c-9af3f0a99f8d" : null,
           couponId: selectedCouponId,
           customerListId: selectedCustomerLists[0].id,
         },

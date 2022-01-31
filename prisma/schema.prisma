@@ -23,6 +23,7 @@ model Business {
   phoneNumber  String?         @unique
   logoUrl      String?
   users        Business_User[]
+  campaigns    Campaign[]
   coupons      Coupon[]
   keywords     Keyword[]
   customerList Customer_List[]
@@ -69,6 +70,8 @@ model Campaign {
   messagesSent    Int
   couponsOpened   Int 
   couponsRedeemed Int
+  business        Business                 @relation(fields: [businessId], references: [id])
+  businessId      String
   coupon          Coupon                   @relation(fields: [couponId], references: [id])
   couponId        String
   customer_list   Campaign_Customer_List[]

@@ -56,6 +56,7 @@ export interface NexusGenObjects {
     stripeId?: string | null; // String
   }
   Campaign: { // root type
+    businessId?: string | null; // String
     couponId?: string | null; // String
     couponsOpened?: number | null; // Int
     couponsRedeemed?: number | null; // Int
@@ -63,6 +64,7 @@ export interface NexusGenObjects {
     dateSent?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     message?: string | null; // String
+    messagesSent?: number | null; // Int
     name?: string | null; // String
   }
   Coupon: { // root type
@@ -140,6 +142,7 @@ export interface NexusGenFieldTypes {
     stripeId: string | null; // String
   }
   Campaign: { // field return type
+    businessId: string | null; // String
     couponId: string | null; // String
     couponsOpened: number | null; // Int
     couponsRedeemed: number | null; // Int
@@ -147,6 +150,7 @@ export interface NexusGenFieldTypes {
     dateSent: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     message: string | null; // String
+    messagesSent: number | null; // Int
     name: string | null; // String
   }
   Coupon: { // field return type
@@ -202,7 +206,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
-    campaign: NexusGenRootTypes['Campaign'] | null; // Campaign
+    campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerLists: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
@@ -233,6 +237,7 @@ export interface NexusGenFieldTypeNames {
     stripeId: 'String'
   }
   Campaign: { // field return type name
+    businessId: 'String'
     couponId: 'String'
     couponsOpened: 'Int'
     couponsRedeemed: 'Int'
@@ -240,6 +245,7 @@ export interface NexusGenFieldTypeNames {
     dateSent: 'Date'
     id: 'String'
     message: 'String'
+    messagesSent: 'Int'
     name: 'String'
   }
   Coupon: { // field return type name
@@ -375,10 +381,7 @@ export interface NexusGenArgTypes {
       id: string; // String!
     }
     campaign: { // args
-      couponId: string; // String!
-      id: string; // String!
-      message: string; // String!
-      name: string; // String!
+      businessId: string; // String!
     }
     coupons: { // args
       businessId: string; // String!

@@ -29,6 +29,7 @@ export const newCampaignMutation = extendType({
             couponsOpened: 0,
             couponsRedeemed: 0,
             couponId,
+            businessId
           },
         });
 

@@ -43,7 +43,7 @@ const index = () => {
     getCoupons({
       variables: {
         businessId:
-          businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d"
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d"
       }
     })
   }, [getCoupons, businessState]);

@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
 import Table from "../../components/Table";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   ColumnDiv,
   ContainerDiv,
@@ -16,6 +16,7 @@ import { useBusinessState } from "../../context/BusinessContext/BusinessContext"
 import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
 import { HeaderDiv } from "../../page-styles/keywords/create/styles";
+
 const Keywords = () => {
   const router = useRouter();
   const createPath = router.asPath + "/create";
@@ -33,8 +34,7 @@ const Keywords = () => {
     "Coupon open %",
     "Coupon redeem %",
   ];
-  const dummyData: string[][] = [[]];
-  const [data, setData] = useState<string[]>([]);
+  const data: string[][] = [[]];
   const businessState = useBusinessState();
 
   const [getKeywords, keywordsQueryResult] = useLazyQuery(KEYWORD_QUERY);
@@ -42,7 +42,7 @@ const Keywords = () => {
     getKeywords({
       variables: {
         businessId:
-          businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d",
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getKeywords, businessState]);
@@ -54,7 +54,7 @@ const Keywords = () => {
 
   for (let i = 0; i < keywords.length; i++) {
     const curr = keywords[i];
-    dummyData.push([
+    data.push([
       curr.keyword,
       new Date(curr.dateCreated).toDateString(),
       curr.customersOnboarded,
@@ -83,7 +83,7 @@ const Keywords = () => {
           </SearchDiv>
           <Button onClick={onClick}>Create New Keyword</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={dummyData} />
+        <Table headers={tableHeaders} data={data} />
       </ColumnDiv>
     </ContainerDiv>
   );

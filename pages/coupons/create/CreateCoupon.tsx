@@ -208,7 +208,7 @@ const CreateCoupon: React.FC = () => {
           description,
           expirationDate: dateTime,
           primaryColor: color,
-          businessId: businessState?.businessId,
+          businessId: businessState?.businessId == null ? "13a1fcc2-dc74-4467-9eb4-b8ede588791d" : "",
         },
       });
 
