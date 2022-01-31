@@ -4,7 +4,7 @@ import { SideNavProps } from "./types";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const SideNav: React.FC<SideNavProps> = ({ items, routes, heading, index }) => {
+const SideNav: React.FC<SideNavProps> = ({ items, routes, heading }) => {
   const router = useRouter();
   const currentPath = router.asPath;
 
