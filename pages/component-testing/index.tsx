@@ -20,7 +20,6 @@ const Test = () => {
         />
       </StyledCard>
 
-      <TimerBox></TimerBox>
       <IPhonePreview></IPhonePreview>
     </Page>
   );
