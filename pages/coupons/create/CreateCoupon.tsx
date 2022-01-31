@@ -99,7 +99,7 @@ const CreateCoupon: React.FC = () => {
         </ConnectButton>
       </div>
 
-      <SetupLaterButton onClick={() => router.push("/")}>
+      <SetupLaterButton onClick={() => router.push("/dashboard")}>
         Setup later
       </SetupLaterButton>
     </StyledCard>

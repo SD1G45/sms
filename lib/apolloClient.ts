@@ -17,7 +17,7 @@ function createApolloClient() {
   const uri = rootUrl + "api/graphql";
 
   const httpLink = createHttpLink({
-    uri: "http://localhost:3001/api/graphql",
+    uri: "http://smsmp-develop.herokuapp.com/api/graphql",
     credentials: "include",
   });
 
