@@ -1,3 +1,5 @@
+export {};
+
 // TODO: FIX
 
 // import { compareSync, hashSync } from "bcrypt";
