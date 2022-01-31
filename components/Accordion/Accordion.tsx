@@ -11,7 +11,7 @@ import {
 
 import Chevron from "./Chevron";
 
-const Accordion = (props) => {
+const Accordion = (props: any) => {
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
   const [setRotate, setRotateState] = useState("accordion__icon ");
@@ -24,7 +24,7 @@ const Accordion = (props) => {
     }
     setActiveState(setActive === "" ? "active" : "");
     setHeightState(
-      setActive === "active" ? "0px" : `${content.current.scrollHeight}px`
+      setActive === "active" ? "0px" : `${props.content.current.scrollHeight}px`
     );
   }
   return (
