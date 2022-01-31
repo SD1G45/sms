@@ -31,7 +31,7 @@ function Billing() {
   return (
     <ContainerDiv>
       <RowDiv>
-        <SideNav items={list} index={0} heading={"Coupons"} />
+        {/* <SideNav items={list} index={0} heading={"Coupons"} /> */}
 
         <StyledCard>
           <Elements stripe={stripePromise} options={options}>
