@@ -10,15 +10,15 @@ import {
 } from "../../page-styles/billing/styles";
 import Link from "next/link";
 
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 
 import SetupForm from "./SetupForm";
 import { RowDiv } from "../../page-styles/coupons/styles";
 
-const stripePromise = loadStripe(
-  "pk_test_51KHFPRHwoWyhJ69QRzdbMz2lcKa1GMQqgIUc9Cn1eGO7bpvV3uLgQcrOjo31aJEttDD4zBqoxMo1XkH3TzIutujd00u3HnhXtG"
-);
+// const stripePromise = loadStripe(
+//   "pk_test_51KHFPRHwoWyhJ69QRzdbMz2lcKa1GMQqgIUc9Cn1eGO7bpvV3uLgQcrOjo31aJEttDD4zBqoxMo1XkH3TzIutujd00u3HnhXtG"
+// );
 
 function Billing() {
   const options = {
@@ -34,9 +34,9 @@ function Billing() {
         {/* <SideNav items={list} index={0} heading={"Coupons"} /> */}
 
         <StyledCard>
-          <Elements stripe={stripePromise} options={options}>
+          {/* <Elements stripe={stripePromise} options={options}>
             <SetupForm />
-          </Elements>
+          </Elements> */}
         </StyledCard>
       </RowDiv>
     </ContainerDiv>
