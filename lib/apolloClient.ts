@@ -12,12 +12,13 @@ function createApolloClient() {
   // Declare variable to store authToken
   let token: string | null;
 
-  const rootUrl = process.env.ROOT_URL || "http://smsmp-develop.herokuapp.com/";
+  const rootUrl =
+    process.env.ROOT_URL || "https://smsmp-develop.herokuapp.com/";
 
   const uri = rootUrl + "api/graphql";
 
   const httpLink = createHttpLink({
-    uri: "http://smsmp-develop.herokuapp.com/api/graphql",
+    uri: "https://smsmp-develop.herokuapp.com/api/graphql",
     credentials: "include",
   });
 
