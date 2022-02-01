@@ -106,8 +106,10 @@ const Login = () => {
             setStaySignedInChecked(event.target.checked)
           }
         />
+        <StyledButton onClick={() => onLogin()} disabled={loading} loading={loading}>
+          Login
+        </StyledButton>
         <LinkDiv>
-          <StyledButton onClick={() => onLogin()}>Continue</StyledButton>
           <Link href="/register" passHref>
             <StyledLink>New to us? Create an Account</StyledLink>
           </Link>

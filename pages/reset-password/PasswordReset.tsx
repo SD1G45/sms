@@ -24,6 +24,7 @@ const PasswordReset = () => {
   const [updatePassword, setUpdatePassword] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   // const [updatePasswordMutation] = useMutation(RESET_PASSWORD_MUTATION, {
   //   errorPolicy: "all",
   // });
@@ -116,7 +117,9 @@ const PasswordReset = () => {
               setEmail(event.target.value)
             }
           />
-          <StyledButton>Send Email</StyledButton>
+          <StyledButton disabled={loading} loading={loading}>
+            Send Email
+          </StyledButton>
           <BackButton onClick={() => setForgotPassword(false)}>Back</BackButton>
         </StyledCard>
       </>
@@ -155,7 +158,7 @@ const PasswordReset = () => {
               setNewPassword(event.target.value)
             }
           />
-          {/* <Button onClick={() => onReset()}>Reset Password</Button> */}
+          {/* <Button onClick={() => onReset() disabled={loading} loading={loading}>Reset Password</Button> */}
           <BackButton onClick={() => setUpdatePassword(false)}>back</BackButton>
         </StyledCard>
       </>

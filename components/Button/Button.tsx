@@ -1,5 +1,6 @@
 import React from "react";
-import { StyledButton } from "./styles";
+import Spinner from "../Spinner";
+import { LoadingContainer, StyledButton } from "./styles";
 import { ButtonProps } from "./types";
 
 const Button: React.FC<ButtonProps> = ({
@@ -7,6 +8,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled,
   className,
   children,
+  loading,
   ...other
 }) => {
   return (
@@ -14,9 +16,18 @@ const Button: React.FC<ButtonProps> = ({
       invert={invert}
       disabled={disabled}
       className={className}
+      loading={loading}
       {...other}
     >
-      {children}
+      { loading && 
+        <LoadingContainer>
+          <Spinner size={20} sizeUnit="px" color="#fff"/>
+          <div>Loading</div>
+        </LoadingContainer>
+      }
+      { !loading && 
+        children
+      }
     </StyledButton>
   );
 };

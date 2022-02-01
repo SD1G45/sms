@@ -48,6 +48,7 @@ const CreateKeyword: React.FC = () => {
     { name: string; id: string }[]
   >([]);
 
+  const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({error: false, message: ''});
 
   const handleRemove = (id: string) => {
@@ -116,6 +117,8 @@ const CreateKeyword: React.FC = () => {
       setError({...errorState, error: true, message: "No customer list(s) selected."});
     }
 
+    setLoading(true);
+
     try {
 
       newKeywordMutation({
@@ -128,8 +131,10 @@ const CreateKeyword: React.FC = () => {
           customerListId: selectedCustomerLists[0].id,
         },
       });
+      setLoading(false);
     } catch (error) {
       setError({...errorState, error: true, message: "Something went wrong, please try again later."});
+      setLoading(false);
     }
   };
 
@@ -196,8 +201,8 @@ const CreateKeyword: React.FC = () => {
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()}>
-              Create keyword
+            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading} loading={loading}>
+              Create Keyword
             </Button>
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />

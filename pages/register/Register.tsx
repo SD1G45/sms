@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/link-passhref */
 import React, { useState, useEffect } from "react";
-import Background from "../../components/Background";
 import {
   Heading,
   StyledCard,
@@ -11,7 +10,6 @@ import {
   LastNameTextField,
   NameContainer,
 } from "../../page-styles/register/styles";
-import Image from "next/image";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "../../page-mutations/register";
 import { useUserDispatch } from "../../context/UserContext/UserContext";
@@ -143,9 +141,10 @@ const Register = () => {
           errorMessage="Passwords don't match"
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
-        <StyledButton onClick={() => onRegister()}>Create Account</StyledButton>
+        <StyledButton onClick={() => onRegister()} disabled={loading} loading={loading}>
+          Create Account
+        </StyledButton>
         <LinkDiv>
-          <StyledButton onClick={() => onRegister()}>Continue</StyledButton>
           <Link href="/login">
             <StyledLink>Already have an account? Log in instead</StyledLink>
           </Link>

@@ -47,6 +47,7 @@ const CreateCoupon: React.FC = () => {
   const [time, setTime] = useState("23:59");
   const [color, setColor] = useState("#4881F0");
 
+  const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({ error: false, message: "" });
 
   const list: string[] = ["Analytics", "Create New", "FAQ"];
@@ -74,6 +75,8 @@ const CreateCoupon: React.FC = () => {
             onClick();
             // handleCreate();
           }}
+          disabled={loading}
+          loading={loading}
         >
           Create Coupon
         </CreateButton>
@@ -125,6 +128,8 @@ const CreateCoupon: React.FC = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const { data, errors } = await newCouponMutation({
         variables: {
@@ -139,14 +144,18 @@ const CreateCoupon: React.FC = () => {
 
       if (errors && errors.length > 0) {
         setError({ ...errorState, error: true, message: errors[0].message });
+        setLoading(false);
         return;
       }
+
+      setLoading(false);
     } catch (error) {
       setError({
         ...errorState,
         error: true,
         message: "Something went wrong, please try again later.",
       });
+      setLoading(false);
     }
   };
 
@@ -205,9 +214,6 @@ const CreateCoupon: React.FC = () => {
           />
 
           <ButtonContainer>
-            {/* <Button style={{ width: 250 }} onClick={() => handleCreate()}>
-              Create coupon
-            </Button> */}
             <Search />
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />
