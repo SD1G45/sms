@@ -23,6 +23,14 @@ import {
   CUSTOMER_LIST_QUERY,
 } from "../../../page-queries/keywords/create";
 import ErrorPopup from "../../../components/ErrorPopup";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import {
+  StyledCard,
+  CardDescription,
+  CardHeading,
+  SetupLaterButton,
+} from "../../../page-styles/coupons/create/styles";
 
 interface Coupon {
   id: string;
@@ -34,11 +42,13 @@ interface Coupon {
 }
 
 const CreateKeyword: React.FC = () => {
+  const router = useRouter();
   const businessState = useBusinessState();
 
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
   const [description, setDescription] = useState("");
+  const [result, setResult] = useState(false);
 
   const [selectorSearch, setSelectorSearch] = useState("");
   const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
@@ -74,7 +84,7 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId: businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d",
+        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCoupons, businessState]);
@@ -82,7 +92,7 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCustomerLists({
       variables: {
-        businessId: businessState?.businessId || "6d1faded-428f-4374-bd2c-9af3f0a99f8d",
+        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCustomerLists, businessState]);
@@ -117,21 +127,44 @@ const CreateKeyword: React.FC = () => {
     }
 
     try {
-
       newKeywordMutation({
         variables: {
           keyword,
           message,
           description,
-          businessId: businessState?.businessId == null ? "6d1faded-428f-4374-bd2c-9af3f0a99f8d" : null,
+          businessId: businessState?.businessId == null ? "13a1fcc2-dc74-4467-9eb4-b8ede588791d" : null,
           couponId: selectedCouponId,
           customerListId: selectedCustomerLists[0].id,
         },
       });
+      setResult(true);
     } catch (error) {
       setError({...errorState, error: true, message: "Something went wrong, please try again later."});
     }
   };
+
+  const Results = () => (
+    <StyledCard>
+      <Image src="/check.png" width={100} height={100} />
+      <CardHeading>New keyword created!</CardHeading>
+      <CardDescription>
+        You can now use this keyword to market and attract new customers
+      </CardDescription>
+      {/* <div>
+        <ConnectButton onClick={() => router.push("/campaigns")}>
+          Connect to campaign
+        </ConnectButton>
+        <ConnectButton onClick={() => router.push("/keywords")}>
+          Connect to keyword
+        </ConnectButton>
+      </div>
+      */}
+  
+      <SetupLaterButton onClick={() => router.push("/keywords")}>
+        close
+      </SetupLaterButton>
+    </StyledCard>
+  );
 
   let couponTitle = "";
   let couponDescription = "";
@@ -199,6 +232,7 @@ const CreateKeyword: React.FC = () => {
             <Button style={{ width: 250 }} onClick={() => handleCreate()}>
               Create keyword
             </Button>
+            {result ? <Results /> : ""}
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />
         </HalfPage>

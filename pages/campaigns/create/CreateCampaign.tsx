@@ -11,17 +11,24 @@ import {
   StyledSelector,
   StyledMultiSelector,
 } from "../../../page-styles/keywords/create/styles";
+import Image from "next/image";
+import {
+  StyledCard,
+  CardDescription,
+  CardHeading,
+  SetupLaterButton,
+} from "../../../page-styles/coupons/create/styles";
 import CouponPreview from "../../../components/CouponPreview";
 import Button from "../../../components/Button";
 import { ContainerDiv } from "../../../page-styles/coupons/styles";
 import SideNav from "../../../components/SideNav";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { NEW_KEYWORD } from "../../../page-mutations/keywords/create";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
 import {
   COUPONS_QUERY,
   CUSTOMER_LIST_QUERY,
 } from "../../../page-queries/keywords/create";
+import { useRouter } from "next/router";
 import ErrorPopup from "../../../components/ErrorPopup";
 import { NEW_CAMPAIGN } from "../../../page-mutations/campaigns/create";
 
@@ -35,10 +42,12 @@ interface Coupon {
 }
 
 const CreateCampaign: React.FC = () => {
+  const router = useRouter();
   const businessState = useBusinessState();
 
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [result, setResult] = useState(false);
 
   const [selectorSearch, setSelectorSearch] = useState("");
   const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
@@ -129,6 +138,7 @@ const CreateCampaign: React.FC = () => {
           customerListId: selectedCustomerLists[0].id,
         },
       });
+      setResult(true);
     } catch (error) {
       setError({
         ...errorState,
@@ -137,6 +147,29 @@ const CreateCampaign: React.FC = () => {
       });
     }
   };
+
+  const Results = () => (
+    <StyledCard>
+      <Image src="/check.png" width={100} height={100} />
+      <CardHeading>New campaign created!</CardHeading>
+      <CardDescription>
+        You can now add keywords and coupons to this campaign
+      </CardDescription>
+      {/* <div>
+        <ConnectButton onClick={() => router.push("/campaigns")}>
+          Connect to campaign
+        </ConnectButton>
+        <ConnectButton onClick={() => router.push("/keywords")}>
+          Connect to keyword
+        </ConnectButton>
+      </div>
+      */}
+  
+      <SetupLaterButton onClick={() => router.push("/campaigns")}>
+        close
+      </SetupLaterButton>
+    </StyledCard>
+  );
 
   let couponTitle = "";
   let couponDescription = "";
@@ -196,6 +229,7 @@ const CreateCampaign: React.FC = () => {
             <Button style={{ width: 250 }} onClick={() => handleCreate()}>
               Create campaign
             </Button>
+            {result ? <Results /> : ""}
           </ButtonContainer>
           <ErrorPopup error={errorState.error} message={errorState.message} />
         </HalfPage>
