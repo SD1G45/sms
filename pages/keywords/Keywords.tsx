@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
 import Table from "../../components/Table";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   ColumnDiv,
   ContainerDiv,
@@ -16,6 +16,7 @@ import { useBusinessState } from "../../context/BusinessContext/BusinessContext"
 import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
 import { HeaderDiv } from "../../page-styles/keywords/create/styles";
+
 const Keywords = () => {
   const router = useRouter();
   const createPath = router.asPath + "/create";
@@ -26,15 +27,14 @@ const Keywords = () => {
   const tableHeaders: string[] = [
     "Keyword",
     "Date created",
-    "Messages sent",
+    "Customers Onboarded",
     "Message success rate",
     "Coupons opened",
     "Coupons redeemed",
     "Coupon open %",
     "Coupon redeem %",
   ];
-  const dummyData: string[][] = [[]];
-  const [data, setData] = useState<string[]>([]);
+  const data: string[][] = [[]];
   const businessState = useBusinessState();
 
   const [getKeywords, keywordsQueryResult] = useLazyQuery(KEYWORD_QUERY);
@@ -42,7 +42,7 @@ const Keywords = () => {
     getKeywords({
       variables: {
         businessId:
-          businessState?.businessId || "029c9ee3-3c24-4687-8962-b050ba4d0af0",
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getKeywords, businessState]);
@@ -53,14 +53,14 @@ const Keywords = () => {
       : [];
 
   for (let i = 0; i < keywords.length; i++) {
-    console.log(keywords[i]);
-    dummyData.push([
-      keywords[i].keyword,
-      "10/20/21",
-      "8,123",
+    const curr = keywords[i];
+    data.push([
+      curr.keyword,
+      new Date(curr.dateCreated).toDateString(),
+      curr.customersOnboarded,
       "99%",
-      "5,400",
-      "400" + i,
+      curr.couponsOpened,
+      curr.couponsRedeemed,
       "66%",
       "0.5%",
     ]);
@@ -83,7 +83,7 @@ const Keywords = () => {
           </SearchDiv>
           <Button onClick={onClick}>Create New Keyword</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={dummyData} />
+        <Table headers={tableHeaders} data={data} />
       </ColumnDiv>
     </ContainerDiv>
   );
