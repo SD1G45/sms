@@ -1,20 +1,18 @@
-import { extendType, nonNull, stringArg } from "nexus";
+import { extendType, list, nonNull, stringArg } from "nexus";
+import { Campaign } from "../objects";
 
 export const campaignQuery = extendType({
   type: "Query",
   definition(t) {
     t.field("campaign", {
-      type: "Campaign",
+      type: list(Campaign),
       args: {
-        id: nonNull(stringArg()),
-        name: nonNull(stringArg()),
-        message: nonNull(stringArg()),
-        couponId: nonNull(stringArg())
+        businessId: nonNull(stringArg())
       },
-      resolve: async (_, { id }, ctx) => {
-        return await ctx.prisma.campaign.findFirst({
+      resolve: async (_, { businessId }, ctx) => {
+        return await ctx.prisma.campaign.findMany({
           where: {
-            id,
+            businessId,
           },
         })
       },

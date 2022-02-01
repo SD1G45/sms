@@ -40,6 +40,9 @@ CREATE TABLE "Coupon" (
     "description" TEXT NOT NULL,
     "primaryColor" TEXT NOT NULL,
     "expirationDate" TIMESTAMP(3) NOT NULL,
+    "sent" INTEGER NOT NULL,
+    "opened" INTEGER NOT NULL,
+    "redeemed" INTEGER NOT NULL,
     "businessId" TEXT NOT NULL,
 
     CONSTRAINT "Coupon_pkey" PRIMARY KEY ("id")
@@ -50,6 +53,11 @@ CREATE TABLE "Campaign" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "message" TEXT NOT NULL,
+    "dateSent" TIMESTAMP(3) NOT NULL,
+    "messagesSent" INTEGER NOT NULL,
+    "couponsOpened" INTEGER NOT NULL,
+    "couponsRedeemed" INTEGER NOT NULL,
+    "businessId" TEXT NOT NULL,
     "couponId" TEXT NOT NULL,
 
     CONSTRAINT "Campaign_pkey" PRIMARY KEY ("id")
@@ -99,6 +107,10 @@ CREATE TABLE "Keyword" (
     "keyword" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "message" TEXT NOT NULL,
+    "customersOnboarded" INTEGER NOT NULL,
+    "couponsOpened" INTEGER NOT NULL,
+    "couponsRedeemed" INTEGER NOT NULL,
+    "dateCreated" TIMESTAMP(3) NOT NULL,
     "couponId" TEXT NOT NULL,
     "businessId" TEXT NOT NULL,
 
@@ -131,6 +143,9 @@ ALTER TABLE "Business_User" ADD CONSTRAINT "Business_User_userId_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "Coupon" ADD CONSTRAINT "Coupon_businessId_fkey" FOREIGN KEY ("businessId") REFERENCES "Business"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Campaign" ADD CONSTRAINT "Campaign_businessId_fkey" FOREIGN KEY ("businessId") REFERENCES "Business"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Campaign" ADD CONSTRAINT "Campaign_couponId_fkey" FOREIGN KEY ("couponId") REFERENCES "Coupon"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

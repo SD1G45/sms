@@ -314,9 +314,10 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
                 onNext={() => updateActiveStepperIndex(1)}
                 openLogoEditor={() => setLogoEditorOpen(true)}
               />
-            ) : activeStepperIndex === 2 ? (
-              <SetPaymentInfo />
             ) : (
+              //TODO: Add Billing info
+              // ) : activeStepperIndex === 2 ? (
+              //   <SetPaymentInfo />
               <PickPhoneNumber />
             )}
           </>

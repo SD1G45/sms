@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
@@ -11,8 +11,17 @@ import {
   ContainerDiv,
   StyledHeader,
 } from "../../page-styles/coupons/styles";
-import { CampaignHeader } from "./styles";
 import { HeaderDiv } from "../../page-styles/campaigns/styles";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import { useLazyQuery } from "@apollo/client";
+import { CAMPAIGN_QUERY } from "../../page-queries/campaigns";
+
+const parseDate = (date: any) => {
+  const dateObj = new Date(date);
+  return (
+    dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+  );
+};
 
 const Campaigns = () => {
   const router = useRouter();
@@ -25,22 +34,42 @@ const Campaigns = () => {
     "Campaign",
     "Date sent",
     "Messages sent",
-    "Message success rate",
+    "Message success %",
     "Coupons opened",
     "Coupons redeemed",
-    "Coupon open %",
-    "Coupon redeem %",
+    "Open %",
+    "Redeem %",
   ];
-  const dummyData: string[][] = [[
-    "Main List - 10% OFF",
-    "10/20/21",
-    "8,123",
-    "99%",
-    "5,400",
-    "400",
-    "66%",
-    "0.5%",
-  ]];
+  const data: string[][] = [];
+  const businessState = useBusinessState();
+
+  const [getCampaigns, campaignsQueryResult] = useLazyQuery(CAMPAIGN_QUERY);
+  useEffect(() => {
+    getCampaigns({
+      variables: {
+        businessId:
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+      },
+    });
+  }, [getCampaigns, businessState]);
+
+  const campaigns =
+    campaignsQueryResult.data != undefined
+      ? campaignsQueryResult.data.campaign
+      : [];
+  for (let i = 0; i < campaigns.length; i++) {
+    const curr = campaigns[i];
+    data.push([
+      curr.name,
+      parseDate(curr.dateSent),
+      curr.messagesSent,
+      "100%",
+      curr.couponsOpened,
+      curr.couponsRedeemed,
+      "75%",
+      "80%",
+    ]);
+  }
 
   const onClick = () => {
     router.push(createPath);
@@ -59,7 +88,7 @@ const Campaigns = () => {
           </SearchDiv>
           <Button>Create New Campaign</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={dummyData} />
+        <Table headers={tableHeaders} data={data} />
       </ColumnDiv>
     </ContainerDiv>
   );

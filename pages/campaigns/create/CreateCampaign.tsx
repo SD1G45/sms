@@ -75,7 +75,7 @@ const CreateCampaign: React.FC = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId: businessState?.businessId || "",
+        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCoupons, businessState]);
@@ -83,7 +83,7 @@ const CreateCampaign: React.FC = () => {
   useEffect(() => {
     getCustomerLists({
       variables: {
-        businessId: businessState?.businessId || "",
+        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCustomerLists, businessState]);
@@ -127,7 +127,7 @@ const CreateCampaign: React.FC = () => {
         variables: {
           name,
           message,
-          businessId: businessState?.businessId,
+          businessId: businessState?.businessId == null ? "13a1fcc2-dc74-4467-9eb4-b8ede588791d" : "",
           couponId: selectedCouponId,
           customerListId: selectedCustomerLists[0].id,
         },

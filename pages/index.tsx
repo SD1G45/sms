@@ -57,14 +57,14 @@ const Home: NextPage = () => {
 
   return (
     <Center style={{ width: 200 }}>
-      <MultiSelector
+      {/* <MultiSelector
         options={filteredOptions}
         searchValue={searchValue}
         onSearchValueChange={(id) => setSearchValue(id)}
         onSelect={({ name, id }) => handleSelect(id, name)}
         selectedOptions={selectedOptions}
         onRemove={(id) => handleRemove(id)}
-      />
+      /> */}
       <Selector
         label="Test"
         options={selectorOptions}

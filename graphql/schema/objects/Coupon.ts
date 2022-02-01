@@ -10,5 +10,8 @@ export const Coupon = objectType({
     t.string("primaryColor");
     t.date("expirationDate");
     t.string("businessId");
+    t.int("opened");
+    t.int("redeemed");
+    t.int("sent");
   },
 });

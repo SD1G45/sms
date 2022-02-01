@@ -24,7 +24,12 @@ export const newCampaignMutation = extendType({
           data: {
             name,
             message,
+            dateSent: new Date(),
+            messagesSent: 0,
+            couponsOpened: 0,
+            couponsRedeemed: 0,
             couponId,
+            businessId
           },
         });
 
