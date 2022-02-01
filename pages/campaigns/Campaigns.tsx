@@ -11,10 +11,6 @@ import {
   ContainerDiv,
   StyledHeader,
 } from "../../page-styles/coupons/styles";
-<<<<<<< HEAD
-=======
-
->>>>>>> 112adcdb032362a896067b8be9e837cdd720d8ab
 import { HeaderDiv } from "../../page-styles/campaigns/styles";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import { useLazyQuery } from "@apollo/client";
