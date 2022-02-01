@@ -22,7 +22,7 @@ export const TableBody = styled.tbody`
 export const Header = styled.th`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
-    padding-right: 60px;
+    padding-left: 58px;
     padding-top: 15px;
     font-size: 14px;
 `;
@@ -39,14 +39,23 @@ export const HeaderLong = styled.th`
 export const Data = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
-    padding-right: 60px;
+    padding-left: 60px;
     padding-top: 15px;
     font-size: 14px;
     font-weight: 500;
 `;
 
+export const DataEmpty = styled.td`
+    border-bottom: 2.75px solid #C4C4C4;
+    padding-bottom: 45px;
+    padding-right: 60px;
+    font-size: 14px;
+    font-weight: 500;
+`;
+
 export const DataLong = styled(Data)`
-    padding-right: 100px;
+    padding-left: 0px;
+    padding-right: 40px;
     font-weight: 500;
     text-align: left;
 `;

@@ -20,7 +20,12 @@ const FAQ = () => {
         />
         <StyledAccordion
           title="How to check analytics"
-          content="Click <b><q>Analytics</q></b> on the menu under the Coupons. You will be able to see your anaylitics by coupons you've created. <b><q>Coupons created</q></b> shows how many coupons are created. <b><q>Coupons opened</q></b> shows how many coupons are opened from those you have created. <b><q>Coupons redeemed</q></b> shows how many coupons are redeemed from those you have created. Open % is calculated by (# of coupons opened / # of coupons created). Redeem % is calculated by (# of coupons redeemed / # of coupons created)"
+          content="Click <b><q>Analytics</q></b> on the menu under the Coupons. You will be able to see your anaylitics by coupons you've created. 
+          <b><q>Coupons created</q></b> shows how many coupons are created. 
+          <b><q>Coupons opened</q></b> shows how many coupons are opened from those you have created. 
+          <b><q>Coupons redeemed</q></b> shows how many coupons are redeemed from those you have created. 
+          <b><q>Open %</q></b> is calculated by (# of coupons opened / # of coupons created). 
+          <b><q>Redeem %</q></b> is calculated by (# of coupons redeemed / # of coupons created)"
         />
       </FlexContainer>
     </ContainerDiv>

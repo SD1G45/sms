@@ -35,7 +35,7 @@ const index = () => {
     "Open %",
     "Redeem %",
   ];
-  const data: string[][] = [[]];
+  const data: string[][] = [];
 
   const businessState = useBusinessState();
   const [getCoupons, couponsQueryResult] = useLazyQuery(COUPON_QUERY);
