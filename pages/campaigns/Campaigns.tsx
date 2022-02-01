@@ -18,8 +18,10 @@ import { CAMPAIGN_QUERY } from "../../page-queries/campaigns";
 
 const parseDate = (date: any) => {
   const dateObj = new Date(date);
-  return dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear();
-}
+  return (
+    dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+  );
+};
 
 const Campaigns = () => {
   const router = useRouter();
@@ -32,11 +34,11 @@ const Campaigns = () => {
     "Campaign",
     "Date sent",
     "Messages sent",
-    "Message success rate",
+    "Message success %",
     "Coupons opened",
     "Coupons redeemed",
-    "Coupon open %",
-    "Coupon redeem %",
+    "Open %",
+    "Redeem %",
   ];
   const data: string[][] = [];
   const businessState = useBusinessState();
@@ -46,15 +48,15 @@ const Campaigns = () => {
     getCampaigns({
       variables: {
         businessId:
-          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d"
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCampaigns, businessState]);
 
-  const campaigns = 
-    campaignsQueryResult.data != undefined 
-    ? campaignsQueryResult.data.campaign
-    : [];
+  const campaigns =
+    campaignsQueryResult.data != undefined
+      ? campaignsQueryResult.data.campaign
+      : [];
   for (let i = 0; i < campaigns.length; i++) {
     const curr = campaigns[i];
     data.push([
@@ -65,7 +67,7 @@ const Campaigns = () => {
       curr.couponsOpened,
       curr.couponsRedeemed,
       "75%",
-      "80%"
+      "80%",
     ]);
   }
 

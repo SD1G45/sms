@@ -19,8 +19,10 @@ import { HeaderDiv } from "../../page-styles/keywords/create/styles";
 
 const parseDate = (date: any) => {
   const dateObj = new Date(date);
-  return dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear();
-}
+  return (
+    dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear()
+  );
+};
 
 const Keywords = () => {
   const router = useRouter();
@@ -36,8 +38,8 @@ const Keywords = () => {
     "Message success rate",
     "Coupons opened",
     "Coupons redeemed",
-    "Coupon open %",
-    "Coupon redeem %",
+    "Open %",
+    "Redeem %",
   ];
   const data: string[][] = [];
   const businessState = useBusinessState();
