@@ -94,3 +94,12 @@ export const CreateButton = styled(Button)`
   margin-top: 100px;
   margin-left: 200px;
 `;
+
+export const ColorPicker = styled.div`
+  height: 30px;
+  width: 30px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: 2px solid gray;
+`;

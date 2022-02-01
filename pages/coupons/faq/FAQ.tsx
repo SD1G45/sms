@@ -14,9 +14,14 @@ const FAQ = () => {
     <ContainerDiv>
       <SideNav items={list} routes={routes} heading={"Coupons"} />
       <FlexContainer>
-        <StyledAccordion title="How to create a coupon" content="Click " />
-        <StyledAccordion title="How to create a coupon" content="Click " />
-        <StyledAccordion title="How to create a coupon" content="Click " />
+        <StyledAccordion
+          title="How to create a coupon"
+          content="Click <b><q>Create New</q></b> on the menu under the Coupons. Set your coupon title, message you would like to send, expiration date/time, and the color. The preview will show on the right side of your screen. If you wish to continue, press the blue <b><q>Create Coupon</q></b> button. You're all set!"
+        />
+        <StyledAccordion
+          title="How to check analytics"
+          content="Click <b><q>Analytics</q></b> on the menu under the Coupons. You will be able to see your anaylitics by coupons you've created. <b><q>Coupons created</q></b> shows how many coupons are created. <b><q>Coupons opened</q></b> shows how many coupons are opened from those you have created. <b><q>Coupons redeemed</q></b> shows how many coupons are redeemed from those you have created. Open % is calculated by (# of coupons opened / # of coupons created). Redeem % is calculated by (# of coupons redeemed / # of coupons created)"
+        />
       </FlexContainer>
     </ContainerDiv>
   );
