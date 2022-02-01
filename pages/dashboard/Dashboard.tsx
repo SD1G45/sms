@@ -12,6 +12,13 @@ import {
 import { StyledHeader } from "../../page-styles/coupons/styles";
 import Link from "next/link";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import { couponData, customersData } from "./sampleData";
+import dynamic from "next/dynamic";
+
+const LineChart = dynamic(
+  () => import('../../components/LineChart'),
+  { ssr: false }
+)
 
 const Dashboard = () => {
   const businessState = useBusinessState();
@@ -20,11 +27,35 @@ const Dashboard = () => {
     setBusinessName(businessState?.name || "");
     console.log(businessName);
   });
+
   return (
     <>
       <ContainerDiv>
         <StyledHeader>{businessName}</StyledHeader>
       </ContainerDiv>
+
+      <ContainerDiv>
+        <ColumnDiv>
+          <LineChart
+            title="Coupons"
+            data={couponData}
+            height={300}
+            flexure={1}
+          />
+        </ColumnDiv>
+        <ColumnDiv>
+          <LineChart
+            title="Customers"
+            data={customersData}
+            height={300}
+            flexure={1}
+          />
+        </ColumnDiv>
+        <ColumnDiv>
+          {/* TODO: Build up Amount Spent & Estimated Sales */}
+        </ColumnDiv>
+      </ContainerDiv>
+
       <ContainerDiv>
         <ColumnDiv>
           <RowDiv>
@@ -52,7 +83,7 @@ const Dashboard = () => {
             </StyledCard>
           </RowDiv>
         </ColumnDiv>
-        <ColumnDiv>
+        <ColumnDiv style={{ margin: "auto", }}>
           <RowDiv>
             <StyledCard>
               <StyledHeader>Customers</StyledHeader>
