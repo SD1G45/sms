@@ -40,5 +40,5 @@ yarn-error.log*
 # packagelock
 packagelock.json
 
-/prisma/migrations
+
 
