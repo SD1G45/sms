@@ -17,6 +17,11 @@ import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
 import { HeaderDiv } from "../../page-styles/keywords/create/styles";
 
+const parseDate = (date: any) => {
+  const dateObj = new Date(date);
+  return dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear();
+}
+
 const Keywords = () => {
   const router = useRouter();
   const createPath = router.asPath + "/create";
@@ -34,7 +39,7 @@ const Keywords = () => {
     "Coupon open %",
     "Coupon redeem %",
   ];
-  const data: string[][] = [[]];
+  const data: string[][] = [];
   const businessState = useBusinessState();
 
   const [getKeywords, keywordsQueryResult] = useLazyQuery(KEYWORD_QUERY);
@@ -56,7 +61,7 @@ const Keywords = () => {
     const curr = keywords[i];
     data.push([
       curr.keyword,
-      new Date(curr.dateCreated).toDateString(),
+      parseDate(curr.dateCreated),
       curr.customersOnboarded,
       "99%",
       curr.couponsOpened,

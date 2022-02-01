@@ -1,5 +1,5 @@
 import React from "react";
-import { DivContainer, DataTable, TableHeader, TableBody, Header, HeaderLong, DataLong, Data } from "./styles";
+import { DivContainer, DataEmpty, DataTable, TableHeader, TableBody, Header, HeaderLong, DataLong, Data } from "./styles";
 import { TableProps } from "./types";
 
 function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
@@ -18,7 +18,6 @@ function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
 
 function mapDataToBodyComponent(data: string[][]): JSX.Element[] {
     const mapping: JSX.Element[] = [];
-
     data.map((value) => { 
         const map: JSX.Element[] = [];
         value.map((val, i) => {
@@ -31,6 +30,14 @@ function mapDataToBodyComponent(data: string[][]): JSX.Element[] {
         mapping.push(<tr>{ map }</tr>)
     })
 
+    // Fill in rest of table empty
+    while (mapping.length < 8) {
+        const map: JSX.Element[] = [];
+        for (let i = 0; i < 8; i++) {
+            map.push(<DataEmpty/>)
+        }
+        mapping.push(<tr>{ map }</tr>);
+    }
     return mapping;
 }
 

@@ -16,6 +16,11 @@ import { useBusinessState } from "../../context/BusinessContext/BusinessContext"
 import { useLazyQuery } from "@apollo/client";
 import { CAMPAIGN_QUERY } from "../../page-queries/campaigns";
 
+const parseDate = (date: any) => {
+  const dateObj = new Date(date);
+  return dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear();
+}
+
 const Campaigns = () => {
   const router = useRouter();
   const createPath = router.asPath + "/create";
@@ -33,7 +38,7 @@ const Campaigns = () => {
     "Coupon open %",
     "Coupon redeem %",
   ];
-  const data: string[][] = [[]];
+  const data: string[][] = [];
   const businessState = useBusinessState();
 
   const [getCampaigns, campaignsQueryResult] = useLazyQuery(CAMPAIGN_QUERY);
@@ -50,12 +55,11 @@ const Campaigns = () => {
     campaignsQueryResult.data != undefined 
     ? campaignsQueryResult.data.campaign
     : [];
-  console.log(campaigns);
   for (let i = 0; i < campaigns.length; i++) {
     const curr = campaigns[i];
     data.push([
       curr.name,
-      new Date(curr.dateSent).toDateString(),
+      parseDate(curr.dateSent),
       curr.messagesSent,
       "100%",
       curr.couponsOpened,
