@@ -52,6 +52,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
   const business_id = router.query.business_id;
   const [nameSetError, setNameSetError] = useState(false);
   const [emtpyNameError, setEmptyNameError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [createBusinessMutation] = useMutation(CREATE_BUSINESS_MUTATION, {
     errorPolicy: "all",
@@ -86,6 +87,8 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
       return;
     }
 
+    setLoading(true);
+
     if (mutationMode === "CREATE") {
       try {
         const { data, errors } = await createBusinessMutation({
@@ -93,6 +96,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         });
 
         if (handleRequestErrors(errors)) {
+          setLoading(false);
           return;
         }
 
@@ -118,6 +122,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         });
 
         if (handleRequestErrors(errors)) {
+          setLoading(false);
           return;
         }
 
@@ -126,6 +131,8 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         setNameSetError(true);
       }
     }
+    
+    setLoading(false);
   };
 
   return (
@@ -139,7 +146,9 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         error={emtpyNameError}
         errorMessage="Please enter a business name"
       />
-      <StyledButton onClick={() => onNextClick()}>Next</StyledButton>
+      <StyledButton onClick={() => onNextClick()} disabled={loading} loading={loading}>
+        Next
+      </StyledButton>
       {nameSetError && (
         <ErrorMessage>
           There was an error setting the name of your business. Please try again
@@ -185,6 +194,7 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
 
 const PickPhoneNumber: React.FC = () => {
   const [areaCode, setAreaCode] = useState("");
+  const [pickLoading, setPickLoading] = useState(false);
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState<string | null>(
     null
   );
@@ -209,10 +219,12 @@ const PickPhoneNumber: React.FC = () => {
   };
 
   const provisionPhoneNumber = async () => {
+    setPickLoading(true);
     const { data, errors } = await provisionPhoneNumberMutation({
       variables: { phoneNumber: selectedPhoneNumber, businessId: business_id },
     });
 
+    setPickLoading(false);
     if (data) {
       router.push("/");
     }
@@ -245,10 +257,11 @@ const PickPhoneNumber: React.FC = () => {
           )}
       </PhoneNumberList>
       <Button
-        disabled={selectedPhoneNumber === null}
+        disabled={selectedPhoneNumber === null || pickLoading}
         onClick={() => provisionPhoneNumber()}
+        loading={pickLoading}
       >
-        Select
+        Create Account
       </Button>
     </div>
   );

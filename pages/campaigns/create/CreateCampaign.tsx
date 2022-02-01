@@ -57,6 +57,7 @@ const CreateCampaign: React.FC = () => {
     { name: string; id: string }[]
   >([]);
 
+  const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({ error: false, message: "" });
 
   const handleRemove = (id: string) => {
@@ -128,6 +129,8 @@ const CreateCampaign: React.FC = () => {
       });
     }
 
+    setLoading(true);
+
     try {
       newCampaignMutation({
         variables: {
@@ -139,12 +142,14 @@ const CreateCampaign: React.FC = () => {
         },
       });
       setResult(true);
+      setLoading(false);
     } catch (error) {
       setError({
         ...errorState,
         error: true,
         message: "Something went wrong, please try again later.",
       });
+      setLoading(false);
     }
   };
 
@@ -226,8 +231,8 @@ const CreateCampaign: React.FC = () => {
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()}>
-              Create campaign
+            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading} loading={loading}>
+              Create Campaign
             </Button>
             {result ? <Results /> : ""}
           </ButtonContainer>

@@ -39,6 +39,8 @@ export const NameContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export const StyledButton = styled(Button)`
   margin-top: 5px;
+  margin-bottom: 30px;
 `;
