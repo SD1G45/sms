@@ -11,14 +11,22 @@ import SingleCardPage from "../../../components/SingleCardPage";
 import { useRouter } from "next/router";
 import { INVITE_ACCOUNT_MUTATION } from "../../../page-mutations/business/invite";
 import { BUSINESS_INVITE_CODE_QUERY } from "../../../page-queries/business/join";
+import { ACCEPT_INVITATION_MUTATION } from "../../../page-mutations/business/join";
+import { useUserState } from "../../../context/UserContext";
 
 const BusinessInvite = () => {
-  const [email, setEmail] = useState("");
   const [errorState, setError] = useState({ error: false, message: "" });
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const code = router.query.code;
+  const userState = useUserState();
+
+  useEffect(() => {
+    if (userState?.jid == null && code != null) {
+      router.push(`/register?redirect=/business/join&code=${code}`);
+    }
+  }, [userState?.jid, code]);
 
   const [getBusinessInviteCodes, businessInviteCodeQuery] = useLazyQuery(
     BUSINESS_INVITE_CODE_QUERY
@@ -35,16 +43,20 @@ const BusinessInvite = () => {
   }, [code, getBusinessInviteCodes]);
 
   const businessName =
-    businessInviteCodeQuery.data !== undefined
+    businessInviteCodeQuery.data !== undefined && userState?.jid
       ? businessInviteCodeQuery.data.businessInviteCode.business.name
       : "[error]";
 
-  const [acceptInvitationMutation] = useMutation(INVITE_ACCOUNT_MUTATION);
+  const [acceptInvitationMutation] = useMutation(ACCEPT_INVITATION_MUTATION);
 
   const onAccept = async () => {
     setLoading(true);
     try {
-      const { data, errors } = await acceptInvitationMutation();
+      const { data, errors } = await acceptInvitationMutation({
+        variables: {
+          code,
+        },
+      });
 
       if (errors && errors.length > 0) {
         setError({ ...errorState, error: true, message: errors[0].message });
