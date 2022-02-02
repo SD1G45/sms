@@ -12,14 +12,15 @@ function createApolloClient() {
   // Declare variable to store authToken
   let token: string | null;
 
-  // const rootUrl = process.env.ROOT_URL;
+  const rootUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3001/"
+      : "https://trism.app/";
 
-  // const uri = rootUrl + "api/graphql";
-
-  // console.log(uri);
+  const uri = rootUrl + "api/graphql";
 
   const httpLink = createHttpLink({
-    uri: "api/graphql",
+    uri,
     credentials: "include",
   });
 

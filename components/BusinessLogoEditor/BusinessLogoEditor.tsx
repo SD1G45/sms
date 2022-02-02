@@ -35,7 +35,10 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
         businessId: business_id,
       };
 
-      const rootUrl = process.env.ROOT_URL;
+      const rootUrl =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3001/"
+          : "https://trism.app/";
 
       fetch(rootUrl + "api/picture", {
         method: "POST",
@@ -47,7 +50,7 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
           setLoading(false);
           onClose();
         })
-        .catch(() => {
+        .catch((err) => {
           setLoading(false);
           setErrorMsg(
             "There was an error uploading your profile picture. Please try again later."

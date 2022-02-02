@@ -11,6 +11,7 @@ import {
   SecondaryNavbar,
   SecondaryNavbarContainer,
   Item,
+  BusinessSelector,
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -28,17 +29,19 @@ const Navbar = () => {
 
   const businessState = useBusinessState();
   const [businessName, setBusinessName] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
   useEffect(() => {
     setBusinessName(businessState?.name || "");
-    console.log(businessName);
+    setLogoUrl(businessState?.logoUrl || "");
   });
 
   return (
     <>
       <PrimaryNavbar>
         <BusinessInfoSection>
-          <BusinessLogo />
+          <BusinessLogo src={logoUrl || ""} />
           <BusinessName>{businessName}</BusinessName>
+          <BusinessSelector>Hey there!</BusinessSelector>
         </BusinessInfoSection>
         <ControlsSection>
           <CreateButton invert>Create</CreateButton>
