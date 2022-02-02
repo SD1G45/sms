@@ -13,12 +13,11 @@ import { StyledHeader } from "../../page-styles/coupons/styles";
 import Link from "next/link";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import dynamic from "next/dynamic";
-import sampleData from "./sampleData";
+import sampleData from "../../sampleData/sampleData";
 
-const LineChart = dynamic(
-  () => import('../../components/LineChart'),
-  { ssr: false }
-)
+const LineChart = dynamic(() => import("../../components/LineChart"), {
+  ssr: false,
+});
 
 const couponData = sampleData.couponData();
 const customersData = sampleData.customersData();
@@ -86,7 +85,7 @@ const Dashboard = () => {
             </StyledCard>
           </RowDiv>
         </ColumnDiv>
-        <ColumnDiv style={{ margin: "auto", }}>
+        <ColumnDiv style={{ margin: "auto" }}>
           <RowDiv>
             <StyledCard>
               <StyledHeader>Customers</StyledHeader>
