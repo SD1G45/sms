@@ -5,7 +5,7 @@ function getRootUrl() {
   } else if (process.env.NODE_ENV === "test") {
     rootUrl = "http://smsmp-develop.herokuapp.com/";
   } else {
-    rootUrl = "https://trism.app/";
+    rootUrl = "https://trism.co/";
   }
   return rootUrl;
 }
