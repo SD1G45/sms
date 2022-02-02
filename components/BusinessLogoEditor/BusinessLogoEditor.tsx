@@ -4,6 +4,7 @@ import Button from "../Button";
 import Slider from "../Slider";
 import { useRouter } from "next/router";
 import { Container, BottomSection, ErrorText, ButtonContainer } from "./styles";
+import getRootUrl from "../../config/rootUrl";
 
 export interface Props {
   onClose: () => void;
@@ -35,7 +36,7 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
         businessId: business_id,
       };
 
-      const rootUrl = process.env.ROOT_URL;
+      const rootUrl = getRootUrl();
 
       fetch(rootUrl + "api/picture", {
         method: "POST",
@@ -47,7 +48,7 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
           setLoading(false);
           onClose();
         })
-        .catch(() => {
+        .catch((err) => {
           setLoading(false);
           setErrorMsg(
             "There was an error uploading your profile picture. Please try again later."

@@ -11,15 +11,26 @@ import {
   SecondaryNavbar,
   SecondaryNavbarContainer,
   Item,
+  BusinessSelector,
+  BusinessListItem,
+  BusinessListItemLogo,
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import {
+  useBusinessDispatch,
+  useBusinessState,
+} from "../../context/BusinessContext/BusinessContext";
+import { useLazyQuery } from "@apollo/client";
+import { BUSINESS_LIST_QUERY } from "./queries";
+import { useUserState } from "../../context/UserContext";
 
 const Navbar = () => {
   const router = useRouter();
   const currentPath = router.asPath;
+
+  const [businessSelectActive, setBusinessSelectActive] = useState(false);
 
   if (currentPath.startsWith("/login")) return <></>;
   if (currentPath.startsWith("/register")) return <></>;
@@ -27,18 +38,57 @@ const Navbar = () => {
   if (currentPath.startsWith("/create-business")) return <></>;
 
   const businessState = useBusinessState();
+  const businessDispatch = useBusinessDispatch();
+  const userState = useUserState();
+
   const [businessName, setBusinessName] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
   useEffect(() => {
     setBusinessName(businessState?.name || "");
-    console.log(businessName);
+    setLogoUrl(businessState?.logoUrl || "");
   });
+
+  const [getBusinesses, businessQueryResult] =
+    useLazyQuery(BUSINESS_LIST_QUERY);
+
+  useEffect(() => {
+    getBusinesses();
+  }, [userState]);
+
+  const businessList: { id: string; name: string; logoUrl: string }[] =
+    businessQueryResult.data != undefined
+      ? businessQueryResult.data.viewer.businesses
+      : [];
+
+  const filteredBusinessList = businessList.filter(
+    ({ id }) => id !== businessState?.businessId
+  );
 
   return (
     <>
       <PrimaryNavbar>
-        <BusinessInfoSection>
-          <BusinessLogo />
+        <BusinessInfoSection
+          onClick={() => setBusinessSelectActive(!businessSelectActive)}
+        >
+          <BusinessLogo src={logoUrl || ""} />
           <BusinessName>{businessName}</BusinessName>
+          {businessSelectActive && (
+            <BusinessSelector>
+              {filteredBusinessList.map(({ id, logoUrl, name }) => (
+                <BusinessListItem
+                  onClick={() =>
+                    businessDispatch({
+                      type: "setActiveBusiness",
+                      payload: { name, businessId: id, logoUrl },
+                    })
+                  }
+                >
+                  <BusinessListItemLogo src={logoUrl} />
+                  {name}
+                </BusinessListItem>
+              ))}
+            </BusinessSelector>
+          )}
         </BusinessInfoSection>
         <ControlsSection>
           <CreateButton invert>Create</CreateButton>

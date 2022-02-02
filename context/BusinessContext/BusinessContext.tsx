@@ -4,7 +4,9 @@ import Cookie from "js-cookie";
 
 type Dispatch = (action: Action) => void;
 
-type Action = { type: "setBusinessId"; payload: State };
+type Action =
+  | { type: "setActiveBusiness"; payload: State }
+  | { type: "setBusinessLogoUrl"; logoUrl: string };
 
 interface State extends Business {}
 
@@ -14,10 +16,21 @@ const BusinessDispatchContext = createContext<Dispatch>(() => {});
 
 const businessReducer = (state: State, action: Action) => {
   switch (action.type) {
-    case "setBusinessId": {
+    case "setActiveBusiness": {
       Cookie.set("businessId", action.payload.businessId || "", { expires: 7 });
       Cookie.set("businessName", action.payload.name || "", { expires: 7 });
+      Cookie.set("businessLogoUrl", action.payload.logoUrl || "", {
+        expires: 7,
+      });
       return action.payload;
+    }
+
+    case "setBusinessLogoUrl": {
+      Cookie.set("businessLogoUrl", action.logoUrl || "");
+      return {
+        ...state,
+        logoUrl: action.logoUrl,
+      };
     }
 
     default: {
@@ -29,9 +42,11 @@ const businessReducer = (state: State, action: Action) => {
 const BusinessProvider = ({ children }: CountProviderProps) => {
   const businessId = Cookie.get("businessId");
   const name = Cookie.get("businessName");
+  const logoUrl = Cookie.get("businessLogoUrl");
   const [state, dispatch] = React.useReducer(businessReducer, {
     businessId: businessId || null,
     name: name || null,
+    logoUrl: logoUrl || null,
   });
 
   return (

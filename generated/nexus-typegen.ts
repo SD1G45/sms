@@ -213,6 +213,7 @@ export interface NexusGenFieldTypes {
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
+    businesses: Array<NexusGenRootTypes['Business'] | null> | null; // [Business]
     email: string | null; // String
     firstName: string | null; // String
     id: string | null; // String
@@ -308,6 +309,7 @@ export interface NexusGenFieldTypeNames {
     viewer: 'User'
   }
   User: { // field return type name
+    businesses: 'Business'
     email: 'String'
     firstName: 'String'
     id: 'String'
