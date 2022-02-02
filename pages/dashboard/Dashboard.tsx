@@ -12,13 +12,16 @@ import {
 import { StyledHeader } from "../../page-styles/coupons/styles";
 import Link from "next/link";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
-import { couponData, customersData } from "./sampleData";
 import dynamic from "next/dynamic";
+import sampleData from "./sampleData";
 
 const LineChart = dynamic(
   () => import('../../components/LineChart'),
   { ssr: false }
 )
+
+const couponData = sampleData.couponData();
+const customersData = sampleData.customersData();
 
 const Dashboard = () => {
   const businessState = useBusinessState();
