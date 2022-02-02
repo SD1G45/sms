@@ -7,5 +7,6 @@ function getRootUrl() {
   } else {
     rootUrl = "https://trism.app/";
   }
+  return rootUrl;
 }
 export default getRootUrl;

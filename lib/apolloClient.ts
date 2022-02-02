@@ -15,10 +15,8 @@ function createApolloClient() {
 
   const rootUrl = getRootUrl();
 
-  const uri = rootUrl + "api/graphql";
-
   const httpLink = createHttpLink({
-    uri,
+    uri: rootUrl + "api/graphql",
     credentials: "include",
   });
 
