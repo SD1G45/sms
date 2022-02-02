@@ -17,6 +17,7 @@ import { useUserDispatch } from "../../../context/UserContext/UserContext";
 import SingleCardPage from "../../../components/SingleCardPage";
 import { useRouter } from "next/router";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
+import { INVITE_ACCOUNT_MUTATION } from "../../../page-mutations/business/invite";
 
 const BusinessInvite = () => {
   const [email, setEmail] = useState("");
@@ -26,9 +27,40 @@ const BusinessInvite = () => {
   const businessState = useBusinessState();
   const router = useRouter();
 
+  const [inviteAccountMutation] = useMutation(INVITE_ACCOUNT_MUTATION);
+
+  const onInvite = async () => {
+    if (email.length === 0) {
+      setError({
+        ...errorState,
+        error: true,
+        message: "Missing email",
+      });
+      return;
+    }
+    setLoading(true);
+    try {
+      const { data, errors } = await inviteAccountMutation({
+        variables: {
+          email,
+        },
+      });
+
+      if (errors && errors.length > 0) {
+        setError({ ...errorState, error: true, message: errors[0].message });
+        setLoading(false);
+        return;
+      }
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError({ ...errorState, error: true, message: "error" });
+    }
+  };
+
   return (
     <SingleCardPage>
-      {" "}
       <StyledCard>
         <Heading>Invite account {businessState?.name}</Heading>
         <SubHeading>
@@ -43,7 +75,7 @@ const BusinessInvite = () => {
           }
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
-        <StyledButton disabled={loading} loading={loading}>
+        <StyledButton disabled={loading} loading={loading} onClick={onInvite}>
           Send invite
         </StyledButton>
       </StyledCard>
