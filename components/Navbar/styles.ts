@@ -21,6 +21,23 @@ export const BusinessInfoSection = styled.div`
 export const BusinessSelector = styled(Card)`
   position: absolute;
   top: 80px;
+  padding: 0;
+`;
+
+export const BusinessListItem = styled.div`
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.backgroundGray};
+  }
+`;
+
+export const BusinessListItemLogo = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
 `;
 
 export const BusinessLogo = styled.img`

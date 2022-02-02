@@ -4,6 +4,7 @@ import Button from "../Button";
 import Slider from "../Slider";
 import { useRouter } from "next/router";
 import { Container, BottomSection, ErrorText, ButtonContainer } from "./styles";
+import getRootUrl from "../../config/rootUrl";
 
 export interface Props {
   onClose: () => void;
@@ -35,10 +36,7 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
         businessId: business_id,
       };
 
-      const rootUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:3001/"
-          : "https://trism.app/";
+      const rootUrl = getRootUrl();
 
       fetch(rootUrl + "api/picture", {
         method: "POST",
