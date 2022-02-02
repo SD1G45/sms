@@ -5,6 +5,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
+import getRootUrl from "../config/rootUrl";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -12,14 +13,10 @@ function createApolloClient() {
   // Declare variable to store authToken
   let token: string | null;
 
-  // const rootUrl = process.env.ROOT_URL;
-
-  // const uri = rootUrl + "api/graphql";
-
-  // console.log(uri);
+  const rootUrl = getRootUrl();
 
   const httpLink = createHttpLink({
-    uri: "api/graphql",
+    uri: rootUrl + "api/graphql",
     credentials: "include",
   });
 

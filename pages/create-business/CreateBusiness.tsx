@@ -104,10 +104,11 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         router.push(router);
 
         businessDispatch({
-          type: "setBusinessId",
+          type: "setActiveBusiness",
           payload: {
             businessId: data.newBusiness.id,
             name: businessName,
+            logoUrl: `https://smsmp-business-logos-local.s3.amazonaws.com/${data.newBusiness.id}.png`,
           },
         });
 
@@ -131,7 +132,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         setNameSetError(true);
       }
     }
-    
+
     setLoading(false);
   };
 
@@ -146,7 +147,11 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         error={emtpyNameError}
         errorMessage="Please enter a business name"
       />
-      <StyledButton onClick={() => onNextClick()} disabled={loading} loading={loading}>
+      <StyledButton
+        onClick={() => onNextClick()}
+        disabled={loading}
+        loading={loading}
+      >
         Next
       </StyledButton>
       {nameSetError && (
