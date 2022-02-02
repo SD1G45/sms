@@ -5,6 +5,7 @@ import { campaignQuery } from "./campaignQuery";
 import { couponsQuery } from "./couponsQuery";
 import { customerListQuery } from "./customerListQuery";
 import { keywordsQuery } from "./keywordsQuery";
+import { businessInviteCodeQuery } from "./businessInviteCodeQuery";
 
 export {
   viewerQuery,
@@ -13,5 +14,6 @@ export {
   couponsQuery,
   customerListQuery,
   campaignQuery,
-  keywordsQuery
+  keywordsQuery,
+  businessInviteCodeQuery,
 };

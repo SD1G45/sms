@@ -32,6 +32,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Role: "ADMIN" | "EDITOR" | "OWNER" | "VIEWER"
 }
 
 export interface NexusGenScalars {
@@ -54,6 +55,12 @@ export interface NexusGenObjects {
     name?: string | null; // String
     phoneNumber?: string | null; // String
     stripeId?: string | null; // String
+  }
+  BusinessInviteCode: { // root type
+    businessId?: string | null; // String
+    email?: string | null; // String
+    id?: string | null; // String
+    role?: string | null; // String
   }
   Campaign: { // root type
     businessId?: string | null; // String
@@ -127,7 +134,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   AvailablePhoneNumber: { // field return type
@@ -140,6 +147,13 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
     phoneNumber: string | null; // String
     stripeId: string | null; // String
+  }
+  BusinessInviteCode: { // field return type
+    business: NexusGenRootTypes['Business'] | null; // Business
+    businessId: string | null; // String
+    email: string | null; // String
+    id: string | null; // String
+    role: string | null; // String
   }
   Campaign: { // field return type
     businessId: string | null; // String
@@ -192,6 +206,7 @@ export interface NexusGenFieldTypes {
     keyword: string | null; // String
   }
   Mutation: { // field return type
+    acceptInvitation: boolean | null; // Boolean
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
     inviteAccount: boolean | null; // Boolean
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
@@ -208,6 +223,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
+    businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerLists: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
@@ -238,6 +254,13 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     phoneNumber: 'String'
     stripeId: 'String'
+  }
+  BusinessInviteCode: { // field return type name
+    business: 'Business'
+    businessId: 'String'
+    email: 'String'
+    id: 'String'
+    role: 'String'
   }
   Campaign: { // field return type name
     businessId: 'String'
@@ -290,6 +313,7 @@ export interface NexusGenFieldTypeNames {
     keyword: 'String'
   }
   Mutation: { // field return type name
+    acceptInvitation: 'Boolean'
     editBusiness: 'Business'
     inviteAccount: 'Boolean'
     loginUser: 'UserLoginPayload'
@@ -306,6 +330,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
+    businessInviteCode: 'BusinessInviteCode'
     campaign: 'Campaign'
     coupons: 'Coupon'
     customerLists: 'Coupon'
@@ -327,12 +352,17 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    acceptInvitation: { // args
+      code: string; // String!
+    }
     editBusiness: { // args
       id: string; // String!
       name: string; // String!
     }
     inviteAccount: { // args
+      businessId: string; // String!
       email: string; // String!
+      role: NexusGenEnums['Role']; // Role!
     }
     loginUser: { // args
       email: string; // String!
@@ -393,6 +423,9 @@ export interface NexusGenArgTypes {
     business: { // args
       id: string; // String!
     }
+    businessInviteCode: { // args
+      value: string; // String!
+    }
     campaign: { // args
       businessId: string; // String!
     }
@@ -418,7 +451,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

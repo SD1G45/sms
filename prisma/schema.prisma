@@ -17,16 +17,17 @@ model User {
 }
 
 model Business {
-  id           String          @id @default(uuid())
-  name         String
-  stripeId     String?
-  phoneNumber  String?         @unique
-  logoUrl      String?
-  users        Business_User[]
-  campaigns    Campaign[]
-  coupons      Coupon[]
-  keywords     Keyword[]
-  customerList Customer_List[]
+  id                 String               @id @default(uuid())
+  name               String
+  stripeId           String?
+  phoneNumber        String?              @unique
+  logoUrl            String?
+  users              Business_User[]
+  campaigns          Campaign[]
+  coupons            Coupon[]
+  keywords           Keyword[]
+  customerList       Customer_List[]
+  businessInviteCode BusinessInviteCode[]
 }
 
 model Business_User {
@@ -53,7 +54,7 @@ model Coupon {
   description    String
   primaryColor   String
   expirationDate DateTime
-  sent           Int 
+  sent           Int
   opened         Int
   redeemed       Int
   business       Business   @relation(fields: [businessId], references: [id])
@@ -68,7 +69,7 @@ model Campaign {
   message         String
   dateSent        DateTime
   messagesSent    Int
-  couponsOpened   Int 
+  couponsOpened   Int
   couponsRedeemed Int
   business        Business                 @relation(fields: [businessId], references: [id])
   businessId      String
@@ -121,8 +122,8 @@ model Keyword {
   couponsOpened       Int
   couponsRedeemed     Int
   dateCreated         DateTime
-  coupon              Coupon                  @relation(fields: [couponId], references:  [id]) 
-  couponId            String 
+  coupon              Coupon                  @relation(fields: [couponId], references: [id])
+  couponId            String
   business            Business                @relation(fields: [businessId], references: [id])
   businessId          String
   keyWordCustomerList Keyword_Customer_List[]
@@ -137,8 +138,11 @@ model Keyword_Customer_List {
 }
 
 model BusinessInviteCode {
-  id        String   @id @default(uuid())
-  value     String   @unique
-  email String
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  value      String   @unique
+  email      String
+  role       Role
+  business   Business @relation(fields: [businessId], references: [id])
+  businessId String
+  createdAt  DateTime @default(now())
 }

@@ -1,6 +1,7 @@
 import { extendType, nonNull, stringArg } from "nexus";
 import nodemailer from "nodemailer";
 import { generate } from "randomstring";
+import { Role } from "../enums";
 
 export const inviteAccount = extendType({
   type: "Mutation",
@@ -9,14 +10,18 @@ export const inviteAccount = extendType({
       type: "Boolean",
       args: {
         email: nonNull(stringArg()),
+        role: nonNull(Role),
+        businessId: nonNull(stringArg()),
       },
-      resolve: async (_, { email }, ctx) => {
+      resolve: async (_, { email, role, businessId }, ctx) => {
         const code = generate(7);
 
         const businessInviteCode = await ctx.prisma.businessInviteCode.create({
           data: {
             value: code,
             email,
+            businessId,
+            role,
           },
         });
 

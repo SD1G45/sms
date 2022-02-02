@@ -9,6 +9,7 @@ import { Campaign } from "./Campaign";
 import { Customer } from "./Customer";
 import { AvailablePhoneNumber } from "./AvailablePhoneNumber";
 import { DateScalar } from "./DateScalar";
+import { BusinessInviteCode } from "./BusinessInviteCode";
 
 export {
   AvailablePhoneNumber,
@@ -22,4 +23,5 @@ export {
   Campaign,
   Customer,
   DateScalar,
+  BusinessInviteCode,
 };

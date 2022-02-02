@@ -43,6 +43,8 @@ const BusinessInvite = () => {
       const { data, errors } = await inviteAccountMutation({
         variables: {
           email,
+          role: "EDITOR",
+          businessId: businessState?.businessId,
         },
       });
 

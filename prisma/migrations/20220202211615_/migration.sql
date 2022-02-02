@@ -131,6 +131,8 @@ CREATE TABLE "BusinessInviteCode" (
     "id" TEXT NOT NULL,
     "value" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "role" "Role" NOT NULL,
+    "businessId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "BusinessInviteCode_pkey" PRIMARY KEY ("id")
@@ -189,3 +191,6 @@ ALTER TABLE "Keyword_Customer_List" ADD CONSTRAINT "Keyword_Customer_List_custom
 
 -- AddForeignKey
 ALTER TABLE "Keyword_Customer_List" ADD CONSTRAINT "Keyword_Customer_List_keywordId_fkey" FOREIGN KEY ("keywordId") REFERENCES "Keyword"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BusinessInviteCode" ADD CONSTRAINT "BusinessInviteCode_businessId_fkey" FOREIGN KEY ("businessId") REFERENCES "Business"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
