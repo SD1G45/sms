@@ -9,12 +9,19 @@ import {
   StyledCard,
   StyledHeader,
 } from "../../page-styles/password-reset/styles";
+import {
+  CardDescription,
+  CardHeading,
+  SetupLaterButton,
+} from "../../page-styles/coupons/create/styles";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 import ErrorPopup from "../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
-// import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
-// import { resetPasswordMutation } from "../../graphql/schema/mutations";
+ import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
+ import { resetPasswordMutation } from "../../graphql/schema/mutations";
 
 const PasswordReset = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -25,9 +32,11 @@ const PasswordReset = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [updatePasswordMutation] = useMutation(RESET_PASSWORD_MUTATION, {
-  //   errorPolicy: "all",
-  // });
+  const [success, setSuccess] = useState(false);
+   const [updatePasswordMutation] = useMutation(RESET_PASSWORD_MUTATION, {
+     errorPolicy: "all",
+   });
+  const router = useRouter();
 
   useEffect(() => {
     setTimeout(
@@ -36,52 +45,67 @@ const PasswordReset = () => {
     );
   });
 
-  // const onReset = async () => {
-  //   if (
-  //     oldPassword.length === 0 ||
-  //     confirmOldPassword.length === 0 ||
-  //     newPassword.length === 0
-  //   ) {
-  //     setErrorState({
-  //       ...errorState,
-  //       error: true,
-  //       message: "All field must be filled in",
-  //     });
-  //     return;
-  //   }
+  const Results = () => (
+    <StyledCard>
+      <Image src="/check.png" width={100} height={100} />
+      <CardHeading>Password update complete</CardHeading>
+      <CardDescription>
+        Succesfully changed password
+      </CardDescription>
 
-  //   if (oldPassword != confirmOldPassword) {
-  //     setErrorState({
-  //       ...errorState,
-  //       error: true,
-  //       message: "Passwords do not match",
-  //     });
-  //     return;
-  //   }
-  // try {
-  //   const { data, errors } = await updatePasswordMutation({
-  //     variables: {
-  //       oldPassword: oldPassword,
-  //       newPassword: newPassword,
-  //     },
-  //   });
+      <SetupLaterButton onClick={() => router.push("/dashboard")}>
+        Go Home
+      </SetupLaterButton>
+    </StyledCard>
+  );
 
-  //   if (errors && errors.length > 0) {
-  //     setErrorState({
-  //       ...errorState,
-  //       error: true,
-  //       message: errors[0].message,
-  //     });
-  //     return;
-  //   }
-  // } catch (error) {
-  //   setErrorState({
-  //     ...errorState,
-  //     error: true,
-  //     message: "Something went wrong, please try again later.",
-  //   });
-  // }
-  // };
+   const onReset = async () => {
+     if (
+       oldPassword.length === 0 ||
+       confirmOldPassword.length === 0 ||
+       newPassword.length === 0
+     ) {
+       setErrorState({
+         ...errorState,
+         error: true,
+         message: "All field must be filled in",
+       });
+       return;
+     }
+
+     if (oldPassword != confirmOldPassword) {
+       setErrorState({
+         ...errorState,
+         error: true,
+         message: "Passwords do not match",
+       });
+       return;
+     }
+   try {
+     const { data, errors } = await updatePasswordMutation({
+       variables: {
+         oldPassword: oldPassword,
+         newPassword: newPassword,
+       },
+     });
+
+     if (errors && errors.length > 0) {
+       setErrorState({
+         ...errorState,
+         error: true,
+         message: errors[0].message,
+       });
+       return;
+     }
+     setSuccess(true);
+   } catch (error) {
+     setErrorState({
+       ...errorState,
+       error: true,
+       message: "Something went wrong, please try again later.",
+     });
+   }
+   };
 
   const InitialDisplay = () => {
     return (
@@ -101,7 +125,6 @@ const PasswordReset = () => {
     );
   };
 
-  // TODO: Write check for existing Email as well as reset pass mutation
   const ForgotPasswordDisplay = () => {
     return (
       <>
@@ -158,12 +181,18 @@ const PasswordReset = () => {
               setNewPassword(event.target.value)
             }
           />
-          {/* <Button onClick={() => onReset() disabled={loading} loading={loading}>Reset Password</Button> */}
+          <Button onClick={() => onReset()} disabled={loading} loading={loading}>Reset Password</Button>
           <BackButton onClick={() => setUpdatePassword(false)}>back</BackButton>
         </StyledCard>
       </>
     );
   };
+
+  if (success) {
+    return (
+      <Results />
+    );
+  }
 
   return (
     <SingleCardPage>

@@ -39,6 +39,7 @@ const CreateCoupon: React.FC = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [result, setResult] = useState(false);
 
   const initDate = new Date();
   initDate.setDate(initDate.getDate() + 7);
@@ -67,20 +68,18 @@ const CreateCoupon: React.FC = () => {
 
   const Search = () => {
     const [showCards, setShowCards] = React.useState(false);
-    const onClick = () => setShowCards(true);
     return (
       <>
         <CreateButton
           onClick={() => {
-            onClick();
-            // handleCreate();
+            handleCreate();
           }}
           disabled={loading}
           loading={loading}
         >
           Create Coupon
         </CreateButton>
-        {showCards ? <Results /> : null}
+        {result ? <Results /> : null}
       </>
     );
   };
@@ -102,7 +101,7 @@ const CreateCoupon: React.FC = () => {
         </ConnectButton>
       </div>
 
-      <SetupLaterButton onClick={() => router.push("/dashboard")}>
+      <SetupLaterButton onClick={() => router.push("/coupons")}>
         Setup later
       </SetupLaterButton>
     </StyledCard>
@@ -147,7 +146,7 @@ const CreateCoupon: React.FC = () => {
         setLoading(false);
         return;
       }
-
+      setResult(true);
       setLoading(false);
     } catch (error) {
       setError({

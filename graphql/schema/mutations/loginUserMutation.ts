@@ -41,10 +41,7 @@ export const loginUserMutation = extendType({
           }
         } catch(e: any) {
           console.log(e);
-          return {
-            token: "ERROR",
-            user: null,
-          };
+          throw new Error(e);
         }
       }, 
     });
