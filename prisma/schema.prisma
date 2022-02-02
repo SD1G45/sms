@@ -135,3 +135,10 @@ model Keyword_Customer_List {
   keyword        Keyword       @relation(fields: [keywordId], references: [id])
   keywordId      String
 }
+
+model BusinessInviteCode {
+  id        String   @id @default(uuid())
+  value     String   @unique
+  email String
+  createdAt DateTime @default(now())
+}

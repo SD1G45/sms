@@ -126,6 +126,16 @@ CREATE TABLE "Keyword_Customer_List" (
     CONSTRAINT "Keyword_Customer_List_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "BusinessInviteCode" (
+    "id" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "BusinessInviteCode_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -134,6 +144,9 @@ CREATE UNIQUE INDEX "Business_phoneNumber_key" ON "Business"("phoneNumber");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Customer_phoneNumber_key" ON "Customer"("phoneNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "BusinessInviteCode_value_key" ON "BusinessInviteCode"("value");
 
 -- AddForeignKey
 ALTER TABLE "Business_User" ADD CONSTRAINT "Business_User_businessId_fkey" FOREIGN KEY ("businessId") REFERENCES "Business"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

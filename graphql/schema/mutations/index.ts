@@ -9,6 +9,7 @@ import { newCustomerMutation } from "./newCustomerMutation";
 import { newCustomerListMutation } from "./newCustomerListMutation";
 import { provisionPhoneNumberMutation } from "./provisionPhoneNumberMutation";
 import { resetPasswordMutation } from "./resetPassword";
+import { inviteAccount } from "./inviteAccount";
 
 export {
   registerUserMutation,
@@ -22,4 +23,5 @@ export {
   provisionPhoneNumberMutation,
   newCustomerListMutation,
   resetPasswordMutation,
+  inviteAccount,
 };
