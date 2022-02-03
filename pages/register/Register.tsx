@@ -40,8 +40,10 @@ const Register = () => {
   });
 
   // Lock email to query param if provided.
+  console.log(router.query);
   let emailFromQueryParam: string | null = null;
   if (router.query.email != null) {
+    console.log(true);
     emailFromQueryParam = router.query.email as string;
   }
 
@@ -132,7 +134,7 @@ const Register = () => {
         </NameContainer>
         <EmailTextField
           label="Email"
-          value={email}
+          value={emailFromQueryParam || email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(event.target.value)
           }

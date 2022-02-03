@@ -9,6 +9,7 @@ export default function newRouteWithQueries(
   for (const key in router.query) {
     if (numQueriesAdded == 0) {
       newRoute += `?${key}=${router.query[key]}`;
+      numQueriesAdded++;
     } else {
       newRoute += `&${key}=${router.query[key]}`;
     }
