@@ -45,7 +45,7 @@ const BusinessInvite = () => {
       businessInviteCodeQuery.data
     ) {
       router.push(
-        `/register?redirect=/business/join&code=${code}&email=${businessInviteCodeQuery.data.businessInviteCode.email}`
+        `/login?redirect=/business/join&code=${code}&email=${businessInviteCodeQuery.data.businessInviteCode.email}`
       );
     }
   }, [userState?.jid, code, businessInviteCodeQuery.data]);
