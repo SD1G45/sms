@@ -30,7 +30,7 @@ const Login = () => {
   // Lock email to query param if provided.
   let emailFromQueryParam: string | null = null;
   if (router.query.email != null) {
-    emailFromQueryParam = router.query.email;
+    emailFromQueryParam = router.query.email as string;
   }
 
   useEffect(() => {
