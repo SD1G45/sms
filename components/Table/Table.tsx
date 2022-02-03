@@ -63,8 +63,6 @@ const Table: React.FC<TableProps> = ({
     const [page, setPage] = useState(1);
     const numOfEntries = data.length;
     const numOfPages = Math.ceil(numOfEntries / 7);
-    console.log(numOfPages);
-    console.log(page >= numOfPages - 1);
     return (
         <DivContainer>
             <DataTable>
