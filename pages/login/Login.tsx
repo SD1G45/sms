@@ -27,6 +27,12 @@ const Login = () => {
   const userDispatch = useUserDispatch();
   const router = useRouter();
 
+  // Lock email to query param if provided.
+  let emailFromQueryParam: string | null = null;
+  if (router.query.email != null) {
+    emailFromQueryParam = router.query.email;
+  }
+
   useEffect(() => {
     setTimeout(
       () => setError({ ...errorState, error: false, message: "" }),
@@ -83,7 +89,7 @@ const Login = () => {
         <Heading>Sign in to your account</Heading>
         <EmailTextField
           label="Email"
-          value={email}
+          value={emailFromQueryParam || email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(event.target.value)
           }
@@ -106,7 +112,11 @@ const Login = () => {
             setStaySignedInChecked(event.target.checked)
           }
         />
-        <StyledButton onClick={() => onLogin()} disabled={loading} loading={loading}>
+        <StyledButton
+          onClick={() => onLogin()}
+          disabled={loading}
+          loading={loading}
+        >
           Login
         </StyledButton>
         <LinkDiv>
