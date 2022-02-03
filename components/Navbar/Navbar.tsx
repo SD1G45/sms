@@ -31,20 +31,13 @@ const Navbar = () => {
   const currentPath = router.asPath;
 
   const [businessSelectActive, setBusinessSelectActive] = useState(false);
-
-  if (currentPath.startsWith("/login")) return <></>;
-  if (currentPath.startsWith("/register")) return <></>;
-  if (currentPath.startsWith("/welcome")) return <></>;
-  if (currentPath.startsWith("/create-business")) return <></>;
-  if (currentPath.startsWith("/business/invite")) return <></>;
-  if (currentPath.startsWith("/business/join")) return <></>;
+  const [businessName, setBusinessName] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
 
   const businessState = useBusinessState();
   const businessDispatch = useBusinessDispatch();
   const userState = useUserState();
 
-  const [businessName, setBusinessName] = useState("");
-  const [logoUrl, setLogoUrl] = useState("");
   useEffect(() => {
     setBusinessName(businessState?.name || "");
     setLogoUrl(businessState?.logoUrl || "");
@@ -65,6 +58,13 @@ const Navbar = () => {
   const filteredBusinessList = businessList.filter(
     ({ id }) => id !== businessState?.businessId
   );
+
+  if (currentPath.startsWith("/login")) return <></>;
+  if (currentPath.startsWith("/register")) return <></>;
+  if (currentPath.startsWith("/welcome")) return <></>;
+  if (currentPath.startsWith("/create-business")) return <></>;
+  if (currentPath.startsWith("/business/invite")) return <></>;
+  if (currentPath.startsWith("/business/join")) return <></>;
 
   return (
     <>
