@@ -21,7 +21,6 @@ import Button from "../../components/Button";
 import ErrorPopup from "../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
  import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
- import { resetPasswordMutation } from "../../graphql/schema/mutations";
 
 const PasswordReset = () => {
   const [oldPassword, setOldPassword] = useState("");

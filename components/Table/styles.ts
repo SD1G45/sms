@@ -19,6 +19,18 @@ export const TableBody = styled.tbody`
 
 `;
 
+export const Pagination = styled.div`
+    float: right;
+    padding-top: 5px;
+`;
+
+export const PagePointer = styled.div `
+    cursor: pointer;
+    display: inline;
+    font-weight: bold;
+    padding-left: 10px;
+`;
+
 export const Header = styled.th`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
