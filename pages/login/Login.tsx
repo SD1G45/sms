@@ -16,6 +16,7 @@ import { LOGIN_MUTATION } from "../../page-mutations/login";
 import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { useRouter } from "next/router";
+import newRouteWithQueries from "../../helpers/newRouteWithQueries";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +27,12 @@ const Login = () => {
 
   const userDispatch = useUserDispatch();
   const router = useRouter();
+
+  // Lock email to query param if provided.
+  let emailFromQueryParam: string | null = null;
+  if (router.query.email != null) {
+    emailFromQueryParam = router.query.email as string;
+  }
 
   useEffect(() => {
     setTimeout(
@@ -39,7 +46,7 @@ const Login = () => {
   });
 
   const onLogin = async () => {
-    if (email.length === 0 || password.length === 0) {
+    if ((!emailFromQueryParam && email.length === 0) || password.length === 0) {
       setError({
         ...errorState,
         error: true,
@@ -51,7 +58,7 @@ const Login = () => {
     try {
       const { data, errors } = await loginMutation({
         variables: {
-          email,
+          email: emailFromQueryParam || email,
           password,
         },
       });
@@ -69,7 +76,14 @@ const Login = () => {
         },
       });
       setLoading(false);
-      router.push("/dashboard");
+      if (router.query.redirect != null) {
+        router.push({
+          pathname: router.query.redirect as string,
+          query: { code: router.query.code },
+        });
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       setLoading(false);
       setError({ ...errorState, error: true, message: "error" });
@@ -83,7 +97,7 @@ const Login = () => {
         <Heading>Sign in to your account</Heading>
         <EmailTextField
           label="Email"
-          value={email}
+          value={emailFromQueryParam || email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(event.target.value)
           }
@@ -106,11 +120,15 @@ const Login = () => {
             setStaySignedInChecked(event.target.checked)
           }
         />
-        <StyledButton onClick={() => onLogin()} disabled={loading} loading={loading}>
+        <StyledButton
+          onClick={() => onLogin()}
+          disabled={loading}
+          loading={loading}
+        >
           Login
         </StyledButton>
         <LinkDiv>
-          <Link href="/register" passHref>
+          <Link href={newRouteWithQueries("/register", router)} passHref>
             <StyledLink>New to us? Create an Account</StyledLink>
           </Link>
         </LinkDiv>

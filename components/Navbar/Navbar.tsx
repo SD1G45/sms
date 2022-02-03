@@ -25,26 +25,20 @@ import {
 import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
+import { businessQuery } from "../../graphql/schema/queries";
 
 const Navbar = () => {
   const router = useRouter();
   const currentPath = router.asPath;
 
   const [businessSelectActive, setBusinessSelectActive] = useState(false);
-
-  if (currentPath.startsWith("/login")) return <></>;
-  if (currentPath.startsWith("/register")) return <></>;
-  if (currentPath.startsWith("/welcome")) return <></>;
-  if (currentPath.startsWith("/create-business")) return <></>;
-  if (currentPath.startsWith("/business/invite")) return <></>;
-  if (currentPath.startsWith("/business/join")) return <></>;
+  const [businessName, setBusinessName] = useState("");
+  const [logoUrl, setLogoUrl] = useState("");
 
   const businessState = useBusinessState();
   const businessDispatch = useBusinessDispatch();
   const userState = useUserState();
 
-  const [businessName, setBusinessName] = useState("");
-  const [logoUrl, setLogoUrl] = useState("");
   useEffect(() => {
     setBusinessName(businessState?.name || "");
     setLogoUrl(businessState?.logoUrl || "");
@@ -58,13 +52,32 @@ const Navbar = () => {
   }, [userState]);
 
   const businessList: { id: string; name: string; logoUrl: string }[] =
-    businessQueryResult.data != undefined
+    businessQueryResult.data != undefined &&
+    businessQueryResult.data.viewer != undefined
       ? businessQueryResult.data.viewer.businesses
       : [];
+
+  if (businessList.length > 0 && businessState?.businessId == null) {
+    businessDispatch({
+      type: "setActiveBusiness",
+      payload: {
+        businessId: businessList[0].id,
+        name: businessList[0].name,
+        logoUrl: businessList[0].logoUrl,
+      },
+    });
+  }
 
   const filteredBusinessList = businessList.filter(
     ({ id }) => id !== businessState?.businessId
   );
+
+  if (currentPath.startsWith("/login")) return <></>;
+  if (currentPath.startsWith("/register")) return <></>;
+  if (currentPath.startsWith("/welcome")) return <></>;
+  if (currentPath.startsWith("/create-business")) return <></>;
+  if (currentPath.startsWith("/business/invite")) return <></>;
+  if (currentPath.startsWith("/business/join")) return <></>;
 
   return (
     <>
