@@ -38,6 +38,12 @@ const Register = () => {
     );
   });
 
+  // Lock email to query param if provided.
+  let emailFromQueryParam: string | null = null;
+  if (router.query.email != null) {
+    emailFromQueryParam = router.query.email as string;
+  }
+
   const [registerMutation] = useMutation(REGISTER_MUTATION, {
     errorPolicy: "all",
   });
@@ -45,7 +51,7 @@ const Register = () => {
   const onRegister = async () => {
     if (
       firstName.length === 0 ||
-      email.length === 0 ||
+      (!emailFromQueryParam && email.length === 0) ||
       password.length === 0 ||
       confirmPassword.length === 0
     ) {
@@ -62,7 +68,7 @@ const Register = () => {
         variables: {
           firstName,
           lastName,
-          email: email.toLowerCase(),
+          email: emailFromQueryParam || email.toLowerCase(),
           password,
         },
       });
@@ -84,7 +90,15 @@ const Register = () => {
         },
       });
       setLoading(false);
-      router.push("/welcome");
+
+      if (router.query.redirect != null) {
+        router.push({
+          pathname: router.query.redirect as string,
+          query: { code: router.query.code },
+        });
+      } else {
+        router.push("/welcome");
+      }
     } catch (error) {
       setErrorState({
         ...errorState,
@@ -141,7 +155,11 @@ const Register = () => {
           errorMessage="Passwords don't match"
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
-        <StyledButton onClick={() => onRegister()} disabled={loading} loading={loading}>
+        <StyledButton
+          onClick={() => onRegister()}
+          disabled={loading}
+          loading={loading}
+        >
           Create Account
         </StyledButton>
         <LinkDiv>

@@ -91,6 +91,8 @@ const BusinessInvite = () => {
         },
       });
 
+      router.push("/");
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
