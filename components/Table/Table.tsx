@@ -63,6 +63,23 @@ const Table: React.FC<TableProps> = ({
     const [page, setPage] = useState(1);
     const numOfEntries = data.length;
     const numOfPages = Math.ceil(numOfEntries / 7);
+
+    const PaginationSection = () => {
+        return (
+            <Pagination>
+                Page {page} of {numOfPages} 
+                <PagePointer onClick={() => {setPage(page <= 1 ? 1 : page - 1)}}>
+                    {"< "}
+                </PagePointer>
+                <PagePointer onClick={
+                    () => {setPage(page >= numOfPages ? numOfPages : page + 1)}
+                }>
+                    {" >"}
+                </PagePointer>
+            </Pagination>
+        );
+    }
+
     return (
         <DivContainer>
             <DataTable>
@@ -79,17 +96,9 @@ const Table: React.FC<TableProps> = ({
                     }
                 </TableBody>
             </DataTable>
-            <Pagination>
-                Page {page} of {numOfPages} 
-                <PagePointer onClick={() => {setPage(page <= 1 ? 1 : page - 1)}}>
-                    {"< "}
-                </PagePointer>
-                <PagePointer onClick={
-                    () => {setPage(page >= numOfPages ? numOfPages : page + 1)}
-                }>
-                    {" >"}
-                </PagePointer>
-            </Pagination>
+            {
+                numOfPages > 1 ? <PaginationSection /> : null
+            }
         </DivContainer>
     );
 }
