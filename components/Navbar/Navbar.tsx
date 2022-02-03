@@ -25,6 +25,7 @@ import {
 import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
+import { businessQuery } from "../../graphql/schema/queries";
 
 const Navbar = () => {
   const router = useRouter();
@@ -51,9 +52,21 @@ const Navbar = () => {
   }, [userState]);
 
   const businessList: { id: string; name: string; logoUrl: string }[] =
-    businessQueryResult.data != undefined
+    businessQueryResult.data != undefined &&
+    businessQueryResult.data.viewer != undefined
       ? businessQueryResult.data.viewer.businesses
       : [];
+
+  if (businessList.length > 0 && businessState?.businessId == null) {
+    businessDispatch({
+      type: "setActiveBusiness",
+      payload: {
+        businessId: businessList[0].id,
+        name: businessList[0].name,
+        logoUrl: businessList[0].logoUrl,
+      },
+    });
+  }
 
   const filteredBusinessList = businessList.filter(
     ({ id }) => id !== businessState?.businessId
