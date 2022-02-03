@@ -13,6 +13,7 @@ import { INVITE_ACCOUNT_MUTATION } from "../../../page-mutations/business/invite
 import { BUSINESS_INVITE_CODE_QUERY } from "../../../page-queries/business/join";
 import { ACCEPT_INVITATION_MUTATION } from "../../../page-mutations/business/join";
 import { useUserState } from "../../../context/UserContext";
+import { useBusinessDispatch } from "../../../context/BusinessContext/BusinessContext";
 
 const BusinessInvite = () => {
   const [errorState, setError] = useState({ error: false, message: "" });
@@ -21,12 +22,7 @@ const BusinessInvite = () => {
   const router = useRouter();
   const code = router.query.code;
   const userState = useUserState();
-
-  useEffect(() => {
-    if (userState?.jid == null && code != null) {
-      router.push(`/register?redirect=/business/join&code=${code}`);
-    }
-  }, [userState?.jid, code]);
+  const businessDispatch = useBusinessDispatch();
 
   const [getBusinessInviteCodes, businessInviteCodeQuery] = useLazyQuery(
     BUSINESS_INVITE_CODE_QUERY
@@ -42,10 +38,32 @@ const BusinessInvite = () => {
     }
   }, [code, getBusinessInviteCodes]);
 
+  useEffect(() => {
+    if (
+      userState?.jid == null &&
+      code != null &&
+      businessInviteCodeQuery.data
+    ) {
+      router.push(
+        `/register?redirect=/business/join&code=${code}&email=${businessInviteCodeQuery.data.businessInviteCode.email}`
+      );
+    }
+  }, [userState?.jid, code, businessInviteCodeQuery.data]);
+
   const businessName =
     businessInviteCodeQuery.data !== undefined && userState?.jid
       ? businessInviteCodeQuery.data.businessInviteCode.business.name
       : "[error]";
+
+  const businessId =
+    businessInviteCodeQuery.data !== undefined && userState?.jid
+      ? businessInviteCodeQuery.data.businessInviteCode.business.id
+      : "";
+
+  const businessLogoUrl =
+    businessInviteCodeQuery.data !== undefined && userState?.jid
+      ? businessInviteCodeQuery.data.businessInviteCode.business.logoUrl
+      : "";
 
   const [acceptInvitationMutation] = useMutation(ACCEPT_INVITATION_MUTATION);
 
@@ -63,6 +81,15 @@ const BusinessInvite = () => {
         setLoading(false);
         return;
       }
+
+      businessDispatch({
+        type: "setActiveBusiness",
+        payload: {
+          name: businessName,
+          businessId,
+          logoUrl: businessLogoUrl,
+        },
+      });
 
       setLoading(false);
     } catch (error) {
