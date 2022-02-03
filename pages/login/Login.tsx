@@ -45,7 +45,7 @@ const Login = () => {
   });
 
   const onLogin = async () => {
-    if (email.length === 0 || password.length === 0) {
+    if ((!emailFromQueryParam && email.length === 0) || password.length === 0) {
       setError({
         ...errorState,
         error: true,
@@ -57,7 +57,7 @@ const Login = () => {
     try {
       const { data, errors } = await loginMutation({
         variables: {
-          email,
+          email: emailFromQueryParam || email,
           password,
         },
       });
@@ -75,7 +75,14 @@ const Login = () => {
         },
       });
       setLoading(false);
-      router.push("/dashboard");
+      if (router.query.redirect != null) {
+        router.push({
+          pathname: router.query.redirect as string,
+          query: { code: router.query.code },
+        });
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       setLoading(false);
       setError({ ...errorState, error: true, message: "error" });
