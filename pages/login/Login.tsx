@@ -16,6 +16,7 @@ import { LOGIN_MUTATION } from "../../page-mutations/login";
 import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { useRouter } from "next/router";
+import newRouteWithQueries from "../../helpers/newRouteWithQueries";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -127,7 +128,7 @@ const Login = () => {
           Login
         </StyledButton>
         <LinkDiv>
-          <Link href="/register" passHref>
+          <Link href={newRouteWithQueries("/register", router)} passHref>
             <StyledLink>New to us? Create an Account</StyledLink>
           </Link>
         </LinkDiv>

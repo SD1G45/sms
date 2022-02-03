@@ -18,6 +18,7 @@ import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ErrorPopup from "../../components/ErrorPopup";
+import newRouteWithQueries from "../../helpers/newRouteWithQueries";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -163,7 +164,7 @@ const Register = () => {
           Create Account
         </StyledButton>
         <LinkDiv>
-          <Link href="/login">
+          <Link href={newRouteWithQueries("/login", router)}>
             <StyledLink>Already have an account? Log in instead</StyledLink>
           </Link>
         </LinkDiv>
