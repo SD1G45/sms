@@ -41,55 +41,62 @@ const Dashboard = () => {
     console.log(businessName);
   });
 
+  const TodayAnalytics = () => {
+    return (
+      <>
+        <ContainerDiv>
+          <StyledHeader>Today</StyledHeader>
+        </ContainerDiv>
+        <ContainerDiv>
+          <BorderDiv>
+            <LeftChartDiv> 
+              <LineChart
+                title="Coupons"
+                data={couponData}
+                height={300}
+                flexure={1}
+              />
+            </LeftChartDiv>
+            <RightChartDiv>
+              <LineChart
+                title="Customers"
+                data={customersData}
+                height={300}
+                flexure={1}
+              />
+            </RightChartDiv>
+            <SalesColumnDiv>
+              <SalesRowDiv>
+                <SalesInnerColumnDiv>
+                  <SalesInnerRowTitleDiv>
+                    <SalesSmallText>Amount Spent</SalesSmallText>
+                    <SalesLinkText>View current billing cycle</SalesLinkText>
+                  </SalesInnerRowTitleDiv>
+                  <SalesLargeText>$1,180.00</SalesLargeText>
+                  <SalesSmallText>Billing cycle: 10/07/21 - 10/31/21</SalesSmallText>
+                </SalesInnerColumnDiv>
+              </SalesRowDiv>
+              <SalesDivider/>
+              <SalesRowDiv>
+                <SalesInnerColumnDiv>
+                  <SalesInnerRowTitleDiv>
+                    <SalesSmallText>Estimated sales</SalesSmallText>
+                    <SalesLinkText>View billing cycle</SalesLinkText>
+                  </SalesInnerRowTitleDiv>
+                  <SalesLargeText>$175.00</SalesLargeText>
+                  <SalesSmallText>*Estimation only*</SalesSmallText>
+                </SalesInnerColumnDiv>
+              </SalesRowDiv>
+            </SalesColumnDiv>
+          </BorderDiv>
+        </ContainerDiv>
+      </>
+    );
+  }
+
   return (
     <>
-      <ContainerDiv>
-        <StyledHeader>Today</StyledHeader>
-      </ContainerDiv>
-
-      <ContainerDiv>
-        <BorderDiv>
-          <LeftChartDiv> 
-            <LineChart
-              title="Coupons"
-              data={couponData}
-              height={300}
-              flexure={1}
-            />
-          </LeftChartDiv>
-          <RightChartDiv>
-            <LineChart
-              title="Customers"
-              data={customersData}
-              height={300}
-              flexure={1}
-            />
-          </RightChartDiv>
-          <SalesColumnDiv>
-            <SalesRowDiv>
-              <SalesInnerColumnDiv>
-                <SalesInnerRowTitleDiv>
-                  <SalesSmallText>Amount Spent</SalesSmallText>
-                  <SalesLinkText>View current billing cycle</SalesLinkText>
-                </SalesInnerRowTitleDiv>
-                <SalesLargeText>$1,180.00</SalesLargeText>
-                <SalesSmallText>Billing cycle: 10/07/21 - 10/31/21</SalesSmallText>
-              </SalesInnerColumnDiv>
-            </SalesRowDiv>
-            <SalesDivider/>
-            <SalesRowDiv>
-              <SalesInnerColumnDiv>
-                <SalesInnerRowTitleDiv>
-                  <SalesSmallText>Estimated sales</SalesSmallText>
-                  <SalesLinkText>View billing cycle</SalesLinkText>
-                </SalesInnerRowTitleDiv>
-                <SalesLargeText>$175.00</SalesLargeText>
-                <SalesSmallText>*Estimation only*</SalesSmallText>
-              </SalesInnerColumnDiv>
-            </SalesRowDiv>
-          </SalesColumnDiv>
-        </BorderDiv>
-      </ContainerDiv>
+      <TodayAnalytics/>
 
       <ContainerDiv>
         <ColumnDiv>

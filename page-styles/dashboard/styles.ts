@@ -86,7 +86,7 @@ export const SalesSmallText = styled.text`
   text-align: left;
   width: 100%;
   color: #888B8E;
-  font-size: 12px;
+  font-size: 16px;
 `;
 
 export const SalesLargeText = styled.text`
@@ -99,7 +99,7 @@ export const SalesLinkText = styled.text`
   text-align: right;
   width: 100%;
   color: #4881F0;
-  font-size: 8;
+  font-size: 14px;
 `;
 
 export const SalesDivider = styled.div`
