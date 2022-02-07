@@ -1,5 +1,5 @@
 import React from "react";
-import { ColumnDiv, SalesLargeText, SalesLinkText, SalesSmallText, TitleDiv, Wrapper } from "./styles";
+import { ColumnDiv, LargeText, LinkText, SmallText, TitleDiv, Wrapper } from "./styles";
 import { BillingCycleInfoProps } from "./types";
 
 const BillingCycleInfo: React.FC<BillingCycleInfoProps> = ({
@@ -12,11 +12,11 @@ const BillingCycleInfo: React.FC<BillingCycleInfoProps> = ({
     <Wrapper>
       <ColumnDiv>
         <TitleDiv>
-          <SalesSmallText>{title}</SalesSmallText>
-          <SalesLinkText>{viewLinkText}</SalesLinkText>
+          <SmallText>{title}</SmallText>
+          <LinkText>{viewLinkText}</LinkText>
         </TitleDiv>
-        <SalesLargeText>{amount}</SalesLargeText>
-        <SalesSmallText>{subtitle}</SalesSmallText>
+        <LargeText>{amount}</LargeText>
+        <SmallText>{subtitle}</SmallText>
       </ColumnDiv>
     </Wrapper>
   );

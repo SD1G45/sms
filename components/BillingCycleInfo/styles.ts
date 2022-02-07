@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-export const SalesSmallText = styled.text`
+export const SmallText = styled.text`
   text-align: left;
   width: 100%;
   color: #888B8E;
   font-size: 16px;
 `;
 
-export const SalesLargeText = styled.text`
+export const LargeText = styled.text`
   text-align: left;
   width: 100%;
   font-size: 30px;
 `;
 
-export const SalesLinkText = styled.text`
+export const LinkText = styled.text`
   text-align: right;
   width: 100%;
   color: #4881F0;
