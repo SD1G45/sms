@@ -1,5 +1,18 @@
 import React from "react";
-import { DivContainer, DataEmpty, DataTable, TableHeader, TableBody, Header, HeaderLong, DataLong, Data } from "./styles";
+import { useState } from "react";
+import { 
+    DivContainer, 
+    DataEmpty, 
+    Pagination, 
+    DataTable, 
+    TableHeader, 
+    TableBody, 
+    Header, 
+    HeaderLong, 
+    DataLong, 
+    Data,
+    PagePointer
+} from "./styles";
 import { TableProps } from "./types";
 
 function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
@@ -16,9 +29,11 @@ function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
     return mapping;
 }
 
-function mapDataToBodyComponent(data: string[][]): JSX.Element[] {
+function mapDataToBodyComponent(data: string[][], page: number): JSX.Element[] {
     const mapping: JSX.Element[] = [];
-    data.map((value) => { 
+    const pageIndex = page - 1;
+    for (let i = 0; i < 7 &&  pageIndex * 7 + i < data.length; i++) {
+        const value = data[pageIndex * 7 + i];
         const map: JSX.Element[] = [];
         value.map((val, i) => {
             const newItem = i == 0 ? 
@@ -28,10 +43,10 @@ function mapDataToBodyComponent(data: string[][]): JSX.Element[] {
             map.push(newItem);
         })
         mapping.push(<tr>{ map }</tr>)
-    })
+    }
 
-    // Fill in rest of table empty
-    while (mapping.length < 8) {
+    // Fill in rest of table if empty
+    while (mapping.length < 7) {
         const map: JSX.Element[] = [];
         for (let i = 0; i < 8; i++) {
             map.push(<DataEmpty/>)
@@ -45,6 +60,26 @@ const Table: React.FC<TableProps> = ({
     headers,
     data 
 }) => {
+    const [page, setPage] = useState(1);
+    const numOfEntries = data.length;
+    const numOfPages = Math.ceil(numOfEntries / 7);
+
+    const PaginationSection = () => {
+        return (
+            <Pagination>
+                Page {page} of {numOfPages} 
+                <PagePointer onClick={() => {setPage(page <= 1 ? 1 : page - 1)}}>
+                    {"< "}
+                </PagePointer>
+                <PagePointer onClick={
+                    () => {setPage(page >= numOfPages ? numOfPages : page + 1)}
+                }>
+                    {" >"}
+                </PagePointer>
+            </Pagination>
+        );
+    }
+
     return (
         <DivContainer>
             <DataTable>
@@ -57,10 +92,13 @@ const Table: React.FC<TableProps> = ({
                 </TableHeader>
                 <TableBody>
                     {
-                        mapDataToBodyComponent(data)
+                        mapDataToBodyComponent(data, page)
                     }
                 </TableBody>
             </DataTable>
+            {
+                numOfPages > 1 ? <PaginationSection /> : null
+            }
         </DivContainer>
     );
 }
