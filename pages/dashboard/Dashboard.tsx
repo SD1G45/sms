@@ -41,7 +41,7 @@ const Dashboard = () => {
     console.log(businessName);
   });
 
-  const TodayAnalytics = () => {
+  const Analytics = () => {
     return (
       <>
         <ContainerDiv>
@@ -96,7 +96,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <TodayAnalytics/>
+      <Analytics/>
+      <Analytics/>
 
       <ContainerDiv>
         <ColumnDiv>
