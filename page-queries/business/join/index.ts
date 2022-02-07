@@ -7,6 +7,8 @@ export const BUSINESS_INVITE_CODE_QUERY = gql`
       email
       business {
         name
+        id
+        logoUrl
       }
     }
   }

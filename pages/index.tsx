@@ -1,93 +1,119 @@
-import type { NextPage } from "next";
-import React, { useState } from "react";
-import styled from "styled-components";
-import Button from "../components/Button";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import TextField from "../components/TextField";
-import Checkbox from "../components/Checkbox";
-import Selector from "../components/Selector";
-import MultiSelector from "../components/MultiSelector";
+import SingleCardPage from "../components/SingleCardPage";
+import Image from "next/image";
 
-const Center = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  flex-direction: column;
-`;
+import {
+  ContainerDiv,
+  ColumnDiv,
+  RowDiv,
+  StyledCard,
+} from "../page-styles/dashboard/styles";
+import { StyledHeader } from "../page-styles/coupons/styles";
+import Link from "next/link";
+import { useBusinessState } from "../context/BusinessContext/BusinessContext";
+import dynamic from "next/dynamic";
+import sampleData from "../sampleData/sampleData";
 
-const options = [
-  { name: "VIP List", id: "1" },
-  { name: "Main List", id: "2" },
-  { name: "Super VIP List", id: "3" },
-];
+const LineChart = dynamic(() => import("../components/LineChart"), {
+  ssr: false,
+});
 
-const selectorOptions = [
-  { name: "BOGO2", id: "1" },
-  { name: "Free Fries", id: "2" },
-  { name: "Free Drinks", id: "2" },
-];
+const couponData = sampleData.couponData();
+const customersData = sampleData.customersData();
 
-const Home: NextPage = () => {
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [selectedOptions, setSelectedOptions] = useState<
-    { name: string; id: string }[]
-  >([]);
-
-  const handleRemove = (id: string) => {
-    setSelectedOptions(selectedOptions.filter((value) => value.id !== id));
-  };
-
-  const handleSelect = (id: string, name: string) => {
-    setSelectedOptions([{ id, name }, ...selectedOptions]);
-  };
-
-  const filteredOptions = options.filter(
-    ({ id: id1 }) => !selectedOptions.some(({ id: id2 }) => id2 === id1)
-  );
-
-  const [selectorSearch, setSelectorSearch] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>("");
-
-  const [checked, setChecked] = useState(false);
-
-  const [username, setUsername] = useState("");
+const Dashboard = () => {
+  const businessState = useBusinessState();
+  const [businessName, setBusinessName] = useState("");
+  useEffect(() => {
+    setBusinessName(businessState?.name || "");
+    console.log(businessName);
+  });
 
   return (
-    <Center style={{ width: 200 }}>
-      {/* <MultiSelector
-        options={filteredOptions}
-        searchValue={searchValue}
-        onSearchValueChange={(id) => setSearchValue(id)}
-        onSelect={({ name, id }) => handleSelect(id, name)}
-        selectedOptions={selectedOptions}
-        onRemove={(id) => handleRemove(id)}
-      /> */}
-      <Selector
-        label="Test"
-        options={selectorOptions}
-        searchValue={selectorSearch}
-        onSearchValueChange={setSelectorSearch}
-        onSelect={(id) => setSelectedId(id)}
-        selectedId={selectedId}
-      />
-      <Button>Click me!</Button>
-      <TextField value="" onChange={() => {}} label="Coupons" />
-      <Card style={{ padding: 80 }}>This is a card</Card>
-      <Card>
-        <TextField value="" onChange={() => {}} label="Coupons" />
-        <div style={{ marginBottom: 10 }} />
+    <>
+      <ContainerDiv>
+        <StyledHeader>{businessName}</StyledHeader>
+      </ContainerDiv>
 
-        <Checkbox
-          label="Checkbox"
-          checked={checked}
-          onChange={(event: any) => setChecked(event.target.checked)}
-        />
-      </Card>
-    </Center>
+      <ContainerDiv>
+        <ColumnDiv>
+          <LineChart
+            title="Coupons"
+            data={couponData}
+            height={300}
+            flexure={1}
+          />
+        </ColumnDiv>
+        <ColumnDiv>
+          <LineChart
+            title="Customers"
+            data={customersData}
+            height={300}
+            flexure={1}
+          />
+        </ColumnDiv>
+        <ColumnDiv>
+          {/* TODO: Build up Amount Spent & Estimated Sales */}
+        </ColumnDiv>
+      </ContainerDiv>
+
+      <ContainerDiv>
+        <ColumnDiv>
+          <RowDiv>
+            <StyledCard>
+              <StyledHeader>Campaigns</StyledHeader>
+              <Link href="/campaigns">
+                <Image
+                  src="/Dashboard_icons/campaign.svg"
+                  width={250}
+                  height={250}
+                />
+              </Link>
+            </StyledCard>
+          </RowDiv>
+          <RowDiv>
+            <StyledCard>
+              <StyledHeader>Coupons</StyledHeader>
+              <Link href="/coupons">
+                <Image
+                  src="/Dashboard_icons/coupon.svg"
+                  width={250}
+                  height={250}
+                />
+              </Link>
+            </StyledCard>
+          </RowDiv>
+        </ColumnDiv>
+        <ColumnDiv style={{ margin: "auto" }}>
+          <RowDiv>
+            <StyledCard>
+              <StyledHeader>Customers</StyledHeader>
+              <Link href="/customers">
+                <Image
+                  src="/Dashboard_icons/customer.svg"
+                  width={250}
+                  height={250}
+                />
+              </Link>
+            </StyledCard>
+          </RowDiv>
+          <RowDiv>
+            <StyledCard>
+              <StyledHeader>Keywords</StyledHeader>
+              <Link href="/keywords">
+                <Image
+                  src="/Dashboard_icons/keyword.svg"
+                  width={250}
+                  height={250}
+                />
+              </Link>
+            </StyledCard>
+          </RowDiv>
+        </ColumnDiv>
+      </ContainerDiv>
+    </>
   );
 };
 
-export default Home;
+export default Dashboard;
