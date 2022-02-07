@@ -13,18 +13,13 @@ import {
   RightChartDiv,
   StyledHeader,
   SalesColumnDiv,
-  SalesRowDiv,
-  SalesInnerColumnDiv,
-  SalesInnerRowTitleDiv,
-  SalesSmallText,
-  SalesLargeText,
-  SalesLinkText,
   SalesDivider
 } from "../../page-styles/dashboard/styles";
 import Link from "next/link";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import dynamic from "next/dynamic";
 import sampleData from "../../sampleData/sampleData";
+import BillingCycleInfo from "../../components/BillingCycleInfo";
 
 const LineChart = dynamic(() => import("../../components/LineChart"), {
   ssr: false,
@@ -66,27 +61,19 @@ const Dashboard = () => {
               />
             </RightChartDiv>
             <SalesColumnDiv>
-              <SalesRowDiv>
-                <SalesInnerColumnDiv>
-                  <SalesInnerRowTitleDiv>
-                    <SalesSmallText>Amount Spent</SalesSmallText>
-                    <SalesLinkText>View current billing cycle</SalesLinkText>
-                  </SalesInnerRowTitleDiv>
-                  <SalesLargeText>$1,180.00</SalesLargeText>
-                  <SalesSmallText>Billing cycle: 10/07/21 - 10/31/21</SalesSmallText>
-                </SalesInnerColumnDiv>
-              </SalesRowDiv>
+              <BillingCycleInfo
+                title="Amount Spent"
+                viewLinkText="View current billing cycle"
+                amount="$1,180.00"
+                subtitle="Billing cycle: 10/07/21 - 10/31/21"
+              />
               <SalesDivider/>
-              <SalesRowDiv>
-                <SalesInnerColumnDiv>
-                  <SalesInnerRowTitleDiv>
-                    <SalesSmallText>Estimated sales</SalesSmallText>
-                    <SalesLinkText>View billing cycle</SalesLinkText>
-                  </SalesInnerRowTitleDiv>
-                  <SalesLargeText>$175.00</SalesLargeText>
-                  <SalesSmallText>*Estimation only*</SalesSmallText>
-                </SalesInnerColumnDiv>
-              </SalesRowDiv>
+              <BillingCycleInfo
+                title="Estimated Sales"
+                viewLinkText="View billing cycle"
+                amount="$175.00"
+                subtitle="*Estimation only*"
+              />
             </SalesColumnDiv>
           </BorderDiv>
         </ContainerDiv>

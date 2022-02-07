@@ -52,11 +52,6 @@ export const SalesColumnDiv = styled(ColumnDiv)`
   padding: 0px;
 `;
 
-export const SalesInnerColumnDiv = styled(ColumnDiv)`
-  padding: 30px 19px 30px 19px;
-  gap: 11px;
-`;
-
 export const RowDiv = styled.div`
   display: flex;
   padding-top: 50px;
@@ -66,40 +61,10 @@ export const RowDiv = styled.div`
   margin-right: 10%;
 `;
 
-export const SalesRowDiv = styled(RowDiv)`
-  padding: 0px;
-`;
-
-export const SalesInnerRowTitleDiv = styled(RowDiv)`
-  padding: 0px;
-  gap: 0%;
-  margin: 0%;
-`;
-
 export const StyledHeader = styled.h1`
   text-align: left;
   margin-top: 30px;
   width: 100%;
-`;
-
-export const SalesSmallText = styled.text`
-  text-align: left;
-  width: 100%;
-  color: #888B8E;
-  font-size: 16px;
-`;
-
-export const SalesLargeText = styled.text`
-  text-align: left;
-  width: 100%;
-  font-size: 30px;
-`;
-
-export const SalesLinkText = styled.text`
-  text-align: right;
-  width: 100%;
-  color: #4881F0;
-  font-size: 14px;
 `;
 
 export const SalesDivider = styled.div`
