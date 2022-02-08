@@ -106,6 +106,7 @@ model Customer_List_Customer {
 model Customer_List {
   id                     String                   @id @default(uuid())
   name                   String
+  description            String?
   business               Business                 @relation(fields: [businessId], references: [id])
   businessId             String
   campaignCustomerList   Campaign_Customer_List[]

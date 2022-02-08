@@ -8,12 +8,14 @@ export const newCustomerListMutation = extendType({
       args: {
         name: nonNull(stringArg()),
         businessId: nonNull(stringArg()),
+        description: stringArg(),
       },
-      resolve: async (_, { name, businessId }, ctx) => {
+      resolve: async (_, { name, businessId, description }, ctx) => {
         const newCustomerList = await ctx.prisma.customer_List.create({
           data: {
             name,
             businessId,
+            description,
           },
         });
 

@@ -391,6 +391,7 @@ export interface NexusGenArgTypes {
     }
     newCustomerList: { // args
       businessId: string; // String!
+      description?: string | null; // String
       name: string; // String!
     }
     newKeyWord: { // args
