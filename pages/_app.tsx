@@ -6,6 +6,7 @@ import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/apolloClient";
 import { UserProvider } from "../context/UserContext/UserContext";
 import { BusinessProvider } from "../context/BusinessContext/BusinessContext";
+import RouteGuard from "../components/RouteGuard";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -16,8 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <BusinessProvider>
           <GlobalStyles />
           <Theme>
-            <Navbar />
-            <Component {...pageProps} />
+            <RouteGuard>
+              <Navbar />
+              <Component {...pageProps} />
+            </RouteGuard>
           </Theme>
         </BusinessProvider>
       </UserProvider>

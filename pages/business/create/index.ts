@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
-import { initializeApollo } from "../../lib/apolloClient";
-import { BUSINESS_QUERY } from "../../page-queries/create-business";
+import { initializeApollo } from "../../../lib/apolloClient";
+import { BUSINESS_QUERY } from "../../../page-queries/create-business";
 
 export async function getServerSideProps(context: any) {
   const client = initializeApollo();
