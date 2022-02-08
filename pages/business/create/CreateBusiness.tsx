@@ -2,23 +2,19 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { GraphQLError } from "graphql";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import BusinessLogoEditor from "../../components/BusinessLogoEditor";
-import Button from "../../components/Button";
-import Radio from "../../components/Radio";
-import SearchBar from "../../components/SearchBar";
-import SingleCardPage from "../../components/SingleCardPage";
-import TextField from "../../components/TextField";
-import { config } from "../../config";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-
-import { useBusinessDispatch } from "../../context/BusinessContext/BusinessContext";
+import BusinessLogoEditor from "../../../components/BusinessLogoEditor";
+import Button from "../../../components/Button";
+import Radio from "../../../components/Radio";
+import SearchBar from "../../../components/SearchBar";
+import SingleCardPage from "../../../components/SingleCardPage";
+import TextField from "../../../components/TextField";
+import { useBusinessDispatch } from "../../../context/BusinessContext/BusinessContext";
 import {
   CREATE_BUSINESS_MUTATION,
   EDIT_BUSINESS_MUTATION,
   PROVISION_PHONE_NUMBER_MUTATION,
-} from "../../page-mutations/create-business";
-import { AVAILABLE_PHONE_NUMBERS_QUERY } from "../../page-queries/create-business";
+} from "../../../page-mutations/create-business";
+import { AVAILABLE_PHONE_NUMBERS_QUERY } from "../../../page-queries/create-business";
 import {
   Heading,
   StyledCard,
@@ -34,8 +30,8 @@ import {
   PhoneNumberContainer,
   PhoneNumber,
   PhoneNumberList,
-} from "../../page-styles/create-business/styles";
-import SetupForm from "../billing/SetupForm";
+} from "../../../page-styles/create-business/styles";
+import SetupForm from "../../billing/SetupForm";
 
 interface SetBusinessNameProps {
   businessName: string;
