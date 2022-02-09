@@ -8,12 +8,16 @@ import {
   ColumnDiv,
   RowDiv,
   StyledCard,
+  BorderDiv,
+  LeftChartDiv,
+  RightChartDiv,
+  StyledHeader
 } from "../page-styles/dashboard/styles";
-import { StyledHeader } from "../page-styles/coupons/styles";
 import Link from "next/link";
 import { useBusinessState } from "../context/BusinessContext/BusinessContext";
 import dynamic from "next/dynamic";
 import sampleData from "../sampleData/sampleData";
+import BillingCycleColumn from "../components/BillingCycleColumn";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
@@ -30,33 +34,46 @@ const Dashboard = () => {
     console.log(businessName);
   });
 
+  const Analytics = () => {
+    return (
+      <>
+        <ContainerDiv>
+          <StyledHeader>Today</StyledHeader>
+        </ContainerDiv>
+        <ContainerDiv>
+          <BorderDiv>
+            <LeftChartDiv> 
+              <LineChart
+                title="Coupons"
+                data={couponData}
+                height={300}
+                flexure={1}
+              />
+            </LeftChartDiv>
+            <RightChartDiv>
+              <LineChart
+                title="Customers"
+                data={customersData}
+                height={300}
+                flexure={1}
+              />
+            </RightChartDiv>
+            <BillingCycleColumn
+              spentAmount="$1,180.00"
+              salesAmount="$175.00"
+              billingCycle="10/07/21 - 10/31/21"
+              billingCycleRoute="/billing"
+            />
+          </BorderDiv>
+        </ContainerDiv>
+      </>
+    );
+  }
+
   return (
     <>
-      <ContainerDiv>
-        <StyledHeader>{businessName}</StyledHeader>
-      </ContainerDiv>
-
-      <ContainerDiv>
-        <ColumnDiv>
-          <LineChart
-            title="Coupons"
-            data={couponData}
-            height={300}
-            flexure={1}
-          />
-        </ColumnDiv>
-        <ColumnDiv>
-          <LineChart
-            title="Customers"
-            data={customersData}
-            height={300}
-            flexure={1}
-          />
-        </ColumnDiv>
-        <ColumnDiv>
-          {/* TODO: Build up Amount Spent & Estimated Sales */}
-        </ColumnDiv>
-      </ContainerDiv>
+      <Analytics/>
+      <Analytics/>
 
       <ContainerDiv>
         <ColumnDiv>
