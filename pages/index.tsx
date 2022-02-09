@@ -9,8 +9,7 @@ import {
   RowDiv,
   StyledCard,
   BorderDiv,
-  LeftChartDiv,
-  RightChartDiv,
+  ChartDiv,
   StyledHeader
 } from "../page-styles/dashboard/styles";
 import Link from "next/link";
@@ -42,22 +41,22 @@ const Dashboard = () => {
         </ContainerDiv>
         <ContainerDiv>
           <BorderDiv>
-            <LeftChartDiv> 
+            <ChartDiv> 
               <LineChart
                 title="Coupons"
                 data={couponData}
                 height={300}
                 flexure={1}
               />
-            </LeftChartDiv>
-            <RightChartDiv>
+            </ChartDiv>
+            <ChartDiv>
               <LineChart
                 title="Customers"
                 data={customersData}
                 height={300}
                 flexure={1}
               />
-            </RightChartDiv>
+            </ChartDiv>
             <BillingCycleColumn
               spentAmount="$1,180.00"
               salesAmount="$175.00"

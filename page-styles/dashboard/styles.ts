@@ -26,16 +26,12 @@ export const BorderDiv = styled.div`
   border-style: solid none;
 `;
 
-export const LeftChartDiv = styled.div`
+export const ChartDiv = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 21px 50px 21px 0px;
-  justify-content: center;
-  width: 100%
-`;
-
-export const RightChartDiv = styled(LeftChartDiv)`
   padding: 21px 50px 21px 50px;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const ColumnDiv = styled.div`
