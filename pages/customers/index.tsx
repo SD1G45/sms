@@ -1,7 +1,1 @@
-import React from "react";
-
-const index = () => {
-  return <div></div>;
-};
-
-export default index;
+export {default} from "./Customers"

@@ -226,7 +226,7 @@ export interface NexusGenFieldTypes {
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
-    customerLists: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
+    customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -333,7 +333,7 @@ export interface NexusGenFieldTypeNames {
     businessInviteCode: 'BusinessInviteCode'
     campaign: 'Campaign'
     coupons: 'Coupon'
-    customerLists: 'Coupon'
+    customerLists: 'CustomerList'
     keywords: 'Keyword'
     viewer: 'User'
   }
