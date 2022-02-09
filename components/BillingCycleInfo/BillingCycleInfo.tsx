@@ -1,19 +1,27 @@
 import React from "react";
 import { ColumnDiv, LargeText, LinkText, SmallText, TitleDiv, Wrapper } from "./styles";
 import { BillingCycleInfoProps } from "./types";
+import Link from "next/link";
 
 const BillingCycleInfo: React.FC<BillingCycleInfoProps> = ({
   title,
-  viewLinkText,
   amount,
-  subtitle
+  subtitle,
+  viewLinkText,
+  linkRoute
 }) => {
   return (
     <Wrapper>
       <ColumnDiv>
         <TitleDiv>
           <SmallText>{title}</SmallText>
-          <LinkText>{viewLinkText}</LinkText>
+          { viewLinkText && linkRoute ? 
+            <Link href={linkRoute}>
+             <LinkText>{viewLinkText}</LinkText>
+            </Link>
+            : 
+            <></>
+          }
         </TitleDiv>
         <LargeText>{amount}</LargeText>
         <SmallText>{subtitle}</SmallText>

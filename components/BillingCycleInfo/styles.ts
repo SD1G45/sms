@@ -19,6 +19,11 @@ export const LinkText = styled.text`
   width: 100%;
   color: #4881F0;
   font-size: 14px;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 export const Wrapper = styled.div`
