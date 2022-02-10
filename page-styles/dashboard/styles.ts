@@ -15,6 +15,23 @@ export const ContainerDiv = styled.div`
   display: flex;
   white-space: nowrap;
   justify-content: center;
+  padding: 15px 80px;
+`;
+
+export const BorderDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid #BEC8D2;
+  border-style: solid none;
+`;
+
+export const ChartDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 21px 50px 21px 50px;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const ColumnDiv = styled.div`
@@ -35,7 +52,7 @@ export const RowDiv = styled.div`
 `;
 
 export const StyledHeader = styled.h1`
-  padding-left: 50px;
-  padding-right: 50px;
-  text-align: center;
+  text-align: left;
+  margin-top: 30px;
+  width: 100%;
 `;
