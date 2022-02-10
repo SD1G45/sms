@@ -75,7 +75,7 @@ const Navbar = () => {
   if (currentPath.startsWith("/login")) return <></>;
   if (currentPath.startsWith("/register")) return <></>;
   if (currentPath.startsWith("/welcome")) return <></>;
-  if (currentPath.startsWith("/create-business")) return <></>;
+  if (currentPath.startsWith("/business/create")) return <></>;
   if (currentPath.startsWith("/business/invite")) return <></>;
   if (currentPath.startsWith("/business/join")) return <></>;
 
@@ -118,8 +118,8 @@ const Navbar = () => {
         !currentPath.startsWith("/billing") && (
           <SecondaryNavbarContainer>
             <SecondaryNavbar>
-              <Link href="/dashboard" passHref>
-                <Item active={currentPath === "/dashboard"}>Home</Item>
+              <Link href="/" passHref>
+                <Item active={currentPath === "/"}>Home</Item>
               </Link>
               <Link href="/coupons" passHref>
                 <Item active={currentPath.startsWith("/coupons")}>Coupons</Item>
