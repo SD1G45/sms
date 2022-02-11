@@ -1,35 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Background renders correctly 1`] = `
+.c2 {
+  height: 100vh;
+  width: 260px;
+}
+
+.c3 {
+  height: 100vh;
+  width: 250px;
+  border-left: 1px dashed #ccc;
+}
+
+.c1 {
+  height: 100vh;
+  width: 230vw;
+  position: absolute;
+  bottom: 55vh;
+  left: -60vw;
+  background-color: #f7f8ff;
+  -webkit-transform: rotate(165deg);
+  -ms-transform: rotate(165deg);
+  transform: rotate(165deg);
+  z-index: -2;
+}
+
+.c0 {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  z-index: -1;
+}
+
 <div
-  className=""
+  className="c0"
 >
   <div
-    className=""
+    className="c1"
   />
   <div
-    className=""
+    className="c2"
   />
   <div
-    className=""
+    className="c3"
   />
   <div
-    className=""
+    className="c3"
   />
   <div
-    className=""
+    className="c3"
   />
   <div
-    className=""
+    className="c3"
   />
   <div
-    className=""
+    className="c3"
   />
   <div
-    className=""
+    className="c3"
   />
   <div
-    className=""
+    className="c3"
   />
 </div>
 `;

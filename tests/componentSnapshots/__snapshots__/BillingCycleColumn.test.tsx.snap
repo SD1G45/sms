@@ -1,25 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BillingCycleColumn renders correctly 1`] = `
+.c5 {
+  text-align: left;
+  width: 100%;
+  color: #888B8E;
+  font-size: 16px;
+}
+
+.c7 {
+  text-align: left;
+  width: 100%;
+  font-size: 30px;
+}
+
+.c6 {
+  text-align: right;
+  width: 100%;
+  color: #4881F0;
+  font-size: 14px;
+}
+
+.c6:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  gap: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 0px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 0px;
+  gap: 0%;
+  margin: 0%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 30px 19px 30px 19px;
+  gap: 11px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 50px;
+  width: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  border-left: 1px solid #BEC8D2;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0px;
+}
+
+.c8 {
+  width: 100%;
+  border-bottom: 1px solid #BEC8D2;
+  margin: 15px 0px 7px 0px;
+}
+
 <div
-  className=""
+  className="c0 c1"
 >
   <div
-    className=""
+    className="c2"
   >
     <div
-      className=""
+      className="c3"
     >
       <div
-        className=""
+        className="c4"
       >
         <text
-          className=""
+          className="c5"
         >
           Amount Spent
         </text>
         <text
-          className=""
+          className="c6"
           onClick={[Function]}
           onMouseEnter={[Function]}
         >
@@ -27,42 +124,42 @@ exports[`BillingCycleColumn renders correctly 1`] = `
         </text>
       </div>
       <text
-        className=""
+        className="c7"
       >
         $1,180.00
       </text>
       <text
-        className=""
+        className="c5"
       >
         Billing cycle: 10/07/21 - 10/31/21
       </text>
     </div>
   </div>
   <div
-    className=""
+    className="c8"
   />
   <div
-    className=""
+    className="c2"
   >
     <div
-      className=""
+      className="c3"
     >
       <div
-        className=""
+        className="c4"
       >
         <text
-          className=""
+          className="c5"
         >
           Estimated Sales
         </text>
       </div>
       <text
-        className=""
+        className="c7"
       >
         $175.00
       </text>
       <text
-        className=""
+        className="c5"
       >
         *Estimation only*
       </text>
