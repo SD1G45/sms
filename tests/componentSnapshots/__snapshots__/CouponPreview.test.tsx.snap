@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Coupon preview renders correctly 1`] = `
+<div
+  className=""
+>
+  <h2
+    className=""
+  >
+    Phone preview
+  </h2>
+  <div
+    className=""
+  >
+    <div
+      className=""
+    />
+    <img
+      className=""
+    />
+    <h1
+      className=""
+    >
+      Coupon
+    </h1>
+    <p
+      className=""
+    >
+      This is a sample coupon
+    </p>
+    <button
+      className=""
+    >
+      Redeem
+    </button>
+    <div
+      className=""
+    >
+      <div
+        className=""
+      >
+        Valid for the next 
+      </div>
+      <div
+        className=""
+      >
+        <div
+          className=""
+        >
+          <div
+            className=""
+          >
+            0
+          </div>
+          <p
+            className=""
+          >
+            Days
+          </p>
+        </div>
+        <div
+          className=""
+        >
+          <div
+            className=""
+          >
+            0
+          </div>
+          <p
+            className=""
+          >
+            Hours
+          </p>
+        </div>
+        <div
+          className=""
+        >
+          <div
+            className=""
+          >
+            0
+          </div>
+          <p
+            className=""
+          >
+            Mins
+          </p>
+        </div>
+        <div
+          className=""
+        >
+          <div
+            className=""
+          >
+            0
+          </div>
+          <p
+            className=""
+          >
+            Secs
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
