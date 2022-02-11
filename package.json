@@ -4,7 +4,8 @@
   "private": true,
   "jest": {
     "verbose": true,
-    "preset": "jest-puppeteer"
+    "preset": "jest-puppeteer",
+    "testEnvironment": "jsdom"
   },
   "scripts": {
     "dev": "next dev -p 3001",
@@ -64,6 +65,7 @@
     "eslint": "7.32.0",
     "eslint-config-next": "^0.2.4",
     "jest": "^27.5.1",
+    "jest-environment-jsdom": "^27.5.1",
     "jest-puppeteer": "^6.1.0",
     "jest-styled-components": "^7.0.8",
     "puppeteer": "^13.3.1",
