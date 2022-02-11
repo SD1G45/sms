@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Background renders correctly 1`] = `
+<div
+  className=""
+>
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+  <div
+    className=""
+  />
+</div>
+`;
