@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Button renders as disabled 1`] = `
+<button
+  className=""
+  disabled={true}
+/>
+`;
+
+exports[`Button renders as loading 1`] = `
+<button
+  className=""
+  loading={true}
+>
+  <div
+    className=""
+  >
+    <div
+      className=""
+      color="#fff"
+      size={20}
+    >
+      <div
+        className=""
+        color="#fff"
+        size={20}
+      />
+    </div>
+    <div>
+      Loading
+    </div>
+  </div>
+</button>
+`;
+
 exports[`Button renders correctly 1`] = `
 <button
   className=""
