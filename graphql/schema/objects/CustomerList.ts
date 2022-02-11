@@ -5,5 +5,6 @@ export const CustomerList = objectType({
   definition(t) {
     t.string("id");
     t.string("name");
+    t.string("description");
   },
 });

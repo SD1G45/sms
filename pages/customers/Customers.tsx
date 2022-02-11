@@ -21,16 +21,11 @@ const Customers = () => {
     const router = useRouter();
     const createPath = router.asPath + "/create";
     const faqPath = router.asPath + "/faq";
-    const tableHeaders: string[] = [
-        "name",
-        "description",
-        "customers"
-    ]
-  
+    
     const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
     const routes: string[] = ["/customers", createPath, faqPath];
-    const data: string[][] = [];    
-    
+    const data: string[][] = [];
+
     const businessState = useBusinessState();
     const [getCustomersList, customerListQueryResult] = useLazyQuery(CUSTOMER_LIST_QUERY);
     useEffect(() => {
@@ -42,37 +37,37 @@ const Customers = () => {
         });
     }, [getCustomersList, businessState]);
 
-    const customerLists = 
-        customerListQueryResult.data != undefined 
-        ? customerListQueryResult.data.customerLists
-        : [];
-    
+    const customerLists =
+        customerListQueryResult.data != undefined
+            ? customerListQueryResult.data.customerLists
+            : [];
+
     for (let i = 0; i < customerLists.length; i++) {
         const curr = customerLists[i];
         data.push([
             curr.name,
-            curr.descriptions,
-            "names"
+            curr.description + "-",
+            "View Customers"
         ]);
     }
-    
+
     return (
         <ContainerDiv>
-          <SideNav items={sideNavItems} routes={routes} heading={"Campaigns"} />
-          <ColumnDiv>
-            <RowDiv>
-              <HeaderDiv>
-                <StyledHeader>Customer Analytics</StyledHeader>
-              </HeaderDiv>
-              <SearchDiv>
-                <SearchBar value={""} onValueChange={() => {}} />
-              </SearchDiv>
-              <Button>Create New Customer</Button>
-            </RowDiv>
-            <Table headers={tableHeaders} data={data} />
-          </ColumnDiv>
+            <SideNav items={sideNavItems} routes={routes} heading={"Customers"} />
+            <ColumnDiv>
+                <RowDiv>
+                    <HeaderDiv>
+                        <StyledHeader>Customer Analytics</StyledHeader>
+                    </HeaderDiv>
+                    <SearchDiv>
+                        <SearchBar value={""} onValueChange={() => { }} />
+                    </SearchDiv>
+                    <Button>Create New Customer List</Button>
+                </RowDiv>
+                <Table headers={null} data={data} />
+            </ColumnDiv>
         </ContainerDiv>
-      );
+    );
 }
 
 export default Customers;

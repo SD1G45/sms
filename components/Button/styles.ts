@@ -12,6 +12,8 @@ export const StyledButton = styled.button<ButtonProps>`
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   font-size: 1rem;
   opacity: ${(props) => (props.disabled ? "40%" : "100%")};
+  overflow: hidden;
+  white-space: nowrap;
 
   &:hover {
     opacity: ${(props) => (props.disabled ? "40%" : "70%")};

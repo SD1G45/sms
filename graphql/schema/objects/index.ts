@@ -10,6 +10,7 @@ import { Customer } from "./Customer";
 import { AvailablePhoneNumber } from "./AvailablePhoneNumber";
 import { DateScalar } from "./DateScalar";
 import { BusinessInviteCode } from "./BusinessInviteCode";
+import { Customer_CustomerList } from "./Customer_CustomerList";
 
 export {
   AvailablePhoneNumber,
@@ -24,4 +25,5 @@ export {
   Customer,
   DateScalar,
   BusinessInviteCode,
+  Customer_CustomerList
 };

@@ -37,12 +37,15 @@ export const Header = styled.th`
     padding-left: 58px;
     padding-top: 15px;
     font-size: 14px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
 `;
 
 export const HeaderLong = styled.th`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
-    padding-right: 100px;
+    padding-right: 40px;
     padding-top: 15px;
     font-size: 14px;
     text-align: left;

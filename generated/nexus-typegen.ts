@@ -94,8 +94,14 @@ export interface NexusGenObjects {
     phoneNumber?: string | null; // String
   }
   CustomerList: { // root type
+    description?: string | null; // String
     id?: string | null; // String
     name?: string | null; // String
+  }
+  Customer_CustomerList: { // root type
+    customer_id?: string | null; // String
+    customer_list_id?: string | null; // String
+    id?: string | null; // String
   }
   KeyWord_CustomerList: { // root type
     customer_list_id?: string | null; // String
@@ -187,8 +193,14 @@ export interface NexusGenFieldTypes {
     phoneNumber: string | null; // String
   }
   CustomerList: { // field return type
+    description: string | null; // String
     id: string | null; // String
     name: string | null; // String
+  }
+  Customer_CustomerList: { // field return type
+    customer_id: string | null; // String
+    customer_list_id: string | null; // String
+    id: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
     customer_list_id: string | null; // String
@@ -215,6 +227,7 @@ export interface NexusGenFieldTypes {
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
     newCustomerList: NexusGenRootTypes['CustomerList'] | null; // CustomerList
+    newCustomerListCustomer: NexusGenRootTypes['Customer_CustomerList'] | null; // Customer_CustomerList
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
     provisionPhoneNumber: NexusGenRootTypes['AvailablePhoneNumber'] | null; // AvailablePhoneNumber
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
@@ -226,6 +239,7 @@ export interface NexusGenFieldTypes {
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
+    customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
     viewer: NexusGenRootTypes['User'] | null; // User
@@ -294,8 +308,14 @@ export interface NexusGenFieldTypeNames {
     phoneNumber: 'String'
   }
   CustomerList: { // field return type name
+    description: 'String'
     id: 'String'
     name: 'String'
+  }
+  Customer_CustomerList: { // field return type name
+    customer_id: 'String'
+    customer_list_id: 'String'
+    id: 'String'
   }
   KeyWord_CustomerList: { // field return type name
     customer_list_id: 'String'
@@ -322,6 +342,7 @@ export interface NexusGenFieldTypeNames {
     newCoupon: 'Coupon'
     newCustomer: 'Customer'
     newCustomerList: 'CustomerList'
+    newCustomerListCustomer: 'Customer_CustomerList'
     newKeyWord: 'Keyword'
     provisionPhoneNumber: 'AvailablePhoneNumber'
     registerUser: 'UserLoginPayload'
@@ -333,6 +354,7 @@ export interface NexusGenFieldTypeNames {
     businessInviteCode: 'BusinessInviteCode'
     campaign: 'Campaign'
     coupons: 'Coupon'
+    customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     keywords: 'Keyword'
     viewer: 'User'
@@ -394,6 +416,10 @@ export interface NexusGenArgTypes {
       description?: string | null; // String
       name: string; // String!
     }
+    newCustomerListCustomer: { // args
+      customerId: string; // String!
+      customerListId: string; // String!
+    }
     newKeyWord: { // args
       businessId: string; // String!
       couponId: string; // String!
@@ -432,6 +458,9 @@ export interface NexusGenArgTypes {
     }
     coupons: { // args
       businessId: string; // String!
+    }
+    customerListCustomers: { // args
+      customerListId: string; // String!
     }
     customerLists: { // args
       businessId: string; // String!

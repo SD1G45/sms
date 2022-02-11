@@ -1,4 +1,4 @@
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
-    headers: string[],
+    headers: string[] | null,
     data: string[][]
 }
