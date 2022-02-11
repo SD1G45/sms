@@ -3,7 +3,7 @@ function getRootUrl() {
   if (process.env.NODE_ENV === "development") {
     rootUrl = "http://localhost:3001/";
   } else if (process.env.NODE_ENV === "test") {
-    rootUrl = "http://smsmp-develop.herokuapp.com/";
+    rootUrl = "http://localhost:3001/";
   } else {
     rootUrl = "https://trism.co/";
   }
