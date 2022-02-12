@@ -92,7 +92,7 @@ const Login = () => {
 
   return (
     <SingleCardPage>
-      ç{" "}
+      {" "}
       <StyledCard>
         <Heading>Sign in to your account</Heading>
         <EmailTextField
