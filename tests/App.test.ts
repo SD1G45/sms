@@ -16,17 +16,15 @@ beforeAll(async () => {
   await page.goto(rootUrl);
 }, 30_000);
 
-test("Correctly on login page", async () => {
+test("Correctly on login page at start", async () => {
   await sleep(1_000);
 
   if (!page) {
     throw new Error("Error while loading App page");
   }
 
-  const url = await page.url();
-  
-  expect(url).toEqual(rootUrl + "login");
-})
+  await expect(page).toMatch('Login')
+});
 
 afterAll(async () => {
   await browser?.close();
