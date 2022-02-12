@@ -8,12 +8,14 @@ import {
   SetupQuestion,
 } from "../../page-styles/welcome/styles";
 import Link from "next/link";
+import { useUserState } from "../../context/UserContext";
 
 const Welcome = () => {
+  const userState = useUserState();
   return (
     <SingleCardPage>
       <StyledCard>
-        <Heading>Welcome to [COMPANY_NAME], Brennen! </Heading>
+        <Heading>Welcome to trism, [user]! </Heading>
         <SetupMessage>
           Let&apos;s get you set up with your business...
         </SetupMessage>
@@ -21,10 +23,10 @@ const Welcome = () => {
           Would you like to create a new business account or join an existing
           one?
         </SetupQuestion>
-        <Link href="/create-business" passHref>
+        <Link href="/business/create" passHref>
           <StyledButton>Create new business</StyledButton>
         </Link>
-        <Link href="/join-business" passHref>
+        <Link href="/business/join" passHref>
           <StyledButton>Join existing business</StyledButton>
         </Link>
       </StyledCard>
