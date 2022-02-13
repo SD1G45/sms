@@ -47,7 +47,7 @@ const Customers = () => {
         data.push([
             curr.name,
             curr.description + "-",
-            "View Customers"
+            curr.count + " total customers"
         ]);
     }
 

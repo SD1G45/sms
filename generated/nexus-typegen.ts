@@ -193,6 +193,7 @@ export interface NexusGenFieldTypes {
     phoneNumber: string | null; // String
   }
   CustomerList: { // field return type
+    count: number | null; // Int
     description: string | null; // String
     id: string | null; // String
     name: string | null; // String
@@ -308,6 +309,7 @@ export interface NexusGenFieldTypeNames {
     phoneNumber: 'String'
   }
   CustomerList: { // field return type name
+    count: 'Int'
     description: 'String'
     id: 'String'
     name: 'String'

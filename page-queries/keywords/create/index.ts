@@ -19,6 +19,7 @@ export const CUSTOMER_LIST_QUERY = gql`
       id
       name
       description
+      count
     }
   }
 `;
