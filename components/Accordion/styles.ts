@@ -9,17 +9,19 @@ export const Accordion = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  border: 1px solid #ccc;
+  border-bottom: 5px solid #ffffff;
 
   &: not(: first-of-type) {
     border-top: 0;
   }
   padding: 10px;
-  background-color: rgba(72, 129, 240, 0.6);
+  background-color: #4881f0;
 `;
 
 export const Title = styled.h2`
+  color: white;
   width: 100%;
+  // height: 50%;
   margin: 100;
 `;
 
@@ -53,10 +55,11 @@ export const Chevron = styled.button<ChevronProps>`
 export const ItemContainer = styled.div`
   transition: height 0.2s ease-in-out;
   overflow: hidden;
+
   // background-color: rgba(72, 240, 229, 0.5);
 `;
 
 export const Content = styled.div`
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ffffff;
   padding: 15px 20px;
 `;

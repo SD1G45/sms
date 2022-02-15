@@ -11,7 +11,7 @@ const AccordionMenu = ({ items }: { items: Array<AccordionProps> }) => {
 
   return (
     <Accordion>
-      {items.map((item, idx) => (
+      {items?.map((item, idx) => (
         <AccordionItem
           key={idx}
           data={item}
