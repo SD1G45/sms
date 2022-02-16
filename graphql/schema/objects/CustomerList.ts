@@ -1,4 +1,5 @@
-import { objectType } from "nexus";
+import { objectType, list } from "nexus";
+import { Customer } from "./";
 
 export const CustomerList = objectType({
   name: "CustomerList",
@@ -11,11 +12,11 @@ export const CustomerList = objectType({
         const customerListID = String(parent.id);
         const numCustomers = await ctx.prisma.customer_List_Customer.count({
           where: {
-            customerListId: customerListID
-          }
-        })
+            customerListId: customerListID,
+          },
+        });
         return numCustomers;
-      }
-    })
+      },
+    });
   },
 });

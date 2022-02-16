@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SearchBar from "../../components/SearchBar";
 import Button from "../../components/Button";
-import Table from "../../components/Table";
+import CustomersTable from "../../components/CustomersTable";
 import {
     RowDiv,
     SearchDiv,
@@ -21,10 +21,11 @@ const Customers = () => {
     const router = useRouter();
     const createPath = router.asPath + "/create";
     const faqPath = router.asPath + "/faq";
-    
+
     const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
     const routes: string[] = ["/customers", createPath, faqPath];
     const data: string[][] = [];
+    const ids: string[] = [];
 
     const businessState = useBusinessState();
     const [getCustomersList, customerListQueryResult] = useLazyQuery(CUSTOMER_LIST_QUERY);
@@ -49,6 +50,7 @@ const Customers = () => {
             curr.description + "-",
             curr.count + " total customers"
         ]);
+        ids.push(curr.id);
     }
 
     return (
@@ -64,7 +66,7 @@ const Customers = () => {
                     </SearchDiv>
                     <Button>Create New Customer List</Button>
                 </RowDiv>
-                <Table headers={null} data={data} />
+                <CustomersTable data={data} ids={ids} view={false}/>
             </ColumnDiv>
         </ContainerDiv>
     );
