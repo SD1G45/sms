@@ -5,7 +5,9 @@ import { ChevronProps } from "./types";
 export const Accordion = styled.ul`
   list-style: none;
   margin: 0;
-  padding: 0;
+  // padding: 0;
+  margin-left: 10px;
+  padding-left: 10px;
 `;
 
 export const ListItem = styled.li`
@@ -16,6 +18,7 @@ export const ListItem = styled.li`
   }
   padding: 10px;
   background-color: #4881f0;
+  margin-left: 5px;
 `;
 
 export const Title = styled.h2`
