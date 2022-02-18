@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField renders correctly 1`] = `
+.c0 {
+  width: 100%;
+}
+
+.c1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  display: block;
+  padding-bottom: 7px;
+}
+
+.c3 {
+  color: #4881F0;
+  cursor: pointer;
+}
+
+.c4 {
+  padding: 12px;
+  border: 1px solid #BEC8D2;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+    >
+      
+    </label>
+    <label
+      className="c2 c3"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      
+    </label>
+  </div>
+  <input
+    className="c4"
+    value="TextField"
+  />
+</div>
+`;
+
+exports[`TextField with error renders correctly 1`] = `
+.c0 {
+  width: 100%;
+}
+
+.c1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  display: block;
+  padding-bottom: 7px;
+}
+
+.c3 {
+  color: #4881F0;
+  cursor: pointer;
+}
+
+.c4 {
+  padding: 12px;
+  border: 1px solid #FF7F7F;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.c5 {
+  color: #FF7F7F;
+  font-size: 0.9rem;
+  margin-left: 7px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+    >
+      
+    </label>
+    <label
+      className="c2 c3"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      
+    </label>
+  </div>
+  <input
+    className="c4"
+    value="TextField"
+  />
+  <p
+    className="c5"
+  >
+    There was an error
+  </p>
+</div>
+`;
+
+exports[`TextField with label renders correctly 1`] = `
+.c0 {
+  width: 100%;
+}
+
+.c1 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  display: block;
+  padding-bottom: 7px;
+}
+
+.c3 {
+  color: #4881F0;
+  cursor: pointer;
+}
+
+.c4 {
+  padding: 12px;
+  border: 1px solid #BEC8D2;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+    >
+      TextField
+    </label>
+    <label
+      className="c2 c3"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+    >
+      
+    </label>
+  </div>
+  <input
+    className="c4"
+    value="TextField"
+  />
+</div>
+`;
