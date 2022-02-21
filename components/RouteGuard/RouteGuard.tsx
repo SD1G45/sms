@@ -49,8 +49,8 @@ const RouteGuard: any = ({ children }: any) => {
     } else {
       setAuthorized(true);
       if (
-        (userState?.jid && path.includes("login")) ||
-        path.includes("register")
+        userState?.jid &&
+        (path.includes("login") || path.includes("register"))
       ) {
         router.push({ pathname: "/" });
       }

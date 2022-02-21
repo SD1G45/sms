@@ -8,6 +8,7 @@ export const ContainerDiv = styled.div`
 export const ColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const RowDiv = styled.div`
