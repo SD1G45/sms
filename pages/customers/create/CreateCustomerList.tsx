@@ -57,7 +57,7 @@ const CreateCustomer: React.FC = () => {
         variables: {
           name,
           description,
-          businessId: businessState?.businessId,
+          businessId: businessState?.businessId || "7a6a0a03-5196-4952-aa9b-248c9daf1827",
         },
       });
       setResult(true);

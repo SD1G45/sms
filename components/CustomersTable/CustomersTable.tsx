@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState } from "react";
+import { CustomersTableProps } from "./types";
 import {
-    Button,
+    ViewButton,
     DivContainer,
     DataEmpty,
     Pagination,
@@ -14,7 +14,7 @@ import {
     Data,
     PagePointer
 } from "./styles";
-import { TableProps } from "./types";
+import Link from "next/link";
 
 function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
     const mapping: JSX.Element[] = [];
@@ -30,21 +30,35 @@ function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
     return mapping;
 }
 
-function mapDataToBodyComponent(data: string[][], page: number, customerTable: boolean): JSX.Element[] {
+function mapDataToBodyComponent(data: string[][], page: number, ids: string[], view: boolean): JSX.Element[] {
     const mapping: JSX.Element[] = [];
     const pageIndex = page - 1;
 
-    for (let i = 0; i < 7 && pageIndex * 7 + i < data.length; i++) {
-        const value = data[pageIndex * 7 + i];
+
+    for (let j = 0; j < 7 && pageIndex * 7 + j < data.length; j++) {
+        const value = data[pageIndex * 7 + j];
         const map: JSX.Element[] = [];
         value.map((val, i) => {
+            const content = view ? 
+                <Data>{val}</Data>
+                :
+                <Data>
+                <Link href={"/customers/view/" + ids[j]}>
+                    <span>
+                    {val}
+                    <ViewButton>
+                        View Customers
+                    </ViewButton>
+                    </span>
+                </Link>
+                </Data>
             const newItem = i == 0 ?
                 <DataLong>{val}</DataLong>
                 :
-                (customerTable && i == value.length - 1 ?
-                <Data>{val}<Button>Click here to view</Button></Data>
-                :    
-                <Data>{val}</Data>
+                (i == value.length - 1 ?
+                    content
+                    :
+                    <Data>{val}</Data>
                 );
             map.push(newItem);
         })
@@ -62,33 +76,14 @@ function mapDataToBodyComponent(data: string[][], page: number, customerTable: b
     return mapping;
 }
 
-const customersTable = (data: string[][], page: number) => {
-    const headers = ['Name', 'Description', 'Customers'];
-
-    return (
-        <DivContainer>
-            <DataTable>
-                <TableHeader>
-                    <tr>
-                        {
-                            mapDataToHeaderComponent(headers)
-                        }
-                    </tr>
-                </TableHeader>
-                <TableBody>
-                    {
-                        mapDataToBodyComponent(data, page, true)
-                    }
-                </TableBody>
-            </DataTable>
-        </DivContainer>
-    );
-}
-
-const Table: React.FC<TableProps> = ({
-    headers,
-    data
+const CustomersTable: React.FC<CustomersTableProps> = ({
+    data,
+    ids,
+    view
 }) => {
+    const headers = view ? 
+        ["First Name", "Last Name", "Phone #"]
+        : ['Name', 'Description', 'Customers'];
     const [page, setPage] = useState(1);
     const numOfEntries = data.length;
     const numOfPages = Math.ceil(numOfEntries / 7);
@@ -109,10 +104,6 @@ const Table: React.FC<TableProps> = ({
         );
     }
 
-    if (headers == null) {
-        return customersTable(data, page);
-    }
-
     return (
         <DivContainer>
             <DataTable>
@@ -125,7 +116,7 @@ const Table: React.FC<TableProps> = ({
                 </TableHeader>
                 <TableBody>
                     {
-                        mapDataToBodyComponent(data, page, false)
+                        mapDataToBodyComponent(data, page, ids, view)
                     }
                 </TableBody>
             </DataTable>
@@ -133,7 +124,7 @@ const Table: React.FC<TableProps> = ({
                 numOfPages > 1 ? <PaginationSection /> : null
             }
         </DivContainer>
-    );
+    )
 }
 
-export default Table;
+export default CustomersTable;

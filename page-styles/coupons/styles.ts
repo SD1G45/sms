@@ -19,7 +19,8 @@ export const RowDiv = styled.div`
 export const StyledHeader = styled.h1`
   padding-left: 50px;
   padding-right: 75px;
-  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const SearchDiv = styled.div`
