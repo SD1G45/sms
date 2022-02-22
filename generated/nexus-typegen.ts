@@ -220,6 +220,7 @@ export interface NexusGenFieldTypes {
     customerId: string | null; // String
     customerListId: string | null; // String
     id: string | null; // String
+    name: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
     customer_list_id: string | null; // String
@@ -348,6 +349,7 @@ export interface NexusGenFieldTypeNames {
     customerId: 'String'
     customerListId: 'String'
     id: 'String'
+    name: 'String'
   }
   KeyWord_CustomerList: { // field return type name
     customer_list_id: 'String'
