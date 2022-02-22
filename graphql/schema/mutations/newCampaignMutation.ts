@@ -75,6 +75,8 @@ export const newCampaignMutation = extendType({
               opened: false,
             },
           });
+
+          console.log(customer_Coupon.id);
           const customerPhoneNumber = customer?.phoneNumber;
 
           const messageWithCoupon = `${message} https://trism.co/reward/${customer_Coupon.id}`;

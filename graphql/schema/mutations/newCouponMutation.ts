@@ -24,7 +24,7 @@ export const newCouponMutation = extendType({
             title,
             description,
             primaryColor,
-            expirationDate: new Date(),
+            expirationDate,
             businessId,
             redeemed: 0,
             sent: 0,
