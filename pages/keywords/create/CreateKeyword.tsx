@@ -59,7 +59,7 @@ const CreateKeyword: React.FC = () => {
   >([]);
 
   const [loading, setLoading] = useState(false);
-  const [errorState, setError] = useState({error: false, message: ''});
+  const [errorState, setError] = useState({ error: false, message: "" });
 
   const handleRemove = (id: string) => {
     setSelectedCustomerLists(
@@ -85,7 +85,8 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId:
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCoupons, businessState]);
@@ -93,7 +94,8 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCustomerLists({
       variables: {
-        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId:
+          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
       },
     });
   }, [getCustomerLists, businessState]);
@@ -112,19 +114,22 @@ const CreateKeyword: React.FC = () => {
   );
 
   const handleCreate = () => {
-
     if (keyword.length == 0 || message.length == 0 || description.length == 0) {
-      setError({...errorState, error:true, message: "Missing information."});
+      setError({ ...errorState, error: true, message: "Missing information." });
       return;
     }
 
     if (!selectedCouponId) {
-      setError({...errorState, error: true, message: "No coupon selected."});
+      setError({ ...errorState, error: true, message: "No coupon selected." });
       return;
     }
 
     if (selectedCouponId.length < 1) {
-      setError({...errorState, error: true, message: "No customer list(s) selected."});
+      setError({
+        ...errorState,
+        error: true,
+        message: "No customer list(s) selected.",
+      });
     }
 
     setLoading(true);
@@ -135,7 +140,7 @@ const CreateKeyword: React.FC = () => {
           keyword,
           message,
           description,
-          businessId: businessState?.businessId == null ? "13a1fcc2-dc74-4467-9eb4-b8ede588791d" : null,
+          businessId: businessState?.businessId,
           couponId: selectedCouponId,
           customerListId: selectedCustomerLists[0].id,
         },
@@ -143,7 +148,11 @@ const CreateKeyword: React.FC = () => {
       setResult(true);
       setLoading(false);
     } catch (error) {
-      setError({...errorState, error: true, message: "Something went wrong, please try again later."});
+      setError({
+        ...errorState,
+        error: true,
+        message: "Something went wrong, please try again later.",
+      });
       setLoading(false);
     }
   };
@@ -164,7 +173,7 @@ const CreateKeyword: React.FC = () => {
         </ConnectButton>
       </div>
       */}
-  
+
       <SetupLaterButton onClick={() => router.push("/keywords")}>
         close
       </SetupLaterButton>
@@ -234,7 +243,12 @@ const CreateKeyword: React.FC = () => {
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading} loading={loading}>
+            <Button
+              style={{ width: 250 }}
+              onClick={() => handleCreate()}
+              disabled={loading}
+              loading={loading}
+            >
               Create Keyword
             </Button>
             {result ? <Results /> : ""}
