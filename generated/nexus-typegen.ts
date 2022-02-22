@@ -106,6 +106,8 @@ export interface NexusGenObjects {
     name?: string | null; // String
   }
   Customer_CustomerList: { // root type
+    customerId?: string | null; // String
+    customerListId?: string | null; // String
     id?: string | null; // String
   }
   KeyWord_CustomerList: { // root type
@@ -215,8 +217,8 @@ export interface NexusGenFieldTypes {
   }
   Customer_CustomerList: { // field return type
     customer: NexusGenRootTypes['Customer'] | null; // Customer
-    customer_id: string | null; // String
-    customer_list_id: string | null; // String
+    customerId: string | null; // String
+    customerListId: string | null; // String
     id: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
@@ -343,8 +345,8 @@ export interface NexusGenFieldTypeNames {
   }
   Customer_CustomerList: { // field return type name
     customer: 'Customer'
-    customer_id: 'String'
-    customer_list_id: 'String'
+    customerId: 'String'
+    customerListId: 'String'
     id: 'String'
   }
   KeyWord_CustomerList: { // field return type name

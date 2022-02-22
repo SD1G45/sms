@@ -5,16 +5,8 @@ export const Customer_CustomerList = objectType({
   name: "Customer_CustomerList",
   definition(t) {
     t.string("id");
-    t.string("customer_id", {
-      resolve(parent, _args, _ctx) {
-        return String(parent.customerId);
-      }
-    });
-    t.string("customer_list_id", {
-      resolve(parent, _args, _ctx) {
-        return String(parent.customerListId);
-      }
-    });
+    t.string("customerId");
+    t.string("customerListId");
     t.field("customer", {
       type: Customer,
       async resolve(parent, _args, ctx) {
@@ -22,9 +14,9 @@ export const Customer_CustomerList = objectType({
         console.log(parent);
         const customer = await ctx.prisma.customer.findUnique({
           where: {
-            id: customerId
-          }
-        })
+            id: customerId,
+          },
+        });
         console.log(customer);
         return customer;
       },
