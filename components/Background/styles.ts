@@ -14,7 +14,7 @@ export const Column = styled.div`
 export const TiltedDiv = styled.div`
   height: 100vh;
   width: 230vw;
-  position: absolute;
+  position: fixed;
   bottom: 55vh;
   left: -60vw;
 
