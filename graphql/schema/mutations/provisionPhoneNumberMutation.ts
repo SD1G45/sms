@@ -32,7 +32,10 @@ export const provisionPhoneNumberMutation = extendType({
 
         const response = await client.incomingPhoneNumbers.create({
           phoneNumber,
+          smsUrl: "https://trism.co/api/sms/reply",
         });
+
+        client.incomingPhoneNumbers.create;
 
         await ctx.prisma.business.update({
           where: {
