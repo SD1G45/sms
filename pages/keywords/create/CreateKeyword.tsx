@@ -85,8 +85,7 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId:
-          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId: businessState?.businessId,
       },
     });
   }, [getCoupons, businessState]);
@@ -94,8 +93,7 @@ const CreateKeyword: React.FC = () => {
   useEffect(() => {
     getCustomerLists({
       variables: {
-        businessId:
-          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId: businessState?.businessId,
       },
     });
   }, [getCustomerLists, businessState]);

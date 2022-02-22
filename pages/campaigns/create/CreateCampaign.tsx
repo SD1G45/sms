@@ -71,7 +71,11 @@ const CreateCampaign: React.FC = () => {
   };
 
   const list: string[] = ["Analytics", "Create New", "FAQ"];
-  const routes: string[] = ["/campaigns", "/campaigns/create", "/campaigns/faq"];
+  const routes: string[] = [
+    "/campaigns",
+    "/campaigns/create",
+    "/campaigns/faq",
+  ];
 
   const [newCampaignMutation] = useMutation(NEW_CAMPAIGN, {
     errorPolicy: "all",
@@ -84,7 +88,7 @@ const CreateCampaign: React.FC = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId: businessState?.businessId,
       },
     });
   }, [getCoupons, businessState]);
@@ -92,7 +96,7 @@ const CreateCampaign: React.FC = () => {
   useEffect(() => {
     getCustomerLists({
       variables: {
-        businessId: businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId: businessState?.businessId,
       },
     });
   }, [getCustomerLists, businessState]);
@@ -136,7 +140,7 @@ const CreateCampaign: React.FC = () => {
         variables: {
           name,
           message,
-          businessId: businessState?.businessId == null ? "13a1fcc2-dc74-4467-9eb4-b8ede588791d" : "",
+          businessId: businessState?.businessId,
           couponId: selectedCouponId,
           customerListId: selectedCustomerLists[0].id,
         },
@@ -169,7 +173,7 @@ const CreateCampaign: React.FC = () => {
         </ConnectButton>
       </div>
       */}
-  
+
       <SetupLaterButton onClick={() => router.push("/campaigns")}>
         close
       </SetupLaterButton>
@@ -231,7 +235,12 @@ const CreateCampaign: React.FC = () => {
             onRemove={(id) => handleRemove(id)}
           />
           <ButtonContainer>
-            <Button style={{ width: 250 }} onClick={() => handleCreate()} disabled={loading} loading={loading}>
+            <Button
+              style={{ width: 250 }}
+              onClick={() => handleCreate()}
+              disabled={loading}
+              loading={loading}
+            >
               Create Campaign
             </Button>
             {result ? <Results /> : ""}
