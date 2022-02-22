@@ -25,6 +25,7 @@ const MultiSelector: React.FC<MultiSelectorProps> = ({
   onSelect,
   options,
   onRemove,
+  label,
 }) => {
   const [isHidden, setIsHidden, ref] =
     useHideOnClickOutside<HTMLDivElement>(true);
@@ -41,7 +42,7 @@ const MultiSelector: React.FC<MultiSelectorProps> = ({
   return (
     <MultiSelectorContainer ref={ref}>
       <LabelContainer>
-        <Label>Customer lists</Label>
+        <Label>{label}</Label>
         <AddButton onClick={() => setIsHidden(false)} />
       </LabelContainer>
       <SelectionContainer>

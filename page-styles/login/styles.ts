@@ -6,14 +6,8 @@ import TextField from "../../components/TextField";
 export const StyledCard = styled(Card)`
   width: 500px;
   padding: 30px;
-`;
-
-export const Page = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-left: 250px;
+  margin-right: 125px;
 `;
 
 export const Heading = styled.h1`
@@ -21,6 +15,19 @@ export const Heading = styled.h1`
   margin-bottom: 20px;
 `;
 
+export const Label = styled.label`
+  display: block;
+  padding-bottom: 7px;
+`;
+
+export const LinkDiv = styled.div`
+  text-align: center;
+`;
+
+export const StyledLink = styled(Label)`
+  color: ${(props) => props.theme.colors.primary};
+  cursor: pointer;
+`;
 export const PasswordTextField = styled(TextField)`
   margin-bottom: 30px;
 `;
@@ -31,4 +38,5 @@ export const EmailTextField = styled(TextField)`
 
 export const StyledButton = styled(Button)`
   margin-top: 30px;
+  margin-bottom: 30px;
 `;

@@ -22,24 +22,28 @@ export const loginUserMutation = extendType({
           throw new Error("A user with this email or password doesn't exist");
         }
 
-        const validPassword = compareSync(password, userBasedOnEmail?.password);
-
-        if (validPassword) {
-          const { id, email } = userBasedOnEmail;
-          const token = generateJWTToken({
-            id,
-            email,
-            username: "NEED TO SET USERNAME THIS IS CURRENTLY WRONG",
-          });
-
-          return {
-            token,
-            user: userBasedOnEmail,
-          };
-        } else {
-          throw new Error("The email or password is incorrect");
+        try {
+          const validPassword = compareSync(password, userBasedOnEmail?.password);
+  
+          if (validPassword) {
+            const { id, email } = userBasedOnEmail;
+            const token = generateJWTToken({
+              id,
+              email
+            });
+  
+            return {
+              token,
+              user: userBasedOnEmail,
+            };
+          } else {
+            throw new Error("The email or password is incorrect");
+          }
+        } catch(e: any) {
+          console.log(e);
+          throw new Error(e);
         }
-      },
+      }, 
     });
   },
 });

@@ -17,13 +17,17 @@ model User {
 }
 
 model Business {
-  id          String          @id @default(uuid())
-  name        String
-  stripeId    String
-  phoneNumber String          @unique
-  logoUrl     String
-  users       Business_User[]
-  coupons     Coupon[]
+  id                 String               @id @default(uuid())
+  name               String
+  stripeId           String?
+  phoneNumber        String?              @unique
+  logoUrl            String?
+  users              Business_User[]
+  campaigns          Campaign[]
+  coupons            Coupon[]
+  keywords           Keyword[]
+  customerList       Customer_List[]
+  businessInviteCode BusinessInviteCode[]
 }
 
 model Business_User {
@@ -44,24 +48,35 @@ enum Role {
 }
 
 model Coupon {
-  id             String     @id @default(uuid())
+  id             String            @id @default(uuid())
   name           String
   title          String
   description    String
   primaryColor   String
   expirationDate DateTime
-  business       Business   @relation(fields: [businessId], references: [id])
+  sent           Int
+  opened         Int
+  redeemed       Int
+  business       Business          @relation(fields: [businessId], references: [id])
   businessId     String
   campaign       Campaign[]
+  keyword        Keyword[]
+  customers      Customer_Coupon[]
 }
 
 model Campaign {
-  id            String                   @id @default(uuid())
-  name          String
-  message       String
-  coupon        Coupon                   @relation(fields: [couponId], references: [id])
-  couponId      String
-  customer_list Campaign_Customer_List[]
+  id              String                   @id @default(uuid())
+  name            String
+  message         String
+  dateSent        DateTime
+  messagesSent    Int
+  couponsOpened   Int
+  couponsRedeemed Int
+  business        Business                 @relation(fields: [businessId], references: [id])
+  businessId      String
+  coupon          Coupon                   @relation(fields: [couponId], references: [id])
+  couponId        String
+  customer_list   Campaign_Customer_List[]
 }
 
 model Campaign_Customer_List {
@@ -72,17 +87,58 @@ model Campaign_Customer_List {
   customerListId String
 }
 
+model Customer_Coupon {
+  id         String   @id @default(uuid())
+  redeemed   Boolean
+  opened     Boolean
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+  coupon     Coupon   @relation(fields: [couponId], references: [id])
+  couponId   String
+}
+
+model Customer {
+  id                     String                   @id @default(uuid())
+  phoneNumber            String                   @unique
+  firstName              String?
+  lastName               String?
+  password               String?
+  Customer_List_Customer Customer_List_Customer[]
+  coupons                Customer_Coupon[]
+}
+
+model Customer_List_Customer {
+  id             String        @id @default(uuid())
+  customerListId String
+  customerList   Customer_List @relation(fields: [customerListId], references: [id])
+  customerId     String
+  customer       Customer      @relation(fields: [customerId], references: [id])
+}
+
 model Customer_List {
-  id                   String                   @id @default(uuid())
-  name                 String
-  campaignCustomerList Campaign_Customer_List[]
-  keyWordCustomerList  Keyword_Customer_List[]
+  id                     String                   @id @default(uuid())
+  name                   String
+  description            String?
+  business               Business                 @relation(fields: [businessId], references: [id])
+  businessId             String
+  campaignCustomerList   Campaign_Customer_List[]
+  keyWordCustomerList    Keyword_Customer_List[]
+  Customer_List_Customer Customer_List_Customer[]
 }
 
 model Keyword {
   id                  String                  @id @default(uuid())
   keyword             String
   description         String
+  message             String
+  customersOnboarded  Int
+  couponsOpened       Int
+  couponsRedeemed     Int
+  dateCreated         DateTime
+  coupon              Coupon                  @relation(fields: [couponId], references: [id])
+  couponId            String
+  business            Business                @relation(fields: [businessId], references: [id])
+  businessId          String
   keyWordCustomerList Keyword_Customer_List[]
 }
 
@@ -92,4 +148,14 @@ model Keyword_Customer_List {
   customerListId String
   keyword        Keyword       @relation(fields: [keywordId], references: [id])
   keywordId      String
+}
+
+model BusinessInviteCode {
+  id         String   @id @default(uuid())
+  value      String   @unique
+  email      String
+  role       Role
+  business   Business @relation(fields: [businessId], references: [id])
+  businessId String
+  createdAt  DateTime @default(now())
 }

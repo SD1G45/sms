@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders as disabled 1`] = `
+.c0 {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #4881F0;
+  border-radius: 18px;
+  border: 2px solid white;
+  color: white;
+  cursor: not-allowed;
+  font-size: 1rem;
+  opacity: 40%;
+}
+
+.c0:hover {
+  opacity: 40%;
+}
+
+<button
+  className="c0"
+  disabled={true}
+/>
+`;
+
+exports[`Button renders as loading 1`] = `
+.c2 {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+
+.c3 {
+  box-sizing: border-box;
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  -webkit-animation: fEWCgj 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  animation: fEWCgj 1.2s cubic-bezier(0.5,0,0.5,1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.c3:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
+  animation-delay: -0.45s;
+}
+
+.c3:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+
+.c3:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
+  animation-delay: -0.15s;
+}
+
+.c0 {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #4881F0;
+  border-radius: 18px;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 100%;
+}
+
+.c0:hover {
+  opacity: 70%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+<button
+  className="c0"
+  loading={true}
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+      color="#fff"
+      size={20}
+    >
+      <div
+        className="c3"
+        color="#fff"
+        size={20}
+      />
+    </div>
+    <div>
+      Loading
+    </div>
+  </div>
+</button>
+`;
+
+exports[`Button renders correctly 1`] = `
+.c0 {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #4881F0;
+  border-radius: 18px;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 100%;
+}
+
+.c0:hover {
+  opacity: 70%;
+}
+
+<button
+  className="c0"
+/>
+`;

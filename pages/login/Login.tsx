@@ -1,27 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from "../../components/Checkbox";
+import ErrorPopup from "../../components/ErrorPopup";
+import Link from "next/link";
 import {
-  Page,
   Heading,
   StyledCard,
   PasswordTextField,
   EmailTextField,
   StyledButton,
+  StyledLink,
+  LinkDiv,
 } from "../../page-styles/login/styles";
+import { useMutation } from "@apollo/client";
+import { LOGIN_MUTATION } from "../../page-mutations/login";
+import { useUserDispatch } from "../../context/UserContext/UserContext";
+import SingleCardPage from "../../components/SingleCardPage";
+import { useRouter } from "next/router";
+import newRouteWithQueries from "../../helpers/newRouteWithQueries";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [staySignedInChecked, setStaySignedInChecked] = useState(false);
+  const [errorState, setError] = useState({ error: false, message: "" });
+  const [loading, setLoading] = useState(false);
 
-  const [staySignedInChecked, setStaySignedInChecked] = useState(true);
+  const userDispatch = useUserDispatch();
+  const router = useRouter();
+
+  // Lock email to query param if provided.
+  let emailFromQueryParam: string | null = null;
+  if (router.query.email != null) {
+    emailFromQueryParam = router.query.email as string;
+  }
+
+  useEffect(() => {
+    setTimeout(
+      () => setError({ ...errorState, error: false, message: "" }),
+      10000
+    );
+  });
+
+  const [loginMutation] = useMutation(LOGIN_MUTATION, {
+    errorPolicy: "all",
+  });
+
+  const onLogin = async () => {
+    if ((!emailFromQueryParam && email.length === 0) || password.length === 0) {
+      setError({
+        ...errorState,
+        error: true,
+        message: "Missing email and/or password",
+      });
+      return;
+    }
+    setLoading(true);
+    try {
+      const { data, errors } = await loginMutation({
+        variables: {
+          email: emailFromQueryParam || email,
+          password,
+        },
+      });
+
+      if (errors && errors.length > 0) {
+        setError({ ...errorState, error: true, message: errors[0].message });
+        setLoading(false);
+        return;
+      }
+
+      userDispatch({
+        type: "login",
+        payload: {
+          jid: data.loginUser.token,
+        },
+      });
+      setLoading(false);
+      if (router.query.redirect != null) {
+        router.push({
+          pathname: router.query.redirect as string,
+          query: { code: router.query.code },
+        });
+      } else {
+        router.push("/");
+      }
+    } catch (error) {
+      setLoading(false);
+      setError({ ...errorState, error: true, message: "error" });
+    }
+  };
+
   return (
-    <Page>
+    <SingleCardPage>
+      {" "}
       <StyledCard>
         <Heading>Sign in to your account</Heading>
         <EmailTextField
           label="Email"
-          value={email}
+          value={emailFromQueryParam || email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(event.target.value)
           }
@@ -36,6 +112,7 @@ const Login = () => {
           linkText="Forgot your password?"
           linkValue="/reset-password"
         />
+        <ErrorPopup error={errorState.error} message={errorState.message} />
         <Checkbox
           checked={staySignedInChecked}
           label="Stay signed in"
@@ -43,9 +120,20 @@ const Login = () => {
             setStaySignedInChecked(event.target.checked)
           }
         />
-        <StyledButton>Continue</StyledButton>
+        <StyledButton
+          onClick={() => onLogin()}
+          disabled={loading}
+          loading={loading}
+        >
+          Login
+        </StyledButton>
+        <LinkDiv>
+          <Link href={newRouteWithQueries("/register", router)} passHref>
+            <StyledLink>New to us? Create an Account</StyledLink>
+          </Link>
+        </LinkDiv>
       </StyledCard>
-    </Page>
+    </SingleCardPage>
   );
 };
 

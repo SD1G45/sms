@@ -12,13 +12,18 @@ export const registerUserMutation = extendType({
         lastName: nonNull(stringArg()),
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
-        username: nonNull(stringArg()),
       },
-      resolve: async (
-        _,
-        { firstName, lastName, email, password, username },
-        ctx
-      ) => {
+      resolve: async (_, { firstName, lastName, email, password }, ctx) => {
+        const existingUser = await ctx.prisma.user.findFirst({
+          where: {
+            email: email.toLowerCase(),
+          },
+        });
+
+        if (existingUser != null) {
+          throw new Error("A user with this email already exists!");
+        }
+
         var hashedPassword = hashSync(password, 10);
 
         const newRegisteredUser = await ctx.prisma.user.create({
@@ -33,7 +38,6 @@ export const registerUserMutation = extendType({
         const token = generateJWTToken({
           id: newRegisteredUser.id,
           email: email,
-          username,
         });
 
         return {

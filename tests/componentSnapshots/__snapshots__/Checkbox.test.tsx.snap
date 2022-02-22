@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox renders correctly checked 1`] = `
+.c0 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.c6 {
+  fill: none;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.c2 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clippath: inset(50%);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #4881F0;
+  border-radius: 3px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+}
+
+.c1:focus + .c3 {
+  box-shadow: 0 0 0 3px #4881F0;
+}
+
+.c4 .c5 {
+  visibility: visible;
+}
+
+<label>
+  <div
+    className="c0"
+  >
+    <input
+      checked={true}
+      className="c1 c2"
+      type="checkbox"
+    />
+    <div
+      checked={true}
+      className="c3 c4"
+    >
+      <svg
+        className="c5 c6"
+        viewBox="0 0 24 24"
+      >
+        <polyline
+          points="20 6 9 17 4 12"
+        />
+      </svg>
+    </div>
+  </div>
+  <span
+    style={
+      Object {
+        "marginLeft": 8,
+      }
+    }
+  />
+</label>
+`;
+
+exports[`Checkbox renders correctly unchecked 1`] = `
+.c0 {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.c6 {
+  fill: none;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.c2 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clippath: inset(50%);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c4 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #9ED7F6;
+  border-radius: 3px;
+  -webkit-transition: all 150ms;
+  transition: all 150ms;
+}
+
+.c1:focus + .c3 {
+  box-shadow: 0 0 0 3px #4881F0;
+}
+
+.c4 .c5 {
+  visibility: hidden;
+}
+
+<label>
+  <div
+    className="c0"
+  >
+    <input
+      checked={false}
+      className="c1 c2"
+      type="checkbox"
+    />
+    <div
+      checked={false}
+      className="c3 c4"
+    >
+      <svg
+        className="c5 c6"
+        viewBox="0 0 24 24"
+      >
+        <polyline
+          points="20 6 9 17 4 12"
+        />
+      </svg>
+    </div>
+  </div>
+  <span
+    style={
+      Object {
+        "marginLeft": 8,
+      }
+    }
+  />
+</label>
+`;

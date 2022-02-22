@@ -119,6 +119,8 @@ export const DropDownCard = styled(Card)`
   position: absolute;
   width: 100%;
   top: 0px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const StyledSearchBar = styled(SearchBar)`
