@@ -13,7 +13,6 @@ import {
 import { HeaderDiv } from "../../../page-styles/campaigns/styles";
 import SideNav from "../../../components/SideNav";
 import SearchBar from "../../../components/SearchBar";
-import Button from "../../../components/Button";
 import CustomersTable from "../../../components/CustomersTable";
 
 const View = () => {
@@ -43,6 +42,11 @@ const View = () => {
         ? customersQueryResult.data.customerListCustomers 
         : [];
     
+    const customerListName = 
+        customersQueryResult.data !== undefined 
+        ? customersQueryResult.data.customerListCustomers[0].name 
+        : "[Customer List]";
+
     for (let i = 0; i < customers.length; i++) {
         const currCustomer = customers[i].customer;
         data.push([
@@ -58,12 +62,11 @@ const View = () => {
             <ColumnDiv>
                 <RowDiv>
                     <HeaderDiv>
-                        <StyledHeader>Customer Analytics</StyledHeader>
+                        <StyledHeader>"{customerListName}" Analytics</StyledHeader>
                     </HeaderDiv>
                     <SearchDiv>
                         <SearchBar value={""} onValueChange={() => { }} />
                     </SearchDiv>
-                    <Button>Create New Customer List</Button>
                 </RowDiv>
                 <CustomersTable data={data} ids={headers} view={true}/>
             </ColumnDiv>
