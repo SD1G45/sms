@@ -118,7 +118,8 @@ const CreateCoupon: React.FC = () => {
     }
 
     const today = new Date();
-    if (dateTime.getDate() < today.getDate()) {
+    if (dateTime.getTime() < today.getTime()) {
+      console.log(dateTime.getTime());
       setError({
         ...errorState,
         error: true,
@@ -130,6 +131,7 @@ const CreateCoupon: React.FC = () => {
     setLoading(true);
 
     try {
+      console.log(dateTime);
       const { data, errors } = await newCouponMutation({
         variables: {
           name: title,

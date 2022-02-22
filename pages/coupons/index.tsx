@@ -12,10 +12,9 @@ import { HeaderDiv } from "../../page-styles/keywords/create/styles";
 import Button from "../../components/Button";
 import Table from "../../components/Table";
 import { useRouter } from "next/router";
-import { COUPON_QUERY } from "../../page-queries/coupons"
+import { COUPON_QUERY } from "../../page-queries/coupons";
 import { useLazyQuery } from "@apollo/client";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
-
 
 const index = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -42,18 +41,14 @@ const index = () => {
   useEffect(() => {
     getCoupons({
       variables: {
-        businessId:
-          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d"
-      }
-    })
+        businessId: businessState?.businessId,
+      },
+    });
   }, [getCoupons, businessState]);
 
-  const coupons = 
-    couponsQueryResult.data != undefined
-    ? couponsQueryResult.data.coupons
-    : [];
-  
-  
+  const coupons =
+    couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
+
   for (let i = 0; i < coupons.length; i++) {
     const curr = coupons[i];
     data.push([
@@ -65,7 +60,7 @@ const index = () => {
       curr.opened,
       curr.redeemed,
       "2.3%",
-    ])
+    ]);
   }
 
   const onClick = () => {

@@ -29,7 +29,7 @@ export const newCampaignMutation = extendType({
             couponsOpened: 0,
             couponsRedeemed: 0,
             couponId,
-            businessId
+            businessId,
           },
         });
 
@@ -62,9 +62,27 @@ export const newCampaignMutation = extendType({
               id: list.customerId,
             },
           });
+
+          if (!customer) {
+            return;
+          }
+
+          const customer_Coupon = await ctx.prisma.customer_Coupon.create({
+            data: {
+              customerId: customer?.id,
+              couponId: couponId,
+              redeemed: false,
+              opened: false,
+            },
+          });
+
+          console.log(customer_Coupon.id);
           const customerPhoneNumber = customer?.phoneNumber;
+
+          const messageWithCoupon = `${message} https://trism.co/reward/${customer_Coupon.id}`;
+
           await client.messages.create({
-            body: message,
+            body: messageWithCoupon,
             from: businessPhoneNumber,
             to: customerPhoneNumber,
           });

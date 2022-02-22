@@ -78,6 +78,7 @@ const Navbar = () => {
   if (currentPath.startsWith("/business/create")) return <></>;
   if (currentPath.startsWith("/business/invite")) return <></>;
   if (currentPath.startsWith("/business/join")) return <></>;
+  if (currentPath.startsWith("/reward")) return <></>;
 
   return (
     <>
