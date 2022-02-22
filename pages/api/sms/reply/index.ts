@@ -64,18 +64,19 @@ export default async function handler(
       },
     });
 
-    const link =
-      process.env.ROOT_URL +
-      keyword.couponId +
-      "?customer=" +
-      customerPhoneNumber;
+    const customer_Coupon = await prisma.customer_Coupon.create({
+      data: {
+        customerId: customerWithPhoneNumber?.id,
+        couponId: keyword.couponId,
+        redeemed: false,
+        opened: false,
+      },
+    });
 
-    const messageWithLink = keyword.message.replace("{coupon}", link);
-
-    console.log(messageWithLink);
+    const messageWithCoupon = `${keyword.message} https://trism.co/reward/${customer_Coupon.id}`;
 
     await client.messages.create({
-      body: messageWithLink,
+      body: messageWithCoupon,
       from: businessPhoneNumber,
       to: customerPhoneNumber,
     });
