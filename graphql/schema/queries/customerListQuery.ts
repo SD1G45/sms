@@ -1,11 +1,11 @@
 import { extendType, list, nonNull, stringArg } from "nexus";
-import { Coupon } from "../objects";
+import { CustomerList } from "../objects";
 
 export const customerListQuery = extendType({
   type: "Query",
   definition(t) {
     t.field("customerLists", {
-      type: list(Coupon),
+      type: list(CustomerList),
       args: {
         businessId: nonNull(stringArg()),
       },

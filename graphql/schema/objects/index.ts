@@ -11,6 +11,7 @@ import { AvailablePhoneNumber } from "./AvailablePhoneNumber";
 import { DateScalar } from "./DateScalar";
 import { BusinessInviteCode } from "./BusinessInviteCode";
 import { CouponInstance } from "./CouponInstance";
+import { Customer_CustomerList } from "./Customer_CustomerList";
 
 export {
   AvailablePhoneNumber,
@@ -26,4 +27,5 @@ export {
   DateScalar,
   BusinessInviteCode,
   CouponInstance,
+  Customer_CustomerList
 };

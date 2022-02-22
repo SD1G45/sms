@@ -18,6 +18,8 @@ export const CUSTOMER_LIST_QUERY = gql`
     customerLists(businessId: $businessId) {
       id
       name
+      description
+      count
     }
   }
 `;
