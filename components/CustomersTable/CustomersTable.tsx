@@ -46,7 +46,7 @@ function mapDataToBodyComponent(data: string[][], page: number, ids: string[], v
                 <Link href={"/customers/view/" + ids[j]}>
                     <span>
                     {val}
-                    <ViewButton>
+                    <ViewButton disabled={val.charAt(0) == '0'}>
                         View Customers
                     </ViewButton>
                     </span>

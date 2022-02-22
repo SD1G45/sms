@@ -47,11 +47,15 @@ const Customers = () => {
         const curr = customerLists[i];
         data.push([
             curr.name,
-            curr.description + "-",
+            String(curr.description),
             curr.count + " total customers"
         ]);
         ids.push(curr.id);
     }
+
+    const onClick = () => {
+        router.push(createPath);
+      };
 
     return (
         <ContainerDiv>
@@ -64,7 +68,7 @@ const Customers = () => {
                     <SearchDiv>
                         <SearchBar value={""} onValueChange={() => { }} />
                     </SearchDiv>
-                    <Button>Create New Customer List</Button>
+                    <Button onClick={onClick}>Create New Customer List</Button>
                 </RowDiv>
                 <CustomersTable data={data} ids={ids} view={false}/>
             </ColumnDiv>
