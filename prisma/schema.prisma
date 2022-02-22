@@ -48,7 +48,7 @@ enum Role {
 }
 
 model Coupon {
-  id             String     @id @default(uuid())
+  id             String            @id @default(uuid())
   name           String
   title          String
   description    String
@@ -57,10 +57,11 @@ model Coupon {
   sent           Int
   opened         Int
   redeemed       Int
-  business       Business   @relation(fields: [businessId], references: [id])
+  business       Business          @relation(fields: [businessId], references: [id])
   businessId     String
   campaign       Campaign[]
   keyword        Keyword[]
+  customers      Customer_Coupon[]
 }
 
 model Campaign {
@@ -86,6 +87,16 @@ model Campaign_Customer_List {
   customerListId String
 }
 
+model Customer_Coupon {
+  id         String   @id @default(uuid())
+  redeemed   Boolean
+  opened     Boolean
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+  coupon     Coupon   @relation(fields: [couponId], references: [id])
+  couponId   String
+}
+
 model Customer {
   id                     String                   @id @default(uuid())
   phoneNumber            String                   @unique
@@ -93,6 +104,7 @@ model Customer {
   lastName               String?
   password               String?
   Customer_List_Customer Customer_List_Customer[]
+  coupons                Customer_Coupon[]
 }
 
 model Customer_List_Customer {

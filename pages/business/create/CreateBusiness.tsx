@@ -268,7 +268,7 @@ const PickPhoneNumber: React.FC = () => {
   );
 };
 
-const steps = ["Name", "Logo", "Payment Method", "Phone number"];
+const steps = ["Name", "Logo", "Phone number"];
 
 interface Business {
   name: string;

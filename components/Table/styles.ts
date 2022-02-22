@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../Button";
 
 export const DivContainer = styled.div`
   padding-left: 50px;
@@ -34,6 +35,8 @@ export const Header = styled.th`
   padding-top: 15px;
   font-size: 14px;
 `;
+
+export const StyledButton = styled(Button)``;
 
 export const HeaderLong = styled.th`
   border-bottom: 2.75px solid #c4c4c4;

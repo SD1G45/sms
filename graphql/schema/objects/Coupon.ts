@@ -10,6 +10,22 @@ export const Coupon = objectType({
     t.string("primaryColor");
     t.date("expirationDate");
     t.string("businessId");
+    t.field("business", {
+      type: "Business",
+      resolve: async (root, _args, ctx) => {
+        if (!root.businessId) {
+          throw new Error("No business.");
+        }
+
+        const business = await ctx.prisma.business.findUnique({
+          where: {
+            id: root.businessId,
+          },
+        });
+
+        return business;
+      },
+    });
     t.int("opened");
     t.int("redeemed");
     t.int("sent");

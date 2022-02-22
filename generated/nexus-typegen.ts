@@ -86,6 +86,13 @@ export interface NexusGenObjects {
     sent?: number | null; // Int
     title?: string | null; // String
   }
+  CouponInstance: { // root type
+    couponId?: string | null; // String
+    customerId?: string | null; // String
+    id?: string | null; // String
+    opened?: boolean | null; // Boolean
+    redeemed?: boolean | null; // Boolean
+  }
   Customer: { // root type
     firstName?: string | null; // String
     id?: string | null; // String
@@ -174,6 +181,7 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
   }
   Coupon: { // field return type
+    business: NexusGenRootTypes['Business'] | null; // Business
     businessId: string | null; // String
     description: string | null; // String
     expirationDate: NexusGenScalars['Date'] | null; // Date
@@ -184,6 +192,15 @@ export interface NexusGenFieldTypes {
     redeemed: number | null; // Int
     sent: number | null; // Int
     title: string | null; // String
+  }
+  CouponInstance: { // field return type
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
+    couponId: string | null; // String
+    customer: NexusGenRootTypes['Customer'] | null; // Customer
+    customerId: string | null; // String
+    id: string | null; // String
+    opened: boolean | null; // Boolean
+    redeemed: boolean | null; // Boolean
   }
   Customer: { // field return type
     firstName: string | null; // String
@@ -241,6 +258,7 @@ export interface NexusGenFieldTypes {
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
+    couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
@@ -292,6 +310,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
   }
   Coupon: { // field return type name
+    business: 'Business'
     businessId: 'String'
     description: 'String'
     expirationDate: 'Date'
@@ -302,6 +321,15 @@ export interface NexusGenFieldTypeNames {
     redeemed: 'Int'
     sent: 'Int'
     title: 'String'
+  }
+  CouponInstance: { // field return type name
+    coupon: 'Coupon'
+    couponId: 'String'
+    customer: 'Customer'
+    customerId: 'String'
+    id: 'String'
+    opened: 'Boolean'
+    redeemed: 'Boolean'
   }
   Customer: { // field return type name
     firstName: 'String'
@@ -359,6 +387,7 @@ export interface NexusGenFieldTypeNames {
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
     campaign: 'Campaign'
+    couponInstance: 'CouponInstance'
     coupons: 'Coupon'
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
@@ -464,6 +493,9 @@ export interface NexusGenArgTypes {
     }
     campaign: { // args
       businessId: string; // String!
+    }
+    couponInstance: { // args
+      id: string; // String!
     }
     coupons: { // args
       businessId: string; // String!

@@ -72,6 +72,8 @@ export default async function handler(
 
     const messageWithLink = keyword.message.replace("{coupon}", link);
 
+    console.log(messageWithLink);
+
     await client.messages.create({
       body: messageWithLink,
       from: businessPhoneNumber,
