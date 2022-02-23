@@ -12,6 +12,8 @@ import { resetPasswordMutation } from "./resetPassword";
 import { inviteAccount } from "./inviteAccount";
 import { acceptInvitation } from "./acceptInviteMutation";
 import { newCustomerListCustomerMutation } from "./newCustomerListCustomerMutation";
+import { redeemCouponMutation } from "./redeemCoupon";
+import { openCouponMutation } from "./openCoupon";
 
 export {
   registerUserMutation,
@@ -28,4 +30,6 @@ export {
   inviteAccount,
   acceptInvitation,
   newCustomerListCustomerMutation,
+  redeemCouponMutation,
+  openCouponMutation,
 };
