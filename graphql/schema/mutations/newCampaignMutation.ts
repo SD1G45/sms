@@ -20,12 +20,19 @@ export const newCampaignMutation = extendType({
         { name, message, couponId, customerListId, businessId },
         ctx
       ) => {
+        const customer_List_Customer =
+          await ctx.prisma.customer_List_Customer.findMany({
+            where: {
+              customerListId,
+            },
+          });
+
         const newCampaign = await ctx.prisma.campaign.create({
           data: {
             name,
             message,
             dateSent: new Date(),
-            messagesSent: 0,
+            messagesSent: customer_List_Customer.length,
             couponsOpened: 0,
             couponsRedeemed: 0,
             couponId,
@@ -39,13 +46,6 @@ export const newCampaignMutation = extendType({
             customerListId: customerListId,
           },
         });
-
-        const customer_List_Customer =
-          await ctx.prisma.customer_List_Customer.findMany({
-            where: {
-              customerListId,
-            },
-          });
 
         const business = await ctx.prisma.business.findUnique({
           where: {
@@ -76,7 +76,6 @@ export const newCampaignMutation = extendType({
             },
           });
 
-          console.log(customer_Coupon.id);
           const customerPhoneNumber = customer?.phoneNumber;
 
           const messageWithCoupon = `${message} https://trism.co/reward/${customer_Coupon.id}`;

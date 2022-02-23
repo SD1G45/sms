@@ -63,10 +63,15 @@ const Campaigns = () => {
       parseDate(curr.dateSent),
       curr.messagesSent,
       "100%",
-      curr.couponsOpened,
-      curr.couponsRedeemed,
-      "75%",
-      "80%",
+      curr.coupon.openCount,
+      curr.coupon.redeemCount,
+      `${
+        Math.round((curr.coupon.openCount / (curr.sentCount || 1)) * 100) / 100
+      }%`,
+      `${
+        Math.round((curr.coupon.redeemCount / (curr.sentCount || 1)) * 100) /
+        100
+      }%`,
     ]);
   }
 

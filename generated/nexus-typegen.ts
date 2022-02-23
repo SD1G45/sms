@@ -164,6 +164,7 @@ export interface NexusGenFieldTypes {
   }
   Campaign: { // field return type
     businessId: string | null; // String
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     couponId: string | null; // String
     couponsOpened: number | null; // Int
     couponsRedeemed: number | null; // Int
@@ -291,6 +292,7 @@ export interface NexusGenFieldTypeNames {
   }
   Campaign: { // field return type name
     businessId: 'String'
+    coupon: 'Coupon'
     couponId: 'String'
     couponsOpened: 'Int'
     couponsRedeemed: 'Int'
