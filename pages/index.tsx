@@ -10,7 +10,7 @@ import {
   StyledCard,
   BorderDiv,
   ChartDiv,
-  StyledHeader
+  StyledHeader,
 } from "../page-styles/dashboard/styles";
 import Link from "next/link";
 import { useBusinessState } from "../context/BusinessContext/BusinessContext";
@@ -41,7 +41,7 @@ const Dashboard = () => {
         </ContainerDiv>
         <ContainerDiv>
           <BorderDiv>
-            <ChartDiv> 
+            <ChartDiv>
               <LineChart
                 title="Coupons"
                 data={couponData}
@@ -67,12 +67,48 @@ const Dashboard = () => {
         </ContainerDiv>
       </>
     );
-  }
+  };
 
+  // Temporary fix - just for demo
+  const AnalyticsMonthly = () => {
+    return (
+      <>
+        <ContainerDiv>
+          <StyledHeader>This Month</StyledHeader>
+        </ContainerDiv>
+        <ContainerDiv>
+          <BorderDiv>
+            <ChartDiv>
+              <LineChart
+                title="Coupons"
+                data={couponData}
+                height={300}
+                flexure={1}
+              />
+            </ChartDiv>
+            <ChartDiv>
+              <LineChart
+                title="Customers"
+                data={customersData}
+                height={300}
+                flexure={1}
+              />
+            </ChartDiv>
+            <BillingCycleColumn
+              spentAmount="$12,325.10"
+              salesAmount="$1952.00"
+              billingCycle="10/07/21 - 10/31/21"
+              billingCycleRoute="/billing"
+            />
+          </BorderDiv>
+        </ContainerDiv>
+      </>
+    );
+  };
   return (
     <>
-      <Analytics/>
-      <Analytics/>
+      <Analytics />
+      <AnalyticsMonthly />
 
       <ContainerDiv>
         <ColumnDiv>
