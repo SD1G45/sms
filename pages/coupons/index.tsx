@@ -53,13 +53,13 @@ const index = () => {
     const curr = coupons[i];
     data.push([
       curr.name,
-      "10/10/10",
-      "10/20/21",
-      "4321",
-      curr.sent,
-      curr.opened,
-      curr.redeemed,
-      "2.3%",
+      "02/23/10",
+      "02/23/21",
+      curr.sentCount,
+      curr.openCount,
+      curr.redeemCount,
+      `${Math.round((curr.openCount / (curr.sentCount || 1)) * 100) / 100}%`,
+      `${Math.round((curr.redeemCount / (curr.sentCount || 1)) * 100) / 100}%`,
     ]);
   }
 

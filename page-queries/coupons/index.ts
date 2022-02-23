@@ -4,8 +4,9 @@ export const COUPON_QUERY = gql`
   query Coupon($businessId: String!) {
     coupons(businessId: $businessId) {
       name
-      opened
-      redeemed
-      sent
+      openCount
+      redeemCount
+      sentCount
     }
-  }`
+  }
+`;
