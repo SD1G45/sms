@@ -90,6 +90,7 @@ const Register = () => {
         type: "login",
         payload: {
           jid: data.registerUser.token,
+          firstName: data.registerUser.user.firstName,
         },
       });
       setLoading(false);

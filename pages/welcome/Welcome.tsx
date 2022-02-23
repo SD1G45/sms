@@ -15,7 +15,7 @@ const Welcome = () => {
   return (
     <SingleCardPage>
       <StyledCard>
-        <Heading>Welcome to trism, [user]! </Heading>
+        <Heading>Welcome to trism, {userState?.firstName}! </Heading>
         <SetupMessage>
           Let&apos;s get you set up with your business...
         </SetupMessage>
