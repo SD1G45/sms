@@ -80,10 +80,7 @@ export interface NexusGenObjects {
     expirationDate?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     name?: string | null; // String
-    opened?: number | null; // Int
     primaryColor?: string | null; // String
-    redeemed?: number | null; // Int
-    sent?: number | null; // Int
     title?: string | null; // String
   }
   CouponInstance: { // root type
@@ -187,10 +184,10 @@ export interface NexusGenFieldTypes {
     expirationDate: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     name: string | null; // String
-    opened: number | null; // Int
+    openCount: number | null; // Int
     primaryColor: string | null; // String
-    redeemed: number | null; // Int
-    sent: number | null; // Int
+    redeemCount: number | null; // Int
+    sentCount: number | null; // Int
     title: string | null; // String
   }
   CouponInstance: { // field return type
@@ -316,10 +313,10 @@ export interface NexusGenFieldTypeNames {
     expirationDate: 'Date'
     id: 'String'
     name: 'String'
-    opened: 'Int'
+    openCount: 'Int'
     primaryColor: 'String'
-    redeemed: 'Int'
-    sent: 'Int'
+    redeemCount: 'Int'
+    sentCount: 'Int'
     title: 'String'
   }
   CouponInstance: { // field return type name
