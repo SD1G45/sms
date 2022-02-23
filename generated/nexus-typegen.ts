@@ -113,10 +113,7 @@ export interface NexusGenObjects {
     keyword_id?: string | null; // String
   }
   Keyword: { // root type
-    couponsOpened?: number | null; // Int
-    couponsRedeemed?: number | null; // Int
-    customersOnboarded?: number | null; // Int
-    dateCreated?: NexusGenScalars['Date'] | null; // Date
+    couponId?: string | null; // String
     description?: string | null; // String
     id?: string | null; // String
     keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
@@ -225,10 +222,8 @@ export interface NexusGenFieldTypes {
     keyword_id: string | null; // String
   }
   Keyword: { // field return type
-    couponsOpened: number | null; // Int
-    couponsRedeemed: number | null; // Int
-    customersOnboarded: number | null; // Int
-    dateCreated: NexusGenScalars['Date'] | null; // Date
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
+    couponId: string | null; // String
     description: string | null; // String
     id: string | null; // String
     keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
@@ -354,10 +349,8 @@ export interface NexusGenFieldTypeNames {
     keyword_id: 'String'
   }
   Keyword: { // field return type name
-    couponsOpened: 'Int'
-    couponsRedeemed: 'Int'
-    customersOnboarded: 'Int'
-    dateCreated: 'Date'
+    coupon: 'Coupon'
+    couponId: 'String'
     description: 'String'
     id: 'String'
     keyWordCustomerList: 'KeyWord_CustomerList'
