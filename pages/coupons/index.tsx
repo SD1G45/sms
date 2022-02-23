@@ -58,8 +58,8 @@ const index = () => {
       curr.sentCount,
       curr.openCount,
       curr.redeemCount,
-      `${Math.round((curr.openCount / (curr.sentCount || 1)) * 100) / 100}%`,
-      `${Math.round((curr.redeemCount / (curr.sentCount || 1)) * 100) / 100}%`,
+      `${Math.round((curr.openCount / (curr.sentCount || 1)) * 100)}%`,
+      `${Math.round((curr.redeemCount / (curr.sentCount || 1)) * 100)}%`,
     ]);
   }
 

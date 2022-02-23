@@ -65,13 +65,8 @@ const Campaigns = () => {
       "100%",
       curr.coupon.openCount,
       curr.coupon.redeemCount,
-      `${
-        Math.round((curr.coupon.openCount / (curr.sentCount || 1)) * 100) / 100
-      }%`,
-      `${
-        Math.round((curr.coupon.redeemCount / (curr.sentCount || 1)) * 100) /
-        100
-      }%`,
+      `${Math.round((curr.coupon.openCount / (curr.sentCount || 1)) * 100)}%`,
+      `${Math.round((curr.coupon.redeemCount / (curr.sentCount || 1)) * 100)}%`,
     ]);
   }
 
