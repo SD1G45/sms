@@ -24,7 +24,10 @@ export default async function handler(
     const textBody = req.body.Body;
 
     const keyword = await prisma.keyword.findFirst({
-      where: { keyword: textBody, businessId: businessWithPhoneNumber.id },
+      where: {
+        keyword: textBody.toLowerCase(),
+        businessId: businessWithPhoneNumber.id,
+      },
     });
 
     if (keyword == null) {

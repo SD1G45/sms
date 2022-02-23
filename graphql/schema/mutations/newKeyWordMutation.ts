@@ -20,7 +20,7 @@ export const newKeyWordMutation = extendType({
       ) => {
         const newKeyWord = await ctx.prisma.keyword.create({
           data: {
-            keyword,
+            keyword: keyword.toLowerCase(),
             message,
             description,
             customersOnboarded: 0,
