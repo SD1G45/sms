@@ -1,7 +1,9 @@
-import { gql } from "@apollo/client";
-import React, { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import Timer from "../../../components/Timer";
 import { initializeApollo } from "../../../lib/apolloClient";
+import { OPEN_COUPON, REDEEM_COUPON } from "../../../page-mutations/reward";
 import {
   Bottom,
   Container,
@@ -34,11 +36,21 @@ interface Props {
   opened: boolean;
 }
 
-const index: React.FC<Props> = ({ coupon, redeemed }) => {
+const index: React.FC<Props> = ({ coupon, redeemed, opened }) => {
   const [isRedeemed, setRedeemed] = useState(redeemed);
-  console.log(coupon.expirationDate);
+  const router = useRouter();
+
+  const [openMutation] = useMutation(OPEN_COUPON);
+  const [redeemMutation] = useMutation(REDEEM_COUPON);
+
+  useEffect(() => {
+    if (!opened) {
+      openMutation({ variables: { id: router.query.id } });
+    }
+  }, []);
 
   const handleRedeem = () => {
+    redeemMutation({ variables: { id: router.query.id } });
     setRedeemed(true);
   };
 
