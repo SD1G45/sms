@@ -17,6 +17,7 @@ import { useBusinessState } from "../context/BusinessContext/BusinessContext";
 import dynamic from "next/dynamic";
 import sampleData from "../sampleData/sampleData";
 import BillingCycleColumn from "../components/BillingCycleColumn";
+import LogoutButton from "../components/LogoutButton";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
