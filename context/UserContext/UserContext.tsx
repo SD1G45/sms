@@ -25,7 +25,10 @@ const userReducer = (state: State | null, action: Action) => {
     }
 
     case "logout": {
-      Cookie.remove("token");
+      Object.keys(Cookie.get()).forEach(function (cookieName) {
+        Cookie.remove(cookieName);
+      });
+
       return null;
     }
 
