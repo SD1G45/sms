@@ -4,8 +4,10 @@ import { useRouter } from "next/router";
 import { useApolloClient } from "@apollo/client";
 import { useUserDispatch } from "../../context/UserContext";
 import Button from "../Button";
+import { LogoutButtonProps } from "./types";
+import { VariantButton } from "./styles";
 
-const LogoutButton = () => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
   const [loading, setLoading] = useState(false);
   const apolloClient = useApolloClient();
   const userDispatch = useUserDispatch();
@@ -30,9 +32,14 @@ const LogoutButton = () => {
   };
 
   return (
-    <Button onClick={() => onLogout()} loading={loading}>
+    <VariantButton 
+      onClick={() => onLogout()} 
+      loading={loading}
+      variant={variant}
+      invert={invert}
+    >
       Logout
-    </Button>
+    </VariantButton>
   );
 }
 
