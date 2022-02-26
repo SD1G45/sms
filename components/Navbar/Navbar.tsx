@@ -26,6 +26,7 @@ import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
 import { businessQuery } from "../../graphql/schema/queries";
+import LogoutButton from "../LogoutButton";
 
 const Navbar = () => {
   const router = useRouter();
@@ -113,6 +114,8 @@ const Navbar = () => {
           </Link>
           <Spacing />
           <Image src="/icons/profile.svg" width={70} height={50} />
+          <Spacing />
+          <LogoutButton variant="header"/>
         </ControlsSection>
       </PrimaryNavbar>
       {!currentPath.startsWith("/settings") &&
