@@ -1,6 +1,6 @@
 import { extendType, nonNull, stringArg } from "nexus";
-import { AvailablePhoneNumber } from "../objects";
-import client from "../../../lib/twilioClient";
+import { AvailablePhoneNumber } from "../../objects";
+import client from "../../../../lib/twilioClient";
 
 export const provisionPhoneNumberMutation = extendType({
   type: "Mutation",
