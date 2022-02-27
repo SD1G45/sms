@@ -14,6 +14,7 @@ import { acceptInvitation } from "./business/acceptInviteMutation";
 import { newCustomerListCustomerMutation } from "./create/newCustomerListCustomerMutation";
 import { redeemCouponMutation } from "./coupon/redeemCoupon";
 import { openCouponMutation } from "./coupon/openCoupon";
+import { deleteUserMutation } from "./delete/deleteUserMutation";
 
 export {
   registerUserMutation,
@@ -32,4 +33,5 @@ export {
   newCustomerListCustomerMutation,
   redeemCouponMutation,
   openCouponMutation,
+  deleteUserMutation,
 };
