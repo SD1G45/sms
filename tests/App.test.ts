@@ -26,7 +26,7 @@ beforeAll(async () => {
 }, 30_000);
 
 describe("Register process", () => {
-  it("Correctly on login page at start", async () => {
+  it("is on login page at start", async () => {
     await sleep(1_000);
   
     if (!page) {
@@ -36,7 +36,7 @@ describe("Register process", () => {
     await expect(page).toMatch('Login')
   });
 
-  it("Moves to register page on clicking link", async () => {
+  it("moves to register page on clicking link", async () => {
     if (!page) {
       throw new Error("Error while loading Register page");
     }
@@ -54,7 +54,7 @@ describe("Register process", () => {
     await expect(page).toMatch('register');
   });
 
-  it("Enter false registration credentials", async () => {
+  it("enters and catches false registration credentials", async () => {
     if (!page) {
       throw new Error("Error while loading App page");
     }
@@ -64,11 +64,22 @@ describe("Register process", () => {
     await page.type("#email", testUser.email);
     await page.type("#password", testUser.password);
     await page.type("#confirm-password", testUser.badPassowrd);
-    await page.click("#register");
 
     const text = await page.$eval('p', element => element.textContent);
     await expect(text).toMatch("Passwords don't match");
+  });
 
+  it("enters and passes correct registration credentials", async () => {
+    if (!page) {
+      throw new Error("Error while loading App page");
+    }
+
+    await page.click("#confirm-password", {clickCount: 3});
+    await page.keyboard.press("Backspace");
+    await page.type("#confirm-password", testUser.password);
+    await page.click("#register");
+
+    await page.waitForNavigation();
     await expect(page).toMatch('/');
   });
 })
