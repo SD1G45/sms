@@ -11,6 +11,8 @@ exports[`Button renders as disabled 1`] = `
   cursor: not-allowed;
   font-size: 1rem;
   opacity: 40%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .c0:hover {
@@ -69,6 +71,8 @@ exports[`Button renders as loading 1`] = `
   cursor: pointer;
   font-size: 1rem;
   opacity: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .c0:hover {
@@ -126,6 +130,8 @@ exports[`Button renders correctly 1`] = `
   cursor: pointer;
   font-size: 1rem;
   opacity: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .c0:hover {
