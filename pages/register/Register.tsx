@@ -120,6 +120,7 @@ const Register = () => {
         <NameContainer>
           <FirstNameTextField
             label="First Name"
+            id="first-name"
             value={firstName}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setFirstName(event.target.value)
@@ -127,6 +128,7 @@ const Register = () => {
           />
           <LastNameTextField
             label="Last Name"
+            id="last-name"
             value={lastName}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setLastName(event.target.value)
@@ -135,6 +137,7 @@ const Register = () => {
         </NameContainer>
         <EmailTextField
           label="Email"
+          id="email"
           value={emailFromQueryParam || email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(event.target.value)
@@ -142,6 +145,7 @@ const Register = () => {
         />
         <PasswordTextField
           label="Password"
+          id="password"
           value={password}
           type="password"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -150,6 +154,7 @@ const Register = () => {
         />
         <PasswordTextField
           label="Confirm password"
+          id="confirm-password"
           value={confirmPassword}
           type="password"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -163,6 +168,7 @@ const Register = () => {
           onClick={() => onRegister()}
           disabled={loading}
           loading={loading}
+          id="register"
         >
           Create Account
         </StyledButton>

@@ -1,7 +1,7 @@
 // TODO: support multiple customerListIds (should be passed an array of IDs)
 import { prisma } from ".prisma/client";
 import { extendType, nonNull, stringArg } from "nexus";
-import client from "../../../lib/twilioClient";
+import client from "../../../../lib/twilioClient";
 
 export const newCampaignMutation = extendType({
   type: "Mutation",

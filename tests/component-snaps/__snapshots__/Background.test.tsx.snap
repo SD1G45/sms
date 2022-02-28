@@ -15,7 +15,7 @@ exports[`Background renders correctly 1`] = `
 .c1 {
   height: 100vh;
   width: 230vw;
-  position: absolute;
+  position: fixed;
   bottom: 55vh;
   left: -60vw;
   background-color: #f7f8ff;

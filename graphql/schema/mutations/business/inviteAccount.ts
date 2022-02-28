@@ -1,7 +1,7 @@
 import { extendType, nonNull, stringArg } from "nexus";
 import nodemailer from "nodemailer";
 import { generate } from "randomstring";
-import { Role } from "../enums";
+import { Role } from "../../enums";
 
 export const inviteAccount = extendType({
   type: "Mutation",

@@ -1,5 +1,5 @@
 import { extendType, nonNull, stringArg } from "nexus";
-import { generateJWTToken } from "../../auth";
+import { generateJWTToken } from "../../../auth";
 import { hashSync } from "bcrypt";
 
 export const registerUserMutation = extendType({
