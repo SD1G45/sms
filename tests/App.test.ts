@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/client";
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
 import { testUser, cleanDatabase } from "./utils/e2eHelpers";
