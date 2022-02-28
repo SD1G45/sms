@@ -1,5 +1,7 @@
+import { useMutation } from "@apollo/client";
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
+import { testUser, cleanDatabase } from "./utils/e2eHelpers";
 
 let browser: puppeteer.Browser | undefined;
 let page: puppeteer.Page | undefined;
@@ -8,6 +10,8 @@ let rootUrl = getRootUrl();
 const sleep = async (ms: number) => await new Promise((res) => setTimeout(res, ms));
 
 beforeAll(async () => {
+  cleanDatabase("Cleaned database - ready for testing.");
+
   browser = await puppeteer.launch({
     headless: true,
     args: [
@@ -34,7 +38,7 @@ describe("Register process", () => {
 
   it("Moves to register page on clicking link", async () => {
     if (!page) {
-      throw new Error("Error while loading App page");
+      throw new Error("Error while loading Register page");
     }
 
     const linkHandlers = await page.$x("//label[contains(., 'New to us? Create an Account')]");
@@ -49,9 +53,28 @@ describe("Register process", () => {
     }
     await expect(page).toMatch('register');
   });
+
+  it("Enter false registration credentials", async () => {
+    if (!page) {
+      throw new Error("Error while loading App page");
+    }
+
+    await page.type("#first-name", testUser.firstName);
+    await page.type("#last-name", testUser.lastName);
+    await page.type("#email", testUser.email);
+    await page.type("#password", testUser.password);
+    await page.type("#confirm-password", testUser.badPassowrd);
+    await page.click("#register");
+
+    const text = await page.$eval('p', element => element.textContent);
+    await expect(text).toMatch("Passwords don't match");
+
+    await expect(page).toMatch('/');
+  });
 })
 
 
 afterAll(async () => {
+  await cleanDatabase("Tests finished. Database clean");
   await browser?.close();
 })
