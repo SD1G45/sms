@@ -34,6 +34,8 @@ export const Header = styled.th`
   padding-left: 58px;
   padding-top: 15px;
   font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const StyledButton = styled(Button)``;
@@ -54,11 +56,13 @@ export const Data = styled.td`
   padding-top: 15px;
   font-size: 14px;
   font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const DataEmpty = styled.td`
   border-bottom: 2.75px solid #c4c4c4;
-  padding-bottom: 45px;
+  padding-bottom: 49px;
   padding-right: 60px;
   font-size: 14px;
   font-weight: 500;
