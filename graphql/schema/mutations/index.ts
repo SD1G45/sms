@@ -12,6 +12,7 @@ import { resetPasswordMutation } from "./resetPassword";
 import { inviteAccount } from "./inviteAccount";
 import { acceptInvitation } from "./acceptInviteMutation";
 import { newCustomerListCustomerMutation } from "./newCustomerListCustomerMutation";
+import { editUserMutations } from "./editUserMutations";
 
 export {
   registerUserMutation,
@@ -28,4 +29,5 @@ export {
   inviteAccount,
   acceptInvitation,
   newCustomerListCustomerMutation,
+  editUserMutations
 };
