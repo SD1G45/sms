@@ -8,6 +8,7 @@ import {
   StyledButton,
   StyledCard,
   StyledHeader,
+  StyledLink,
 } from "../../../page-styles/password-reset/styles";
 import {
   CardDescription,
@@ -21,6 +22,9 @@ import Button from "../../../components/Button";
 import ErrorPopup from "../../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
 import { RESET_PASSWORD_MUTATION } from "../../../page-mutations/reset-password";
+import Link from "next/link";
+import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
+import { FcDataEncryption } from "react-icons/fc";
 
 interface ForgotPasswordProps {
   email: string;
@@ -67,18 +71,25 @@ const InitialDisplay: React.FC<InitialDisplayProps> = ({
   setUpdatePassword,
   setForgotPassword,
 }) => {
+  const router = useRouter();
   return (
     <>
       <StyledCard>
         <HeaderDiv>
-          <StyledHeader>Reset Password</StyledHeader>
+          <StyledHeader>
+            <FcDataEncryption />
+            Reset Password
+          </StyledHeader>
         </HeaderDiv>
-        <Button onClick={() => setUpdatePassword(true)}>
+        <StyledButton onClick={() => setUpdatePassword(true)}>
           I know my password
-        </Button>
-        <Button onClick={() => setForgotPassword(true)}>
+        </StyledButton>
+        <StyledButton onClick={() => setForgotPassword(true)}>
           I forgot my password
-        </Button>
+        </StyledButton>
+        <Link href={newRouteWithQueries("/settings", router)}>
+          <StyledLink>Back to settings</StyledLink>
+        </Link>
       </StyledCard>
     </>
   );
