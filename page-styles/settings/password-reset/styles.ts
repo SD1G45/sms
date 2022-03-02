@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Button from "../../components/Button";
-import Card from "../../components/Card";
-import TextField from "../../components/TextField";
+import Button from "../../../components/Button";
+import Card from "../../../components/Card";
+import TextField from "../../../components/TextField";
 
 export const StyledHeader = styled.h1`
   font-size: 2rem;

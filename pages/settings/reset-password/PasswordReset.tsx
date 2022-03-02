@@ -9,7 +9,7 @@ import {
   StyledCard,
   StyledHeader,
   StyledLink,
-} from "../../../page-styles/password-reset/styles";
+} from "../../../page-styles/settings/password-reset/styles";
 import {
   CardDescription,
   CardHeading,
