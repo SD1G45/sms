@@ -1,7 +1,7 @@
-import styled, { css, DefaultTheme} from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 import Button from "../Button";
 
-const variantStyles = (theme: DefaultTheme, variant = 'header') =>
+const variantStyles = (theme: DefaultTheme, variant = "header") =>
   ({
     header: css`
       border-radius: 30px;
@@ -11,6 +11,6 @@ const variantStyles = (theme: DefaultTheme, variant = 'header') =>
     `,
   }[variant]);
 
-  export const VariantButton = styled(Button)<{ variant?: string }>`
-    ${({ theme, variant }) => variantStyles(theme, variant)}
-  `;
+export const VariantButton = styled(Button)<{ variant?: string }>`
+  ${({ theme, variant }) => variantStyles(theme, variant)}
+`;

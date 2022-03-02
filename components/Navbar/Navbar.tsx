@@ -14,6 +14,7 @@ import {
   BusinessSelector,
   BusinessListItem,
   BusinessListItemLogo,
+  StyledImage,
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -108,14 +109,18 @@ const Navbar = () => {
           )}
         </BusinessInfoSection>
         <ControlsSection>
-          <CreateButton invert>Create</CreateButton>
-          <Link href="/settings">
-            <Image src="/icons/settings.svg" width={50} height={50} />
+          <Link href="/">
+            <StyledImage src="/icons/home.svg" width={130} height={130} />
           </Link>
           <Spacing />
-          <Image src="/icons/profile.svg" width={70} height={50} />
+          <Link href="/settings">
+            <StyledImage src="/icons/settings.svg" width={50} height={50} />
+          </Link>
           <Spacing />
-          <LogoutButton variant="header"/>
+
+          <Spacing />
+
+          <LogoutButton variant="header" />
         </ControlsSection>
       </PrimaryNavbar>
       {!currentPath.startsWith("/settings") &&
