@@ -20,11 +20,15 @@ const userReducer = (state: State | null, action: Action) => {
   switch (action.type) {
     case "login": {
       Cookie.set("token", action.payload.jid, { expires: 7 });
+      Cookie.set("firstName", action.payload.firstName, { expires: 7 });
       return action.payload;
     }
 
     case "logout": {
-      Cookie.remove("token");
+      Object.keys(Cookie.get()).forEach(function (cookieName) {
+        Cookie.remove(cookieName);
+      });
+
       return null;
     }
 
@@ -36,7 +40,9 @@ const userReducer = (state: State | null, action: Action) => {
 
 const UserProvider = ({ children }: CountProviderProps) => {
   const jid = Cookie.get("token");
-  const defaultUserData = jid !== undefined ? { jid } : null;
+  const firstName = Cookie.get("firstName");
+  const defaultUserData =
+    jid !== undefined && firstName !== undefined ? { jid, firstName } : null;
   const [state, dispatch] = React.useReducer(userReducer, defaultUserData);
 
   return (

@@ -1,9 +1,9 @@
-import { Number } from "aws-sdk/clients/iot";
+import { ReactNode } from "react";
 
-export interface ChevronProps extends React.HTMLAttributes<HTMLDivElement> {
-  rotated?: boolean;
-  className?: string;
-  height?: number;
-  width?: number;
-  fill?: string;
+export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+  title: string;
+  content: ReactNode;
+}
+export interface ChevronProps extends React.HTMLAttributes<HTMLButtonElement> {
+  active: boolean;
 }

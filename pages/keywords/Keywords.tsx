@@ -48,8 +48,7 @@ const Keywords = () => {
   useEffect(() => {
     getKeywords({
       variables: {
-        businessId:
-          businessState?.businessId || "13a1fcc2-dc74-4467-9eb4-b8ede588791d",
+        businessId: businessState?.businessId,
       },
     });
   }, [getKeywords, businessState]);
@@ -63,13 +62,13 @@ const Keywords = () => {
     const curr = keywords[i];
     data.push([
       curr.keyword,
-      parseDate(curr.dateCreated),
-      curr.customersOnboarded,
+      "02/23/22",
+      curr.coupon.sentCount,
       "99%",
-      curr.couponsOpened,
-      curr.couponsRedeemed,
-      "66%",
-      "0.5%",
+      curr.coupon.openCount,
+      curr.coupon.redeemCount,
+      `${Math.round((curr.coupon.openCount / (curr.sentCount || 1)) * 100)}%`,
+      `${Math.round((curr.coupon.redeemCount / (curr.sentCount || 1)) * 100)}%`,
     ]);
   }
 

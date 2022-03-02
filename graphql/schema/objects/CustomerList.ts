@@ -1,5 +1,4 @@
 import { objectType, list } from "nexus";
-import { Customer } from "./";
 
 export const CustomerList = objectType({
   name: "CustomerList",

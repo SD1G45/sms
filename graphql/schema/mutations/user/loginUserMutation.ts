@@ -1,6 +1,6 @@
 import { extendType, nonNull, stringArg } from "nexus";
 import { compareSync } from "bcrypt";
-import { generateJWTToken } from "../../auth";
+import { generateJWTToken } from "../../../auth";
 
 export const loginUserMutation = extendType({
   type: "Mutation",

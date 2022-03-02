@@ -8,7 +8,10 @@ import Radio from "../../../components/Radio";
 import SearchBar from "../../../components/SearchBar";
 import SingleCardPage from "../../../components/SingleCardPage";
 import TextField from "../../../components/TextField";
-import { useBusinessDispatch } from "../../../context/BusinessContext/BusinessContext";
+import {
+  useBusinessDispatch,
+  useBusinessState,
+} from "../../../context/BusinessContext/BusinessContext";
 import {
   CREATE_BUSINESS_MUTATION,
   EDIT_BUSINESS_MUTATION,
@@ -97,7 +100,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         }
 
         router.query.business_id = data.newBusiness.id;
-        router.push(router);
+        // router.push(router);
 
         businessDispatch({
           type: "setActiveBusiness",
@@ -268,7 +271,7 @@ const PickPhoneNumber: React.FC = () => {
   );
 };
 
-const steps = ["Name", "Logo", "Payment Method", "Phone number"];
+const steps = ["Name", "Logo", "Phone number"];
 
 interface Business {
   name: string;
@@ -288,6 +291,7 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
   const [logoEditorOpen, setLogoEditorOpen] = useState(false);
 
   const updateActiveStepperIndex = (factor: 1 | -1) => {
+    console.log(factor);
     const newStepIndex = activeStepperIndex + factor;
     setActiveStepperIndex(newStepIndex);
     router.query.step = `${newStepIndex}`;

@@ -1,6 +1,6 @@
 import { extendType, nonNull, stringArg } from "nexus";
-import { AvailablePhoneNumber } from "../objects";
-import client from "../../../lib/twilioClient";
+import { AvailablePhoneNumber } from "../../objects";
+import client from "../../../../lib/twilioClient";
 
 export const provisionPhoneNumberMutation = extendType({
   type: "Mutation",
@@ -30,31 +30,25 @@ export const provisionPhoneNumberMutation = extendType({
         if (businessUserRelation == null)
           throw new Error("User cannot edit this business.");
 
-        // TODO: Uncomment when we start paying for Twilio
+        const response = await client.incomingPhoneNumbers.create({
+          phoneNumber,
+          smsUrl: "https://trism.co/api/sms/reply",
+        });
 
-        // const response = await client.incomingPhoneNumbers.create({
-        //   phoneNumber,
-        // });
-        // return {
-        //   phoneNumber: response.phoneNumber,
-        //   friendlyName: response.friendlyName,
-        // };
+        client.incomingPhoneNumbers.create;
 
-        const result = await ctx.prisma.business.update({
+        await ctx.prisma.business.update({
           where: {
             id: businessId,
           },
           data: {
-            // TODO: This value is hardcoded while we're not paying
-            phoneNumber: "+14075841037",
+            phoneNumber: response.phoneNumber,
           },
         });
-        console.log(result);
 
-        // TODO: Hardcoded
         return {
-          phoneNumber: "+14075841037",
-          friendlyName: "(407) 584-1037",
+          phoneNumber: response.phoneNumber,
+          friendlyName: response.friendlyName,
         };
       },
     });

@@ -80,11 +80,15 @@ export interface NexusGenObjects {
     expirationDate?: NexusGenScalars['Date'] | null; // Date
     id?: string | null; // String
     name?: string | null; // String
-    opened?: number | null; // Int
     primaryColor?: string | null; // String
-    redeemed?: number | null; // Int
-    sent?: number | null; // Int
     title?: string | null; // String
+  }
+  CouponInstance: { // root type
+    couponId?: string | null; // String
+    customerId?: string | null; // String
+    id?: string | null; // String
+    opened?: boolean | null; // Boolean
+    redeemed?: boolean | null; // Boolean
   }
   Customer: { // root type
     firstName?: string | null; // String
@@ -99,6 +103,8 @@ export interface NexusGenObjects {
     name?: string | null; // String
   }
   Customer_CustomerList: { // root type
+    customerId?: string | null; // String
+    customerListId?: string | null; // String
     id?: string | null; // String
   }
   KeyWord_CustomerList: { // root type
@@ -107,10 +113,7 @@ export interface NexusGenObjects {
     keyword_id?: string | null; // String
   }
   Keyword: { // root type
-    couponsOpened?: number | null; // Int
-    couponsRedeemed?: number | null; // Int
-    customersOnboarded?: number | null; // Int
-    dateCreated?: NexusGenScalars['Date'] | null; // Date
+    couponId?: string | null; // String
     description?: string | null; // String
     id?: string | null; // String
     keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
@@ -161,6 +164,7 @@ export interface NexusGenFieldTypes {
   }
   Campaign: { // field return type
     businessId: string | null; // String
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     couponId: string | null; // String
     couponsOpened: number | null; // Int
     couponsRedeemed: number | null; // Int
@@ -172,16 +176,26 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
   }
   Coupon: { // field return type
+    business: NexusGenRootTypes['Business'] | null; // Business
     businessId: string | null; // String
     description: string | null; // String
     expirationDate: NexusGenScalars['Date'] | null; // Date
     id: string | null; // String
     name: string | null; // String
-    opened: number | null; // Int
+    openCount: number | null; // Int
     primaryColor: string | null; // String
-    redeemed: number | null; // Int
-    sent: number | null; // Int
+    redeemCount: number | null; // Int
+    sentCount: number | null; // Int
     title: string | null; // String
+  }
+  CouponInstance: { // field return type
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
+    couponId: string | null; // String
+    customer: NexusGenRootTypes['Customer'] | null; // Customer
+    customerId: string | null; // String
+    id: string | null; // String
+    opened: boolean | null; // Boolean
+    redeemed: boolean | null; // Boolean
   }
   Customer: { // field return type
     firstName: string | null; // String
@@ -198,9 +212,10 @@ export interface NexusGenFieldTypes {
   }
   Customer_CustomerList: { // field return type
     customer: NexusGenRootTypes['Customer'] | null; // Customer
-    customer_id: string | null; // String
-    customer_list_id: string | null; // String
+    customerId: string | null; // String
+    customerListId: string | null; // String
     id: string | null; // String
+    name: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
     customer_list_id: string | null; // String
@@ -208,10 +223,8 @@ export interface NexusGenFieldTypes {
     keyword_id: string | null; // String
   }
   Keyword: { // field return type
-    couponsOpened: number | null; // Int
-    couponsRedeemed: number | null; // Int
-    customersOnboarded: number | null; // Int
-    dateCreated: NexusGenScalars['Date'] | null; // Date
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
+    couponId: string | null; // String
     description: string | null; // String
     id: string | null; // String
     keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
@@ -230,7 +243,9 @@ export interface NexusGenFieldTypes {
     newCustomerList: NexusGenRootTypes['CustomerList'] | null; // CustomerList
     newCustomerListCustomer: NexusGenRootTypes['Customer_CustomerList'] | null; // Customer_CustomerList
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
+    openCoupon: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     provisionPhoneNumber: NexusGenRootTypes['AvailablePhoneNumber'] | null; // AvailablePhoneNumber
+    redeemCoupon: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     registerUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     resetPassword: NexusGenRootTypes['User'] | null; // User
   }
@@ -239,6 +254,7 @@ export interface NexusGenFieldTypes {
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
+    couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
@@ -279,6 +295,7 @@ export interface NexusGenFieldTypeNames {
   }
   Campaign: { // field return type name
     businessId: 'String'
+    coupon: 'Coupon'
     couponId: 'String'
     couponsOpened: 'Int'
     couponsRedeemed: 'Int'
@@ -290,16 +307,26 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
   }
   Coupon: { // field return type name
+    business: 'Business'
     businessId: 'String'
     description: 'String'
     expirationDate: 'Date'
     id: 'String'
     name: 'String'
-    opened: 'Int'
+    openCount: 'Int'
     primaryColor: 'String'
-    redeemed: 'Int'
-    sent: 'Int'
+    redeemCount: 'Int'
+    sentCount: 'Int'
     title: 'String'
+  }
+  CouponInstance: { // field return type name
+    coupon: 'Coupon'
+    couponId: 'String'
+    customer: 'Customer'
+    customerId: 'String'
+    id: 'String'
+    opened: 'Boolean'
+    redeemed: 'Boolean'
   }
   Customer: { // field return type name
     firstName: 'String'
@@ -316,9 +343,10 @@ export interface NexusGenFieldTypeNames {
   }
   Customer_CustomerList: { // field return type name
     customer: 'Customer'
-    customer_id: 'String'
-    customer_list_id: 'String'
+    customerId: 'String'
+    customerListId: 'String'
     id: 'String'
+    name: 'String'
   }
   KeyWord_CustomerList: { // field return type name
     customer_list_id: 'String'
@@ -326,10 +354,8 @@ export interface NexusGenFieldTypeNames {
     keyword_id: 'String'
   }
   Keyword: { // field return type name
-    couponsOpened: 'Int'
-    couponsRedeemed: 'Int'
-    customersOnboarded: 'Int'
-    dateCreated: 'Date'
+    coupon: 'Coupon'
+    couponId: 'String'
     description: 'String'
     id: 'String'
     keyWordCustomerList: 'KeyWord_CustomerList'
@@ -348,7 +374,9 @@ export interface NexusGenFieldTypeNames {
     newCustomerList: 'CustomerList'
     newCustomerListCustomer: 'Customer_CustomerList'
     newKeyWord: 'Keyword'
+    openCoupon: 'CouponInstance'
     provisionPhoneNumber: 'AvailablePhoneNumber'
+    redeemCoupon: 'CouponInstance'
     registerUser: 'UserLoginPayload'
     resetPassword: 'User'
   }
@@ -357,6 +385,7 @@ export interface NexusGenFieldTypeNames {
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
     campaign: 'Campaign'
+    couponInstance: 'CouponInstance'
     coupons: 'Coupon'
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
@@ -442,9 +471,15 @@ export interface NexusGenArgTypes {
       keyword: string; // String!
       message: string; // String!
     }
+    openCoupon: { // args
+      id: string; // String!
+    }
     provisionPhoneNumber: { // args
       businessId: string; // String!
       phoneNumber: string; // String!
+    }
+    redeemCoupon: { // args
+      id: string; // String!
     }
     registerUser: { // args
       email: string; // String!
@@ -469,6 +504,9 @@ export interface NexusGenArgTypes {
     }
     campaign: { // args
       businessId: string; // String!
+    }
+    couponInstance: { // args
+      id: string; // String!
     }
     coupons: { // args
       businessId: string; // String!

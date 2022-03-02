@@ -1,5 +1,5 @@
 import { extendType, nonNull, stringArg } from "nexus";
-import { config } from "../../../config";
+import { config } from "../../../../config";
 export const newBusinessMutation = extendType({
   type: "Mutation",
   definition(t) {

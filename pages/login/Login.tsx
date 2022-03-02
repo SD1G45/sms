@@ -68,11 +68,13 @@ const Login = () => {
         setLoading(false);
         return;
       }
+      console.log(data.loginUser.firstName);
 
       userDispatch({
         type: "login",
         payload: {
           jid: data.loginUser.token,
+          firstName: data.loginUser.user.firstName,
         },
       });
       setLoading(false);

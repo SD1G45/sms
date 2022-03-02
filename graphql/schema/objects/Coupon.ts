@@ -10,8 +10,67 @@ export const Coupon = objectType({
     t.string("primaryColor");
     t.date("expirationDate");
     t.string("businessId");
-    t.int("opened");
-    t.int("redeemed");
-    t.int("sent");
+    t.int("redeemCount", {
+      resolve: async (root, _args, ctx) => {
+        if (!root.id) {
+          throw new Error("No coupon id");
+        }
+
+        const count = await ctx.prisma.customer_Coupon.count({
+          where: {
+            couponId: root.id,
+            redeemed: true,
+          },
+        });
+
+        return count;
+      },
+    });
+    t.int("sentCount", {
+      resolve: async (root, _args, ctx) => {
+        if (!root.id) {
+          throw new Error("No coupon id");
+        }
+
+        const count = await ctx.prisma.customer_Coupon.count({
+          where: {
+            couponId: root.id,
+          },
+        });
+
+        return count;
+      },
+    });
+    t.int("openCount", {
+      resolve: async (root, _args, ctx) => {
+        if (!root.id) {
+          throw new Error("No coupon id");
+        }
+        const count = await ctx.prisma.customer_Coupon.count({
+          where: {
+            couponId: root.id,
+            opened: true,
+          },
+        });
+
+        return count;
+      },
+    });
+    t.field("business", {
+      type: "Business",
+      resolve: async (root, _args, ctx) => {
+        if (!root.businessId) {
+          throw new Error("No business.");
+        }
+
+        const business = await ctx.prisma.business.findUnique({
+          where: {
+            id: root.businessId,
+          },
+        });
+
+        return business;
+      },
+    });
   },
 });

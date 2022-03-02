@@ -24,7 +24,10 @@ export default async function handler(
     const textBody = req.body.Body;
 
     const keyword = await prisma.keyword.findFirst({
-      where: { keyword: textBody, businessId: businessWithPhoneNumber.id },
+      where: {
+        keyword: textBody.toLowerCase(),
+        businessId: businessWithPhoneNumber.id,
+      },
     });
 
     if (keyword == null) {
@@ -64,16 +67,19 @@ export default async function handler(
       },
     });
 
-    const link =
-      process.env.ROOT_URL +
-      keyword.couponId +
-      "?customer=" +
-      customerPhoneNumber;
+    const customer_Coupon = await prisma.customer_Coupon.create({
+      data: {
+        customerId: customerWithPhoneNumber?.id,
+        couponId: keyword.couponId,
+        redeemed: false,
+        opened: false,
+      },
+    });
 
-    const messageWithLink = keyword.message.replace("{coupon}", link);
+    const messageWithCoupon = `${keyword.message} https://trism.co/reward/${customer_Coupon.id}`;
 
     await client.messages.create({
-      body: messageWithLink,
+      body: messageWithCoupon,
       from: businessPhoneNumber,
       to: customerPhoneNumber,
     });

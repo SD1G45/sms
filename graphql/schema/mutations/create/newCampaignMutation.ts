@@ -1,7 +1,7 @@
 // TODO: support multiple customerListIds (should be passed an array of IDs)
 import { prisma } from ".prisma/client";
 import { extendType, nonNull, stringArg } from "nexus";
-import client from "../../../lib/twilioClient";
+import client from "../../../../lib/twilioClient";
 
 export const newCampaignMutation = extendType({
   type: "Mutation",
@@ -20,16 +20,23 @@ export const newCampaignMutation = extendType({
         { name, message, couponId, customerListId, businessId },
         ctx
       ) => {
+        const customer_List_Customer =
+          await ctx.prisma.customer_List_Customer.findMany({
+            where: {
+              customerListId,
+            },
+          });
+
         const newCampaign = await ctx.prisma.campaign.create({
           data: {
             name,
             message,
             dateSent: new Date(),
-            messagesSent: 0,
+            messagesSent: customer_List_Customer.length,
             couponsOpened: 0,
             couponsRedeemed: 0,
             couponId,
-            businessId
+            businessId,
           },
         });
 
@@ -39,13 +46,6 @@ export const newCampaignMutation = extendType({
             customerListId: customerListId,
           },
         });
-
-        const customer_List_Customer =
-          await ctx.prisma.customer_List_Customer.findMany({
-            where: {
-              customerListId,
-            },
-          });
 
         const business = await ctx.prisma.business.findUnique({
           where: {
@@ -62,9 +62,26 @@ export const newCampaignMutation = extendType({
               id: list.customerId,
             },
           });
+
+          if (!customer) {
+            return;
+          }
+
+          const customer_Coupon = await ctx.prisma.customer_Coupon.create({
+            data: {
+              customerId: customer?.id,
+              couponId: couponId,
+              redeemed: false,
+              opened: false,
+            },
+          });
+
           const customerPhoneNumber = customer?.phoneNumber;
+
+          const messageWithCoupon = `${message} https://trism.co/reward/${customer_Coupon.id}`;
+
           await client.messages.create({
-            body: message,
+            body: messageWithCoupon,
             from: businessPhoneNumber,
             to: customerPhoneNumber,
           });
