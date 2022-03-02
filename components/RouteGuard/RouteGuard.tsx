@@ -40,6 +40,8 @@ const RouteGuard: any = ({ children }: any) => {
         path.includes("customers") ||
         path.includes("keywords") ||
         path.includes("business") ||
+        path.includes("billing") ||
+        path.includes("settings") ||
         path === "/")
     ) {
       setAuthorized(false);

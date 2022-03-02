@@ -10,6 +10,7 @@ export const Page = styled.div`
 
 export const LeftTriangleDiv = styled.div`
   padding-top: 301px;
+  margin-right: 20px;
 `;
 
 export const RightCircleDiv = styled.div`

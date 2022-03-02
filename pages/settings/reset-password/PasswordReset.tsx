@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Card from "../../components/Card";
-import SingleCardPage from "../../components/SingleCardPage";
+import Card from "../../../components/Card";
+import SingleCardPage from "../../../components/SingleCardPage";
 import {
   BackButton,
   HeaderDiv,
@@ -8,19 +8,23 @@ import {
   StyledButton,
   StyledCard,
   StyledHeader,
-} from "../../page-styles/password-reset/styles";
+  StyledLink,
+} from "../../../page-styles/settings/password-reset/styles";
 import {
   CardDescription,
   CardHeading,
   SetupLaterButton,
-} from "../../page-styles/coupons/create/styles";
+} from "../../../page-styles/coupons/create/styles";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import TextField from "../../components/TextField";
-import Button from "../../components/Button";
-import ErrorPopup from "../../components/ErrorPopup";
+import TextField from "../../../components/TextField";
+import Button from "../../../components/Button";
+import ErrorPopup from "../../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
-import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
+import { RESET_PASSWORD_MUTATION } from "../../../page-mutations/reset-password";
+import Link from "next/link";
+import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
+import { FcDataEncryption } from "react-icons/fc";
 
 interface ForgotPasswordProps {
   email: string;
@@ -67,18 +71,25 @@ const InitialDisplay: React.FC<InitialDisplayProps> = ({
   setUpdatePassword,
   setForgotPassword,
 }) => {
+  const router = useRouter();
   return (
     <>
       <StyledCard>
         <HeaderDiv>
-          <StyledHeader>Reset Password</StyledHeader>
+          <StyledHeader>
+            <FcDataEncryption />
+            Reset Password
+          </StyledHeader>
         </HeaderDiv>
-        <Button onClick={() => setUpdatePassword(true)}>
+        <StyledButton onClick={() => setUpdatePassword(true)}>
           I know my password
-        </Button>
-        <Button onClick={() => setForgotPassword(true)}>
+        </StyledButton>
+        <StyledButton onClick={() => setForgotPassword(true)}>
           I forgot my password
-        </Button>
+        </StyledButton>
+        <Link href={newRouteWithQueries("/settings", router)}>
+          <StyledLink>Back to settings</StyledLink>
+        </Link>
       </StyledCard>
     </>
   );

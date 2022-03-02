@@ -233,6 +233,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     acceptInvitation: boolean | null; // Boolean
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
+    editUser: NexusGenRootTypes['User'] | null; // User
     inviteAccount: boolean | null; // Boolean
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
@@ -363,6 +364,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     acceptInvitation: 'Boolean'
     editBusiness: 'Business'
+    editUser: 'User'
     inviteAccount: 'Boolean'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
@@ -411,6 +413,13 @@ export interface NexusGenArgTypes {
     editBusiness: { // args
       id: string; // String!
       name: string; // String!
+    }
+    editUser: { // args
+      email: string; // String!
+      firstName: string; // String!
+      id: string; // String!
+      lastName: string; // String!
+      password: string; // String!
     }
     inviteAccount: { // args
       businessId: string; // String!
