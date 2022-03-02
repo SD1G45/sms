@@ -7,7 +7,6 @@ import {
   GridContainer,
   CardHeading,
   Description,
-  StyledButton,
   LinkDiv,
   StyledLink,
 } from "../../page-styles/settings/styles";
@@ -36,21 +35,21 @@ const Settings = () => {
               <FcDataEncryption />
               Profile
             </BoxHeading>
-
             <Description>Change your basic information </Description>
-
             <LinkDiv>
-              <Link href={newRouteWithQueries("/profile", router)}>
+              <Link href={newRouteWithQueries("settings/profile", router)}>
                 <StyledLink>Account Details</StyledLink>
               </Link>
             </LinkDiv>
             <LinkDiv>
-              <Link href={newRouteWithQueries("/reset-password", router)}>
+              <Link
+                href={newRouteWithQueries("settings/reset-password", router)}
+              >
                 <StyledLink>Password Reset</StyledLink>
               </Link>
             </LinkDiv>
             <LinkDiv>
-              <Link href={newRouteWithQueries("/account-phone-number", router)}>
+              <Link href={newRouteWithQueries("/profile/phone-number", router)}>
                 <StyledLink>Phone Number</StyledLink>
               </Link>
             </LinkDiv>
@@ -61,7 +60,6 @@ const Settings = () => {
               Billing
             </BoxHeading>
             <Description>Change your billing information </Description>
-
             <LinkDiv>
               <Link href={newRouteWithQueries("/billing/subscription", router)}>
                 <StyledLink>Subscription</StyledLink>
@@ -79,6 +77,7 @@ const Settings = () => {
             </LinkDiv>
           </Box>
         </GridContainer>
+
         <GridContainer>
           <Box>
             <BoxHeading>
@@ -98,6 +97,7 @@ const Settings = () => {
               </Link>
             </LinkDiv>
           </Box>
+
           <Box>
             <BoxHeading>
               <FcQuestions />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Card from "../../components/Card";
-import SingleCardPage from "../../components/SingleCardPage";
+import Card from "../../../components/Card";
+import SingleCardPage from "../../../components/SingleCardPage";
 import {
   BackButton,
   HeaderDiv,
@@ -8,19 +8,19 @@ import {
   StyledButton,
   StyledCard,
   StyledHeader,
-} from "../../page-styles/password-reset/styles";
+} from "../../../page-styles/password-reset/styles";
 import {
   CardDescription,
   CardHeading,
   SetupLaterButton,
-} from "../../page-styles/coupons/create/styles";
+} from "../../../page-styles/coupons/create/styles";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import TextField from "../../components/TextField";
-import Button from "../../components/Button";
-import ErrorPopup from "../../components/ErrorPopup";
+import TextField from "../../../components/TextField";
+import Button from "../../../components/Button";
+import ErrorPopup from "../../../components/ErrorPopup";
 import { useMutation } from "@apollo/client";
-import { RESET_PASSWORD_MUTATION } from "../../page-mutations/reset-password";
+import { RESET_PASSWORD_MUTATION } from "../../../page-mutations/reset-password";
 
 interface ForgotPasswordProps {
   email: string;
