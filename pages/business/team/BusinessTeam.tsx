@@ -11,17 +11,17 @@ import {
 
 const BusinessTeam = () => {
   const businessState = useBusinessState();
-  const [getBusinessUsers, businessUsersQueryResult] = useLazyQuery(BUSINESS_USERS_QUERY);
+  const [getBusinessUsers, businessUsersQueryResult] =
+    useLazyQuery(BUSINESS_USERS_QUERY);
   useEffect(() => {
     getBusinessUsers({
       variables: {
         businessId: businessState?.businessId,
-      }
+      },
     });
   }, [getBusinessUsers, businessState]);
 
-  console.log(businessUsersQueryResult);
-  
+  console.log(businessUsersQueryResult.data);
 
   return (
     <SingleCardPage>

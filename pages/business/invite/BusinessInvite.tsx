@@ -65,10 +65,11 @@ const BusinessInvite = () => {
   return (
     <SingleCardPage>
       <StyledCard>
-        <Heading>Invite account {businessState?.name}</Heading>
+        <Heading>Invite someone to your team</Heading>
+
         <SubHeading>
-          Enter the email you used to create your account. A URL will be sent to
-          your email to reset your password.
+          Enter the email of the person you would like to invite to{" "}
+          {businessState?.name}
         </SubHeading>
         <EmailTextField
           label="Email"

@@ -20,8 +20,11 @@ import {
 import Link from "next/link";
 import newRouteWithQueries from "../../helpers/newRouteWithQueries";
 import { useRouter } from "next/router";
+import { useUserState } from "../../context/UserContext";
 
 const Settings = () => {
+  const userState = useUserState();
+
   const router = useRouter();
   return (
     <SingleCardPage>

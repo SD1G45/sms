@@ -12,12 +12,14 @@ export const StyledCard = styled(Card)`
 
 export const Heading = styled.h1`
   font-size: 1.4rem;
-  margin-bottom: 5px;
+  text-align: center;
+  margin-bottom: 30px;
 `;
 
 export const SubHeading = styled.p`
   font-size: 1rem;
   margin-bottom: 40px;
+  text-align: center;
 `;
 
 export const Label = styled.label`
