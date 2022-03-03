@@ -111,7 +111,7 @@ const Settings = () => {
             <Description>Contact Trism </Description>
 
             <LinkDiv>
-              <Link href={newRouteWithQueries("/contact-us", router)}>
+              <Link href={newRouteWithQueries("/contact", router)}>
                 <StyledLink>Contact Us</StyledLink>
               </Link>
             </LinkDiv>

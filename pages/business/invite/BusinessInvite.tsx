@@ -9,8 +9,8 @@ import {
   EmailTextField,
   StyledButton,
   StyledLink,
-  LinkDiv,
   SubHeading,
+  LinkDiv,
 } from "../../../page-styles/business/invite/styles";
 import { useMutation } from "@apollo/client";
 import { useUserDispatch } from "../../../context/UserContext/UserContext";
@@ -18,6 +18,7 @@ import SingleCardPage from "../../../components/SingleCardPage";
 import { useRouter } from "next/router";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
 import { INVITE_ACCOUNT_MUTATION } from "../../../page-mutations/business/invite";
+import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
 
 const BusinessInvite = () => {
   const [email, setEmail] = useState("");
@@ -80,6 +81,14 @@ const BusinessInvite = () => {
         <StyledButton disabled={loading} loading={loading} onClick={onInvite}>
           Send invite
         </StyledButton>
+        <LinkDiv>
+          <Link href={newRouteWithQueries("/settings", router)}>
+            <StyledLink>Back to settings</StyledLink>
+          </Link>
+          <Link href={newRouteWithQueries("/", router)}>
+            <StyledLink>home</StyledLink>
+          </Link>
+        </LinkDiv>
       </StyledCard>
     </SingleCardPage>
   );

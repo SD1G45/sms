@@ -26,7 +26,8 @@ export const Label = styled.label`
 `;
 
 export const LinkDiv = styled.div`
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const StyledLink = styled(Label)`
@@ -43,4 +44,5 @@ export const EmailTextField = styled(TextField)`
 
 export const StyledButton = styled(Button)`
   margin-top: 30px;
+  margin-bottom: 30px;
 `;
