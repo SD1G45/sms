@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../../components/Button";
 import { StyledCard } from "../../../components/Card/styles";
 import SingleCardPage from "../../../components/SingleCardPage";
 import TextField from "../../../components/TextField";
@@ -8,7 +7,6 @@ import {
   BackButton,
   HeaderDiv,
   StyledButton,
-  StyledHeader,
   SubHeading,
   StyledTextField,
 } from "../../../page-styles/settings/profile/styles";
@@ -19,6 +17,10 @@ import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
 import Link from "next/link";
 import { StyledLink } from "../../../page-styles/settings/profile/styles";
 import { FcPortraitMode } from "react-icons/fc";
+import { useMutation } from "@apollo/client";
+import { EDIT_USERNAME_MUTATION } from "../../../page-mutations/users";
+import { useUserState } from "../../../context/UserContext/UserContext";
+
 interface InitialDisplayProps {
   setUpdateEmail: (value: boolean) => void;
   setUpdateDisplayName: (value: boolean) => void;
@@ -69,6 +71,37 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
   setUpdateDisplayName,
 }) => {
   const [loading, setLoading] = useState(false);
+  const [editUserNameMutation] = useMutation(EDIT_USERNAME_MUTATION, {
+    errorPolicy: "all",
+  });
+  const userState = useUserState();
+
+  const doEditName = async () => {
+    if (firstName.length == 0 || lastName.length == null) {
+      alert("Both fields must be filled in.");
+      return;
+    }
+
+      const password = prompt("please enter password");
+      try {
+        const { data, errors } = await editUserNameMutation({
+          variables: {
+            id: userState?.userId,
+            firstName,
+            lastName,
+            password
+          }
+        });
+
+        if (errors && errors.length > 0) {
+          alert("Something went wrong");
+        } 
+        alert("Succesfully changed");
+      } catch (error) {
+        console.log(error);
+      }
+    
+  }
 
   return (
     <>
@@ -96,7 +129,13 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
             onLastNameChange(event.target.value)
           }
         />
-        <StyledButton disabled={loading} loading={loading}>
+        <StyledButton 
+         disabled={loading} 
+         loading={loading} 
+         onClick={() => {
+          console.log("click"); 
+          doEditName()}}
+        >
           Change Name
         </StyledButton>
         <BackButton onClick={() => setUpdateDisplayName(false)}>

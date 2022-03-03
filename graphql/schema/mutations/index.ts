@@ -15,6 +15,7 @@ import { newCustomerListCustomerMutation } from "./create/newCustomerListCustome
 import { redeemCouponMutation } from "./coupon/redeemCoupon";
 import { openCouponMutation } from "./coupon/openCoupon";
 import { editUserMutations } from "./editUserMutations";
+import { editUserDisplayNameMutation } from "./user/editUserDisplayNameMutation";
 
 export {
   registerUserMutation,
@@ -33,5 +34,6 @@ export {
   newCustomerListCustomerMutation,
   redeemCouponMutation,
   openCouponMutation,
-  editUserMutations
+  editUserMutations,
+  editUserDisplayNameMutation
 };
