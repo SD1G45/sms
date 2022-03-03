@@ -7,6 +7,7 @@ export const BUSINESS_LIST_QUERY = gql`
         id
         name
         logoUrl
+        phoneNumber
       }
     }
   }

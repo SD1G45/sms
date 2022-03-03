@@ -53,7 +53,12 @@ const Navbar = () => {
     getBusinesses();
   }, [userState]);
 
-  const businessList: { id: string; name: string; logoUrl: string }[] =
+  const businessList: {
+    id: string;
+    name: string;
+    logoUrl: string;
+    phoneNumber: string;
+  }[] =
     businessQueryResult.data != undefined &&
     businessQueryResult.data.viewer != undefined
       ? businessQueryResult.data.viewer.businesses
@@ -66,6 +71,7 @@ const Navbar = () => {
         businessId: businessList[0].id,
         name: businessList[0].name,
         logoUrl: businessList[0].logoUrl,
+        phoneNumber: businessList[0].phoneNumber,
       },
     });
   }
