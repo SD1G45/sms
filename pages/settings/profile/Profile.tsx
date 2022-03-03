@@ -9,6 +9,8 @@ import {
   HeaderDiv,
   StyledButton,
   StyledHeader,
+  SubHeading,
+  StyledTextField,
 } from "../../../page-styles/settings/profile/styles";
 
 import { FcDataEncryption } from "react-icons/fc";
@@ -16,7 +18,7 @@ import { useRouter } from "next/router";
 import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
 import Link from "next/link";
 import { StyledLink } from "../../../page-styles/settings/profile/styles";
-
+import { FcPortraitMode } from "react-icons/fc";
 interface InitialDisplayProps {
   setUpdateEmail: (value: boolean) => void;
   setUpdateDisplayName: (value: boolean) => void;
@@ -52,14 +54,18 @@ const InitialDisplay: React.FC<InitialDisplayProps> = ({
 };
 
 interface updateDisplayNameProps {
-  displayName: string;
-  onDisplayNameChange: (value: string) => void;
+  firstName: string;
+  lastName: string;
+  onFirstNameChange: (value: string) => void;
+  onLastNameChange: (value: string) => void;
   setUpdateDisplayName: (value: boolean) => void;
 }
 
 const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
-  displayName,
-  onDisplayNameChange,
+  firstName,
+  lastName,
+  onFirstNameChange,
+  onLastNameChange,
   setUpdateDisplayName,
 }) => {
   const [loading, setLoading] = useState(false);
@@ -67,12 +73,27 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
   return (
     <>
       <StyledCard>
-        <Heading>Change your Display Name</Heading>
-        <TextField
-          label="Enter the display name you would like attached to your profile."
-          value={displayName}
+        <HeaderDiv>
+          <Heading>
+            <FcPortraitMode />
+            Change your Display Name
+          </Heading>
+          <SubHeading>
+            Enter the display name you would like attached to your profile.
+          </SubHeading>
+        </HeaderDiv>
+        <StyledTextField
+          label="First Name"
+          value={firstName}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            onDisplayNameChange(event.target.value)
+            onFirstNameChange(event.target.value)
+          }
+        />
+        <StyledTextField
+          label="Last Name"
+          value={lastName}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            onLastNameChange(event.target.value)
           }
         />
         <StyledButton disabled={loading} loading={loading}>

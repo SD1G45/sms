@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import Button from "../../../components/Button";
 import Card from "../../../components/Card";
+import Button from "../../../components/Button";
+import TextField from "../../../components/TextField";
 
 export const StyledCard = styled(Card)`
   width: 100%;
@@ -8,12 +9,21 @@ export const StyledCard = styled(Card)`
 `;
 export const Heading = styled.h1`
   font-size: 2rem;
+  margin-bottom: 40px;
+`;
+
+export const SubHeading = styled.h2`
+  font-size: 1.2rem;
   margin-bottom: 20px;
 `;
 export const TextDiv = styled.div`
   margin: auto;
   margin-top: 30px;
   width: 70%;
+`;
+
+export const StyledTextField = styled(TextField)`
+  margin-top: 30px;
 `;
 
 export const StyledHeader = styled.h1`
@@ -41,7 +51,7 @@ export const BackButton = styled(Button)`
 `;
 
 export const StyledButton = styled(Button)`
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 export const Label = styled.label`
