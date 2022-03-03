@@ -253,6 +253,7 @@ export interface NexusGenFieldTypes {
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
+    businessUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
@@ -384,6 +385,7 @@ export interface NexusGenFieldTypeNames {
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
+    businessUsers: 'User'
     campaign: 'Campaign'
     couponInstance: 'CouponInstance'
     coupons: 'Coupon'
@@ -501,6 +503,9 @@ export interface NexusGenArgTypes {
     }
     businessInviteCode: { // args
       value: string; // String!
+    }
+    businessUsers: { // args
+      businessId: string; // String!
     }
     campaign: { // args
       businessId: string; // String!
