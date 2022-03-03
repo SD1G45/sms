@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SideNav from "../../components/SideNav";
 import SearchBar from "../../components/SearchBar";
 import {
@@ -17,6 +17,8 @@ import { useLazyQuery } from "@apollo/client";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 
 const index = () => {
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const createPath = router.asPath + "/create";
@@ -76,11 +78,18 @@ const index = () => {
             <StyledHeader>Coupon Analytics</StyledHeader>
           </HeaderDiv>
           <SearchDiv>
-            <SearchBar value={""} onValueChange={() => {}} />
+            <SearchBar value={search} 
+              onValueChange={(s: string) => {
+                setSearch(s)
+                setFilteredData(data.filter(d => d[0].includes(s)))
+              }} />
           </SearchDiv>
           <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
-        <Table headers={headers} data={data} />
+        <Table 
+          headers={headers} 
+          data={search.length > 0 ? filteredData : data} 
+        />
       </ColumnDiv>
     </ContainerDiv>
   );

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
@@ -25,6 +25,8 @@ const parseDate = (date: any) => {
 };
 
 const Keywords = () => {
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
   const router = useRouter();
   const createPath = router.asPath + "/create";
   const faqPath = router.asPath + "/faq";
@@ -85,11 +87,18 @@ const Keywords = () => {
             <StyledHeader>Keyword Analytics</StyledHeader>
           </HeaderDiv>
           <SearchDiv>
-            <SearchBar value={""} onValueChange={() => {}} />
+            <SearchBar value={search}
+              onValueChange={(s: string) => {
+                setSearch(s)
+                setFilteredData(data.filter(d => d[0].includes(s)))
+              }} />
           </SearchDiv>
           <Button onClick={onClick}>Create New Keyword</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={data} />
+        <Table
+          headers={tableHeaders}
+          data={search.length > 0 ? filteredData : data}
+        />
       </ColumnDiv>
     </ContainerDiv>
   );
