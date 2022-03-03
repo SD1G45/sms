@@ -11,12 +11,14 @@ import {
   StyledLink,
   LinkDiv,
 } from "../../page-styles/login/styles";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../page-mutations/login";
-import { useUserDispatch } from "../../context/UserContext/UserContext";
+import { useUserState, useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { useRouter } from "next/router";
 import newRouteWithQueries from "../../helpers/newRouteWithQueries";
+import { BUSINESS_LIST_QUERY } from "../../components/Navbar/queries";
+import { useBusinessDispatch, useBusinessState } from "../../context/BusinessContext/BusinessContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +27,12 @@ const Login = () => {
   const [errorState, setError] = useState({ error: false, message: "" });
   const [loading, setLoading] = useState(false);
 
+  const userState = useUserState();
   const userDispatch = useUserDispatch();
+
+  const businessState = useBusinessState();
+  const businessDispatch = useBusinessDispatch();
+
   const router = useRouter();
 
   // Lock email to query param if provided.
@@ -68,7 +75,6 @@ const Login = () => {
         setLoading(false);
         return;
       }
-      console.log(data.loginUser.firstName);
 
       userDispatch({
         type: "login",
@@ -77,6 +83,35 @@ const Login = () => {
           firstName: data.loginUser.user.firstName,
         },
       });
+
+      const [getBusinesses, businessQueryResult] = useLazyQuery(BUSINESS_LIST_QUERY);
+
+      useEffect(() => {
+        console.log("use effect");
+        getBusinesses();
+      }, [userState]);
+
+      console.log("after user");
+
+      const businessList: { id: string; name: string; logoUrl: string }[] =
+        businessQueryResult.data != undefined &&
+        businessQueryResult.data.viewer != undefined
+          ? businessQueryResult.data.viewer.businesses
+          : [];
+
+      if (businessList.length > 0 && businessState?.businessId == null) {
+        businessDispatch({
+          type: "setActiveBusiness",
+          payload: {
+            businessId: businessList[0].id,
+            name: businessList[0].name,
+            logoUrl: businessList[0].logoUrl,
+          },
+        });
+      }
+
+      console.log("after business");
+
       setLoading(false);
       if (router.query.redirect != null) {
         router.push({
