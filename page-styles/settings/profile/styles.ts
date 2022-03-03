@@ -1,9 +1,19 @@
 import styled from "styled-components";
 import Button from "../../../components/Button";
+import Card from "../../../components/Card";
 
+export const StyledCard = styled(Card)`
+  width: 100%;
+  text-align: center;
+`;
 export const Heading = styled.h1`
   font-size: 2rem;
   margin-bottom: 20px;
+`;
+export const TextDiv = styled.div`
+  margin: auto;
+  margin-top: 30px;
+  width: 70%;
 `;
 
 export const StyledHeader = styled.h1`
@@ -22,6 +32,7 @@ export const HeaderDiv = styled.div`
 export const PhoneNumberLinkDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 `;
 
 export const BackButton = styled(Button)`
