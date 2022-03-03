@@ -96,3 +96,9 @@ export const Item = styled.p<{ active: boolean }>`
   font-size: 0.8rem;
   cursor: pointer;
 `;
+
+export const StyledImage = styled(Image)`
+  &:hover {
+    opacity: 70%;
+  }
+`;

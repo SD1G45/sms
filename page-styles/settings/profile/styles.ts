@@ -10,11 +10,18 @@ export const StyledHeader = styled.h1`
   font-size: 1.6rem;
   margin-bottom: 20px;
 `;
-
+export const PhoneNumberDiv = styled.div`
+  text-align: center;
+`;
 export const HeaderDiv = styled.div`
   text-align: center;
   font-size: 2rem;
   margin-bottom: 20px;
+`;
+
+export const PhoneNumberLinkDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const BackButton = styled(Button)`

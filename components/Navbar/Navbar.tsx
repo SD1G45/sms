@@ -14,6 +14,7 @@ import {
   BusinessSelector,
   BusinessListItem,
   BusinessListItemLogo,
+  StyledImage,
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -52,7 +53,12 @@ const Navbar = () => {
     getBusinesses();
   }, [userState]);
 
-  const businessList: { id: string; name: string; logoUrl: string }[] =
+  const businessList: {
+    id: string;
+    name: string;
+    logoUrl: string;
+    phoneNumber: string;
+  }[] =
     businessQueryResult.data != undefined &&
     businessQueryResult.data.viewer != undefined
       ? businessQueryResult.data.viewer.businesses
@@ -65,6 +71,7 @@ const Navbar = () => {
         businessId: businessList[0].id,
         name: businessList[0].name,
         logoUrl: businessList[0].logoUrl,
+        phoneNumber: businessList[0].phoneNumber,
       },
     });
   }
@@ -108,14 +115,18 @@ const Navbar = () => {
           )}
         </BusinessInfoSection>
         <ControlsSection>
-          <CreateButton invert>Create</CreateButton>
-          <Link href="/settings">
-            <Image src="/icons/settings.svg" width={50} height={50} />
+          <Link href="/">
+            <StyledImage src="/icons/home.svg" width={130} height={130} />
           </Link>
           <Spacing />
-          <Image src="/icons/profile.svg" width={70} height={50} />
+          <Link href="/settings">
+            <StyledImage src="/icons/settings.svg" width={50} height={50} />
+          </Link>
           <Spacing />
-          <LogoutButton variant="header"/>
+
+          <Spacing />
+
+          <LogoutButton variant="header" />
         </ControlsSection>
       </PrimaryNavbar>
       {!currentPath.startsWith("/settings") &&

@@ -6,6 +6,7 @@ export const BUSINESS_QUERY = gql`
       id
       name
       logoUrl
+      phoneNumber
     }
   }
 `;

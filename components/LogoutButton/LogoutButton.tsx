@@ -19,7 +19,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
       type: "logout",
     });
     apolloClient.clearStore();
-    
+
     setLoading(false);
     if (router.query.redirect != null) {
       router.push({
@@ -27,13 +27,13 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
         query: { code: router.query.code },
       });
     } else {
-      router.push("/login");
+      location.replace("/login");
     }
   };
 
   return (
-    <VariantButton 
-      onClick={() => onLogout()} 
+    <VariantButton
+      onClick={() => onLogout()}
       loading={loading}
       variant={variant}
       invert={invert}
@@ -41,6 +41,6 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
       Logout
     </VariantButton>
   );
-}
+};
 
 export default LogoutButton;

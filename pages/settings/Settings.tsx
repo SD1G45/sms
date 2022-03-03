@@ -49,7 +49,12 @@ const Settings = () => {
               </Link>
             </LinkDiv>
             <LinkDiv>
-              <Link href={newRouteWithQueries("/profile/phone-number", router)}>
+              <Link
+                href={newRouteWithQueries(
+                  "settings/profile/phone-number",
+                  router
+                )}
+              >
                 <StyledLink>Phone Number</StyledLink>
               </Link>
             </LinkDiv>
