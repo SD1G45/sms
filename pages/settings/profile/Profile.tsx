@@ -147,7 +147,8 @@ const Profile = () => {
   const [errorState, setError] = useState({ error: false, message: "" });
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [updateEmail, setUpdateEmail] = useState(false);
   const [updateDisplayName, setUpdateDisplayName] = useState(false);
 
@@ -180,8 +181,10 @@ const Profile = () => {
       )}
       {!updateEmail && updateDisplayName && (
         <UpdateDisplayName
-          displayName={displayName}
-          onDisplayNameChange={(value) => setDisplayName(value)}
+          firstName={firstName}
+          lastName={lastName}
+          onFirstNameChange={(value) => setFirstName(value)}
+          onLastNameChange={(value) => setLastName(value)}
           setUpdateDisplayName={(updateDisplayName) =>
             setUpdateDisplayName(updateDisplayName)
           }
