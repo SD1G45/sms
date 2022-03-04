@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar";
 import Button from "../../components/Button";
 import CustomersTable from "../../components/CustomersTable";
@@ -19,6 +19,8 @@ import { CUSTOMER_LIST_QUERY } from "../../page-queries/keywords/create";
 
 const Customers = () => {
     const router = useRouter();
+    const [search, setSearch] = useState("");
+    const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
     const createPath = router.asPath + "/create";
     const faqPath = router.asPath + "/faq";
 
@@ -55,7 +57,7 @@ const Customers = () => {
 
     const onClick = () => {
         router.push(createPath);
-      };
+    };
 
     return (
         <ContainerDiv>
@@ -66,11 +68,19 @@ const Customers = () => {
                         <StyledHeader>Customer Analytics</StyledHeader>
                     </HeaderDiv>
                     <SearchDiv>
-                        <SearchBar value={""} onValueChange={() => { }} />
+                        <SearchBar value={search} 
+                            onValueChange={(s: string) => {
+                                setSearch(s)
+                                setFilteredData(data.filter(d => d[0].includes(s)))
+                        }} />
                     </SearchDiv>
                     <Button onClick={onClick}>Create New Customer List</Button>
                 </RowDiv>
-                <CustomersTable data={data} ids={ids} view={false}/>
+                <CustomersTable
+                    data={search.length > 0 ? filteredData : data}
+                    ids={ids}
+                    view={false}
+                />
             </ColumnDiv>
         </ContainerDiv>
     );
