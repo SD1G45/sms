@@ -254,13 +254,13 @@ export interface NexusGenFieldTypes {
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
-    businessUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
+    usersForBusiness: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -387,13 +387,13 @@ export interface NexusGenFieldTypeNames {
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
-    businessUsers: 'User'
     campaign: 'Campaign'
     couponInstance: 'CouponInstance'
     coupons: 'Coupon'
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     keywords: 'Keyword'
+    usersForBusiness: 'User'
     viewer: 'User'
   }
   User: { // field return type name
@@ -512,9 +512,6 @@ export interface NexusGenArgTypes {
     businessInviteCode: { // args
       value: string; // String!
     }
-    businessUsers: { // args
-      businessId: string; // String!
-    }
     campaign: { // args
       businessId: string; // String!
     }
@@ -531,6 +528,9 @@ export interface NexusGenArgTypes {
       businessId: string; // String!
     }
     keywords: { // args
+      businessId: string; // String!
+    }
+    usersForBusiness: { // args
       businessId: string; // String!
     }
   }

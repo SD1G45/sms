@@ -8,6 +8,7 @@ export const User = objectType({
     t.string("firstName");
     t.string("lastName");
     t.string("email");
+
     t.field("businesses", {
       type: list(Business),
       resolve: async (parent, _args, ctx) => {
