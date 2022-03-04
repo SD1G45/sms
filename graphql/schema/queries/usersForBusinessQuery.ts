@@ -33,34 +33,21 @@ export const usersForBusinessQuery = extendType({
           },
         });
 
-
-        const data: [
-          { id: any; first: string; last: string; role: string }
-        ] = [];
+        const data: string[][] = [];
         for (let i = 0; i < business_User.length; i++) {
           const curr = users[i];
           if (curr.id == business_User[i].userId) {
-            data.push({
+            data.push([
               curr.id,
               curr.firstName,
               curr.lastName,
               business_User[i].role,
-            }
-            );
+            ]);
           }
         }
 
+        console.log("User data + Business Role: ");
         console.log(data);
-
-        let merge_users_and_roles = (business_User: any, users: any) =>
-          business_User.map((user: any, i: number) => {
-            if (user.userId == users.userId) {
-              [user, business_User[i].role];
-            }
-          });
-
-        const merged = merge_users_and_roles(business_User, users);
-        console.log(merged);
 
         return await data;
       },
