@@ -26,7 +26,6 @@ import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
 import LogoutButton from "../LogoutButton";
-import phoneNumber from "../../pages/settings/profile/phone-number";
 
 const Navbar = () => {
   const router = useRouter();

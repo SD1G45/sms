@@ -109,7 +109,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
             businessId: data.newBusiness.id,
             name: businessName,
             logoUrl: `https://smsmp-business-logos-local.s3.amazonaws.com/${data.newBusiness.id}.png`,
-            phoneNumber: null,
+            phoneNumber: "3",
           },
         });
 
