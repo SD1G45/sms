@@ -2,14 +2,13 @@ import styled from "styled-components";
 import Card from "../../components/Card";
 
 export const StyledCard = styled(Card)`
-  width: 100%;
-  text-align: center;
+  width: 50%;
 `;
 
 export const BackDiv = styled.div`
   margin-right: 100%;
   margin-top: 40px;
-  width: 15%;
+  width: 30%;
 `;
 
 export const LinkContainer = styled.div`

@@ -6,13 +6,24 @@ import { BUSINESS_USERS_QUERY } from "../../../page-queries/business/users";
 
 // Styled imports
 import {
+  DataContainer,
+  Divider,
   HeadingDiv,
+  StyledLink,
+  NameItem,
+  RoleItem,
   StyledCard,
   StyledHeading,
+  BottomLinkDiv,
 } from "../../../page-styles/business/team/styles";
-import Table from "../../../components/Table";
+import { RowDiv } from "../../../page-styles/business/team/styles";
+import { FcBusinessman, FcConferenceCall, FcReading } from "react-icons/fc";
+import Link from "next/link";
+import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
+import { useRouter } from "next/router";
 
 const BusinessTeam = () => {
+  const router = useRouter();
   const businessState = useBusinessState();
 
   const [getBusinessUsers, businessUsersQueryResult] =
@@ -26,36 +37,47 @@ const BusinessTeam = () => {
     });
   }, [getBusinessUsers, businessState]);
 
+  // Users stored as { user{id,firstName,lastName}, role}
   const users =
     businessUsersQueryResult.data != undefined
       ? businessUsersQueryResult.data.usersForBusiness
       : [];
 
-  if (users.length > 0) {
-    console.log(users[0]);
-  }
-
-  const table_data: string[][] = [];
-  // for (let i = 0; i < users.length; i++) {
-  //   const curr = users[i];
-  //   table_data.push([
-  //     curr.firstName,
-
-  //     curr.coupon.openCount,
-  //     curr.coupon.redeemCount,
-  //     `${Math.round((curr.coupon.openCount / (curr.sentCount || 1)) * 100)}%`,
-  //     `${Math.round((curr.coupon.redeemCount / (curr.sentCount || 1)) * 100)}%`,
-  //   ]);
-  // }
   return (
     <SingleCardPage>
       <StyledCard>
         <HeadingDiv>
-          <StyledHeading>{businessState?.name}'s team:</StyledHeading>
-          {users.map((user: any, i: any) => (
-            <div>{user.firstName}</div>
-          ))}
+          <StyledHeading>
+            <FcConferenceCall />
+            {businessState?.name}'s team:
+          </StyledHeading>
         </HeadingDiv>
+        <DataContainer>
+          {users.map((user: any, i: any) => (
+            <>
+              <RowDiv>
+                <NameItem>
+                  {user.user.firstName} {user.user.lastName}
+                </NameItem>
+
+                <RoleItem>
+                  {user.role == "OWNER" ? <FcBusinessman /> : <FcReading />}
+                  {user.role}
+                  <StyledLink>edit</StyledLink>
+                </RoleItem>
+              </RowDiv>
+              <Divider></Divider>
+            </>
+          ))}
+        </DataContainer>
+        <BottomLinkDiv>
+          <Link href={newRouteWithQueries("/settings", router)}>
+            <StyledLink>Back to settings</StyledLink>
+          </Link>
+          <Link href={newRouteWithQueries("/business/invite", router)}>
+            <StyledLink>Invite someone to your Team</StyledLink>
+          </Link>
+        </BottomLinkDiv>
       </StyledCard>
     </SingleCardPage>
   );

@@ -127,6 +127,10 @@ export interface NexusGenObjects {
     id?: string | null; // String
     lastName?: string | null; // String
   }
+  UserBusinessRole: { // root type
+    role?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   UserLoginPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
@@ -260,7 +264,7 @@ export interface NexusGenFieldTypes {
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
-    usersForBusiness: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    usersForBusiness: Array<NexusGenRootTypes['UserBusinessRole'] | null> | null; // [UserBusinessRole]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -269,6 +273,10 @@ export interface NexusGenFieldTypes {
     firstName: string | null; // String
     id: string | null; // String
     lastName: string | null; // String
+  }
+  UserBusinessRole: { // field return type
+    role: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
   }
   UserLoginPayload: { // field return type
     token: string | null; // String
@@ -393,7 +401,7 @@ export interface NexusGenFieldTypeNames {
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     keywords: 'Keyword'
-    usersForBusiness: 'User'
+    usersForBusiness: 'UserBusinessRole'
     viewer: 'User'
   }
   User: { // field return type name
@@ -402,6 +410,10 @@ export interface NexusGenFieldTypeNames {
     firstName: 'String'
     id: 'String'
     lastName: 'String'
+  }
+  UserBusinessRole: { // field return type name
+    role: 'String'
+    user: 'User'
   }
   UserLoginPayload: { // field return type name
     token: 'String'

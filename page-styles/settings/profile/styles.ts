@@ -4,7 +4,7 @@ import Button from "../../../components/Button";
 import TextField from "../../../components/TextField";
 
 export const StyledCard = styled(Card)`
-  width: 100%;
+  width: 40%;
   text-align: center;
 `;
 export const Heading = styled.h1`

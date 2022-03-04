@@ -84,8 +84,9 @@ const Navbar = () => {
   if (currentPath.startsWith("/register")) return <></>;
   if (currentPath.startsWith("/welcome")) return <></>;
   if (currentPath.startsWith("/business/create")) return <></>;
-  if (currentPath.startsWith("/business/invite")) return <></>;
+
   if (currentPath.startsWith("/business/join")) return <></>;
+
   if (currentPath.startsWith("/reward")) return <></>;
 
   return (
@@ -130,6 +131,7 @@ const Navbar = () => {
         </ControlsSection>
       </PrimaryNavbar>
       {!currentPath.startsWith("/settings") &&
+        !currentPath.startsWith("/business") &&
         !currentPath.startsWith("/billing") && (
           <SecondaryNavbarContainer>
             <SecondaryNavbar>

@@ -6,10 +6,11 @@ export const usersForBusinessQuery = extendType({
   type: "Query",
   definition(t) {
     t.field("usersForBusiness", {
-      type: list(User),
+      type: list(UserBusinessRole),
       args: {
         businessId: nonNull(stringArg()),
       },
+
       resolve: async (_, { businessId }, ctx) => {
         const business_User = await ctx.prisma.business_User.findMany({
           where: {
@@ -22,34 +23,26 @@ export const usersForBusinessQuery = extendType({
         business_User.forEach(({ userId }) => {
           userIds.push(userId);
         });
-        const test = ctx.prisma.user.findMany({
-          where: {
-            id: { in: userIds },
-          },
-        });
+
         const users = await ctx.prisma.user.findMany({
           where: {
             id: { in: userIds },
           },
         });
 
-        const data: string[][] = [];
-        for (let i = 0; i < business_User.length; i++) {
-          const curr = users[i];
-          if (curr.id == business_User[i].userId) {
-            data.push([
-              curr.id,
-              curr.firstName,
-              curr.lastName,
-              business_User[i].role,
-            ]);
-          }
-        }
+        const map: any = {};
+        users.forEach((user) => {
+          map[user.id] = { ...user };
+        });
 
-        console.log("User data + Business Role: ");
-        console.log(data);
+        const test = business_User.map(({ userId, role }) => {
+          return {
+            user: map[userId],
+            role,
+          };
+        });
 
-        return await data;
+        return test;
       },
     });
   },
