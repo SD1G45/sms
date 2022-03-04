@@ -18,7 +18,6 @@ import {
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import {
   useBusinessDispatch,
   useBusinessState,
@@ -26,8 +25,8 @@ import {
 import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
-import { businessQuery } from "../../graphql/schema/queries";
 import LogoutButton from "../LogoutButton";
+import phoneNumber from "../../pages/settings/profile/phone-number";
 
 const Navbar = () => {
   const router = useRouter();
@@ -99,19 +98,26 @@ const Navbar = () => {
           <BusinessName>{businessName}</BusinessName>
           {businessSelectActive && (
             <BusinessSelector>
-              {filteredBusinessList.map(({ id, logoUrl, name }) => (
-                <BusinessListItem
-                  onClick={() =>
-                    businessDispatch({
-                      type: "setActiveBusiness",
-                      payload: { name, businessId: id, logoUrl },
-                    })
-                  }
-                >
-                  <BusinessListItemLogo src={logoUrl} />
-                  {name}
-                </BusinessListItem>
-              ))}
+              {filteredBusinessList.map(
+                ({ id, logoUrl, name, phoneNumber }) => (
+                  <BusinessListItem
+                    onClick={() =>
+                      businessDispatch({
+                        type: "setActiveBusiness",
+                        payload: {
+                          name,
+                          businessId: id,
+                          logoUrl,
+                          phoneNumber: phoneNumber,
+                        },
+                      })
+                    }
+                  >
+                    <BusinessListItemLogo src={logoUrl} />
+                    {name}
+                  </BusinessListItem>
+                )
+              )}
             </BusinessSelector>
           )}
         </BusinessInfoSection>
