@@ -76,11 +76,6 @@ const Test = () => {
   return (
     <>
       <Page>
-        {pageLoading && (
-          <LoadingDiv>
-            <Spinner size={50} sizeUnit="px" color="#9999" />
-          </LoadingDiv>
-        )}
         <StyledCard>
           <Button onClick={() => setPageLoading(true)}>Load</Button>
           {/* <AccordionMenu items={accordionItems} /> */}
