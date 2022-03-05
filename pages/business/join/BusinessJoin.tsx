@@ -9,7 +9,6 @@ import {
 import { useLazyQuery, useMutation } from "@apollo/client";
 import SingleCardPage from "../../../components/SingleCardPage";
 import { useRouter } from "next/router";
-import { INVITE_ACCOUNT_MUTATION } from "../../../page-mutations/business/invite";
 import { BUSINESS_INVITE_CODE_QUERY } from "../../../page-queries/business/join";
 import { ACCEPT_INVITATION_MUTATION } from "../../../page-mutations/business/join";
 import { useUserState } from "../../../context/UserContext";
@@ -55,6 +54,11 @@ const BusinessInvite = () => {
       ? businessInviteCodeQuery.data.businessInviteCode.business.name
       : "[error]";
 
+  const businessPhoneNumber =
+    businessInviteCodeQuery.data !== undefined && userState?.jid
+      ? businessInviteCodeQuery.data.businessInviteCode.business.phoneNumber
+      : "[error]";
+
   const businessId =
     businessInviteCodeQuery.data !== undefined && userState?.jid
       ? businessInviteCodeQuery.data.businessInviteCode.business.id
@@ -88,6 +92,7 @@ const BusinessInvite = () => {
           name: businessName,
           businessId,
           logoUrl: businessLogoUrl,
+          phoneNumber: businessPhoneNumber,
         },
       });
 

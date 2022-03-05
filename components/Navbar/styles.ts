@@ -101,4 +101,5 @@ export const StyledImage = styled(Image)`
   &:hover {
     opacity: 70%;
   }
+  cursor: pointer;
 `;

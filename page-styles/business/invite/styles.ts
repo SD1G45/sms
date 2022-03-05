@@ -12,12 +12,14 @@ export const StyledCard = styled(Card)`
 
 export const Heading = styled.h1`
   font-size: 1.4rem;
-  margin-bottom: 5px;
+  text-align: center;
+  margin-bottom: 30px;
 `;
 
 export const SubHeading = styled.p`
   font-size: 1rem;
   margin-bottom: 40px;
+  text-align: center;
 `;
 
 export const Label = styled.label`
@@ -26,7 +28,8 @@ export const Label = styled.label`
 `;
 
 export const LinkDiv = styled.div`
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const StyledLink = styled(Label)`
@@ -43,4 +46,5 @@ export const EmailTextField = styled(TextField)`
 
 export const StyledButton = styled(Button)`
   margin-top: 30px;
+  margin-bottom: 30px;
 `;

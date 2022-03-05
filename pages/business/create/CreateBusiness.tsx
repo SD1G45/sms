@@ -35,6 +35,7 @@ import {
   PhoneNumberList,
 } from "../../../page-styles/create-business/styles";
 import SetupForm from "../../billing/SetupForm";
+import phoneNumber from "../../settings/profile/phone-number";
 
 interface SetBusinessNameProps {
   businessName: string;
@@ -108,6 +109,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
             businessId: data.newBusiness.id,
             name: businessName,
             logoUrl: `https://smsmp-business-logos-local.s3.amazonaws.com/${data.newBusiness.id}.png`,
+            phoneNumber: "3",
           },
         });
 

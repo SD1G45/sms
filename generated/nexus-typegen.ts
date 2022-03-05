@@ -127,6 +127,10 @@ export interface NexusGenObjects {
     id?: string | null; // String
     lastName?: string | null; // String
   }
+  UserBusinessRole: { // root type
+    role?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   UserLoginPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
@@ -234,6 +238,7 @@ export interface NexusGenFieldTypes {
     acceptInvitation: boolean | null; // Boolean
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
     editUser: NexusGenRootTypes['User'] | null; // User
+    editUserDisplayNameMutation: NexusGenRootTypes['User'] | null; // User
     inviteAccount: boolean | null; // Boolean
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
@@ -259,6 +264,7 @@ export interface NexusGenFieldTypes {
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
+    usersForBusiness: Array<NexusGenRootTypes['UserBusinessRole'] | null> | null; // [UserBusinessRole]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -267,6 +273,10 @@ export interface NexusGenFieldTypes {
     firstName: string | null; // String
     id: string | null; // String
     lastName: string | null; // String
+  }
+  UserBusinessRole: { // field return type
+    role: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
   }
   UserLoginPayload: { // field return type
     token: string | null; // String
@@ -365,6 +375,7 @@ export interface NexusGenFieldTypeNames {
     acceptInvitation: 'Boolean'
     editBusiness: 'Business'
     editUser: 'User'
+    editUserDisplayNameMutation: 'User'
     inviteAccount: 'Boolean'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
@@ -390,6 +401,7 @@ export interface NexusGenFieldTypeNames {
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     keywords: 'Keyword'
+    usersForBusiness: 'UserBusinessRole'
     viewer: 'User'
   }
   User: { // field return type name
@@ -398,6 +410,10 @@ export interface NexusGenFieldTypeNames {
     firstName: 'String'
     id: 'String'
     lastName: 'String'
+  }
+  UserBusinessRole: { // field return type name
+    role: 'String'
+    user: 'User'
   }
   UserLoginPayload: { // field return type name
     token: 'String'
@@ -416,6 +432,12 @@ export interface NexusGenArgTypes {
     }
     editUser: { // args
       email: string; // String!
+      firstName: string; // String!
+      id: string; // String!
+      lastName: string; // String!
+      password: string; // String!
+    }
+    editUserDisplayNameMutation: { // args
       firstName: string; // String!
       id: string; // String!
       lastName: string; // String!
@@ -518,6 +540,9 @@ export interface NexusGenArgTypes {
       businessId: string; // String!
     }
     keywords: { // args
+      businessId: string; // String!
+    }
+    usersForBusiness: { // args
       businessId: string; // String!
     }
   }

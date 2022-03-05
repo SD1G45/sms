@@ -17,6 +17,7 @@ export const Heading = styled.h1`
 
 export const Label = styled.label`
   display: block;
+
   padding-bottom: 7px;
 `;
 
@@ -28,6 +29,7 @@ export const StyledLink = styled(Label)`
   color: ${(props) => props.theme.colors.primary};
   cursor: pointer;
 `;
+
 export const PasswordTextField = styled(TextField)`
   margin-bottom: 30px;
 `;

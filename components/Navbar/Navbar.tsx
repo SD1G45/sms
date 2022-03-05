@@ -18,7 +18,6 @@ import {
 } from "./styles";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import {
   useBusinessDispatch,
   useBusinessState,
@@ -26,7 +25,6 @@ import {
 import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
-import { businessQuery } from "../../graphql/schema/queries";
 import LogoutButton from "../LogoutButton";
 
 const Navbar = () => {
@@ -84,8 +82,9 @@ const Navbar = () => {
   if (currentPath.startsWith("/register")) return <></>;
   if (currentPath.startsWith("/welcome")) return <></>;
   if (currentPath.startsWith("/business/create")) return <></>;
-  if (currentPath.startsWith("/business/invite")) return <></>;
+
   if (currentPath.startsWith("/business/join")) return <></>;
+
   if (currentPath.startsWith("/reward")) return <></>;
 
   return (
@@ -98,19 +97,26 @@ const Navbar = () => {
           <BusinessName>{businessName}</BusinessName>
           {businessSelectActive && (
             <BusinessSelector>
-              {filteredBusinessList.map(({ id, logoUrl, name }) => (
-                <BusinessListItem
-                  onClick={() =>
-                    businessDispatch({
-                      type: "setActiveBusiness",
-                      payload: { name, businessId: id, logoUrl },
-                    })
-                  }
-                >
-                  <BusinessListItemLogo src={logoUrl} />
-                  {name}
-                </BusinessListItem>
-              ))}
+              {filteredBusinessList.map(
+                ({ id, logoUrl, name, phoneNumber }) => (
+                  <BusinessListItem
+                    onClick={() =>
+                      businessDispatch({
+                        type: "setActiveBusiness",
+                        payload: {
+                          name,
+                          businessId: id,
+                          logoUrl,
+                          phoneNumber: phoneNumber,
+                        },
+                      })
+                    }
+                  >
+                    <BusinessListItemLogo src={logoUrl} />
+                    {name}
+                  </BusinessListItem>
+                )
+              )}
             </BusinessSelector>
           )}
         </BusinessInfoSection>
@@ -130,6 +136,7 @@ const Navbar = () => {
         </ControlsSection>
       </PrimaryNavbar>
       {!currentPath.startsWith("/settings") &&
+        !currentPath.startsWith("/business") &&
         !currentPath.startsWith("/billing") && (
           <SecondaryNavbarContainer>
             <SecondaryNavbar>
