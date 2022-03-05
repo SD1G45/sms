@@ -15,8 +15,10 @@ import {
   StyledCard,
   StyledHeading,
   BottomLinkDiv,
+  SubHeading,
+  RowDiv,
 } from "../../../page-styles/business/team/styles";
-import { RowDiv } from "../../../page-styles/business/team/styles";
+
 import { FcBusinessman, FcConferenceCall, FcReading } from "react-icons/fc";
 import Link from "next/link";
 import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
@@ -25,6 +27,31 @@ import { useRouter } from "next/router";
 const BusinessTeam = () => {
   const router = useRouter();
   const businessState = useBusinessState();
+
+  // Check to see if the logged-in user is currently logged-into a business.
+  if (businessState?.businessId === null) {
+    return (
+      <SingleCardPage>
+        <StyledCard>
+          <HeadingDiv>
+            <StyledHeading>
+              <FcConferenceCall />
+              You are not currently a member of a business.
+            </StyledHeading>
+          </HeadingDiv>
+          <SubHeading>Lets change that.</SubHeading>
+          <BottomLinkDiv>
+            <Link href={newRouteWithQueries("/settings", router)}>
+              <StyledLink>Back to settings</StyledLink>
+            </Link>
+            <Link href={newRouteWithQueries("/business/create", router)}>
+              <StyledLink>Create a new Business</StyledLink>
+            </Link>
+          </BottomLinkDiv>
+        </StyledCard>
+      </SingleCardPage>
+    );
+  }
 
   const [getBusinessUsers, businessUsersQueryResult] =
     useLazyQuery(BUSINESS_USERS_QUERY);

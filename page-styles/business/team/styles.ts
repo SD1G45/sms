@@ -5,7 +5,11 @@ export const StyledCard = styled(Card)`
   width: 40%;
   justify-content: center;
 `;
-
+export const SubHeading = styled.h2`
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+`;
 export const HeadingDiv = styled.div`
   text-align: center;
   margin-bottom: 30px;

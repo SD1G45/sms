@@ -9,6 +9,7 @@ import {
   StyledButton,
   SubHeading,
   StyledTextField,
+  SuccessDiv,
 } from "../../../page-styles/settings/profile/styles";
 
 import { FcDataEncryption } from "react-icons/fc";
@@ -157,6 +158,8 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
 
   return (
     <>
+      <SuccessDiv>{success && <SuccessPopUp />}</SuccessDiv>
+
       <StyledCard>
         <HeaderDiv>
           <Heading>
@@ -202,7 +205,6 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
         <BackButton onClick={() => setUpdateDisplayName(false)}>
           Back
         </BackButton>
-        {success && <SuccessPopUp />}
       </StyledCard>
     </>
   );

@@ -3,6 +3,12 @@ import Card from "../../../components/Card";
 import Button from "../../../components/Button";
 import TextField from "../../../components/TextField";
 
+export const SuccessDiv = styled.div`
+  right: 50%;
+  bottom: 50%;
+  positon: relative;
+  z-index: 1;
+`;
 export const StyledCard = styled(Card)`
   width: 40%;
   text-align: center;
