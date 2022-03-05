@@ -38,7 +38,7 @@ const Loading = () => {
           <LoadingDiv />
         </div>
       ) : (
-        <>d</>
+        <></>
       )}
     </>
   );
