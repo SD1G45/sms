@@ -6,6 +6,7 @@ type Dispatch = (action: Action) => void;
 
 type Action =
   | { type: "login"; payload: State }
+  | { type: "name-change"; payload: State }
   | { type: "logout" }
   | { type: "email"; payload: string }
   | { type: "password"; payload: string };
@@ -31,6 +32,11 @@ const userReducer = (state: State | null, action: Action) => {
       });
 
       return null;
+    }
+
+    case "name-change": {
+      Cookie.set("firstName", action.payload.firstName, { expires: 7 });
+      return action.payload;
     }
 
     default: {

@@ -19,7 +19,10 @@ import { StyledLink } from "../../../page-styles/settings/profile/styles";
 import { FcPortraitMode } from "react-icons/fc";
 import { useMutation } from "@apollo/client";
 import { EDIT_USERNAME_MUTATION } from "../../../page-mutations/users";
-import { useUserState } from "../../../context/UserContext/UserContext";
+import {
+  useUserDispatch,
+  useUserState,
+} from "../../../context/UserContext/UserContext";
 
 import Image from "next/image";
 import {
@@ -85,10 +88,12 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
   const [editUserNameMutation] = useMutation(EDIT_USERNAME_MUTATION, {
     errorPolicy: "all",
   });
+
   const userState = useUserState();
 
   const [errorState, setErrorState] = useState({ error: false, message: "" });
   const router = useRouter();
+  const userDispatch = useUserDispatch();
   const [success, setSuccess] = useState(false);
 
   const SuccessPopUp = () => (
@@ -135,6 +140,15 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
       if (errors && errors.length > 0) {
         setErrorState({ ...errorState, error: true, message: "error" });
       }
+
+      userDispatch({
+        type: "login",
+        payload: {
+          jid: userState?.jid,
+          userId: userState?.userId,
+          firstName: firstName,
+        },
+      });
       setSuccess(true);
     } catch (error) {
       console.log(error);
