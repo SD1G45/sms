@@ -4,14 +4,16 @@ import Button from "../../../components/Button";
 import TextField from "../../../components/TextField";
 
 export const SuccessDiv = styled.div`
-  right: 50%;
-  bottom: 50%;
-  positon: relative;
+  // right: 50;
+  // bottom: 50%;
+  width: 500px;
+  positon: absolute;
   z-index: 1;
 `;
 export const StyledCard = styled(Card)`
   width: 40%;
   text-align: center;
+  z-index: 0;
 `;
 export const Heading = styled.h1`
   font-size: 2rem;

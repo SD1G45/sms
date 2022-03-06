@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyledCard } from "../../../components/Card/styles";
+
 import SingleCardPage from "../../../components/SingleCardPage";
 import TextField from "../../../components/TextField";
 import {
@@ -10,6 +10,7 @@ import {
   SubHeading,
   StyledTextField,
   SuccessDiv,
+  StyledCard,
 } from "../../../page-styles/settings/profile/styles";
 
 import { FcDataEncryption } from "react-icons/fc";
@@ -141,15 +142,18 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
       if (errors && errors.length > 0) {
         setErrorState({ ...errorState, error: true, message: "error" });
       }
+      const jid = userState?.jid;
 
-      userDispatch({
-        type: "login",
-        payload: {
-          jid: userState?.jid,
-          userId: userState?.userId,
-          firstName: firstName,
-        },
-      });
+      if (jid) {
+        userDispatch({
+          type: "login",
+          payload: {
+            jid: jid,
+            userId: userState?.userId,
+            firstName: firstName,
+          },
+        });
+      }
       setSuccess(true);
     } catch (error) {
       console.log(error);
@@ -158,9 +162,8 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
 
   return (
     <>
-      <SuccessDiv>{success && <SuccessPopUp />}</SuccessDiv>
-
       <StyledCard>
+        <SuccessDiv>{success && <SuccessPopUp />}</SuccessDiv>
         <HeaderDiv>
           <Heading>
             <FcPortraitMode />
