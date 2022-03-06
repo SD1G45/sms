@@ -9,3 +9,11 @@ export const BUSINESS_USERS_QUERY = gql`
     }
   }
 `;
+
+export const EMAIL_RESET_CODE_QUERY = gql`
+  query EmailResetCode($value: String!) {
+    emailResetCode(value: $value) {
+      email
+    }
+  }
+`;

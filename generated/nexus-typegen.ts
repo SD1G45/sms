@@ -107,6 +107,10 @@ export interface NexusGenObjects {
     customerListId?: string | null; // String
     id?: string | null; // String
   }
+  EmailResetCode: { // root type
+    email?: string | null; // String
+    id?: string | null; // String
+  }
   KeyWord_CustomerList: { // root type
     customer_list_id?: string | null; // String
     id?: string | null; // String
@@ -217,6 +221,10 @@ export interface NexusGenFieldTypes {
     id: string | null; // String
     name: string | null; // String
   }
+  EmailResetCode: { // field return type
+    email: string | null; // String
+    id: string | null; // String
+  }
   KeyWord_CustomerList: { // field return type
     customer_list_id: string | null; // String
     id: string | null; // String
@@ -233,8 +241,9 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     acceptInvitation: boolean | null; // Boolean
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
-    editUser: NexusGenRootTypes['User'] | null; // User
+    editEmailCode: boolean | null; // Boolean
     editUserDisplayNameMutation: NexusGenRootTypes['User'] | null; // User
+    editUserEmailMutation: boolean | null; // Boolean
     inviteAccount: boolean | null; // Boolean
     loginUser: NexusGenRootTypes['UserLoginPayload'] | null; // UserLoginPayload
     newBusiness: NexusGenRootTypes['Business'] | null; // Business
@@ -260,6 +269,7 @@ export interface NexusGenFieldTypes {
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
+    emailResetCode: NexusGenRootTypes['EmailResetCode'] | null; // EmailResetCode
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -350,6 +360,10 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     name: 'String'
   }
+  EmailResetCode: { // field return type name
+    email: 'String'
+    id: 'String'
+  }
   KeyWord_CustomerList: { // field return type name
     customer_list_id: 'String'
     id: 'String'
@@ -366,8 +380,9 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     acceptInvitation: 'Boolean'
     editBusiness: 'Business'
-    editUser: 'User'
+    editEmailCode: 'Boolean'
     editUserDisplayNameMutation: 'User'
+    editUserEmailMutation: 'Boolean'
     inviteAccount: 'Boolean'
     loginUser: 'UserLoginPayload'
     newBusiness: 'Business'
@@ -393,6 +408,7 @@ export interface NexusGenFieldTypeNames {
     coupons: 'Coupon'
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
+    emailResetCode: 'EmailResetCode'
     keywords: 'Keyword'
     viewer: 'User'
   }
@@ -418,11 +434,9 @@ export interface NexusGenArgTypes {
       id: string; // String!
       name: string; // String!
     }
-    editUser: { // args
+    editEmailCode: { // args
       email: string; // String!
-      firstName: string; // String!
       id: string; // String!
-      lastName: string; // String!
       password: string; // String!
     }
     editUserDisplayNameMutation: { // args
@@ -430,6 +444,10 @@ export interface NexusGenArgTypes {
       id: string; // String!
       lastName: string; // String!
       password: string; // String!
+    }
+    editUserEmailMutation: { // args
+      code: string; // String!
+      newEmail: string; // String!
     }
     inviteAccount: { // args
       businessId: string; // String!
@@ -529,6 +547,9 @@ export interface NexusGenArgTypes {
     }
     customerLists: { // args
       businessId: string; // String!
+    }
+    emailResetCode: { // args
+      value: string; // String!
     }
     keywords: { // args
       businessId: string; // String!
