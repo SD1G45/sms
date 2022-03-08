@@ -98,6 +98,7 @@ const Login = () => {
       <StyledCard>
         <Heading>Sign in to your account</Heading>
         <EmailTextField
+          id="email"
           label="Email"
           value={emailFromQueryParam || email}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -105,6 +106,7 @@ const Login = () => {
           }
         />
         <PasswordTextField
+          id="password"
           label="Password"
           value={password}
           type="password"
@@ -116,6 +118,7 @@ const Login = () => {
         />
         <ErrorPopup error={errorState.error} message={errorState.message} />
         <Checkbox
+          id="stay-signed-in"
           checked={staySignedInChecked}
           label="Stay signed in"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -123,6 +126,7 @@ const Login = () => {
           }
         />
         <StyledButton
+          id="login-button"
           onClick={() => onLogin()}
           disabled={loading}
           loading={loading}
@@ -131,7 +135,7 @@ const Login = () => {
         </StyledButton>
         <LinkDiv>
           <Link href={newRouteWithQueries("/register", router)} passHref>
-            <StyledLink>New to us? Create an Account</StyledLink>
+            <StyledLink id="register">New to us? Create an Account</StyledLink>
           </Link>
         </LinkDiv>
       </StyledCard>
