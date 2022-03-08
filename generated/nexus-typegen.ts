@@ -108,8 +108,8 @@ export interface NexusGenObjects {
     id?: string | null; // String
   }
   EmailResetCode: { // root type
+    customerId?: string | null; // String
     email?: string | null; // String
-    id?: string | null; // String
   }
   KeyWord_CustomerList: { // root type
     customer_list_id?: string | null; // String
@@ -222,8 +222,8 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
   }
   EmailResetCode: { // field return type
+    customerId: string | null; // String
     email: string | null; // String
-    id: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
     customer_list_id: string | null; // String
@@ -361,8 +361,8 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
   }
   EmailResetCode: { // field return type name
+    customerId: 'String'
     email: 'String'
-    id: 'String'
   }
   KeyWord_CustomerList: { // field return type name
     customer_list_id: 'String'
@@ -435,9 +435,8 @@ export interface NexusGenArgTypes {
       name: string; // String!
     }
     editEmailCode: { // args
-      email: string; // String!
-      id: string; // String!
-      password: string; // String!
+      customerId: string; // String!
+      newEmail: string; // String!
     }
     editUserDisplayNameMutation: { // args
       firstName: string; // String!

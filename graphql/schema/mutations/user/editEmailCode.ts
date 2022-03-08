@@ -9,32 +9,27 @@ export const editEmailCode = extendType({
     t.field("editEmailCode", {
       type: "Boolean",
       args: {
-        id: nonNull(stringArg()),
-        email: nonNull(stringArg()),
-        password: nonNull(stringArg()),
+        customerId: nonNull(stringArg()),
+        newEmail: nonNull(stringArg()),
       },
-      resolve: async (_, { id, email, password }, ctx) => {
+      resolve: async (_, { customerId, newEmail }, ctx) => {
         const code = generate(7);
         const user = await ctx.prisma.user.findFirst({
           where: {
-            id,
-            email,
+            id: customerId
           },
         });
 
         if (!user)
           throw new Error(
-            "Unable to find current user information or user with that email"
+            "Unable to find current user information"
           );
-        else if (!compareSync(password, String(user.password)))
-          throw new Error("Incorrect password, unable to update information");
-
-        console.log("here");
 
         await ctx.prisma.emailResetCode.create({
           data: {
             value: code,
-            email: email,
+            email: newEmail,
+            customerId,
           },
         });
 
@@ -49,11 +44,11 @@ export const editEmailCode = extendType({
 
         await transporter.sendMail({
           from: `"Trism" <no-reply@trism.co>`,
-          to: email,
+          to: newEmail,
           subject: "Trism account email change",
           html: `
                 <p>
-                  This email is being sent out because a change email link was requested from your Trism account. Go click the following link to change your accounts email: <a href="http://localhost:3001/settings/change-email/${code}>https://Trism.co/settings/change-email/${code}</a>
+                  This email is being sent out because a change email link was requested from your Trism account. Go click the following link to change your accounts email: <a href="http://localhost:3001/settings/change-email/${code}?email=${newEmail}>https://Trism.co/settings/change-email/${code}?email=${newEmail}</a>
                 </p> 
               `,
         });

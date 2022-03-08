@@ -161,8 +161,9 @@ model BusinessInviteCode {
 }
 
 model EmailResetCode {
-  id        String   @id @default(uuid())
-  value     String   @unique
-  email     String   
-  createdAt DateTime @default(now())
+  id         String   @id @default(uuid())
+  value      String   @unique
+  email      String   
+  customerId String  
+  createdAt  DateTime @default(now())
 }

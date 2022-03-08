@@ -11,20 +11,20 @@ export const editUserEmailMutation = extendType({
         newEmail: nonNull(stringArg()),
       },
       resolve: async (_, { code, newEmail }, ctx) => {
-        const user = await ctx.prisma.emailResetCode.findFirst({
+        const emailReset = await ctx.prisma.emailResetCode.findFirst({
           where: {
-            value: code
+            value: code,
+            email: newEmail
           },
         });
+        if (!emailReset) {
+          throw new Error("Unable to find that code");
+        }
 
-        if (user == null)
-          throw new Error(
-            "Unable to find current user information or user with that email"
-          );
-
+        const customerId = emailReset.customerId;
         await ctx.prisma.user.update({
           where: {
-            email: String(user.email),
+            id: customerId,
           }, 
           data: {
             email: newEmail
