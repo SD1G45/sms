@@ -83,6 +83,69 @@ describe("Register process", () => {
   });
 })
 
+describe("Create and join new business", () => {
+  it("enters the welcome page", () => {
+
+  });
+
+  it("navigates to business/create",  () => {
+
+  });
+
+  it("creates new business account", () => {
+    // business name
+    // logo
+    // phone number
+  });
+})
+
+describe("Coupons", () => {
+  it("enters the coupons page", async () => {
+  
+  });
+
+  it("navigates to coupons/create", async () => {
+
+  });
+})
+
+describe("Campaigns", () => {
+  it("enters the campaigns page", async () => {
+
+  });
+
+  it("navigates to campaigns/create", async () => {
+
+  });
+})
+
+describe("Keywords", () => {
+  it("enters the keywords page", async () => {
+
+  });
+
+  it("navigates to keywords/create", async () => {
+
+  });
+})
+
+describe("Customers", () => {
+  it("enters the customers page", async () => {
+
+  });
+})
+
+describe("Logout process", () => {
+  it("presses logout button and logs user out", async () => {
+
+  });
+})
+
+describe("Log back in", () => {
+  it("logs user back in to verify account registration", () => {
+
+  });
+})
 
 afterAll(async () => {
   await cleanDatabase("Tests finished. Database clean");
