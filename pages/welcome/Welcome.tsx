@@ -24,10 +24,10 @@ const Welcome = () => {
           one?
         </SetupQuestion>
         <Link href="/business/create" passHref>
-          <StyledButton>Create new business</StyledButton>
+          <StyledButton id="create">Create new business</StyledButton>
         </Link>
         <Link href="/business/join" passHref>
-          <StyledButton>Join existing business</StyledButton>
+          <StyledButton id="join">Join existing business</StyledButton>
         </Link>
       </StyledCard>
     </SingleCardPage>
