@@ -6,7 +6,8 @@ export const testUser = {
   lastName: "LastName",
   email: "sample@email.com",
   password: "password",
-  badPassowrd: "badPassword"
+  badPassword: "badPassword",
+  areaCode: "407",
 };
 
 export const testBusiness = {
