@@ -28,7 +28,7 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
         <LogoCircle
           src={`https://smsmp-business-logos-local.s3.amazonaws.com/${business_id}.png`}
         />
-        <UploadLogoButton invert onClick={() => openLogoEditor()}>
+        <UploadLogoButton id="upload" invert onClick={() => openLogoEditor()}>
           Upload logo
         </UploadLogoButton>
       </LogoPickerContainer>
