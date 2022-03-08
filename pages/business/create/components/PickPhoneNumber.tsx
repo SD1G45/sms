@@ -73,6 +73,7 @@ const PickPhoneNumber: React.FC = () => {
           )}
       </PhoneNumberList>
       <Button
+        id="create-account"
         disabled={selectedPhoneNumber === null || pickLoading}
         onClick={() => provisionPhoneNumber()}
         loading={pickLoading}

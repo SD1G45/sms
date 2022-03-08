@@ -117,6 +117,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
         errorMessage="Please enter a business name"
       />
       <StyledButton
+        id="next"
         onClick={() => onNextClick()}
         disabled={loading}
         loading={loading}

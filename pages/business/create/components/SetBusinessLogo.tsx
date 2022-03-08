@@ -37,7 +37,7 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
           Back
         </StyledButton>
         <ButtonDivider />
-        <StyledButton onClick={onNext}>Next</StyledButton>
+        <StyledButton id="next" onClick={onNext}>Next</StyledButton>
       </ButtonContainer>
     </>
   );
