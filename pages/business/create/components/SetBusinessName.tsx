@@ -108,6 +108,7 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
   return (
     <>
       <TextField
+        id="business-name"
         value={businessName}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           onBusinessNameChange(event.target.value)
