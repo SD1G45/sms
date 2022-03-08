@@ -33,7 +33,7 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
         </UploadLogoButton>
       </LogoPickerContainer>
       <ButtonContainer>
-        <StyledButton onClick={onBack} invert>
+        <StyledButton id="back" onClick={onBack} invert>
           Back
         </StyledButton>
         <ButtonDivider />
