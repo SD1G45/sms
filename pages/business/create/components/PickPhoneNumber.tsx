@@ -50,6 +50,7 @@ const PickPhoneNumber: React.FC = () => {
     <div>
       <PhoneSearchFlex>
         <SearchBar
+          id="search"
           value={areaCode}
           onValueChange={(value) => updateSearch(value)}
         />
@@ -62,6 +63,7 @@ const PickPhoneNumber: React.FC = () => {
               <PhoneNumberContainer key={value.phoneNumber}>
                 <PhoneNumber>{value.friendlyName}</PhoneNumber>
                 <Radio
+                  id="radio"
                   checked={selectedPhoneNumber === value.phoneNumber}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                     event.target.checked &&
