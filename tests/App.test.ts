@@ -163,6 +163,7 @@ describe("Coupons", () => {
   });
 
   it("navigates to coupons/create using SideNav", async () => {
+    sleep(1_000);
     if (!page) {
       throw new Error("Error while loading / page");
     }
