@@ -148,7 +148,18 @@ describe("Create and join new business", () => {
 
 describe("Coupons", () => {
   it("enters the coupons page", async () => {
-  
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
+
+    const coupons = await page.$x("//a[contains(text(), 'Coupons')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Coupons nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/coupons");
   });
 
   it("navigates to coupons/create", async () => {
@@ -158,7 +169,18 @@ describe("Coupons", () => {
 
 describe("Campaigns", () => {
   it("enters the campaigns page", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const coupons = await page.$x("//a[contains(text(), 'Campaigns')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Campaigns nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/campaigns");
   });
 
   it("navigates to campaigns/create", async () => {
@@ -168,7 +190,18 @@ describe("Campaigns", () => {
 
 describe("Keywords", () => {
   it("enters the keywords page", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const coupons = await page.$x("//a[contains(text(), 'Keywords')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Keywords nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/keywords");
   });
 
   it("navigates to keywords/create", async () => {
@@ -178,7 +211,18 @@ describe("Keywords", () => {
 
 describe("Customers", () => {
   it("enters the customers page", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const coupons = await page.$x("//a[contains(text(), 'Customers')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Customers nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/customers");
   });
 })
 
