@@ -162,8 +162,19 @@ describe("Coupons", () => {
     await expect(page).toMatch("/coupons");
   });
 
-  it("navigates to coupons/create", async () => {
+  it("navigates to coupons/create using SideNav", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/coupons/create");
   });
 })
 
@@ -183,8 +194,19 @@ describe("Campaigns", () => {
     await expect(page).toMatch("/campaigns");
   });
 
-  it("navigates to campaigns/create", async () => {
+  it("navigates to campaigns/create using SideNav", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/campaigns/create");
   });
 })
 
@@ -205,7 +227,18 @@ describe("Keywords", () => {
   });
 
   it("navigates to keywords/create", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/keywords/create");
   });
 })
 
@@ -228,7 +261,18 @@ describe("Customers", () => {
 
 describe("Logout process", () => {
   it("presses logout button and logs user out", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/customers/create");
   });
 })
 
