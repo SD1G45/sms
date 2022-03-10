@@ -23,7 +23,7 @@ const SideNav: React.FC<SideNavProps> = ({ items, routes, heading }) => {
           {items.map((item, i) => (
             <Link key={i} href={routes[i]} passHref>
               <tr>
-                <Item active={currentPath === routes[i]}>{item}</Item>
+                <Item id={item} active={currentPath === routes[i]}>{item}</Item>
               </tr>
             </Link>
           ))}
