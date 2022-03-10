@@ -12,7 +12,14 @@ export const testUser = {
 
 export const testBusiness = {
   name: "TestBusiness",
-}
+};
+
+export const testCoupon = {
+  title: "Test Coupon",
+  message: "This is only a test coupon",
+  expirationDate: "01012100",
+  expirationTime: "0000AM",
+};
 
 export const cleanDatabase = async ( errorMessage: string ) => {
     try {
