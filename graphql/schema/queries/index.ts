@@ -8,6 +8,7 @@ import { keywordsQuery } from "./keywordsQuery";
 import { businessInviteCodeQuery } from "./businessInviteCodeQuery";
 import { couponInstanceQuery } from "./couponInstanceQuery";
 import { customerListCustomerQuery } from "./customerListCustomerQuery";
+import { usersForBusinessQuery } from "./usersForBusinessQuery";
 
 export {
   viewerQuery,
@@ -20,4 +21,5 @@ export {
   keywordsQuery,
   businessInviteCodeQuery,
   couponInstanceQuery,
+  usersForBusinessQuery,
 };

@@ -1,9 +1,37 @@
 import styled from "styled-components";
+import Card from "../../../components/Card";
 import Button from "../../../components/Button";
+import TextField from "../../../components/TextField";
 
+export const SuccessDiv = styled.div`
+  // right: 50;
+  // bottom: 50%;
+  width: 500px;
+  positon: absolute;
+  z-index: 1;
+`;
+export const StyledCard = styled(Card)`
+  width: 40%;
+  text-align: center;
+  z-index: 0;
+`;
 export const Heading = styled.h1`
   font-size: 2rem;
+  margin-bottom: 40px;
+`;
+
+export const SubHeading = styled.h2`
+  font-size: 1.2rem;
   margin-bottom: 20px;
+`;
+export const TextDiv = styled.div`
+  margin: auto;
+  margin-top: 30px;
+  width: 70%;
+`;
+
+export const StyledTextField = styled(TextField)`
+  margin-top: 30px;
 `;
 
 export const StyledHeader = styled.h1`
@@ -22,6 +50,7 @@ export const HeaderDiv = styled.div`
 export const PhoneNumberLinkDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 `;
 
 export const BackButton = styled(Button)`
@@ -30,7 +59,7 @@ export const BackButton = styled(Button)`
 `;
 
 export const StyledButton = styled(Button)`
-  margin-top: 20px;
+  margin-top: 40px;
 `;
 
 export const Label = styled.label`

@@ -9,12 +9,14 @@ import {
   FirstNameTextField,
   LastNameTextField,
   NameContainer,
+  LinkDiv,
+  StyledLink,
 } from "../../page-styles/register/styles";
 import { useMutation } from "@apollo/client";
 import { REGISTER_MUTATION } from "../../page-mutations/register";
 import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
-import { LinkDiv, StyledLink } from "../../page-styles/login/styles";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ErrorPopup from "../../components/ErrorPopup";
@@ -91,6 +93,7 @@ const Register = () => {
         payload: {
           jid: data.registerUser.token,
           firstName: data.registerUser.user.firstName,
+          userId: data.registerUser.user.id,
         },
       });
       setLoading(false);

@@ -9,8 +9,8 @@ import {
   EmailTextField,
   StyledButton,
   StyledLink,
-  LinkDiv,
   SubHeading,
+  LinkDiv,
 } from "../../../page-styles/business/invite/styles";
 import { useMutation } from "@apollo/client";
 import { useUserDispatch } from "../../../context/UserContext/UserContext";
@@ -18,6 +18,7 @@ import SingleCardPage from "../../../components/SingleCardPage";
 import { useRouter } from "next/router";
 import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
 import { INVITE_ACCOUNT_MUTATION } from "../../../page-mutations/business/invite";
+import newRouteWithQueries from "../../../helpers/newRouteWithQueries";
 
 const BusinessInvite = () => {
   const [email, setEmail] = useState("");
@@ -64,10 +65,11 @@ const BusinessInvite = () => {
   return (
     <SingleCardPage>
       <StyledCard>
-        <Heading>Invite account {businessState?.name}</Heading>
+        <Heading>Invite someone to your team</Heading>
+
         <SubHeading>
-          Enter the email you used to create your account. A URL will be sent to
-          your email to reset your password.
+          Enter the email of the person you would like to invite to{" "}
+          {businessState?.name}
         </SubHeading>
         <EmailTextField
           label="Email"
@@ -80,6 +82,14 @@ const BusinessInvite = () => {
         <StyledButton disabled={loading} loading={loading} onClick={onInvite}>
           Send invite
         </StyledButton>
+        <LinkDiv>
+          <Link href={newRouteWithQueries("/settings", router)}>
+            <StyledLink>Back to settings</StyledLink>
+          </Link>
+          <Link href={newRouteWithQueries("/business/team", router)}>
+            <StyledLink>Manage your Team</StyledLink>
+          </Link>
+        </LinkDiv>
       </StyledCard>
     </SingleCardPage>
   );

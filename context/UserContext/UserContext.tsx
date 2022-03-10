@@ -6,6 +6,7 @@ type Dispatch = (action: Action) => void;
 
 type Action =
   | { type: "login"; payload: State }
+  | { type: "name-change"; payload: State }
   | { type: "logout" }
   | { type: "email"; payload: string }
   | { type: "password"; payload: string };
@@ -21,6 +22,7 @@ const userReducer = (state: State | null, action: Action) => {
     case "login": {
       Cookie.set("token", action.payload.jid, { expires: 7 });
       Cookie.set("firstName", action.payload.firstName, { expires: 7 });
+      Cookie.set("userId", action.payload.userId, { expires: 7 });
       return action.payload;
     }
 
@@ -32,6 +34,11 @@ const userReducer = (state: State | null, action: Action) => {
       return null;
     }
 
+    case "name-change": {
+      Cookie.set("firstName", action.payload.firstName, { expires: 7 });
+      return action.payload;
+    }
+
     default: {
       throw new Error("Unhandled action type");
     }
@@ -41,8 +48,12 @@ const userReducer = (state: State | null, action: Action) => {
 const UserProvider = ({ children }: CountProviderProps) => {
   const jid = Cookie.get("token");
   const firstName = Cookie.get("firstName");
+  const userId = Cookie.get("userId");
+
   const defaultUserData =
-    jid !== undefined && firstName !== undefined ? { jid, firstName } : null;
+    jid !== undefined && firstName !== undefined && userId !== undefined
+      ? { jid, firstName, userId }
+      : null;
   const [state, dispatch] = React.useReducer(userReducer, defaultUserData);
 
   return (

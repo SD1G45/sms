@@ -75,6 +75,7 @@ const Login = () => {
         payload: {
           jid: data.loginUser.token,
           firstName: data.loginUser.user.firstName,
+          userId: data.loginUser.user.id,
         },
       });
       setLoading(false);
