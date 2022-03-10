@@ -87,7 +87,7 @@ export const SecondaryNavbar = styled.div`
   display: flex;
 `;
 
-export const Item = styled.p<{ active: boolean }>`
+export const Item = styled.a<{ active: boolean }>`
   background-color: ${(props) =>
     props.active ? props.theme.colors.primary : "none"};
   color: ${(props) => (props.active ? "white" : props.theme.colors.textColor)};
@@ -95,6 +95,7 @@ export const Item = styled.p<{ active: boolean }>`
   padding: 4px 12px;
   font-size: 0.8rem;
   cursor: pointer;
+  text-decoration: none;
 `;
 
 export const StyledImage = styled(Image)`

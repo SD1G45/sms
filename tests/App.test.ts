@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
-import { testUser, cleanDatabase } from "./utils/e2eHelpers";
+import { testUser, cleanDatabase, testBusiness } from "./utils/e2eHelpers";
 
 let browser: puppeteer.Browser | undefined;
 let page: puppeteer.Page | undefined;
@@ -62,7 +62,7 @@ describe("Register process", () => {
     await page.type("#last-name", testUser.lastName);
     await page.type("#email", testUser.email);
     await page.type("#password", testUser.password);
-    await page.type("#confirm-password", testUser.badPassowrd);
+    await page.type("#confirm-password", testUser.badPassword);
 
     const text = await page.$eval('p', element => element.textContent);
     await expect(text).toMatch("Passwords don't match");
@@ -83,6 +83,116 @@ describe("Register process", () => {
   });
 })
 
+describe("Create and join new business", () => {
+  sleep(1_000);
+  it("enters the welcome page", async () => {
+    if (!page) {
+      throw new Error("Error while loading Welcome page");
+    }
+
+    await page.waitForNavigation();
+    await expect(page).toMatch('/welcome');
+  });
+
+  it("navigates to business/create",  async () => {
+    if (!page) {
+      throw new Error("Error while loading Welcome page");
+    }
+
+    await page.click("#create");
+    await page.waitForNavigation();
+    await expect(page).toMatch('/business/create');
+  });
+
+  it("choose new business name", async () => {
+    if (!page) {
+      throw new Error("Error while loading /business/create page");
+    }
+
+    await page.type("#business-name", testBusiness.name);
+    await page.click("#next");
+    await page.waitForNavigation();
+
+    const url = await page.url();
+    await expect(url).toContain("step=1");
+  });
+
+  it("chooses new business logo", async () => {
+    if (!page) {
+      throw new Error("Error while loading /business/create page");
+    }
+
+    await page.click("#upload");
+    // TODO: choose and upload image
+    await page.click("#cancel");
+    await page.click("#next");
+    await page.waitForNavigation();
+
+    const url = await page.url();
+    await expect(url).toContain("step=2");
+  });
+
+  it("chooses new businesss phone number", async () => {
+    if (!page) {
+      throw new Error("Error while loading /business/create page");
+    }
+
+    await page.type("#search", testUser.areaCode);
+    await sleep(1_000);
+    await page.click("#radio");
+    await page.click("#create-account");
+    await page.waitForNavigation();
+    await expect(page).toMatch("/");
+  });
+})
+
+describe("Coupons", () => {
+  it("enters the coupons page", async () => {
+  
+  });
+
+  it("navigates to coupons/create", async () => {
+
+  });
+})
+
+describe("Campaigns", () => {
+  it("enters the campaigns page", async () => {
+
+  });
+
+  it("navigates to campaigns/create", async () => {
+
+  });
+})
+
+describe("Keywords", () => {
+  it("enters the keywords page", async () => {
+
+  });
+
+  it("navigates to keywords/create", async () => {
+
+  });
+})
+
+describe("Customers", () => {
+  it("enters the customers page", async () => {
+
+  });
+})
+
+describe("Logout process", () => {
+  it("presses logout button and logs user out", async () => {
+
+  });
+})
+
+describe("Log back in", () => {
+  it("logs user back in to verify account registration", async () => {
+
+  });
+})
 
 afterAll(async () => {
   await cleanDatabase("Tests finished. Database clean");

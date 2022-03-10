@@ -78,16 +78,17 @@ const BusinessLogoEditor: React.FC<Props> = ({ onClose }) => {
           onChange={(event: any) => setScaleValue(event.target.value)}
         />
         <input
+          id="file-upload"
           onChange={handleUpload}
           ref={uploadInput}
           type="file"
           style={{ textAlign: "right" }}
         />
         <ButtonContainer>
-          <Button invert onClick={onClose}>
+          <Button id="cancel" invert onClick={onClose}>
             Cancel
           </Button>
-          <Button onClick={onClickSave} style={{ marginLeft: 15 }}>
+          <Button id="save" onClick={onClickSave} style={{ marginLeft: 15 }}>
             Save
           </Button>
         </ButtonContainer>

@@ -141,25 +141,19 @@ const Navbar = () => {
           <SecondaryNavbarContainer>
             <SecondaryNavbar>
               <Link href="/" passHref>
-                <Item active={currentPath === "/"}>Home</Item>
+                <Item id="home" active={currentPath === "/"}>Home</Item>
               </Link>
               <Link href="/coupons" passHref>
-                <Item active={currentPath.startsWith("/coupons")}>Coupons</Item>
+                <Item id="coupons" active={currentPath.startsWith("/coupons")}>Coupons</Item>
               </Link>
               <Link href="/campaigns" passHref>
-                <Item active={currentPath.startsWith("/campaigns")}>
-                  Campaigns
-                </Item>
+                <Item id="campaigns" active={currentPath.startsWith("/campaigns")}>Campaigns</Item>
               </Link>
               <Link href="/keywords" passHref>
-                <Item active={currentPath.startsWith("/keywords")}>
-                  Keywords
-                </Item>
+                <Item id="keywords" active={currentPath.startsWith("/keywords")}>Keywords</Item>
               </Link>
               <Link href="/customers" passHref>
-                <Item active={currentPath.startsWith("/customers")}>
-                  Customers
-                </Item>
+                <Item id="customers" active={currentPath.startsWith("/customers")}>Customers</Item>
               </Link>
             </SecondaryNavbar>
           </SecondaryNavbarContainer>

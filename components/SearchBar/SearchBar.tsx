@@ -4,6 +4,7 @@ import { Input, InputContainer } from "./styles";
 import { SearchBarProps } from "./types";
 
 const SearchBar: React.FC<SearchBarProps> = ({
+  id,
   value,
   onValueChange,
   className,
@@ -11,6 +12,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <InputContainer className={className}>
       <Input
+        id={id}
         placeholder="search..."
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
