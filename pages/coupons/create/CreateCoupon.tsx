@@ -71,6 +71,7 @@ const CreateCoupon: React.FC = () => {
     return (
       <>
         <CreateButton
+          id="create-coupon"
           onClick={() => {
             handleCreate();
           }}
@@ -168,6 +169,7 @@ const CreateCoupon: React.FC = () => {
           <Heading>Create new coupon</Heading>
           <SubHeading>Information</SubHeading>
           <TextField
+            id="title"
             label="Title"
             value={title}
             style={{ marginBottom: 30 }}
@@ -176,6 +178,7 @@ const CreateCoupon: React.FC = () => {
             }
           />
           <TextArea
+            id="message"
             label="Message"
             style={{ marginBottom: 30 }}
             value={description}
@@ -185,6 +188,7 @@ const CreateCoupon: React.FC = () => {
           />
           <ExpirationContainer>
             <TextField
+              id="expiration-date"
               label="Expiration date"
               type="date"
               value={date}
@@ -194,6 +198,7 @@ const CreateCoupon: React.FC = () => {
               }
             />
             <StyledTimePicker
+              id="expiration-time"
               label="Expiration time"
               type="time"
               value={time}
