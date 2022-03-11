@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
-import { testUser, cleanDatabase, testBusiness } from "./utils/e2eHelpers";
+import { testUser, cleanDatabase, testBusiness, testCoupon } from "./utils/e2eHelpers";
 
 let browser: puppeteer.Browser | undefined;
 let page: puppeteer.Page | undefined;
@@ -138,9 +138,11 @@ describe("Create and join new business", () => {
     }
 
     await page.type("#search", testUser.areaCode);
-    await sleep(1_000);
-    await page.click("#radio");
-    await page.click("#create-account");
+    await page.click("#search");
+    await page.keyboard.press("Enter");
+    // Need to mock this
+    //await page.click("#radio");
+    //await page.click("#create-account");
     await page.waitForNavigation();
     await expect(page).toMatch("/");
   });
@@ -163,9 +165,8 @@ describe("Coupons", () => {
   });
 
   it("navigates to coupons/create using SideNav", async () => {
-    sleep(1_000);
     if (!page) {
-      throw new Error("Error while loading / page");
+      throw new Error("Error while loading /coupons page");
     }
 
     const create = await page.$x("//td[contains(text(), 'Create New')]");
@@ -176,6 +177,19 @@ describe("Coupons", () => {
     }
     await page.waitForNavigation();
     await expect(page).toMatch("/coupons/create");
+  });
+
+  it("successfully creates a new coupon", async () => {
+    if (!page) {
+      throw new Error("Error while loading /coupons/create page");
+    }
+
+    await page.type("#title", testCoupon.title);
+    await page.type("#message", testCoupon.message);
+    await page.type("#expiration-date", testCoupon.expirationDate);
+    await page.type("#expiration-time", testCoupon.expirationTime);
+    await page.click("#create-coupon");
+    await page.screenshot({ path: "coupon.png" });
   });
 })
 
