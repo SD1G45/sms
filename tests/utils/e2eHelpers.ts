@@ -37,7 +37,7 @@ export const cleanDatabase = async ( errorMessage: string ) => {
       })
   
       // Delete user
-      await prisma.user.delete({
+      await prisma.user.deleteMany({
         where: {
           id: user?.id
         }
@@ -49,7 +49,7 @@ export const cleanDatabase = async ( errorMessage: string ) => {
           name: testBusiness.name,
         }
       })
-      await prisma.business.delete({
+      await prisma.business.deleteMany({
         where: {
           id: business?.id,
         }
