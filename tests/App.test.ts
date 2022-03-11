@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
-import { testUser, cleanDatabase, testBusiness } from "./utils/e2eHelpers";
+import { testUser, cleanDatabase, testBusiness, testCoupon } from "./utils/e2eHelpers";
 
 let browser: puppeteer.Browser | undefined;
 let page: puppeteer.Page | undefined;
@@ -138,9 +138,11 @@ describe("Create and join new business", () => {
     }
 
     await page.type("#search", testUser.areaCode);
-    await sleep(1_000);
-    await page.click("#radio");
-    await page.click("#create-account");
+    await page.click("#search");
+    await page.keyboard.press("Enter");
+    // Need to mock this
+    //await page.click("#radio");
+    //await page.click("#create-account");
     await page.waitForNavigation();
     await expect(page).toMatch("/");
   });
@@ -148,43 +150,144 @@ describe("Create and join new business", () => {
 
 describe("Coupons", () => {
   it("enters the coupons page", async () => {
-  
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
+
+    const coupons = await page.$x("//a[contains(text(), 'Coupons')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Coupons nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/coupons");
   });
 
-  it("navigates to coupons/create", async () => {
+  it("navigates to coupons/create using SideNav", async () => {
+    if (!page) {
+      throw new Error("Error while loading /coupons page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/coupons/create");
+  });
+
+  it("successfully creates a new coupon", async () => {
+    if (!page) {
+      throw new Error("Error while loading /coupons/create page");
+    }
+
+    await page.type("#title", testCoupon.title);
+    await page.type("#message", testCoupon.message);
+    await page.type("#expiration-date", testCoupon.expirationDate);
+    await page.type("#expiration-time", testCoupon.expirationTime);
+    await page.click("#create-coupon");
+    await page.screenshot({ path: "coupon.png" });
   });
 })
 
 describe("Campaigns", () => {
   it("enters the campaigns page", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const coupons = await page.$x("//a[contains(text(), 'Campaigns')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Campaigns nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/campaigns");
   });
 
-  it("navigates to campaigns/create", async () => {
+  it("navigates to campaigns/create using SideNav", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/campaigns/create");
   });
 })
 
 describe("Keywords", () => {
   it("enters the keywords page", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const coupons = await page.$x("//a[contains(text(), 'Keywords')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Keywords nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/keywords");
   });
 
   it("navigates to keywords/create", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/keywords/create");
   });
 })
 
 describe("Customers", () => {
   it("enters the customers page", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const coupons = await page.$x("//a[contains(text(), 'Customers')]");
+    if (coupons.length > 0) {
+      await coupons[0].click();
+    } else {
+      throw new Error("Customers nav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/customers");
   });
 })
 
 describe("Logout process", () => {
   it("presses logout button and logs user out", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
 
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/customers/create");
   });
 })
 
