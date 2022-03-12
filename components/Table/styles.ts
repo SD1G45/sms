@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../Button";
+import { stylesProps } from "./stylesType";
 
 export const DivContainer = styled.div`
   padding-left: 50px;
@@ -40,10 +41,10 @@ export const Header = styled.th`
 
 export const StyledButton = styled(Button)``;
 
-export const HeaderLong = styled.th`
+export const HeaderLong = styled.th<stylesProps>`
   border-bottom: 2.75px solid #c4c4c4;
   padding-bottom: 15px;
-  padding-right: 100px;
+  padding-right: ${(props) => (props.tableType == "Keyword" ? "50px" : "100px")};
   padding-top: 15px;
   font-size: 14px;
   text-align: left;
@@ -52,12 +53,14 @@ export const HeaderLong = styled.th`
 export const Data = styled.td`
   border-bottom: 2.75px solid #c4c4c4;
   padding-bottom: 15px;
-  padding-left: 60px;
+  padding-left: 58px;
   padding-top: 15px;
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
+  text-align: center;
+
 `;
 
 export const DataEmpty = styled.td`

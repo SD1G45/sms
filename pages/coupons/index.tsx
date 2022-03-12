@@ -80,7 +80,7 @@ const index = () => {
           </SearchDiv>
           <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
-        <Table headers={headers} data={data} />
+        <Table headers={headers} data={data} tableType={"Coupons"}/>
       </ColumnDiv>
     </ContainerDiv>
   );

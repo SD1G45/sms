@@ -31,7 +31,7 @@ const Campaigns = () => {
   const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
   const routes: string[] = ["/campaigns", createPath, faqPath];
   const tableHeaders: string[] = [
-    "Campaign",
+    "Name",
     "Date sent",
     "Messages sent",
     "Message success %",
@@ -85,9 +85,9 @@ const Campaigns = () => {
           <SearchDiv>
             <SearchBar value={""} onValueChange={() => {}} />
           </SearchDiv>
-          <Button>Create New Campaign</Button>
+          <Button onClick={onClick}>Create New Campaign</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={data} />
+        <Table headers={tableHeaders} data={data} tableType={"Campaign"}/>
       </ColumnDiv>
     </ContainerDiv>
   );

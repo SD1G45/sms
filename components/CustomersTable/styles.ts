@@ -56,18 +56,19 @@ export const HeaderLong = styled.th`
 
 export const Data = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     padding-left: 300px;
-    padding-top: 15px;
+    padding-top: 5px;
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
     white-space: nowrap;
+    text-align: center;
 `;
 
 export const DataEmpty = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
-    padding-bottom: 60px;
+    padding-bottom: 48px;
     padding-right: 0px;
     font-size: 14px;
     font-weight: 500;
