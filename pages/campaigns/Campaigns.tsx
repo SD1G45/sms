@@ -86,16 +86,17 @@ const Campaigns = () => {
           </HeaderDiv>
           <SearchDiv>
             <SearchBar value={search}
-              onValueChange={(s: string) => {
-                setSearch(s)
-                setFilteredData(data.filter(d => d[0].includes(s)))
-              }} />
+            onValueChange={(s: string) => {
+              setSearch(s);
+              setFilteredData(data.filter(d => d[0].includes(s)));
+            } } id={""} />
           </SearchDiv>
-          <Button>Create New Campaign</Button>
+          <Button onClick={onClick}>Create New Campaign</Button>
         </RowDiv>
         <Table
           headers={tableHeaders}
           data={search.length > 0 ? filteredData : data}
+          tableType={"Campaign"}
         />
       </ColumnDiv>
     </ContainerDiv>

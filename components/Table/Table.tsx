@@ -16,12 +16,14 @@ import {
 } from "./styles";
 import { TableProps } from "./types";
 
-function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
+function mapDataToHeaderComponent(data: string[], tableType: string): JSX.Element[] {
   const mapping: JSX.Element[] = [];
 
   data.map((value, i) => {
     const newItem =
-      i == 0 ? <HeaderLong>{value}</HeaderLong> : <Header>{value}</Header>;
+      i == 0 ? <HeaderLong tableType={tableType}>{value}</HeaderLong> 
+      : 
+      <Header>{value}</Header>;
     mapping.push(newItem);
   });
 
@@ -74,7 +76,7 @@ const customersTable = (data: string[][], page: number) => {
     <DivContainer>
       <DataTable>
         <TableHeader>
-          <tr>{mapDataToHeaderComponent(headers)}</tr>
+          <tr>{mapDataToHeaderComponent(headers, "Customers")}</tr>
         </TableHeader>
         <TableBody>{mapDataToBodyComponent(data, page, true)}</TableBody>
       </DataTable>
@@ -82,7 +84,7 @@ const customersTable = (data: string[][], page: number) => {
   );
 };
 
-const Table: React.FC<TableProps> = ({ headers, data }) => {
+const Table: React.FC<TableProps> = ({ headers, data, tableType}) => {
   const [page, setPage] = useState(1);
   const numOfEntries = data.length;
   const numOfPages = Math.ceil(numOfEntries / 7);
@@ -117,7 +119,7 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
     <DivContainer>
       <DataTable>
         <TableHeader>
-          <tr>{mapDataToHeaderComponent(headers)}</tr>
+          <tr>{mapDataToHeaderComponent(headers, tableType)}</tr>
         </TableHeader>
         <TableBody>{mapDataToBodyComponent(data, page, false)}</TableBody>
       </DataTable>

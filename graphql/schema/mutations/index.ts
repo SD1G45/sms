@@ -14,8 +14,9 @@ import { acceptInvitation } from "./business/acceptInviteMutation";
 import { newCustomerListCustomerMutation } from "./create/newCustomerListCustomerMutation";
 import { redeemCouponMutation } from "./coupon/redeemCoupon";
 import { openCouponMutation } from "./coupon/openCoupon";
-import { editUserMutations } from "./editUserMutations";
 import { editUserDisplayNameMutation } from "./user/editUserDisplayNameMutation";
+import { editUserEmailMutation } from "./user/editUserEmailMutation";
+import { editEmailCode } from "./user/editEmailCode";
 
 export {
   registerUserMutation,
@@ -34,6 +35,7 @@ export {
   newCustomerListCustomerMutation,
   redeemCouponMutation,
   openCouponMutation,
-  editUserMutations,
-  editUserDisplayNameMutation
+  editUserDisplayNameMutation,
+  editUserEmailMutation,
+  editEmailCode
 };

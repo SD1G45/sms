@@ -12,6 +12,7 @@ import { DateScalar } from "./DateScalar";
 import { BusinessInviteCode } from "./BusinessInviteCode";
 import { CouponInstance } from "./CouponInstance";
 import { Customer_CustomerList } from "./Customer_CustomerList";
+import { EmailResetCode } from "./EmailResetCode";
 
 export {
   AvailablePhoneNumber,
@@ -25,6 +26,7 @@ export {
   Campaign,
   Customer,
   DateScalar,
+  EmailResetCode,
   BusinessInviteCode,
   CouponInstance,
   Customer_CustomerList
