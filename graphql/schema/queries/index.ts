@@ -9,6 +9,7 @@ import { businessInviteCodeQuery } from "./businessInviteCodeQuery";
 import { couponInstanceQuery } from "./couponInstanceQuery";
 import { customerListCustomerQuery } from "./customerListCustomerQuery";
 import { usersForBusinessQuery } from "./usersForBusinessQuery";
+import { emailResetCodeQuery } from "./emailResetCodeQuery";
 
 export {
   viewerQuery,
@@ -18,6 +19,7 @@ export {
   customerListQuery,
   customerListCustomerQuery,
   campaignQuery,
+  emailResetCodeQuery,
   keywordsQuery,
   businessInviteCodeQuery,
   couponInstanceQuery,

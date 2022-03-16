@@ -11,7 +11,7 @@ import {
   RowDiv,
   SearchDiv,
   StyledHeader,
-} from "../../page-styles/coupons/styles";
+} from "../../page-styles/keywords/styles";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
@@ -34,10 +34,10 @@ const Keywords = () => {
   const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
   const routes: string[] = ["/keywords", createPath, faqPath];
   const tableHeaders: string[] = [
-    "Keyword",
+    "Name",
     "Date created",
-    "Customers Onboarded",
-    "Message success rate",
+    "Customers onboarded",
+    "Message success %",
     "Coupons opened",
     "Coupons redeemed",
     "Open %",
@@ -88,16 +88,17 @@ const Keywords = () => {
           </HeaderDiv>
           <SearchDiv>
             <SearchBar value={search}
-              onValueChange={(s: string) => {
-                setSearch(s)
-                setFilteredData(data.filter(d => d[0].includes(s)))
-              }} />
+            onValueChange={(s: string) => {
+              setSearch(s);
+              setFilteredData(data.filter(d => d[0].includes(s)));
+            } } id={""} />
           </SearchDiv>
           <Button onClick={onClick}>Create New Keyword</Button>
         </RowDiv>
         <Table
           headers={tableHeaders}
           data={search.length > 0 ? filteredData : data}
+          tableType={"Keyword"}
         />
       </ColumnDiv>
     </ContainerDiv>

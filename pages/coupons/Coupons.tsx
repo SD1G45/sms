@@ -83,14 +83,14 @@ const Coupons = () => {
               onValueChange={(s: string) => {
                 setSearch(s);
                 setFilteredData(data.filter((d) => d[0].includes(s)));
-              }}
-            />
+              } } id={""}            />
           </SearchDiv>
           <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
         <Table
           headers={headers}
           data={search.length > 0 ? filteredData : data}
+          tableType={"Coupons"}
         />
       </ColumnDiv>
     </ContainerDiv>
