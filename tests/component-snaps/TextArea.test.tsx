@@ -8,11 +8,21 @@ import TextArea from "../../components/TextArea";
 const steps = ["Step 1", "Step 2", "Step 3"];
 
 describe("<TextArea/>", () => {
-  it("renders correctly", () => {
+  it("renders correctly with label", () => {
     const tree = renderer.create(
       <Theme>
         <TextArea
-          id="test"
+          value="test"
+        />
+      </Theme>
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders correctly with label", () => {
+    const tree = renderer.create(
+      <Theme>
+        <TextArea
           label="Test"
           value="test"
         />
@@ -25,7 +35,6 @@ describe("<TextArea/>", () => {
     const tree = renderer.create(
       <Theme>
         <TextArea
-          id="test"
           label="Test"
           value="test"
           error={true}
