@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Radio/> renders correctly 1`] = `
+.c0 {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+<input
+  className="c0"
+  type="radio"
+/>
+`;
