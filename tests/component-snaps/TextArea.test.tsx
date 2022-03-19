@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import "jest-styled-components";
-import Slider from "../../components/Slider";
 import Theme from "../../components/styles/Theme";
 import TextArea from "../../components/TextArea";
 
