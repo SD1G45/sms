@@ -27,34 +27,42 @@ export const cleanDatabase = async ( errorMessage: string ) => {
         where: {
           email: testUser.email,
         }
-      })
+      });
+       const businesses = await prisma.business.findMany({
+        where: {
+          name: testBusiness.name,
+        }
+      });
 
       // Delete all Business_Users
       await prisma.business_User.deleteMany({
         where: {
           userId: user?.id,
         }
-      })
-  
-      // Delete user
+      });
+
+      // Delete Users
       await prisma.user.deleteMany({
         where: {
           id: user?.id
         }
       });
 
-      // Delete business
-      const business = await prisma.business.findFirst({
-        where: {
-          name: testBusiness.name,
-        }
-      })
-      await prisma.business.deleteMany({
-        where: {
-          id: business?.id,
-        }
-      })
-      
+      businesses.forEach(async business => {
+        // Delete all coupons
+        await prisma.coupon.deleteMany({
+          where: {
+            businessId: business?.id,
+          }
+        });
+
+        // Delete all businesses
+        await prisma.business.deleteMany({
+          where: {
+            id: business?.id,
+          }
+        })
+      });
     } catch (error) {
       console.log(errorMessage);
     }
