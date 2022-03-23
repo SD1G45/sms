@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
-import { testUser, cleanDatabase, testBusiness, testCoupon, testCustomerList } from "./utils/e2eHelpers";
+import { testUser, cleanDatabase, testBusiness, testCoupon, testCustomerList, testKeyword } from "./utils/e2eHelpers";
 
 let browser: puppeteer.Browser | undefined;
 let page: puppeteer.Page | undefined;
@@ -188,7 +188,7 @@ describe("Customers", () => {
     await page.click("#close"); 
     await page.waitForNavigation();
     await expect(page).toMatch("/customers");
-  }, 100000);
+  });
 })
 
 describe("Coupons", () => {
@@ -242,7 +242,7 @@ describe("Coupons", () => {
 describe("Keywords", () => {
   it("enters the keywords page", async () => {
     if (!page) {
-      throw new Error("Error while loading / page");
+      throw new Error("Error while loading /keywords page");
     }
 
     await expect(page).toMatch("/keywords");
@@ -250,7 +250,7 @@ describe("Keywords", () => {
 
   it("navigates to keywords/create", async () => {
     if (!page) {
-      throw new Error("Error while loading / page");
+      throw new Error("Error while loading /keywords page");
     }
 
     const create = await page.$x("//td[contains(text(), 'Create New')]");
@@ -261,6 +261,28 @@ describe("Keywords", () => {
     }
     await page.waitForNavigation();
     await expect(page).toMatch("/keywords/create");
+  });
+
+  it("successfully creates a new keyword", async () => {
+    if (!page) {
+      throw new Error("Error while loading /keywords/create page");
+    }
+
+    const couponId = "#" + testCoupon.title.replace(/\s.*/, '');
+    const customerListId = "#" + testCustomerList.name.replace(/\s.*/, '');
+
+    await page.type("#keyword", testKeyword.keyword);
+    await page.type("#auto-response", testKeyword.autoResponse);
+    await page.type("#description", testKeyword.description);
+    await page.type("#coupon", testCoupon.title);
+    await page.click(couponId);
+    await page.click("#add");
+    await page.click(customerListId);
+    await page.click("#create");
+    sleep(2_000);
+    await page.click("#close");
+    await page.waitForNavigation();
+    await expect(page).toMatch("/keywords");
   });
 })
 
