@@ -190,35 +190,20 @@ describe("Coupons", () => {
   });
 })
 
-describe("Campaigns", () => {
-  it("enters the campaigns page", async () => {
+describe("Customers", () => {
+  it("enters the customers page", async () => {
     if (!page) {
       throw new Error("Error while loading / page");
     }
 
-    const coupons = await page.$x("//a[contains(text(), 'Campaigns')]");
+    const coupons = await page.$x("//a[contains(text(), 'Customers')]");
     if (coupons.length > 0) {
       await coupons[0].click();
     } else {
-      throw new Error("Campaigns nav button not found");
+      throw new Error("Customers nav button not found");
     }
     await page.waitForNavigation();
-    await expect(page).toMatch("/campaigns");
-  });
-
-  it("navigates to campaigns/create using SideNav", async () => {
-    if (!page) {
-      throw new Error("Error while loading / page");
-    }
-
-    const create = await page.$x("//td[contains(text(), 'Create New')]");
-    if (create.length > 0) {
-      await create[0].click();
-    } else {
-      throw new Error("Create New SideNav button not found");
-    }
-    await page.waitForNavigation();
-    await expect(page).toMatch("/campaigns/create");
+    await expect(page).toMatch("/customers");
   });
 })
 
@@ -254,20 +239,35 @@ describe("Keywords", () => {
   });
 })
 
-describe("Customers", () => {
-  it("enters the customers page", async () => {
+describe("Campaigns", () => {
+  it("enters the campaigns page", async () => {
     if (!page) {
       throw new Error("Error while loading / page");
     }
 
-    const coupons = await page.$x("//a[contains(text(), 'Customers')]");
+    const coupons = await page.$x("//a[contains(text(), 'Campaigns')]");
     if (coupons.length > 0) {
       await coupons[0].click();
     } else {
-      throw new Error("Customers nav button not found");
+      throw new Error("Campaigns nav button not found");
     }
     await page.waitForNavigation();
-    await expect(page).toMatch("/customers");
+    await expect(page).toMatch("/campaigns");
+  });
+
+  it("navigates to campaigns/create using SideNav", async () => {
+    if (!page) {
+      throw new Error("Error while loading / page");
+    }
+
+    const create = await page.$x("//td[contains(text(), 'Create New')]");
+    if (create.length > 0) {
+      await create[0].click();
+    } else {
+      throw new Error("Create New SideNav button not found");
+    }
+    await page.waitForNavigation();
+    await expect(page).toMatch("/campaigns/create");
   });
 })
 
