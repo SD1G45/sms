@@ -43,10 +43,10 @@ const MultiSelector: React.FC<MultiSelectorProps> = ({
     <MultiSelectorContainer ref={ref}>
       <LabelContainer>
         <Label>{label}</Label>
-        <AddButton onClick={() => setIsHidden(false)} />
+        <AddButton id="add" onClick={() => setIsHidden(false)} />
       </LabelContainer>
       <SelectionContainer>
-        {selectedOptions.map(({ id, name }) => (
+        {selectedOptions.map(({ id, name }, idx) => (
           <>
             <Selection key={id}>
               {name}
@@ -65,7 +65,7 @@ const MultiSelector: React.FC<MultiSelectorProps> = ({
             />
             {optionsFilter.length > 0 ? (
               optionsFilter.map(({ id, name }) => (
-                <Option key={id} onClick={() => handleOptionSelect(id, name)}>
+                <Option id={name.replace(/\s.*/, '')} key={id} onClick={() => handleOptionSelect(id, name)}>
                   {name}
                 </Option>
               ))
