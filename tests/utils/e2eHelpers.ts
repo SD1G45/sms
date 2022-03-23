@@ -33,6 +33,11 @@ export const testKeyword = {
   description: "Description for Test Keyword",
 }
 
+export const testCampaign = {
+  campaign: "Test Campaign",
+  message: "Message for Test Campaign",
+}
+
 export const cleanDatabase = async ( errorMessage: string ) => {
     try {
       const user = await prisma.user.findFirst({
@@ -88,6 +93,12 @@ export const cleanDatabase = async ( errorMessage: string ) => {
             }
           })
         });
+
+        await prisma.campaign.deleteMany({
+          where: {
+            businessId: business?.id,
+          }
+        })
 
         // Delete all keywords
         await prisma.keyword.deleteMany({
