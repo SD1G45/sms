@@ -27,6 +27,12 @@ export const testCoupon = {
   expirationTime: "0000AM",
 };
 
+export const testKeyword = {
+  keyword: "Test Keyword",
+  autoResponse: "Auto Response for Test Keyword",
+  description: "Description for Test Keyword",
+}
+
 export const cleanDatabase = async ( errorMessage: string ) => {
     try {
       const user = await prisma.user.findFirst({
@@ -54,7 +60,42 @@ export const cleanDatabase = async ( errorMessage: string ) => {
         }
       });
 
+      // Delete everything associated with Businesses
       businesses.forEach(async business => {
+        const customerLists = await prisma.customer_List.findMany({
+          where: {
+            businessId: business?.id,
+          }
+        });
+
+        // Delete everything associated with CustomerLists
+        customerLists.forEach(async list => {
+          await prisma.keyword_Customer_List.deleteMany({
+            where: {
+              customerListId: list?.id,
+            }
+          });
+
+          await prisma.campaign_Customer_List.deleteMany({
+            where: {
+              customerListId: list?.id,
+            }
+          });
+
+          await prisma.customer_List.delete({
+            where: {
+              id: list?.id
+            }
+          })
+        });
+
+        // Delete all keywords
+        await prisma.keyword.deleteMany({
+          where: {
+            businessId: business?.id,
+          }
+        });
+
         // Delete all coupons
         await prisma.coupon.deleteMany({
           where: {
@@ -67,14 +108,14 @@ export const cleanDatabase = async ( errorMessage: string ) => {
           where: {
             businessId: business?.id,
           }
-        })
+        });
 
         // Delete all businesses
         await prisma.business.deleteMany({
           where: {
             id: business?.id,
           }
-        })
+        });
       });
     } catch (error) {
       console.log(errorMessage);
