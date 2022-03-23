@@ -12,7 +12,13 @@ export const testUser = {
 
 export const testBusiness = {
   name: "TestBusiness",
+  number: "+15005550006"
 };
+
+export const testCustomerList = {
+  name: "Test Customer List",
+  description: "This is only a test customer list"
+}
 
 export const testCoupon = {
   title: "Test Coupon",
@@ -55,6 +61,13 @@ export const cleanDatabase = async ( errorMessage: string ) => {
             businessId: business?.id,
           }
         });
+
+        // Delete all customer lists
+        await prisma.customer_List.deleteMany({
+          where: {
+            businessId: business?.id,
+          }
+        })
 
         // Delete all businesses
         await prisma.business.deleteMany({
