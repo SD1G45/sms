@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import getRootUrl from "../config/rootUrl";
-import { testUser, cleanDatabase, testBusiness, testCoupon, testCustomerList, testKeyword } from "./utils/e2eHelpers";
+import { testUser, cleanDatabase, testBusiness, testCoupon, testCustomerList, testKeyword, testCampaign } from "./utils/e2eHelpers";
 
 let browser: puppeteer.Browser | undefined;
 let page: puppeteer.Page | undefined;
@@ -315,6 +315,27 @@ describe("Campaigns", () => {
     }
     await page.waitForNavigation();
     await expect(page).toMatch("/campaigns/create");
+  });
+
+  it("successfully creates a new campaign", async () => {
+    if (!page) {
+      throw new Error("Error while loading /campaigns/create page");
+    }
+
+    const couponId = "#" + testCoupon.title.replace(/\s.*/, '');
+    const customerListId = "#" + testCustomerList.name.replace(/\s.*/, '');
+
+    await page.type("#campaign", testCampaign.campaign);
+    await page.type("#message", testCampaign.message);
+    await page.type("#coupon", testCoupon.title);
+    await page.click(couponId);
+    await page.click("#add");
+    await page.click(customerListId);
+    await page.click("#create");
+    sleep(2_000);
+    await page.click("#close");
+    await page.waitForNavigation();
+    await expect(page).toMatch("/campaigns");
   });
 })
 
