@@ -353,7 +353,15 @@ describe("Logout process", () => {
 
 describe("Log back in", () => {
   it("logs user back in to verify account registration", async () => {
+    if (!page) {
+      throw  new Error("Eror while loading /login page");
+    }
 
+    await page.type("#email", testUser.email);
+    await page.type("#password", testUser.password);
+    await page.click("#login-button");
+    await page.waitForNavigation();
+    await expect(page).toMatch("/");
   });
 })
 
