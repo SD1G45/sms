@@ -58,7 +58,7 @@ const PickPhoneNumber: React.FC = () => {
         />
       </PhoneSearchFlex>
       <PhoneNumberList>
-        { process.env.NODE_ENV !== "test" ? data &&
+        { data &&
           data.availablePhoneNumbers &&
           data.availablePhoneNumbers.map(
             (value: { phoneNumber: string; friendlyName: string }) => (
@@ -74,18 +74,7 @@ const PickPhoneNumber: React.FC = () => {
                 />
               </PhoneNumberContainer>
             )
-          ) : 
-          <PhoneNumberContainer key="+15005550006">
-            <PhoneNumber>(500) 555-0006</PhoneNumber>
-            <Radio
-              id="radio"
-              checked={selectedPhoneNumber === "+15005550006"}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                event.target.checked &&
-                setSelectedPhoneNumber("+15005550006")
-              }
-            />
-          </PhoneNumberContainer>
+          ) 
         }
       </PhoneNumberList>
       <Button
