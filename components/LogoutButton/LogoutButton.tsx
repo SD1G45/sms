@@ -33,6 +33,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
 
   return (
     <VariantButton
+      id="logout"
       onClick={() => onLogout()}
       loading={loading}
       variant={variant}

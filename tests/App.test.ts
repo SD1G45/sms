@@ -345,14 +345,9 @@ describe("Logout process", () => {
       throw new Error("Error while loading / page");
     }
 
-    const create = await page.$x("//td[contains(text(), 'Create New')]");
-    if (create.length > 0) {
-      await create[0].click();
-    } else {
-      throw new Error("Create New SideNav button not found");
-    }
+    await page.click("#logout");
     await page.waitForNavigation();
-    await expect(page).toMatch("/customers/create");
+    await expect(page).toMatch("/login");
   });
 })
 
