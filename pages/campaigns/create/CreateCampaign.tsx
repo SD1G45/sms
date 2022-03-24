@@ -174,7 +174,7 @@ const CreateCampaign: React.FC = () => {
       </div>
       */}
 
-      <SetupLaterButton onClick={() => router.push("/campaigns")}>
+      <SetupLaterButton id="close" onClick={() => router.push("/campaigns")}>
         close
       </SetupLaterButton>
     </StyledCard>
@@ -202,6 +202,7 @@ const CreateCampaign: React.FC = () => {
           <Heading>Create new campaign</Heading>
           <SubHeading>Information</SubHeading>
           <TextField
+            id="campaign"
             label="Campaign"
             value={name}
             style={{ marginBottom: 30 }}
@@ -210,6 +211,7 @@ const CreateCampaign: React.FC = () => {
             }
           />
           <TextArea
+            id="message"
             label="Message"
             style={{ marginBottom: 30 }}
             value={message}
@@ -218,6 +220,7 @@ const CreateCampaign: React.FC = () => {
             }
           />
           <StyledSelector
+            id="coupon"
             label="Coupon"
             options={couponOptions}
             searchValue={selectorSearch}
@@ -236,6 +239,7 @@ const CreateCampaign: React.FC = () => {
           />
           <ButtonContainer>
             <Button
+              id="create"
               style={{ width: 250 }}
               onClick={() => handleCreate()}
               disabled={loading}

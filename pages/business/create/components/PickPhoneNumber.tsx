@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Button from "../../../../components/Button";
 import Radio from "../../../../components/Radio";
 import SearchBar from "../../../../components/SearchBar";
+import { useBusinessDispatch } from "../../../../context/BusinessContext/BusinessContext";
 import { PROVISION_PHONE_NUMBER_MUTATION } from "../../../../page-mutations/create-business";
 import { AVAILABLE_PHONE_NUMBERS_QUERY } from "../../../../page-queries/create-business";
 import { PhoneNumber, PhoneNumberContainer, PhoneNumberList, PhoneSearchFlex } from "../../../../page-styles/create-business/styles";
@@ -17,6 +18,7 @@ const PickPhoneNumber: React.FC = () => {
 
   const router = useRouter();
   const business_id = router.query.business_id;
+  const businessDispatch = useBusinessDispatch();
 
   const [getPhoneNumbers, { loading, error, data }] = useLazyQuery(
     AVAILABLE_PHONE_NUMBERS_QUERY
@@ -56,7 +58,7 @@ const PickPhoneNumber: React.FC = () => {
         />
       </PhoneSearchFlex>
       <PhoneNumberList>
-        {data &&
+        { data &&
           data.availablePhoneNumbers &&
           data.availablePhoneNumbers.map(
             (value: { phoneNumber: string; friendlyName: string }) => (
@@ -72,7 +74,8 @@ const PickPhoneNumber: React.FC = () => {
                 />
               </PhoneNumberContainer>
             )
-          )}
+          ) 
+        }
       </PhoneNumberList>
       <Button
         id="create-account"

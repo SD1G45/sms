@@ -1,4 +1,5 @@
 export interface SelectorProps {
+  id?: string;
   className?: string;
   label: string;
   searchValue: string;

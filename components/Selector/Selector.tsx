@@ -6,6 +6,7 @@ import { DropDownCard, Option, SelectorContainer } from "./styles";
 import { SelectorProps } from "./types";
 
 const Selector: React.FC<SelectorProps> = ({
+  id,
   label,
   searchValue,
   onSearchValueChange,
@@ -41,6 +42,7 @@ const Selector: React.FC<SelectorProps> = ({
         <Label>{label || ""}</Label>
       </LabelContainer>
       <TextField
+        id={id}
         value={searchValue}
         onChange={handleSearchChange}
         onFocus={() => setIsHidden(false)}
@@ -48,8 +50,8 @@ const Selector: React.FC<SelectorProps> = ({
       {!isHidden && (
         <DropDownCard>
           {optionsFilter.length > 0 ? (
-            optionsFilter.map(({ id, name }) => (
-              <Option key={id} onClick={() => handleOptionSelect(id, name)}>
+            optionsFilter.map(({ id, name }, idx) => (
+              <Option id={name.replace(/\s.*/, '')} key={id} onClick={() => handleOptionSelect(id, name)}>
                 {name}
               </Option>
             ))

@@ -94,15 +94,15 @@ const CreateCoupon: React.FC = () => {
         a keyword.
       </CardDescription>
       <div>
-        <ConnectButton onClick={() => router.push("/campaigns")}>
+        <ConnectButton id="to-campaigns" onClick={() => router.push("/campaigns")}>
           Connect to campaign
         </ConnectButton>
-        <ConnectButton onClick={() => router.push("/keywords")}>
+        <ConnectButton id="to-keywords" onClick={() => router.push("/keywords")}>
           Connect to keyword
         </ConnectButton>
       </div>
 
-      <SetupLaterButton onClick={() => router.push("/coupons")}>
+      <SetupLaterButton id="close" onClick={() => router.push("/coupons")}>
         Setup later
       </SetupLaterButton>
     </StyledCard>
