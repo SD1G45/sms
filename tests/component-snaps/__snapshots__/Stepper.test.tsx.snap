@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Slider/> renders correctly 1`] = `
+.c0 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  color: #4881F0;
+  border: 1px solid #4881F0;
+}
+
+.c4 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #4881F0;
+  color: white;
+  border: none;
+}
+
+.c3 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  height: 2px;
+  background-color: #BEC8D2;
+  margin: 0px 8px;
+}
+
+.c2 {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+<div
+  className="c0"
+>
+  <button
+    className="c1"
+  >
+    1
+  </button>
+  <p
+    className="c2"
+  >
+    Step 1
+  </p>
+  <div
+    className="c3"
+  />
+  <button
+    className="c4"
+  >
+    2
+  </button>
+  <p
+    className="c2"
+  >
+    Step 2
+  </p>
+  <div
+    className="c3"
+  />
+  <button
+    className="c1"
+  >
+    3
+  </button>
+  <p
+    className="c2"
+  >
+    Step 3
+  </p>
+</div>
+`;

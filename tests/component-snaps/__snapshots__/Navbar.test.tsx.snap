@@ -1,0 +1,415 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navbar/> renders correctly 1`] = `
+Array [
+  .c7 {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: #4881F0;
+  border-radius: 18px;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.c7:hover {
+  opacity: 70%;
+}
+
+.c0 {
+  background-color: #F8FAFC;
+  padding: 15px 80px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c2 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.c3 {
+  font-size: 1.4rem;
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c6 {
+  width: 15px;
+}
+
+.c5 {
+  cursor: pointer;
+}
+
+.c5:hover {
+  opacity: 70%;
+}
+
+.c8 {
+  border-radius: 30px;
+  font-size: 0.8rem;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1"
+      onClick={[Function]}
+    >
+      <img
+        className="c2"
+        src=""
+      />
+      <h1
+        className="c3"
+      >
+        
+      </h1>
+    </div>
+    <div
+      className="c4"
+    >
+      <div
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "display": "inline-block",
+            "margin": 0,
+            "maxWidth": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "boxSizing": "border-box",
+              "display": "block",
+              "maxWidth": "100%",
+            }
+          }
+        >
+          <img
+            alt=""
+            aria-hidden={true}
+            role="presentation"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMwIiBoZWlnaHQ9IjEzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+            style={
+              Object {
+                "border": "none",
+                "display": "block",
+                "margin": 0,
+                "maxWidth": "100%",
+                "padding": 0,
+              }
+            }
+          />
+        </div>
+        <noscript>
+          <img
+            className="c5"
+            decoding="async"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            src="/icons/home.svg"
+            srcSet="/_next/image?url=%2Ficons%2Fhome.svg&w=256&q=75 1x, /_next/image?url=%2Ficons%2Fhome.svg&w=384&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
+        <img
+          className="c5"
+          decoding="async"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": undefined,
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="c6"
+      />
+      <div
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "display": "inline-block",
+            "margin": 0,
+            "maxWidth": "100%",
+            "overflow": "hidden",
+            "position": "relative",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "boxSizing": "border-box",
+              "display": "block",
+              "maxWidth": "100%",
+            }
+          }
+        >
+          <img
+            alt=""
+            aria-hidden={true}
+            role="presentation"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmVyc2lvbj0iMS4xIi8+"
+            style={
+              Object {
+                "border": "none",
+                "display": "block",
+                "margin": 0,
+                "maxWidth": "100%",
+                "padding": 0,
+              }
+            }
+          />
+        </div>
+        <noscript>
+          <img
+            className="c5"
+            decoding="async"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            src="/icons/settings.svg"
+            srcSet="/_next/image?url=%2Ficons%2Fsettings.svg&w=64&q=75 1x, /_next/image?url=%2Ficons%2Fsettings.svg&w=128&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
+        <img
+          className="c5"
+          decoding="async"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+          style={
+            Object {
+              "border": "none",
+              "bottom": 0,
+              "boxSizing": "border-box",
+              "display": "block",
+              "height": 0,
+              "left": 0,
+              "margin": "auto",
+              "maxHeight": "100%",
+              "maxWidth": "100%",
+              "minHeight": "100%",
+              "minWidth": "100%",
+              "objectFit": undefined,
+              "objectPosition": undefined,
+              "padding": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "width": 0,
+            }
+          }
+        />
+      </div>
+      <div
+        className="c6"
+      />
+      <div
+        className="c6"
+      />
+      <button
+        className="c7 c8"
+        loading={false}
+        onClick={[Function]}
+      >
+        Logout
+      </button>
+    </div>
+  </div>,
+  .c0 {
+  width: 100%;
+  padding: 0px 80px;
+}
+
+.c1 {
+  width: 100%;
+  padding: 15px 0px;
+  border-bottom: 1px solid #BEC8D2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  background-color: none;
+  color: #3D4255;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<div
+    className="c0"
+  >
+    <div
+      className="c1"
+    >
+      <a
+        className="c2"
+        href="/"
+        id="home"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Home
+      </a>
+      <a
+        className="c2"
+        href="/coupons"
+        id="coupons"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Coupons
+      </a>
+      <a
+        className="c2"
+        href="/campaigns"
+        id="campaigns"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Campaigns
+      </a>
+      <a
+        className="c2"
+        href="/keywords"
+        id="keywords"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Keywords
+      </a>
+      <a
+        className="c2"
+        href="/customers"
+        id="customers"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Customers
+      </a>
+    </div>
+  </div>,
+]
+`;
