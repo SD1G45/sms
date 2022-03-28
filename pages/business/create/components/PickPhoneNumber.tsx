@@ -7,9 +7,20 @@ import SearchBar from "../../../../components/SearchBar";
 import { useBusinessDispatch } from "../../../../context/BusinessContext/BusinessContext";
 import { PROVISION_PHONE_NUMBER_MUTATION } from "../../../../page-mutations/create-business";
 import { AVAILABLE_PHONE_NUMBERS_QUERY } from "../../../../page-queries/create-business";
-import { PhoneNumber, PhoneNumberContainer, PhoneNumberList, PhoneSearchFlex } from "../../../../page-styles/create-business/styles";
+import {
+  ButtonContainer,
+  ButtonDivider,
+  PhoneNumber,
+  PhoneNumberContainer,
+  PhoneNumberList,
+  PhoneSearchFlex,
+  StyledButton,
+} from "../../../../page-styles/create-business/styles";
 
-const PickPhoneNumber: React.FC = () => {
+interface PickPhoneNumberProps {
+  onBack: () => void;
+}
+const PickPhoneNumber: React.FC<PickPhoneNumberProps> = ({ onBack }) => {
   const [areaCode, setAreaCode] = useState("");
   const [pickLoading, setPickLoading] = useState(false);
   const [selectedPhoneNumber, setSelectedPhoneNumber] = useState<string | null>(
@@ -58,7 +69,7 @@ const PickPhoneNumber: React.FC = () => {
         />
       </PhoneSearchFlex>
       <PhoneNumberList>
-        { data &&
+        {data &&
           data.availablePhoneNumbers &&
           data.availablePhoneNumbers.map(
             (value: { phoneNumber: string; friendlyName: string }) => (
@@ -74,17 +85,23 @@ const PickPhoneNumber: React.FC = () => {
                 />
               </PhoneNumberContainer>
             )
-          ) 
-        }
+          )}
       </PhoneNumberList>
-      <Button
-        id="create-account"
-        disabled={selectedPhoneNumber === null || pickLoading}
-        onClick={() => provisionPhoneNumber()}
-        loading={pickLoading}
-      >
-        Create Account
-      </Button>
+
+      <ButtonContainer>
+        <StyledButton id="back" onClick={onBack} invert>
+          Back
+        </StyledButton>
+        <ButtonDivider />
+        <StyledButton
+          id="create-account"
+          disabled={selectedPhoneNumber === null || pickLoading}
+          onClick={() => provisionPhoneNumber()}
+          loading={pickLoading}
+        >
+          Create Account
+        </StyledButton>
+      </ButtonContainer>
     </div>
   );
 };

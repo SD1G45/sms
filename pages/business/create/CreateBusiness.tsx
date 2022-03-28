@@ -63,9 +63,13 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
               />
             ) : // TODO: Add Billing info
             activeStepperIndex === 2 ? (
-              <SetPaymentInfo onSubmit={() => updateActiveStepperIndex(1)} />
+              <SetPaymentInfo
+                onBack={() => updateActiveStepperIndex(-1)}
+                onNext={() => updateActiveStepperIndex(1)}
+                onSubmit={() => updateActiveStepperIndex(1)}
+              />
             ) : activeStepperIndex === 3 ? (
-              <PickPhoneNumber />
+              <PickPhoneNumber onBack={() => updateActiveStepperIndex(-1)} />
             ) : null}
           </>
         )}
