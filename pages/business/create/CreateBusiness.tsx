@@ -5,13 +5,15 @@ import SingleCardPage from "../../../components/SingleCardPage";
 import {
   Heading,
   StyledCard,
-  StyledStepper
+  StyledStepper,
 } from "../../../page-styles/create-business/styles";
 import PickPhoneNumber from "./components/PickPhoneNumber";
 import SetBusinessLogo from "./components/SetBusinessLogo";
 import SetBusinessName from "./components/SetBusinessName";
 
-const steps = ["Name", "Logo", "Phone number"];
+import SetPaymentInfo from "./components/SetPaymentInfo";
+
+const steps = ["Name", "Logo", "Subscribe", "Phone number"];
 
 export interface Business {
   name: string;
@@ -59,12 +61,16 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
                 onNext={() => updateActiveStepperIndex(1)}
                 openLogoEditor={() => setLogoEditorOpen(true)}
               />
-            ) : (
-              //TODO: Add Billing info
-              // ) : activeStepperIndex === 2 ? (
-              //   <SetPaymentInfo />
-              <PickPhoneNumber />
-            )}
+            ) : // TODO: Add Billing info
+            activeStepperIndex === 2 ? (
+              <SetPaymentInfo
+                onBack={() => updateActiveStepperIndex(-1)}
+                onNext={() => updateActiveStepperIndex(1)}
+                onSubmit={() => updateActiveStepperIndex(1)}
+              />
+            ) : activeStepperIndex === 3 ? (
+              <PickPhoneNumber onBack={() => updateActiveStepperIndex(-1)} />
+            ) : null}
           </>
         )}
       </StyledCard>

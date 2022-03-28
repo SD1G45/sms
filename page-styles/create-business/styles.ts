@@ -4,7 +4,7 @@ import Card from "../../components/Card";
 import Stepper from "../../components/Stepper";
 
 export const StyledCard = styled(Card)`
-  width: 500px;
+  width: 1000px;
   padding: 30px;
   margin-left: 250px;
   margin-right: 125px;
@@ -84,4 +84,8 @@ export const PhoneNumberContainer = styled.div`
 
 export const PhoneNumber = styled.p`
   font-size: 1rem;
+`;
+
+export const SubscribeContainerDiv = styled.div`
+  width: 100%;
 `;
