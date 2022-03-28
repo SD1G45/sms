@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
@@ -11,7 +11,7 @@ import {
   RowDiv,
   SearchDiv,
   StyledHeader,
-} from "../../page-styles/coupons/styles";
+} from "../../page-styles/keywords/styles";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
@@ -25,6 +25,8 @@ const parseDate = (date: any) => {
 };
 
 const Keywords = () => {
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
   const router = useRouter();
   const createPath = router.asPath + "/create";
   const faqPath = router.asPath + "/faq";
@@ -32,10 +34,10 @@ const Keywords = () => {
   const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
   const routes: string[] = ["/keywords", createPath, faqPath];
   const tableHeaders: string[] = [
-    "Keyword",
+    "Name",
     "Date created",
-    "Customers Onboarded",
-    "Message success rate",
+    "Customers onboarded",
+    "Message success %",
     "Coupons opened",
     "Coupons redeemed",
     "Open %",
@@ -85,11 +87,19 @@ const Keywords = () => {
             <StyledHeader>Keyword Analytics</StyledHeader>
           </HeaderDiv>
           <SearchDiv>
-            <SearchBar value={""} onValueChange={() => {}} />
+            <SearchBar value={search}
+            onValueChange={(s: string) => {
+              setSearch(s);
+              setFilteredData(data.filter(d => d[0].includes(s)));
+            } } id={""} />
           </SearchDiv>
           <Button onClick={onClick}>Create New Keyword</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={data} />
+        <Table
+          headers={tableHeaders}
+          data={search.length > 0 ? filteredData : data}
+          tableType={"Keyword"}
+        />
       </ColumnDiv>
     </ContainerDiv>
   );

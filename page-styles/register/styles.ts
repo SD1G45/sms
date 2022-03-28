@@ -10,6 +10,21 @@ export const StyledCard = styled(Card)`
   margin-right: 125px;
 `;
 
+export const Label = styled.label`
+  display: block;
+
+  padding-bottom: 7px;
+`;
+
+export const LinkDiv = styled.div`
+  text-align: center;
+`;
+
+export const StyledLink = styled(Label)`
+  color: ${(props) => props.theme.colors.primary};
+  cursor: pointer;
+`;
+
 export const Heading = styled.h1`
   font-size: 1.4rem;
   margin-bottom: 20px;

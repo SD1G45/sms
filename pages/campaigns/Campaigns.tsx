@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import SearchBar from "../../components/SearchBar";
 import SideNav from "../../components/SideNav";
@@ -24,6 +24,8 @@ const parseDate = (date: any) => {
 };
 
 const Campaigns = () => {
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
   const router = useRouter();
   const createPath = router.asPath + "/create";
   const faqPath = router.asPath + "/faq";
@@ -31,7 +33,7 @@ const Campaigns = () => {
   const sideNavItems: string[] = ["Analytics", "Create New", "FAQ"];
   const routes: string[] = ["/campaigns", createPath, faqPath];
   const tableHeaders: string[] = [
-    "Campaign",
+    "Name",
     "Date sent",
     "Messages sent",
     "Message success %",
@@ -83,11 +85,19 @@ const Campaigns = () => {
             <StyledHeader>Campaign Analytics</StyledHeader>
           </HeaderDiv>
           <SearchDiv>
-            <SearchBar value={""} onValueChange={() => {}} />
+            <SearchBar value={search}
+            onValueChange={(s: string) => {
+              setSearch(s);
+              setFilteredData(data.filter(d => d[0].includes(s)));
+            } } id={""} />
           </SearchDiv>
-          <Button>Create New Campaign</Button>
+          <Button onClick={onClick}>Create New Campaign</Button>
         </RowDiv>
-        <Table headers={tableHeaders} data={data} />
+        <Table
+          headers={tableHeaders}
+          data={search.length > 0 ? filteredData : data}
+          tableType={"Campaign"}
+        />
       </ColumnDiv>
     </ContainerDiv>
   );

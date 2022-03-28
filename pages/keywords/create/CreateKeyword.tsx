@@ -172,7 +172,7 @@ const CreateKeyword: React.FC = () => {
       </div>
       */}
 
-      <SetupLaterButton onClick={() => router.push("/keywords")}>
+      <SetupLaterButton id="close" onClick={() => router.push("/keywords")}>
         close
       </SetupLaterButton>
     </StyledCard>
@@ -200,6 +200,7 @@ const CreateKeyword: React.FC = () => {
           <Heading>Create new keyword</Heading>
           <SubHeading>Information</SubHeading>
           <TextField
+            id="keyword"
             label="Keyword"
             value={keyword}
             style={{ marginBottom: 30 }}
@@ -208,6 +209,7 @@ const CreateKeyword: React.FC = () => {
             }
           />
           <TextArea
+            id="auto-response"
             label="Auto response"
             style={{ marginBottom: 30 }}
             value={message}
@@ -216,6 +218,7 @@ const CreateKeyword: React.FC = () => {
             }
           />
           <TextArea
+            id="description"
             label="Description"
             style={{ marginBottom: 30 }}
             value={description}
@@ -224,6 +227,7 @@ const CreateKeyword: React.FC = () => {
             }
           />
           <StyledSelector
+            id="coupon"
             label="Coupon"
             options={couponOptions}
             searchValue={selectorSearch}
@@ -242,6 +246,7 @@ const CreateKeyword: React.FC = () => {
           />
           <ButtonContainer>
             <Button
+              id="create"
               style={{ width: 250 }}
               onClick={() => handleCreate()}
               disabled={loading}

@@ -131,6 +131,10 @@ export interface NexusGenObjects {
     id?: string | null; // String
     lastName?: string | null; // String
   }
+  UserBusinessRole: { // root type
+    role?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   UserLoginPayload: { // root type
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
@@ -263,7 +267,6 @@ export interface NexusGenFieldTypes {
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
-    businessUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
     couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
@@ -271,6 +274,7 @@ export interface NexusGenFieldTypes {
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     emailResetCode: NexusGenRootTypes['EmailResetCode'] | null; // EmailResetCode
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
+    usersForBusiness: Array<NexusGenRootTypes['UserBusinessRole'] | null> | null; // [UserBusinessRole]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
@@ -279,6 +283,10 @@ export interface NexusGenFieldTypes {
     firstName: string | null; // String
     id: string | null; // String
     lastName: string | null; // String
+  }
+  UserBusinessRole: { // field return type
+    role: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
   }
   UserLoginPayload: { // field return type
     token: string | null; // String
@@ -402,7 +410,6 @@ export interface NexusGenFieldTypeNames {
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
-    businessUsers: 'User'
     campaign: 'Campaign'
     couponInstance: 'CouponInstance'
     coupons: 'Coupon'
@@ -410,6 +417,7 @@ export interface NexusGenFieldTypeNames {
     customerLists: 'CustomerList'
     emailResetCode: 'EmailResetCode'
     keywords: 'Keyword'
+    usersForBusiness: 'UserBusinessRole'
     viewer: 'User'
   }
   User: { // field return type name
@@ -418,6 +426,10 @@ export interface NexusGenFieldTypeNames {
     firstName: 'String'
     id: 'String'
     lastName: 'String'
+  }
+  UserBusinessRole: { // field return type name
+    role: 'String'
+    user: 'User'
   }
   UserLoginPayload: { // field return type name
     token: 'String'
@@ -529,9 +541,6 @@ export interface NexusGenArgTypes {
     businessInviteCode: { // args
       value: string; // String!
     }
-    businessUsers: { // args
-      businessId: string; // String!
-    }
     campaign: { // args
       businessId: string; // String!
     }
@@ -551,6 +560,9 @@ export interface NexusGenArgTypes {
       value: string; // String!
     }
     keywords: { // args
+      businessId: string; // String!
+    }
+    usersForBusiness: { // args
       businessId: string; // String!
     }
   }

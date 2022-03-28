@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SideNav/> renders correctly 1`] = `
+.c0 {
+  margin-left: 10px;
+  padding-top: 40px;
+}
+
+.c3 {
+  border-collapse: collapse;
+}
+
+.c4 {
+  border-left: 2.75px solid #C4C4C4;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.c2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 17.5px;
+}
+
+.c1 {
+  width: 100px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <h1
+      className="c2"
+    >
+      Sample
+    </h1>
+  </div>
+  <table
+    className="c3"
+  >
+    <tbody>
+      <tr
+        href="/test"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        <td
+          className="c4"
+          id="Analytics"
+        >
+          Analytics
+        </td>
+      </tr>
+      <tr
+        href="/test"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        <td
+          className="c4"
+          id="Create New"
+        >
+          Create New
+        </td>
+      </tr>
+      <tr
+        href="/test"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        <td
+          className="c4"
+          id="FAQ"
+        >
+          FAQ
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

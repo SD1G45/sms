@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBar/> renders correctly 1`] = `
+.c1 {
+  padding: 8px 12px;
+  border: 1px solid #BEC8D2;
+  border-radius: 50px;
+  width: 100%;
+}
+
+.c0 {
+  width: 100%;
+}
+
+<div
+  className="c0"
+>
+  <input
+    className="c1"
+    id="search"
+    onChange={[Function]}
+    placeholder="search..."
+    value="test"
+  />
+</div>
+`;

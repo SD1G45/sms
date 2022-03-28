@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyledCard } from "../../../components/Card/styles";
+
 import SingleCardPage from "../../../components/SingleCardPage";
 import TextField from "../../../components/TextField";
 import {
@@ -9,6 +9,8 @@ import {
   StyledButton,
   SubHeading,
   StyledTextField,
+  SuccessDiv,
+  StyledCard,
 } from "../../../page-styles/settings/profile/styles";
 
 import { FcDataEncryption } from "react-icons/fc";
@@ -19,8 +21,18 @@ import { StyledLink } from "../../../page-styles/settings/profile/styles";
 import { FcPortraitMode } from "react-icons/fc";
 import { useMutation } from "@apollo/client";
 import { EDIT_USERNAME_MUTATION } from "../../../page-mutations/users";
-import { useUserState } from "../../../context/UserContext/UserContext";
+import {
+  useUserDispatch,
+  useUserState,
+} from "../../../context/UserContext/UserContext";
 
+import Image from "next/image";
+import {
+  CardDescription,
+  CardHeading,
+  ConnectButton,
+  SetupLaterButton,
+} from "../../../page-styles/coupons/create/styles";
 interface InitialDisplayProps {
   setUpdateEmail: (value: boolean) => void;
   setUpdateDisplayName: (value: boolean) => void;
@@ -58,54 +70,100 @@ const InitialDisplay: React.FC<InitialDisplayProps> = ({
 interface updateDisplayNameProps {
   firstName: string;
   lastName: string;
+  password: string;
   onFirstNameChange: (value: string) => void;
   onLastNameChange: (value: string) => void;
+  onPasswordChange: (value: string) => void;
   setUpdateDisplayName: (value: boolean) => void;
 }
 
 const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
   firstName,
   lastName,
+  password,
   onFirstNameChange,
   onLastNameChange,
+  onPasswordChange,
   setUpdateDisplayName,
 }) => {
   const [loading, setLoading] = useState(false);
   const [editUserNameMutation] = useMutation(EDIT_USERNAME_MUTATION, {
     errorPolicy: "all",
   });
+
   const userState = useUserState();
 
+  const [errorState, setErrorState] = useState({ error: false, message: "" });
+  const router = useRouter();
+  const userDispatch = useUserDispatch();
+  const [success, setSuccess] = useState(false);
+
+  const SuccessPopUp = () => (
+    <StyledCard>
+      <Image src="/check.png" width={100} height={100} />
+      <CardHeading>Got it!</CardHeading>
+      <CardDescription>Your name has been succesfully updated!</CardDescription>
+      <div>
+        <ConnectButton onClick={() => router.push("/settings")}>
+          Back to settings
+        </ConnectButton>
+      </div>
+    </StyledCard>
+  );
+
   const doEditName = async () => {
-    if (firstName.length == 0 || lastName.length == null) {
-      alert("Both fields must be filled in.");
+    if (firstName.length == 0 || lastName.length == 0) {
+      setErrorState({
+        ...errorState,
+        error: true,
+        message: "Both fields must be filled in",
+      });
       return;
     }
 
-      const password = prompt("please enter password");
-      try {
-        const { data, errors } = await editUserNameMutation({
-          variables: {
-            id: userState?.userId,
-            firstName,
-            lastName,
-            password
-          }
-        });
+    if (password.length == 0) {
+      setErrorState({
+        ...errorState,
+        error: true,
+        message: "Please enter the password associated with your account",
+      });
+    }
 
-        if (errors && errors.length > 0) {
-          alert("Something went wrong");
-        } 
-        alert("Succesfully changed");
-      } catch (error) {
-        console.log(error);
+    try {
+      const { data, errors } = await editUserNameMutation({
+        variables: {
+          id: userState?.userId,
+          firstName,
+          lastName,
+          password,
+        },
+      });
+
+      if (errors && errors.length > 0) {
+        setErrorState({ ...errorState, error: true, message: "error" });
       }
-    
-  }
+      const jid = userState?.jid;
+
+      if (jid) {
+        userDispatch({
+          type: "login",
+          payload: {
+            jid: jid,
+            userId: userState?.userId,
+            firstName: firstName,
+          },
+        });
+      }
+      setSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <StyledCard>
+        <SuccessDiv>{success && <SuccessPopUp />}</SuccessDiv>
         <HeaderDiv>
           <Heading>
             <FcPortraitMode />
@@ -129,12 +187,21 @@ const UpdateDisplayName: React.FC<updateDisplayNameProps> = ({
             onLastNameChange(event.target.value)
           }
         />
-        <StyledButton 
-         disabled={loading} 
-         loading={loading} 
-         onClick={() => {
-          console.log("click"); 
-          doEditName()}}
+        <StyledTextField
+          label="Password"
+          type="password"
+          value={password}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            onPasswordChange(event.target.value)
+          }
+        />
+        <StyledButton
+          disabled={loading}
+          loading={loading}
+          onClick={() => {
+            console.log("click");
+            doEditName();
+          }}
         >
           Change Name
         </StyledButton>
@@ -187,6 +254,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [password, setPassword] = useState("");
   const [lastName, setLastName] = useState("");
   const [updateEmail, setUpdateEmail] = useState(false);
   const [updateDisplayName, setUpdateDisplayName] = useState(false);
@@ -222,8 +290,10 @@ const Profile = () => {
         <UpdateDisplayName
           firstName={firstName}
           lastName={lastName}
+          password={password}
           onFirstNameChange={(value) => setFirstName(value)}
           onLastNameChange={(value) => setLastName(value)}
+          onPasswordChange={(value) => setPassword(value)}
           setUpdateDisplayName={(updateDisplayName) =>
             setUpdateDisplayName(updateDisplayName)
           }

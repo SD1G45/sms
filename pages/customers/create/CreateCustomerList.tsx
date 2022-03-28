@@ -79,7 +79,7 @@ const CreateCustomer: React.FC = () => {
       <CardDescription>
         You can now use this customer to market and attract new customers
       </CardDescription>
-      <SetupLaterButton onClick={() => router.push("/customers")}>
+      <SetupLaterButton id="close" onClick={() => router.push("/customers")}>
         close
       </SetupLaterButton>
     </StyledCard>
@@ -91,6 +91,7 @@ const CreateCustomer: React.FC = () => {
       <FlexContainer>
         <Heading>Create new customer list</Heading>
         <TextField
+          id="name"
           label="Name"
           value={name}
           style={{ marginBottom: 30 }}
@@ -99,6 +100,7 @@ const CreateCustomer: React.FC = () => {
           }
         />
         <TextArea
+          id="description"
           label="Description"
           style={{ marginBottom: 30 }}
           value={description}
@@ -108,6 +110,7 @@ const CreateCustomer: React.FC = () => {
         />
         <ButtonContainer>
           <Button
+            id="create"
             style={{ width: 250 }}
             onClick={() => handleCreate()}
             disabled={loading}

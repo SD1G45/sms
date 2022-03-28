@@ -86,8 +86,8 @@ const BusinessInvite = () => {
           <Link href={newRouteWithQueries("/settings", router)}>
             <StyledLink>Back to settings</StyledLink>
           </Link>
-          <Link href={newRouteWithQueries("/", router)}>
-            <StyledLink>home</StyledLink>
+          <Link href={newRouteWithQueries("/business/team", router)}>
+            <StyledLink>Manage your Team</StyledLink>
           </Link>
         </LinkDiv>
       </StyledCard>
