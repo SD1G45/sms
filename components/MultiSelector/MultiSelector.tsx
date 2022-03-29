@@ -65,7 +65,11 @@ const MultiSelector: React.FC<MultiSelectorProps> = ({
             />
             {optionsFilter.length > 0 ? (
               optionsFilter.map(({ id, name }) => (
-                <Option id={name.replace(/\s.*/, '')} key={id} onClick={() => handleOptionSelect(id, name)}>
+                <Option
+                  id={name.replace(/\s.*/, "")}
+                  key={id}
+                  onClick={() => handleOptionSelect(id, name)}
+                >
                   {name}
                 </Option>
               ))
