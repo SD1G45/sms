@@ -3,9 +3,9 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const testAccountSid = process.env.TEST_TWILIO_ACCOUNT_SID;
 const testAuthToken = process.env.TEST_TWILIO_AUTH_TOKEN;
 
-var client;
+var client: any;
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== "test") {
   client = require("twilio")(accountSid, authToken);
 } else {
   client = require("twilio")(testAccountSid, testAuthToken);

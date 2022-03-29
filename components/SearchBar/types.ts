@@ -1,5 +1,5 @@
 export interface SearchBarProps {
-  id: string;
+  id?: string;
   value: string;
   onValueChange: (value: string) => void;
   className?: string;

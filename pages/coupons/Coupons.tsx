@@ -19,6 +19,7 @@ import { useBusinessState } from "../../context/BusinessContext/BusinessContext"
 const Coupons = () => {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
   const createPath = router.asPath + "/create";
@@ -36,6 +37,7 @@ const Coupons = () => {
     "Open %",
     "Redeem %",
   ];
+
   const data: string[][] = [];
 
   const businessState = useBusinessState();
@@ -83,14 +85,15 @@ const Coupons = () => {
               onValueChange={(s: string) => {
                 setSearch(s);
                 setFilteredData(data.filter((d) => d[0].includes(s)));
-              } } id={""}            />
+              }}
+            />
           </SearchDiv>
           <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
         <Table
+          tableType="coupon"
           headers={headers}
           data={search.length > 0 ? filteredData : data}
-          tableType={"Coupons"}
         />
       </ColumnDiv>
     </ContainerDiv>
