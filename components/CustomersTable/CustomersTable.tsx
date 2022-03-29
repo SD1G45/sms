@@ -21,9 +21,9 @@ function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
 
     data.map((value, i) => {
         const newItem = i == 0 ?
-            <HeaderLong>{value}</HeaderLong>
+            <HeaderLong key={i}>{value}</HeaderLong>
             :
-            <Header>{value}</Header>;
+            <Header key={i} >{value}</Header>;
         mapping.push(newItem);
     })
 
@@ -40,38 +40,38 @@ function mapDataToBodyComponent(data: string[][], page: number, ids: string[], v
         const map: JSX.Element[] = [];
         value.map((val, i) => {
             const content = view ? 
-                <Data>{val}</Data>
+                <Data key={i}>{val}</Data>
                 :
-                <Data>
-                <Link href={"/customers/view/" + ids[j]}>
-                    <span>
-                    {val}
-                    <ViewButton disabled={val.charAt(0) == '0'}>
-                        View Customers
-                    </ViewButton>
-                    </span>
-                </Link>
+                <Data key={i}>
+                    <Link href={"/customers/view/" + ids[j]}>
+                        <span>
+                        {val}
+                        <ViewButton disabled={val.charAt(0) == '0'}>
+                            View Customers
+                        </ViewButton>
+                        </span>
+                    </Link>
                 </Data>
             const newItem = i == 0 ?
-                <DataLong>{val}</DataLong>
+                <DataLong key={i}>{val}</DataLong>
                 :
                 (i == value.length - 1 ?
                     content
                     :
-                    <Data>{val}</Data>
+                    <Data key={i}>{val}</Data>
                 );
             map.push(newItem);
         })
-        mapping.push(<tr>{map}</tr>)
+        mapping.push(<tr key={j}>{map}</tr>)
     }
 
     // Fill in rest of table if empty
     while (mapping.length < 7) {
         const map: JSX.Element[] = [];
         for (let i = 0; i < 8; i++) {
-            map.push(<DataEmpty />)
+            map.push(<DataEmpty key={i}/>)
         }
-        mapping.push(<tr>{map}</tr>);
+        mapping.push(<tr key={mapping.length}>{map}</tr>);
     }
     return mapping;
 }
