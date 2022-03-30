@@ -44,6 +44,7 @@ export default async function handler(
       customerWithPhoneNumber = await prisma.customer.create({
         data: {
           phoneNumber: customerPhoneNumber,
+          onboardDate: new Date(),
         },
       });
     }

@@ -18,7 +18,8 @@ export const newCustomerMutation = extendType({
         if (customerWithPhoneNumber == null) {
           customerWithPhoneNumber = await ctx.prisma.customer.create({
             data: {
-              phoneNumber
+              phoneNumber,
+              onboardDate: new Date(),
             },
           });
         }

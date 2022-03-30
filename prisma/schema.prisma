@@ -102,6 +102,7 @@ model Customer_Coupon {
 model Customer {
   id                     String                   @id @default(uuid())
   phoneNumber            String                   @unique
+  onboardDate            DateTime
   firstName              String?
   lastName               String?
   password               String?
