@@ -7,14 +7,16 @@ export const redeemCouponMutation = extendType({
       type: "CouponInstance",
       args: {
         id: nonNull(stringArg()),
+        redeemedAt: nonNull(stringArg()),
       },
-      resolve: async (_, { id }, ctx) => {
+      resolve: async (_, { id, redeemedAt }, ctx) => {
         const couponInstance = await ctx.prisma.customer_Coupon.update({
           where: {
             id,
           },
           data: {
             redeemed: true,
+            redeemedAt,
           },
         });
 
