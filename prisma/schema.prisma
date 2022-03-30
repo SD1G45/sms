@@ -57,6 +57,7 @@ model Coupon {
   sent           Int
   opened         Int
   redeemed       Int
+  redeemedDates  DateTime[]
   business       Business          @relation(fields: [businessId], references: [id])
   businessId     String
   campaign       Campaign[]
@@ -90,6 +91,7 @@ model Campaign_Customer_List {
 model Customer_Coupon {
   id         String   @id @default(uuid())
   redeemed   Boolean
+  redeemedAt DateTime?
   opened     Boolean
   customer   Customer @relation(fields: [customerId], references: [id])
   customerId String
