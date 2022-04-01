@@ -12,7 +12,8 @@ export default new ApolloServer({
   schema,
   context,
   // playground: true,
-  introspection: process.env.NODE_ENV !== 'production',
+  // introspection: process.env.NODE_ENV !== 'production',
+  introspection: true,
 }).createHandler({
   path: "/api/graphql",
 });
