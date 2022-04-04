@@ -56,9 +56,9 @@ export const HeaderLong = styled.th`
 
 export const Data = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
     padding-left: 300px;
-    padding-top: 5px;
+    padding-top: 15px;
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
@@ -66,9 +66,14 @@ export const Data = styled.td`
     text-align: center;
 `;
 
+export const ListData = styled(Data)`
+    padding-top: 5px;
+    padding-bottom: 2px;
+`;
+
 export const DataEmpty = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
-    padding-bottom: 48px;
+    padding-bottom: 46.5px;
     padding-right: 0px;
     font-size: 14px;
     font-weight: 500;

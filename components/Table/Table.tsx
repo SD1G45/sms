@@ -13,6 +13,7 @@ import {
   Data,
   PagePointer,
   StyledButton,
+  EmptyData
 } from "./styles";
 import { TableProps } from "./types";
 
@@ -37,6 +38,10 @@ function mapDataToBodyComponent(
 ): JSX.Element[] {
   const mapping: JSX.Element[] = [];
   const pageIndex = page - 1;
+
+  if (data.length == 0) {
+    return mapping;
+  }
 
   for (let i = 0; i < 7 && pageIndex * 7 + i < data.length; i++) {
     const value = data[pageIndex * 7 + i];
@@ -123,6 +128,7 @@ const Table: React.FC<TableProps> = ({ headers, data, tableType}) => {
         </TableHeader>
         <TableBody>{mapDataToBodyComponent(data, page, false)}</TableBody>
       </DataTable>
+      {data.length == 0 ? <EmptyData>Start creating campaigns to view your customer and marketing data!</EmptyData> : ""}
       {numOfPages > 1 ? <PaginationSection /> : null}
     </DivContainer>
   );

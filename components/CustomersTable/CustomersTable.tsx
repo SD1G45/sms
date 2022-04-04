@@ -12,7 +12,8 @@ import {
     HeaderLong,
     DataLong,
     Data,
-    PagePointer
+    PagePointer,
+    ListData
 } from "./styles";
 import Link from "next/link";
 
@@ -42,16 +43,17 @@ function mapDataToBodyComponent(data: string[][], page: number, ids: string[], v
             const content = view ? 
                 <Data key={i}>{val}</Data>
                 :
-                <Data key={i}>
-                    <Link href={"/customers/view/" + ids[j]}>
+                <ListData key={i}>
+                    <Link href={"/customers/view/" + ids[pageIndex * 7 + j]}>
                         <span>
                         {val}
+                        {/* charAt 0 shows how many customers*/}
                         <ViewButton disabled={val.charAt(0) == '0'}>
                             View Customers
                         </ViewButton>
                         </span>
                     </Link>
-                </Data>
+                </ListData>
             const newItem = i == 0 ?
                 <DataLong key={i}>{val}</DataLong>
                 :
@@ -121,6 +123,7 @@ const CustomersTable: React.FC<CustomersTableProps> = ({
                 </TableBody>
             </DataTable>
             {
+                // pagination when needed
                 numOfPages > 1 ? <PaginationSection /> : null
             }
         </DivContainer>
