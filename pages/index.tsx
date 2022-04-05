@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Card";
-import SingleCardPage from "../components/SingleCardPage";
 import Image from "next/image";
-
 import {
   ContainerDiv,
   ColumnDiv,
@@ -17,7 +14,9 @@ import { useBusinessState } from "../context/BusinessContext/BusinessContext";
 import dynamic from "next/dynamic";
 import sampleData from "../sampleData/sampleData";
 import BillingCycleColumn from "../components/BillingCycleColumn";
-import LogoutButton from "../components/LogoutButton";
+import { useLazyQuery } from "@apollo/client";
+import { COUPONS_QUERY } from "../page-queries/keywords/create";
+import { Coupon } from "@prisma/client";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
@@ -33,6 +32,67 @@ const Dashboard = () => {
     setBusinessName(businessState?.name || "");
     console.log(businessName);
   });
+  
+  const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
+  const [couponsData, setCouponsData] = useState(
+    sampleData.getPlaceholderForGraph("coupons")
+  );
+  const getCouponsData = () => {
+    getCoupons({ variables: { businessId: businessState?.businessId }});
+    console.log(couponsQueryResult);
+
+    const couponsList = couponsQueryResult.data != undefined 
+      ? couponsQueryResult.data.coupons : [];
+
+    console.log(couponsList);
+    
+    var redeemed: { day: string, time: string }[] = [];
+    couponsList.forEach( (coupon: any) => {
+      coupon.redeemedDates.forEach( (date: any) => {
+        const formattedDate = new Date(date).toISOString();
+        const splitDateTime = formattedDate.split("T");
+        redeemed.push({ day: splitDateTime[0], time: splitDateTime[1]});
+      });
+    });
+
+    console.log("Redeemed " + redeemed);
+
+    const currentDateTime: Date = new Date();
+    const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
+    const currentDate: string = currentDateTimeStr[0];
+    
+    redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
+
+    const redeemedMap: Map<string, number> = new Map<string, number>();
+
+    redeemed.forEach((dateTime) => {
+      console.log("Inside redeem: " + dateTime.day);
+      const time = dateTime.time.split(":")[0];
+      console.log(time);
+      if (redeemedMap.has(time)) {
+        redeemedMap.set(time, redeemedMap.get(time)! + 1);
+      } else {
+        redeemedMap.set(time, 1);
+      }
+      console.log(redeemedMap.get(time));
+    });
+
+    const data = sampleData.getDatesForGraph("coupons", redeemedMap);
+    console.log(data);
+    console.log("Total " + redeemed.length);
+
+    setCouponsData(data);
+  }
+
+  useEffect(() => {
+    getCouponsData();
+
+    const graphUpdateInterval = setInterval(() => {
+      getCouponsData();
+    }, 1000 * 10);
+
+    return () => clearInterval(graphUpdateInterval);
+  }, []);
 
   const Analytics = () => {
     return (
@@ -45,7 +105,7 @@ const Dashboard = () => {
             <ChartDiv>
               <LineChart
                 title="Coupons"
-                data={couponData}
+                data={couponsData}
                 height={300}
                 flexure={1}
               />

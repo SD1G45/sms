@@ -5,6 +5,7 @@ export const REDEEM_COUPON = gql`
     redeemCoupon(id: $id, redeemedAt: $redeemedAt) {
       id
       redeemed
+      redeemedAt
     }
   }
 `;

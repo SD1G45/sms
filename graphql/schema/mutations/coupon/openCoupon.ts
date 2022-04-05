@@ -18,6 +18,25 @@ export const openCouponMutation = extendType({
           },
         });
 
+        const coupon = await ctx.prisma.coupon.findFirst({
+          where: {
+            id: couponInstance.couponId,
+          }
+        })
+
+        if (coupon == null) {
+          throw new Error("Could not find coupon associated with customer coupon " + id);
+        }
+
+        await ctx.prisma.coupon.update({
+          where: {
+            id: coupon?.id,
+          },
+          data: {
+            opened: coupon.opened + 1
+          }
+        })
+
         return couponInstance;
       },
     });
