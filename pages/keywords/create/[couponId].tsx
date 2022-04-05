@@ -11,26 +11,26 @@ import {
   StyledSelector,
   StyledMultiSelector,
 } from "../../../page-styles/keywords/create/styles";
+import CouponPreview from "../../../components/CouponPreview";
+import Button from "../../../components/Button";
+import { ContainerDiv } from "../../../page-styles/coupons/styles";
+import SideNav from "../../../components/SideNav";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { NEW_KEYWORD } from "../../../page-mutations/keywords/create";
+import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
+import {
+  COUPONS_QUERY,
+  CUSTOMER_LIST_QUERY,
+} from "../../../page-queries/keywords/create";
+import ErrorPopup from "../../../components/ErrorPopup";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import {
   StyledCard,
   CardDescription,
   CardHeading,
   SetupLaterButton,
 } from "../../../page-styles/coupons/create/styles";
-import CouponPreview from "../../../components/CouponPreview";
-import Button from "../../../components/Button";
-import { ContainerDiv } from "../../../page-styles/coupons/styles";
-import SideNav from "../../../components/SideNav";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
-import {
-  COUPONS_QUERY,
-  CUSTOMER_LIST_QUERY,
-} from "../../../page-queries/keywords/create";
-import { useRouter } from "next/router";
-import ErrorPopup from "../../../components/ErrorPopup";
-import { NEW_CAMPAIGN } from "../../../page-mutations/campaigns/create";
 
 interface Coupon {
   id: string;
@@ -41,16 +41,18 @@ interface Coupon {
   expirationDate: number;
 }
 
-const CreateCampaign: React.FC = () => {
+const CreateKeyword: React.FC = () => {
   const router = useRouter();
+  const { couponId } = router.query;
   const businessState = useBusinessState();
 
-  const [name, setName] = useState("");
+  const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
+  const [description, setDescription] = useState("");
   const [result, setResult] = useState(false);
 
-  const [selectorSearch, setSelectorSearch] = useState("");
-  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(null);
+  const [selectorSearch, setSelectorSearch] = useState<string | null>(null);
+  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(couponId == null ? null : couponId as string);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedCustomerLists, setSelectedCustomerLists] = useState<
@@ -71,13 +73,9 @@ const CreateCampaign: React.FC = () => {
   };
 
   const list: string[] = ["Analytics", "Create New", "FAQ"];
-  const routes: string[] = [
-    "/campaigns",
-    "/campaigns/create",
-    "/campaigns/faq",
-  ];
+  const routes: string[] = ["/keywords", "/keywords/create", "/keywords/faq"];
 
-  const [newCampaignMutation] = useMutation(NEW_CAMPAIGN, {
+  const [newKeywordMutation] = useMutation(NEW_KEYWORD, {
     errorPolicy: "all",
   });
 
@@ -115,7 +113,7 @@ const CreateCampaign: React.FC = () => {
   );
 
   const handleCreate = () => {
-    if (name.length == 0 || message.length == 0) {
+    if (keyword.length == 0 || message.length == 0 || description.length == 0) {
       setError({ ...errorState, error: true, message: "Missing information." });
       return;
     }
@@ -136,10 +134,11 @@ const CreateCampaign: React.FC = () => {
     setLoading(true);
 
     try {
-      newCampaignMutation({
+      newKeywordMutation({
         variables: {
-          name,
+          keyword,
           message,
+          description,
           businessId: businessState?.businessId,
           couponId: selectedCouponId,
           customerListId: selectedCustomerLists[0].id,
@@ -160,9 +159,9 @@ const CreateCampaign: React.FC = () => {
   const Results = () => (
     <StyledCard>
       <Image src="/check.png" width={100} height={100} />
-      <CardHeading>New campaign created!</CardHeading>
+      <CardHeading>New keyword created!</CardHeading>
       <CardDescription>
-        You can now add keywords and coupons to this campaign
+        You can now use this keyword to market and attract new customers
       </CardDescription>
       {/* <div>
         <ConnectButton onClick={() => router.push("/campaigns")}>
@@ -174,7 +173,7 @@ const CreateCampaign: React.FC = () => {
       </div>
       */}
 
-      <SetupLaterButton id="close" onClick={() => router.push("/campaigns")}>
+      <SetupLaterButton id="close" onClick={() => router.push("/keywords")}>
         close
       </SetupLaterButton>
     </StyledCard>
@@ -191,39 +190,51 @@ const CreateCampaign: React.FC = () => {
       couponDescription = currentCoupon.description;
       couponPrimaryColor = currentCoupon.primaryColor;
       couponExpirationDate = currentCoupon.expirationDate;
+      if (selectorSearch == null) {
+        setSelectorSearch(currentCoupon.title);
+      }
     }
   }
 
   return (
     <ContainerDiv>
-      <SideNav items={list} routes={routes} heading={"Campaigns"} />
+      <SideNav items={list} routes={routes} heading={"Keywords"} />
       <FlexContainer>
         <HalfPage>
-          <Heading>Create new campaign</Heading>
+          <Heading>Create new keyword</Heading>
           <SubHeading>Information</SubHeading>
           <TextField
-            id="campaign"
-            label="Campaign"
-            value={name}
+            id="keyword"
+            label="Keyword"
+            value={keyword}
             style={{ marginBottom: 30 }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setName(event.target.value)
+              setKeyword(event.target.value)
             }
           />
           <TextArea
-            id="message"
-            label="Message"
+            id="auto-response"
+            label="Auto response"
             style={{ marginBottom: 30 }}
             value={message}
             onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
               setMessage(event.target.value)
             }
           />
+          <TextArea
+            id="description"
+            label="Description"
+            style={{ marginBottom: 30 }}
+            value={description}
+            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+              setDescription(event.target.value)
+            }
+          />
           <StyledSelector
             id="coupon"
             label="Coupon"
             options={couponOptions}
-            searchValue={selectorSearch}
+            searchValue={selectorSearch == null ? "" : selectorSearch}
             onSearchValueChange={setSelectorSearch}
             onSelect={(id) => setSelectedCouponId(id)}
             selectedId={selectedCouponId}
@@ -245,7 +256,7 @@ const CreateCampaign: React.FC = () => {
               disabled={loading}
               loading={loading}
             >
-              Create Campaign
+              Create Keyword
             </Button>
             {result ? <Results /> : ""}
           </ButtonContainer>
@@ -269,4 +280,4 @@ const CreateCampaign: React.FC = () => {
   );
 };
 
-export default CreateCampaign;
+export default CreateKeyword;

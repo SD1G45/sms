@@ -20,7 +20,6 @@ import {
   CardHeading,
   SetupLaterButton,
   CreateButton,
-  HeaderDiv,
   ColorPicker,
 } from "../../../page-styles/coupons/create/styles";
 import { TwitterPicker } from "react-color";
@@ -39,6 +38,7 @@ const CreateCoupon: React.FC = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [newCouponId, setNewCouponId] = useState("");
   const [result, setResult] = useState(false);
 
   const initDate = new Date();
@@ -94,7 +94,7 @@ const CreateCoupon: React.FC = () => {
         a keyword.
       </CardDescription>
       <div>
-        <ConnectButton id="to-campaigns" onClick={() => router.push("/campaigns")}>
+        <ConnectButton id="to-campaigns" onClick={() => router.push(`/campaigns/create?couponId=${newCouponId}`)}>
           Connect to campaign
         </ConnectButton>
         <ConnectButton id="to-keywords" onClick={() => router.push("/keywords")}>
@@ -151,6 +151,7 @@ const CreateCoupon: React.FC = () => {
       }
       setResult(true);
       setLoading(false);
+      setNewCouponId(data.newCoupon.id);
     } catch (error) {
       setError({
         ...errorState,
