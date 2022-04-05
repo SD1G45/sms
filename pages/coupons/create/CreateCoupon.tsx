@@ -171,10 +171,12 @@ const CreateCoupon: React.FC = () => {
           <TextField
             id="title"
             label="Title"
+            error={title.length == 25}
+            errorMessage={"Title cannot exceed 25 characters"}
             value={title}
             style={{ marginBottom: 30 }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setTitle(event.target.value)
+              setTitle(event.target.value.length > 25 ? title : event.target.value)
             }
           />
           <TextArea

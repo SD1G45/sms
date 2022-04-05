@@ -44,7 +44,7 @@ export const StyledButton = styled(Button)``;
 export const HeaderLong = styled.th<stylesProps>`
   border-bottom: 2.75px solid #c4c4c4;
   padding-bottom: 15px;
-  padding-right: ${(props) => (props.tableType == "Keyword" ? "40px" : "100px")};
+  padding-right: ${(props) => (props.tableType == "Keyword" ? "0px" : "100px")};
   padding-top: 15px;
   font-size: 14px;
   text-align: left;

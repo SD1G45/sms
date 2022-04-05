@@ -35,18 +35,18 @@ export const PagePointer = styled.div `
 export const Header = styled.th`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
-    padding-left: 300px;
     padding-top: 15px;
     font-size: 14px;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
+    text-align: center;
+    padding-right: 300px;
 `;
 
 export const HeaderLong = styled.th`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
-    padding-right: 140px;
     padding-top: 15px;
     font-size: 14px;
     text-align: left;
@@ -56,18 +56,20 @@ export const HeaderLong = styled.th`
 export const Data = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
-    padding-left: 300px;
     padding-top: 15px;
+    padding-right: 300px;
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;
     white-space: nowrap;
-    text-align: center;
+    text-align: left;
+    width: 100%;
 `;
 
 export const ListData = styled(Data)`
     padding-top: 5px;
     padding-bottom: 2px;
+    padding-right: 0px;
 `;
 
 export const DataEmpty = styled.td`
@@ -79,9 +81,6 @@ export const DataEmpty = styled.td`
 `;
 
 export const DataLong = styled(Data)`
-    padding-left: 0px;
-    padding-right: 210px;
-    font-weight: 500;
     text-align: left;
 `;
 
