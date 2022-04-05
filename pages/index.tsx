@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import {
   ContainerDiv,
@@ -17,6 +17,7 @@ import BillingCycleColumn from "../components/BillingCycleColumn";
 import { useLazyQuery } from "@apollo/client";
 import { COUPONS_QUERY } from "../page-queries/keywords/create";
 import { Coupon } from "@prisma/client";
+import { initializeApollo } from "../lib/apolloClient";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
@@ -28,80 +29,66 @@ const customersData = sampleData.customersData();
 const Dashboard = () => {
   const businessState = useBusinessState();
   const [businessName, setBusinessName] = useState("");
+
   useEffect(() => {
     setBusinessName(businessState?.name || "");
-    console.log(businessName);
   });
-  
+
   const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
-  const [couponsData, setCouponsData] = useState(
-    sampleData.getPlaceholderForGraph("coupons")
-  );
+  // const [couponsData, setCouponsData] = useState(
+  //   sampleData.getPlaceholderForGraph("coupons")
+  // );
 
-  const getCouponsData = () => {
+  console.log("Coupons Result:", couponsQueryResult);
 
-    // Query for the coupons
-    getCoupons({ variables: { businessId: businessState?.businessId }});
-    console.log(couponsQueryResult);
+  // Get our data from the coupons query if it's available
+  const couponsList =
+    couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
+  console.log(couponsList);
 
-    // Get our data from the coupons query if it's available
-    const couponsList = couponsQueryResult.data != undefined 
-      ? couponsQueryResult.data.coupons : [];
-    console.log(couponsList);
-    
-    // Get all redeemed dates for each coupon
-    var redeemed: { day: string, time: string }[] = [];
-    couponsList.forEach( (coupon: any) => {
-      coupon.redeemedDates.forEach( (date: any) => {
-        const formattedDate = new Date(date).toISOString();
-        const splitDateTime = formattedDate.split("T");
-        redeemed.push({ day: splitDateTime[0], time: splitDateTime[1]});
-      });
+  // Get all redeemed dates for each coupon
+  var redeemed: { day: string; time: string }[] = [];
+  couponsList.forEach((coupon: any) => {
+    coupon.redeemedDates.forEach((date: any) => {
+      const formattedDate = new Date(date).toISOString();
+      const splitDateTime = formattedDate.split("T");
+      redeemed.push({ day: splitDateTime[0], time: splitDateTime[1] });
     });
-    console.log("Redeemed " + redeemed);
+  });
+  console.log("Redeemed " + redeemed);
 
-    // Format the current date
-    const currentDateTime: Date = new Date();
-    const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
-    const currentDate: string = currentDateTimeStr[0];
-    
-    // Filter all redeemed coupon dates to match today's date
-    redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
+  // Format the current date
+  const currentDateTime: Date = new Date();
+  const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
+  const currentDate: string = currentDateTimeStr[0];
 
-    // Map today's redeemed coupons to their hours
-    // Key: Time (00 -> 23), Value: coupon total since Time 00
-    const redeemedMap: Map<string, number> = new Map<string, number>();
-    redeemed.forEach((dateTime) => {
-      console.log("Inside redeem: " + dateTime.day);
-      const time = dateTime.time.split(":")[0];
-      console.log(time);
-      if (redeemedMap.has(time)) {
-        redeemedMap.set(time, redeemedMap.get(time)! + 1);
-      } else {
-        redeemedMap.set(time, 1);
-      }
-      console.log(redeemedMap.get(time));
-    });
+  // Filter all redeemed coupon dates to match today's date
+  redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
 
-    // Format the data to place into the graph
-    const data = sampleData.getDatesForGraph("coupons", redeemedMap);
-    console.log(data);
-    console.log("Total " + redeemed.length);
+  // Map today's redeemed coupons to their hours
+  // Key: Time (00 -> 23), Value: coupon total since Time 00
+  const redeemedMap: Map<string, number> = new Map<string, number>();
+  redeemed.forEach((dateTime) => {
+    console.log("Inside redeem: " + dateTime.day);
+    const time = dateTime.time.split(":")[0];
+    console.log(time);
+    if (redeemedMap.has(time)) {
+      redeemedMap.set(time, redeemedMap.get(time)! + 1);
+    } else {
+      redeemedMap.set(time, 1);
+    }
+    console.log(redeemedMap.get(time));
+  });
 
-    // Set the couponsData
-    setCouponsData(data);
-  }
+  // Format the data to place into the graph
+  const data = sampleData.getDatesForGraph("coupons", redeemedMap);
+  console.log(data);
+  console.log("Total " + redeemed.length);
 
-  // Execute coupons query at refresh and every 10 seconds after that
+  // Execute coupons query
   useEffect(() => {
-    getCouponsData();
-
-    const graphUpdateInterval = setInterval(() => {
-      getCouponsData();
-    }, 1000 * 10);
-
-    return () => clearInterval(graphUpdateInterval);
-  }, []);
+    getCoupons({ variables: { businessId: businessState?.businessId } });
+  }, [businessState]);
 
   const Analytics = () => {
     return (
@@ -112,12 +99,7 @@ const Dashboard = () => {
         <ContainerDiv>
           <BorderDiv>
             <ChartDiv>
-              <LineChart
-                title="Coupons"
-                data={couponsData}
-                height={300}
-                flexure={1}
-              />
+              <LineChart title="Coupons" data={data} height={300} flexure={1} />
             </ChartDiv>
             <ChartDiv>
               <LineChart
@@ -239,3 +221,20 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+// export async function getServerSideProps(context: any) {
+//   const client = initializeApollo();
+//   console.log(context.req.headers.cookie);
+//   const { data } = await client.query({
+//     context: {
+//       headers: {
+//         cookie: context.req.headers.cookie,
+//       },
+//     },
+//     query: COUPONS_QUERY,
+//     variables: { businessId: context.req.headers.cookie.businessId },
+//   });
+//   return {
+//     props: {},
+//   };
+// }

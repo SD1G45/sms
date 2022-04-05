@@ -89,12 +89,12 @@ export interface NexusGenObjects {
     id?: string | null; // String
     opened?: boolean | null; // Boolean
     redeemed?: boolean | null; // Boolean
+    redeemedAt?: NexusGenScalars['Date'] | null; // Date
   }
   Customer: { // root type
-    firstName?: string | null; // String
+    couponId?: string | null; // String
     id?: string | null; // String
-    lastName?: string | null; // String
-    password?: string | null; // String
+    keywordId?: string | null; // String
     phoneNumber?: string | null; // String
   }
   CustomerList: { // root type
@@ -193,6 +193,7 @@ export interface NexusGenFieldTypes {
     openCount: number | null; // Int
     primaryColor: string | null; // String
     redeemCount: number | null; // Int
+    redeemedDates: Array<NexusGenScalars['Date'] | null> | null; // [Date]
     sentCount: number | null; // Int
     title: string | null; // String
   }
@@ -204,12 +205,12 @@ export interface NexusGenFieldTypes {
     id: string | null; // String
     opened: boolean | null; // Boolean
     redeemed: boolean | null; // Boolean
+    redeemedAt: NexusGenScalars['Date'] | null; // Date
   }
   Customer: { // field return type
-    firstName: string | null; // String
+    couponId: string | null; // String
     id: string | null; // String
-    lastName: string | null; // String
-    password: string | null; // String
+    keywordId: string | null; // String
     phoneNumber: string | null; // String
   }
   CustomerList: { // field return type
@@ -336,6 +337,7 @@ export interface NexusGenFieldTypeNames {
     openCount: 'Int'
     primaryColor: 'String'
     redeemCount: 'Int'
+    redeemedDates: 'Date'
     sentCount: 'Int'
     title: 'String'
   }
@@ -347,12 +349,12 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     opened: 'Boolean'
     redeemed: 'Boolean'
+    redeemedAt: 'Date'
   }
   Customer: { // field return type name
-    firstName: 'String'
+    couponId: 'String'
     id: 'String'
-    lastName: 'String'
-    password: 'String'
+    keywordId: 'String'
     phoneNumber: 'String'
   }
   CustomerList: { // field return type name
@@ -488,9 +490,8 @@ export interface NexusGenArgTypes {
       title: string; // String!
     }
     newCustomer: { // args
-      firstName: string; // String!
-      lastName: string; // String!
-      password: string; // String!
+      couponId: string; // String!
+      keywordId: string; // String!
       phoneNumber: string; // String!
     }
     newCustomerList: { // args
@@ -519,6 +520,7 @@ export interface NexusGenArgTypes {
     }
     redeemCoupon: { // args
       id: string; // String!
+      redeemedAt: string; // String!
     }
     registerUser: { // args
       email: string; // String!
