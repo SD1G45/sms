@@ -37,15 +37,19 @@ const Dashboard = () => {
   const [couponsData, setCouponsData] = useState(
     sampleData.getPlaceholderForGraph("coupons")
   );
+
   const getCouponsData = () => {
+
+    // Query for the coupons
     getCoupons({ variables: { businessId: businessState?.businessId }});
     console.log(couponsQueryResult);
 
+    // Get our data from the coupons query if it's available
     const couponsList = couponsQueryResult.data != undefined 
       ? couponsQueryResult.data.coupons : [];
-
     console.log(couponsList);
     
+    // Get all redeemed dates for each coupon
     var redeemed: { day: string, time: string }[] = [];
     couponsList.forEach( (coupon: any) => {
       coupon.redeemedDates.forEach( (date: any) => {
@@ -54,17 +58,19 @@ const Dashboard = () => {
         redeemed.push({ day: splitDateTime[0], time: splitDateTime[1]});
       });
     });
-
     console.log("Redeemed " + redeemed);
 
+    // Format the current date
     const currentDateTime: Date = new Date();
     const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
     const currentDate: string = currentDateTimeStr[0];
     
+    // Filter all redeemed coupon dates to match today's date
     redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
 
+    // Map today's redeemed coupons to their hours
+    // Key: Time (00 -> 23), Value: coupon total since Time 00
     const redeemedMap: Map<string, number> = new Map<string, number>();
-
     redeemed.forEach((dateTime) => {
       console.log("Inside redeem: " + dateTime.day);
       const time = dateTime.time.split(":")[0];
@@ -77,13 +83,16 @@ const Dashboard = () => {
       console.log(redeemedMap.get(time));
     });
 
+    // Format the data to place into the graph
     const data = sampleData.getDatesForGraph("coupons", redeemedMap);
     console.log(data);
     console.log("Total " + redeemed.length);
 
+    // Set the couponsData
     setCouponsData(data);
   }
 
+  // Execute coupons query at refresh and every 10 seconds after that
   useEffect(() => {
     getCouponsData();
 
