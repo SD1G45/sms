@@ -27,22 +27,16 @@ export const ColumnDiv = styled.div`
   width: 100%;
 `;
 
-export const RowDiv = styled.div`
-  // display: flex;
-`;
+export const RowDiv = styled.div``;
 export const StyledHeader = styled.h1`
   overflow: hidden;
-  // white-space: nowrap;
   font-size: 60px;
   color: white;
 `;
 export const SecondHeader = styled.h1`
-  // margin-top: 300px;
   overflow: hidden;
-  // white-space: nowrap;
   font-size: 60px;
   margin-bottom: 15px;
-  // color: white;
 `;
 export const StyledBody = styled.h1`
   font-weight: normal;
@@ -54,19 +48,14 @@ export const StyledBody = styled.h1`
 `;
 export const SecondBody = styled.h1`
   font-weight: normal;
-  // overflow: hidden;
-  // white-space: nowrap;
   line-height: 2rem;
-  // color: white;
   margin-top: 5px;
   font-size: 20px;
   margin-bottom: 20px;
 `;
 export const ContainerDiv = styled.div`
   display: flex;
-  //   padding: 80px 80px;
-  // background-color: #4881f0;
-  // background-color: #4881f0;
+
   width: 100%;
   margin-top: -1px;
   height: 80%;
@@ -79,10 +68,3 @@ export const LineDiv = styled.div`
   width: 320px;
   margin-bottom: 10px;
 `;
-
-// export const FlexContainer = styled.div`
-//   display: flex;
-//   padding: 50px 80px;
-//   width: 100%;
-//   /* background-color: green; */
-// `;
