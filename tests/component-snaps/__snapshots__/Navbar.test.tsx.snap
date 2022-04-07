@@ -325,6 +325,7 @@ Array [
       />
       <button
         className="c7 c8"
+        id="logout"
         loading={false}
         onClick={[Function]}
       >

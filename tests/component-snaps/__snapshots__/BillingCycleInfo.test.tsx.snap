@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BillingCycleInfo renders correctly 1`] = `
+.c3 {
+  text-align: left;
+  width: 100%;
+  color: #888B8E;
+  font-size: 16px;
+}
+
+.c5 {
+  text-align: left;
+  width: 100%;
+  font-size: 30px;
+}
+
+.c4 {
+  text-align: right;
+  width: 100%;
+  color: #4881F0;
+  font-size: 14px;
+}
+
+.c4:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  gap: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 0px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 0px;
+  gap: 0%;
+  margin: 0%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 30px 19px 30px 19px;
+  gap: 11px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <text
+        className="c3"
+      >
+        title
+      </text>
+      <text
+        className="c4"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        text
+      </text>
+    </div>
+    <text
+      className="c5"
+    >
+      A lot
+    </text>
+    <text
+      className="c3"
+    >
+      sub
+    </text>
+  </div>
+</div>
+`;
