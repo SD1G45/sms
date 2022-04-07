@@ -32,7 +32,7 @@ export const PagePointer = styled.div`
 export const Header = styled.th`
   border-bottom: 2.75px solid #c4c4c4;
   padding-bottom: 15px;
-  padding-left: 58px;
+  padding-left: 50px;
   padding-top: 15px;
   font-size: 14px;
   overflow: hidden;
@@ -44,7 +44,7 @@ export const StyledButton = styled(Button)``;
 export const HeaderLong = styled.th<stylesProps>`
   border-bottom: 2.75px solid #c4c4c4;
   padding-bottom: 15px;
-  padding-right: ${(props) => (props.tableType == "Keyword" ? "50px" : "100px")};
+  padding-right: ${(props) => (props.tableType == "Keyword" ? "0px" : "100px")};
   padding-top: 15px;
   font-size: 14px;
   text-align: left;
@@ -65,7 +65,7 @@ export const Data = styled.td`
 
 export const DataEmpty = styled.td`
   border-bottom: 2.75px solid #c4c4c4;
-  padding-bottom: 49px;
+  padding-bottom: 46.5px;
   padding-right: 60px;
   font-size: 14px;
   font-weight: 500;
@@ -76,4 +76,17 @@ export const DataLong = styled(Data)`
   padding-right: 40px;
   font-weight: 500;
   text-align: left;
+`;
+
+export const EmptyData = styled.div`
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  justify-content: center;
+  background-color: #c4c4c4;
+  height: 100%;
+  color: black;
+  padding: 100px;
+  border-radius: 1.5px;
 `;

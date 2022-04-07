@@ -13,6 +13,7 @@ import {
   Data,
   PagePointer,
   StyledButton,
+  EmptyData
 } from "./styles";
 import { TableProps } from "./types";
 
@@ -33,10 +34,15 @@ function mapDataToHeaderComponent(data: string[], tableType: string): JSX.Elemen
 function mapDataToBodyComponent(
   data: string[][],
   page: number,
-  customerTable: boolean
+  tableType: string
 ): JSX.Element[] {
   const mapping: JSX.Element[] = [];
   const pageIndex = page - 1;
+  const lengthIndex = tableType == 'Keyword' ? 5 : 12;
+
+  if (data.length == 0) {
+    return mapping;
+  }
 
   for (let i = 0; i < 7 && pageIndex * 7 + i < data.length; i++) {
     const value = data[pageIndex * 7 + i];
@@ -44,15 +50,8 @@ function mapDataToBodyComponent(
     value.map((val, i) => {
       const newItem =
         i == 0 ? (
-          <DataLong>{val}</DataLong>
-        ) : customerTable && i == value.length - 1 ? (
-          <Data>
-            {val}
-            <StyledButton>Click here to view</StyledButton>
-          </Data>
-        ) : (
-          <Data>{val}</Data>
-        );
+          <DataLong>{val.length > lengthIndex ? val.slice(0, lengthIndex) + "...." : val}</DataLong>
+        ) : <Data>{val}</Data>;
       map.push(newItem);
     });
     mapping.push(<tr>{map}</tr>);
@@ -68,21 +67,6 @@ function mapDataToBodyComponent(
   }
   return mapping;
 }
-
-const customersTable = (data: string[][], page: number) => {
-  const headers = ["Name", "Description", "Customers"];
-
-  return (
-    <DivContainer>
-      <DataTable>
-        <TableHeader>
-          <tr>{mapDataToHeaderComponent(headers, "Customers")}</tr>
-        </TableHeader>
-        <TableBody>{mapDataToBodyComponent(data, page, true)}</TableBody>
-      </DataTable>
-    </DivContainer>
-  );
-};
 
 const Table: React.FC<TableProps> = ({ headers, data, tableType}) => {
   const [page, setPage] = useState(1);
@@ -111,18 +95,15 @@ const Table: React.FC<TableProps> = ({ headers, data, tableType}) => {
     );
   };
 
-  if (headers == null) {
-    return customersTable(data, page);
-  }
-
   return (
     <DivContainer>
       <DataTable>
         <TableHeader>
           <tr>{mapDataToHeaderComponent(headers, tableType)}</tr>
         </TableHeader>
-        <TableBody>{mapDataToBodyComponent(data, page, false)}</TableBody>
+        <TableBody>{mapDataToBodyComponent(data, page, tableType)}</TableBody>
       </DataTable>
+      {data.length == 0 ? <EmptyData>Start creating campaigns to view your customer and marketing data!</EmptyData> : ""}
       {numOfPages > 1 ? <PaginationSection /> : null}
     </DivContainer>
   );

@@ -1,5 +1,5 @@
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
-    headers: string[] | null,
+    headers: string[],
     data: string[][],
     tableType: string,
 }
