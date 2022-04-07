@@ -31,7 +31,16 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({
         query: { code: router.query.code },
       });
     } else {
-      location.replace("/login");
+      const currentPath = router.asPath;
+      if (
+        currentPath.startsWith("/us") ||
+        currentPath.startsWith("/login") ||
+        currentPath.startsWith("/register")
+      ) {
+        location.replace("/login");
+      } else {
+        location.replace("/us");
+      }
     }
   };
 
