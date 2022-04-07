@@ -12,25 +12,33 @@ import {
   ImageDiv,
 } from "../../page-styles/aboutus/styles";
 import Image from "next/image";
-
+import { Parallax, ParallaxProvider, useParallax } from "react-scroll-parallax";
 const About = () => {
+  const parallax = useParallax<HTMLDivElement>({
+    easing: "easeOutQuad",
+    translateX: [-40, 4],
+  });
   return (
     <ContainerDiv>
       <ColumnDiv>
         <RowDiv>
           <ImageDiv>
-            <Image
-              src="/aboutusblack.png"
-              width={1300}
-              height={300}
-              alt="circle"
-            />
+            <Parallax speed={20}>
+              <Image
+                src="/aboutusblack.png"
+                width={1300}
+                height={300}
+                alt="circle"
+              />
+            </Parallax>
           </ImageDiv>
           <HeaderDiv>
-            <StyledHeader>The Leading</StyledHeader>
-            <StyledHeader>SMS Marketing </StyledHeader>
-            <StyledHeader>Platform in</StyledHeader>
-            <StyledHeader>Orlando, FL</StyledHeader>
+            <div ref={parallax.ref}>
+              <StyledHeader>The Leading</StyledHeader>
+              <StyledHeader>SMS Marketing </StyledHeader>
+              <StyledHeader>Platform in</StyledHeader>
+              <StyledHeader>Orlando, FL</StyledHeader>
+            </div>
             <LineDiv></LineDiv>
 
             <StyledBody>

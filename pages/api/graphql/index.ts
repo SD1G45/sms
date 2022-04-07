@@ -11,7 +11,7 @@ export const config = {
 export default new ApolloServer({
   schema,
   context,
-  // playground: true,
+  playground: true,
   // introspection: process.env.NODE_ENV !== 'production',
   introspection: true,
 }).createHandler({
