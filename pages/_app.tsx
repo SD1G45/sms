@@ -10,6 +10,7 @@ import RouteGuard from "../components/RouteGuard";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LoadingDiv from "../components/LoadingDiv";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const Loading = () => {
   const router = useRouter();
@@ -48,18 +49,20 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <Loading />
-      <UserProvider>
-        <BusinessProvider>
-          <GlobalStyles />
-          <Theme>
-            <RouteGuard>
-              <Navbar />
-              <Component {...pageProps} />
-            </RouteGuard>
-          </Theme>
-        </BusinessProvider>
-      </UserProvider>
+      <ParallaxProvider>
+        <Loading />
+        <UserProvider>
+          <BusinessProvider>
+            <GlobalStyles />
+            <Theme>
+              <RouteGuard>
+                <Navbar />
+                <Component {...pageProps} />
+              </RouteGuard>
+            </Theme>
+          </BusinessProvider>
+        </UserProvider>
+      </ParallaxProvider>
     </ApolloProvider>
   );
 }
