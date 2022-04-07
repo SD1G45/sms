@@ -15,7 +15,7 @@ import {
   StyledHeader,
   StyledLink,
 } from "../../../page-styles/settings/profile/styles";
-import { SetPaymentInfo } from "../../business/create/components/SetPaymentInfo";
+
 interface InitialDisplayProps {
   setViewInfo: (value: boolean) => void;
   setChangeInfo: (value: boolean) => void;
