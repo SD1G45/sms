@@ -49,6 +49,7 @@ export const Landing = () => {
           height={150}
         />
       </Parallax>
+
       <Parallax speed={10}>
         <SplitDivTwo>
           <HeaderDiv>
@@ -71,24 +72,94 @@ export const Landing = () => {
                 <SecondHeader>Personal</SecondHeader>
                 <StyledBody>Our products have a wide variety of</StyledBody>
                 <StyledBody>
-                  applications for friends, classroms, or clubs
+                  applications for friends, classrooms, or clubs
                 </StyledBody>
                 <StyledBody>
-                  to have a unique way of keeping track of information
+                  to keep track of information and offer a
                 </StyledBody>
-                <StyledBody>
-                  and offer a seamless check-in or reward system.
-                </StyledBody>
+                <StyledBody>seamless check-in or reward system.</StyledBody>
               </BodyDiv>
             </BodyContainer>
           </HeaderDiv>
         </SplitDivTwo>
       </Parallax>
-
+      <Parallax speed={-30}>
+        <SplitDivTwo>
+          <HeaderDiv>
+            {/* <StyledHeader>Solutions for</StyledHeader>
+            <BodyContainer>
+              <Link href={"#"}>
+                <StyledLink>Retail</StyledLink>
+              </Link>
+            </BodyContainer>
+            <BodyContainer>
+              <Link href={"#"}>
+                <StyledLink>Retail</StyledLink>
+              </Link>
+            </BodyContainer>
+            <BodyContainer>
+              <Link href={"#"}>
+                <StyledLink>Retail</StyledLink>
+              </Link> */}
+            {/* </BodyContainer> */}
+          </HeaderDiv>
+          <Parallax speed={10}>
+            <Image
+              src={"/icons/pyramid-transparent.png"}
+              width={200}
+              height={200}
+            />
+          </Parallax>
+        </SplitDivTwo>{" "}
+      </Parallax>
+      <div id="why-trism">
+        <Parallax speed={10}>
+          <SplitDivTwo>
+            <HeaderDiv>
+              <StyledHeader>Why Trism</StyledHeader>
+              <BodyContainer>
+                <BodyDiv>
+                  <StyledBody>
+                    We believe there should be more options for people
+                  </StyledBody>
+                  <StyledBody>
+                    when it comes to their marketing solutions.
+                  </StyledBody>
+                  <StyledBody></StyledBody>
+                  <StyledBody>
+                    People shouldn't be locked down because of their POS device
+                  </StyledBody>
+                  <StyledBody>or restricted to a single company.</StyledBody>
+                </BodyDiv>
+              </BodyContainer>
+            </HeaderDiv>
+          </SplitDivTwo>
+        </Parallax>
+      </div>
+      <div id="how-it-works">
+        <Parallax speed={10}>
+          <SplitDivTwo>
+            <HeaderDiv>
+              <StyledHeader>How does it work?</StyledHeader>
+              <BodyContainer></BodyContainer>
+            </HeaderDiv>
+          </SplitDivTwo>
+        </Parallax>
+      </div>
+      <div id="contact">
+        <Parallax speed={10}>
+          <SplitDivTwo>
+            <HeaderDiv>
+              <StyledHeader>Need to know more?</StyledHeader>
+              <BodyContainer></BodyContainer>
+            </HeaderDiv>
+          </SplitDivTwo>
+        </Parallax>
+      </div>
       <Parallax speed={10}>
         <SplitDivTwo>
           <HeaderDiv>
-            <StyledHeader>Solutions for</StyledHeader>
+            {/* <StyledHeader>Solutions for</StyledHeader>
             <BodyContainer>
               <Link href={"#"}>
                 <StyledLink>Retail</StyledLink>
@@ -102,8 +173,8 @@ export const Landing = () => {
             <BodyContainer>
               <Link href={"#"}>
                 <StyledLink>Retail</StyledLink>
-              </Link>
-            </BodyContainer>
+              </Link> */}
+            {/* </BodyContainer> */}
           </HeaderDiv>
           <Parallax speed={10}>
             <Image

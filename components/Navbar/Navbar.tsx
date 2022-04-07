@@ -109,19 +109,19 @@ const Navbar = () => {
           </BusinessInfoSection>
           <ControlsSection>
             {" "}
-            <Link href="/us/about">
+            <Link href="/us#why-trism">
               <StyledLink>Why Trism?</StyledLink>
             </Link>
             <Spacing />
             <Spacing />
             <Spacing />
-            <Link href="/us/trism">
+            <Link href="/us#how-it-works">
               <StyledLink>How it works</StyledLink>
             </Link>
             <Spacing />
             <Spacing />
             <Spacing />
-            <Link href="/us/contact">
+            <Link href="/us#contact">
               <StyledLink>Contact Us</StyledLink>
             </Link>
           </ControlsSection>
