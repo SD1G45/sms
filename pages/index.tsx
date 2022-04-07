@@ -29,6 +29,7 @@ const customersData = sampleData.customersData();
 const Dashboard = () => {
   const businessState = useBusinessState();
   const [businessName, setBusinessName] = useState("");
+
   useEffect(() => {
     setBusinessName(businessState?.name || "");
     console.log(businessName);

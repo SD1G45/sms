@@ -7,7 +7,11 @@ import Button from "../Button";
 import { LogoutButtonProps } from "./types";
 import { VariantButton } from "./styles";
 
-const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({
+  variant,
+  invert,
+  text,
+}) => {
   const [loading, setLoading] = useState(false);
   const apolloClient = useApolloClient();
   const userDispatch = useUserDispatch();
@@ -39,7 +43,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ variant, invert }) => {
       variant={variant}
       invert={invert}
     >
-      Logout
+      {text || "Logout"}
     </VariantButton>
   );
 };

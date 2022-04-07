@@ -17,6 +17,7 @@ import { useUserDispatch } from "../../context/UserContext/UserContext";
 import SingleCardPage from "../../components/SingleCardPage";
 import { useRouter } from "next/router";
 import newRouteWithQueries from "../../helpers/newRouteWithQueries";
+import { Parallax } from "react-scroll-parallax";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -96,50 +97,55 @@ const Login = () => {
   return (
     <SingleCardPage>
       {" "}
-      <StyledCard>
-        <Heading>Sign in to your account</Heading>
-        <EmailTextField
-          id="email"
-          label="Email"
-          value={emailFromQueryParam || email}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setEmail(event.target.value)
-          }
-        />
-        <PasswordTextField
-          id="password"
-          label="Password"
-          value={password}
-          type="password"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setPassword(event.target.value)
-          }
-          linkText="Forgot your password?"
-          linkValue="/reset-password"
-        />
-        <ErrorPopup error={errorState.error} message={errorState.message} />
-        <Checkbox
-          id="stay-signed-in"
-          checked={staySignedInChecked}
-          label="Stay signed in"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setStaySignedInChecked(event.target.checked)
-          }
-        />
-        <StyledButton
-          id="login-button"
-          onClick={() => onLogin()}
-          disabled={loading}
-          loading={loading}
-        >
-          Login
-        </StyledButton>
-        <LinkDiv>
-          <Link href={newRouteWithQueries("/register", router)} passHref>
-            <StyledLink id="register">New to us? Create an Account</StyledLink>
-          </Link>
-        </LinkDiv>
-      </StyledCard>
+      <Parallax speed={-50}>
+        <StyledCard>
+          <Heading>Sign in to your account</Heading>
+          <EmailTextField
+            id="email"
+            label="Email"
+            value={emailFromQueryParam || email}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(event.target.value)
+            }
+          />
+
+          <PasswordTextField
+            id="password"
+            label="Password"
+            value={password}
+            type="password"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(event.target.value)
+            }
+            linkText="Forgot your password?"
+            linkValue="/reset-password"
+          />
+          <ErrorPopup error={errorState.error} message={errorState.message} />
+          <Checkbox
+            id="stay-signed-in"
+            checked={staySignedInChecked}
+            label="Stay signed in"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setStaySignedInChecked(event.target.checked)
+            }
+          />
+          <StyledButton
+            id="login-button"
+            onClick={() => onLogin()}
+            disabled={loading}
+            loading={loading}
+          >
+            Login
+          </StyledButton>
+          <LinkDiv>
+            <Link href={newRouteWithQueries("/register", router)} passHref>
+              <StyledLink id="register">
+                New to us? Create an Account
+              </StyledLink>
+            </Link>
+          </LinkDiv>
+        </StyledCard>
+      </Parallax>
     </SingleCardPage>
   );
 };

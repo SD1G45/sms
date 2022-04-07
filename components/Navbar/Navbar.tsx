@@ -26,6 +26,9 @@ import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "./queries";
 import { useUserState } from "../../context/UserContext";
 import LogoutButton from "../LogoutButton";
+import { StyledLink } from "../../page-styles/settings/styles";
+
+import Image from "next/image";
 
 const Navbar = () => {
   const router = useRouter();
@@ -78,8 +81,6 @@ const Navbar = () => {
     ({ id }) => id !== businessState?.businessId
   );
 
-  if (currentPath.startsWith("/login")) return <></>;
-  if (currentPath.startsWith("/register")) return <></>;
   if (currentPath.startsWith("/welcome")) return <></>;
   if (currentPath.startsWith("/business/create")) return <></>;
 
@@ -87,6 +88,58 @@ const Navbar = () => {
 
   if (currentPath.startsWith("/reward")) return <></>;
 
+  // Navbar if not Logged in
+  if (
+    currentPath.startsWith("/us") ||
+    currentPath.startsWith("/login") ||
+    currentPath.startsWith("/register")
+  )
+    return (
+      <>
+        <PrimaryNavbar>
+          <BusinessInfoSection>
+            <Link href="/us">
+              <Image
+                width={40}
+                height={40}
+                src={"/icons/pyramid-transparent.png"}
+              />
+            </Link>
+            <BusinessName>{businessName}</BusinessName>
+          </BusinessInfoSection>
+          <ControlsSection>
+            {" "}
+            <Link href="/us/about">
+              <StyledLink>Why Trism?</StyledLink>
+            </Link>
+            <Spacing />
+            <Spacing />
+            <Spacing />
+            <Link href="/us/trism">
+              <StyledLink>How it works</StyledLink>
+            </Link>
+            <Spacing />
+            <Spacing />
+            <Spacing />
+            <Link href="/us/contact">
+              <StyledLink>Contact Us</StyledLink>
+            </Link>
+          </ControlsSection>
+          <ControlsSection>
+            <Link href="/register">
+              <StyledLink>Register</StyledLink>
+            </Link>
+            <Spacing />
+
+            <Spacing />
+
+            <LogoutButton variant="header" text="Login" />
+          </ControlsSection>
+        </PrimaryNavbar>
+      </>
+    );
+
+  // Primary Navbar for users who are logged in
   return (
     <>
       <PrimaryNavbar>
@@ -136,24 +189,44 @@ const Navbar = () => {
         </ControlsSection>
       </PrimaryNavbar>
       {!currentPath.startsWith("/settings") &&
+        !currentPath.startsWith("/us") &&
         !currentPath.startsWith("/business") &&
         !currentPath.startsWith("/billing") && (
           <SecondaryNavbarContainer>
             <SecondaryNavbar>
               <Link href="/" passHref>
-                <Item id="home" active={currentPath === "/"}>Home</Item>
+                <Item id="home" active={currentPath === "/"}>
+                  Home
+                </Item>
               </Link>
               <Link href="/coupons" passHref>
-                <Item id="coupons" active={currentPath.startsWith("/coupons")}>Coupons</Item>
+                <Item id="coupons" active={currentPath.startsWith("/coupons")}>
+                  Coupons
+                </Item>
               </Link>
               <Link href="/campaigns" passHref>
-                <Item id="campaigns" active={currentPath.startsWith("/campaigns")}>Campaigns</Item>
+                <Item
+                  id="campaigns"
+                  active={currentPath.startsWith("/campaigns")}
+                >
+                  Campaigns
+                </Item>
               </Link>
               <Link href="/keywords" passHref>
-                <Item id="keywords" active={currentPath.startsWith("/keywords")}>Keywords</Item>
+                <Item
+                  id="keywords"
+                  active={currentPath.startsWith("/keywords")}
+                >
+                  Keywords
+                </Item>
               </Link>
               <Link href="/customers" passHref>
-                <Item id="customers" active={currentPath.startsWith("/customers")}>Customers</Item>
+                <Item
+                  id="customers"
+                  active={currentPath.startsWith("/customers")}
+                >
+                  Customers
+                </Item>
               </Link>
             </SecondaryNavbar>
           </SecondaryNavbarContainer>
