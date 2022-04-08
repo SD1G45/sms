@@ -57,7 +57,7 @@ export const Data = styled.td`
     border-bottom: 2.75px solid #C4C4C4;
     padding-bottom: 15px;
     padding-top: 15px;
-    padding-right: 300px;
+    padding-right: 200px;
     font-size: 14px;
     font-weight: 500;
     overflow: hidden;

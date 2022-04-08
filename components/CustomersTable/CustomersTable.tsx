@@ -55,12 +55,12 @@ function mapDataToBodyComponent(data: string[][], page: number, ids: string[], v
                     </Link>
                 </ListData>
             const newItem = i == 0 ?
-                <DataLong key={i}>{val.length > 10 ? val.slice(0, 10) + "....." : val}</DataLong>
+                <DataLong key={i}>{val.length > 25 ? val.slice(0, 25) + "....." : val}</DataLong>
                 :
                 (i == value.length - 1 ?
                     content
                     :
-                    <Data key={i}>{val.length > 10 ? val.slice(0, 10) + "....." : val}</Data>
+                    <Data key={i}>{val.length > 25 ? val.slice(0, 25) + "....." : val}</Data>
                 );
             map.push(newItem);
         })

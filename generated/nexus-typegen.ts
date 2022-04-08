@@ -102,6 +102,13 @@ export interface NexusGenObjects {
     id?: string | null; // String
     name?: string | null; // String
   }
+  Customer_Coupon: { // root type
+    couponId?: string | null; // String
+    customerId?: string | null; // String
+    id?: string | null; // String
+    opened?: boolean | null; // Boolean
+    redeemed?: boolean | null; // Boolean
+  }
   Customer_CustomerList: { // root type
     customerId?: string | null; // String
     customerListId?: string | null; // String
@@ -218,6 +225,13 @@ export interface NexusGenFieldTypes {
     id: string | null; // String
     name: string | null; // String
   }
+  Customer_Coupon: { // field return type
+    couponId: string | null; // String
+    customerId: string | null; // String
+    id: string | null; // String
+    opened: boolean | null; // Boolean
+    redeemed: boolean | null; // Boolean
+  }
   Customer_CustomerList: { // field return type
     customer: NexusGenRootTypes['Customer'] | null; // Customer
     customerId: string | null; // String
@@ -254,6 +268,7 @@ export interface NexusGenFieldTypes {
     newCampaign: NexusGenRootTypes['Campaign'] | null; // Campaign
     newCoupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     newCustomer: NexusGenRootTypes['Customer'] | null; // Customer
+    newCustomerCoupon: NexusGenRootTypes['Customer_Coupon'] | null; // Customer_Coupon
     newCustomerList: NexusGenRootTypes['CustomerList'] | null; // CustomerList
     newCustomerListCustomer: NexusGenRootTypes['Customer_CustomerList'] | null; // Customer_CustomerList
     newKeyWord: NexusGenRootTypes['Keyword'] | null; // Keyword
@@ -361,6 +376,13 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     name: 'String'
   }
+  Customer_Coupon: { // field return type name
+    couponId: 'String'
+    customerId: 'String'
+    id: 'String'
+    opened: 'Boolean'
+    redeemed: 'Boolean'
+  }
   Customer_CustomerList: { // field return type name
     customer: 'Customer'
     customerId: 'String'
@@ -397,6 +419,7 @@ export interface NexusGenFieldTypeNames {
     newCampaign: 'Campaign'
     newCoupon: 'Coupon'
     newCustomer: 'Customer'
+    newCustomerCoupon: 'Customer_Coupon'
     newCustomerList: 'CustomerList'
     newCustomerListCustomer: 'Customer_CustomerList'
     newKeyWord: 'Keyword'
@@ -492,6 +515,10 @@ export interface NexusGenArgTypes {
       lastName: string; // String!
       password: string; // String!
       phoneNumber: string; // String!
+    }
+    newCustomerCoupon: { // args
+      couponId: string; // String!
+      customerId: string; // String!
     }
     newCustomerList: { // args
       businessId: string; // String!

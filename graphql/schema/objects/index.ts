@@ -13,6 +13,7 @@ import { BusinessInviteCode } from "./BusinessInviteCode";
 import { CouponInstance } from "./CouponInstance";
 import { Customer_CustomerList } from "./Customer_CustomerList";
 import { EmailResetCode } from "./EmailResetCode";
+import { Customer_Coupon } from "./Customer_Coupon";
 
 export {
   AvailablePhoneNumber,
@@ -29,5 +30,6 @@ export {
   EmailResetCode,
   BusinessInviteCode,
   CouponInstance,
-  Customer_CustomerList
+  Customer_CustomerList,
+  Customer_Coupon
 };

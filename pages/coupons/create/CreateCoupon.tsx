@@ -97,7 +97,7 @@ const CreateCoupon: React.FC = () => {
         <ConnectButton id="to-campaigns" onClick={() => router.push(`/campaigns/create?couponId=${newCouponId}`)}>
           Connect to campaign
         </ConnectButton>
-        <ConnectButton id="to-keywords" onClick={() => router.push("/keywords")}>
+        <ConnectButton id="to-keywords" onClick={() => router.push(`/keywords/create?couponId=${newCouponId}`)}>
           Connect to keyword
         </ConnectButton>
       </div>
