@@ -101,7 +101,7 @@ const Dashboard = () => {
   const couponsData = getCouponsData(couponsQueryResult, currentDate);
   const customersData = getCustomersData(customersQueryResult, currentDate);
   const messageCount: number = messageCountQueryResult.data != undefined ? messageCountQueryResult.data.messageCount : 0;
-  const amountSpent: number = messageCount * 0.5;
+  const amountSpent: number = messageCount * 0.05;
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: "currency",

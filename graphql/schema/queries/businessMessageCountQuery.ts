@@ -19,7 +19,8 @@ export const businessMessageCountQuery = extendType({
         if (business == null) {
           throw new Error("Could not find business");
         } else if (business.phoneNumber == null) {
-          throw new Error("Business has not yet provisioned a phone number");
+          console.log("Business has not yet provisioned a phone number");
+          return 0;
         }
         
         const response = await client.messages.list({
