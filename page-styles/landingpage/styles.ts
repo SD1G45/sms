@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
+import TextField from "../../components/TextField";
 
 export const Page = styled.div`
   width: 100%;
@@ -9,16 +10,34 @@ export const Page = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const StyledCard = styled(Card)`
+  width: 500px;
+  padding: 30px;
+`;
+
+export const FirstNameTextField = styled(TextField)`
+  margin-bottom: 30px;
+`;
+
+export const EmailTextField = styled(TextField)`
+  margin-bottom: 40px;
+`;
+
 export const LogoDiv = styled.div`
   height: 100px;
   z-index: -1;
   //   margin-bottom: 500px;
 `;
-export const MainLogoDiv = styled.div`
+export const MainDiv = styled.div`
   height: 100%;
   justify-content: center;
   align-items: left;
   display: flex;
+`;
+
+export const Spacing = styled.div`
+  height: 200px;
 `;
 export const StyledBackground = styled.div`
   position: absolute;

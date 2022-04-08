@@ -1,13 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { Parallax } from "react-scroll-parallax";
 import Background from "../../components/Background";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
+import TextArea from "../../components/TextArea";
+import newRouteWithQueries from "../../helpers/newRouteWithQueries";
 
 import {
   LogoDiv,
-  MainLogoDiv,
+  MainDiv,
   Page,
   SplitDiv,
   StyledBackground,
@@ -21,33 +25,64 @@ import {
   SplitDivTwo,
   BodyDiv,
   BodyContainer,
+  Spacing,
+  EmailTextField,
+  StyledCard,
+  FirstNameTextField,
 } from "../../page-styles/landingpage/styles";
-import { StyledLink } from "../../page-styles/login/styles";
+import {
+  Heading,
+  LinkDiv,
+  PasswordTextField,
+  StyledLink,
+} from "../../page-styles/login/styles";
 
 export const Landing = () => {
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const onMessageSend = () => {
+    if (email && firstName && message) {
+      setEmail("");
+      setFirstName("");
+      setMessage("");
+      setSent(true);
+    }
+  };
+  const router = useRouter();
   return (
     <>
-      <Background></Background>
+      <Background />
       <SplitDiv>
         <HeaderDiv>
           <StyledHeader>Flexible marketing</StyledHeader>
           <StyledHeader>Fit for Anyone </StyledHeader>
           <RightDiv>
-            <StyledButton>Sign Up</StyledButton>
-            <StyledButton invert={true}>Learn More</StyledButton>
+            <Link href="/register">
+              <StyledButton>Sign Up</StyledButton>
+            </Link>
+
+            <Link href="#contact">
+              <StyledButton invert={true}>Learn More</StyledButton>
+            </Link>
           </RightDiv>
         </HeaderDiv>
-        <MainLogoDiv>
+        <MainDiv>
           <Image src={"/man-holding-phone.gif"} width={"1000"} height={"600"} />
-        </MainLogoDiv>
+        </MainDiv>
       </SplitDiv>
 
-      <Parallax speed={-10}>
-        <Image
-          src={"/icons/pyramid-transparent.png"}
-          width={150}
-          height={150}
-        />
+      <Spacing />
+      <Parallax speed={-15}>
+        <MainDiv>
+          <Image
+            src={"/icons/pyramid-transparent.png"}
+            width={150}
+            height={150}
+          />
+        </MainDiv>
       </Parallax>
 
       <Parallax speed={10}>
@@ -151,7 +186,59 @@ export const Landing = () => {
           <SplitDivTwo>
             <HeaderDiv>
               <StyledHeader>Need to know more?</StyledHeader>
-              <BodyContainer></BodyContainer>
+              <StyledCard>
+                <Heading>
+                  {!sent ? "Shoot us a message" : "Awesome! We'll be in touch."}
+                </Heading>
+                {!sent && (
+                  <>
+                    <EmailTextField
+                      id="email"
+                      label="Email"
+                      value={email}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setEmail(event.target.value)
+                      }
+                    />
+
+                    <FirstNameTextField
+                      id="password"
+                      label="Name"
+                      value={firstName}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setFirstName(event.target.value)
+                      }
+                    />
+
+                    <TextArea
+                      value={message}
+                      label="Message"
+                      onChange={(
+                        event: React.ChangeEvent<HTMLTextAreaElement>
+                      ) => setMessage(event.target.value)}
+                    ></TextArea>
+
+                    <Button
+                      onClick={() => {
+                        onMessageSend();
+                      }}
+                    >
+                      Email us
+                    </Button>
+                  </>
+                )}
+
+                <LinkDiv>
+                  <Link
+                    href={newRouteWithQueries("/register", router)}
+                    passHref
+                  >
+                    <StyledLink id="register">
+                      Ready to sign up? Let's get started.
+                    </StyledLink>
+                  </Link>
+                </LinkDiv>
+              </StyledCard>
             </HeaderDiv>
           </SplitDivTwo>
         </Parallax>
