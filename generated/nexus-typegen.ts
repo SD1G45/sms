@@ -95,6 +95,7 @@ export interface NexusGenObjects {
     couponId?: string | null; // String
     id?: string | null; // String
     keywordId?: string | null; // String
+    onboardDate?: NexusGenScalars['Date'] | null; // Date
     phoneNumber?: string | null; // String
   }
   CustomerList: { // root type
@@ -211,6 +212,7 @@ export interface NexusGenFieldTypes {
     couponId: string | null; // String
     id: string | null; // String
     keywordId: string | null; // String
+    onboardDate: NexusGenScalars['Date'] | null; // Date
     phoneNumber: string | null; // String
   }
   CustomerList: { // field return type
@@ -356,6 +358,7 @@ export interface NexusGenFieldTypeNames {
     couponId: 'String'
     id: 'String'
     keywordId: 'String'
+    onboardDate: 'Date'
     phoneNumber: 'String'
   }
   CustomerList: { // field return type name
