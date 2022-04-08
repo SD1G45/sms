@@ -22,22 +22,10 @@ const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
 });
 
-const Dashboard = () => {
-  const businessState = useBusinessState();
-  const [businessName, setBusinessName] = useState("");
-  useEffect(() => {
-    setBusinessName(businessState?.name || "");
-  });
-
-  const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
-  const [getCustomers, customersQueryResult] = useLazyQuery(ALL_CUSTOMERS_QUERY);
-
+const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
   const couponsList =
     couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
-  const customersList =
-    customersQueryResult.data != undefined ? customersQueryResult.data.allCustomers : [];
 
-  // Get all redeemed dates for each coupon and all customers onboard dates
   var redeemed: { day: string, time: string }[] = [];
   couponsList.forEach((coupon: any) => {
     coupon.redeemedDates.forEach((date: any) => {
@@ -46,24 +34,10 @@ const Dashboard = () => {
       redeemed.push({ day: splitDateTime[0], time: splitDateTime[1] });
     });
   });
-  var onboarded: { day: string, time: string }[] = [];
-  customersList.forEach((customer: any) => {
-    const formattedDate = new Date(customer.onboardDate).toISOString();
-    const splitDateTime = formattedDate.split("T");
-    onboarded.push({ day: splitDateTime[0], time: splitDateTime[1] });
-  });
 
-  // Format the current date
-  const currentDateTime: Date = new Date();
-  const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
-  const currentDate: string = currentDateTimeStr[0];
-
-  // Filter all dates to match today's date
   redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
-  onboarded = onboarded.filter((dateTime) => dateTime.day === currentDate);
-
-  // Map today's redeemed coupons to their hours
-  // Key: Time (00 -> 23), Value: coupon total since Time 00
+  
+  // Key: Time (00 -> 23), Value: coupons redeemed total since Time 00
   const redeemedMap: Map<string, number> = new Map<string, number>();
   redeemed.forEach((dateTime) => {
     const time = dateTime.time.split(":")[0];
@@ -73,6 +47,24 @@ const Dashboard = () => {
       redeemedMap.set(time, 1);
     }
   });
+
+  return sampleData.getDatesForGraph("coupons", redeemedMap);
+}
+
+const getCustomersData = (customersQueryResult: any, currentDate: string): any => {
+  const customersList =
+  customersQueryResult.data != undefined ? customersQueryResult.data.allCustomers : [];
+
+  var onboarded: { day: string, time: string }[] = [];
+  customersList.forEach((customer: any) => {
+    const formattedDate = new Date(customer.onboardDate).toISOString();
+    const splitDateTime = formattedDate.split("T");
+    onboarded.push({ day: splitDateTime[0], time: splitDateTime[1] });
+  });
+
+  onboarded = onboarded.filter((dateTime) => dateTime.day === currentDate);
+
+  // Key: Time (00 -> 23), Value: customers onboarded total since Time 00
   const onboardedMap: Map<string, number> = new Map<string, number>();
   onboarded.forEach((dateTime) => {
     const time = dateTime.time.split(":")[0];
@@ -83,11 +75,28 @@ const Dashboard = () => {
     }
   });
 
-  // Format the data to place into the graph
-  const couponsData = sampleData.getDatesForGraph("coupons", redeemedMap);
-  const customersData = sampleData.getDatesForGraph("customers", onboardedMap);
+  return sampleData.getDatesForGraph("customers", onboardedMap);
+}
 
-  // Execute coupons query
+const Dashboard = () => {
+  const businessState = useBusinessState();
+  const [businessName, setBusinessName] = useState("");
+  useEffect(() => {
+    setBusinessName(businessState?.name || "");
+  });
+
+  const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
+  const [getCustomers, customersQueryResult] = useLazyQuery(ALL_CUSTOMERS_QUERY);
+
+  // Get the current date
+  const currentDateTime: Date = new Date();
+  const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
+  const currentDate: string = currentDateTimeStr[0];
+
+  // Format the data to place into the graph
+  const couponsData = getCouponsData(couponsQueryResult, currentDate);
+  const customersData = getCustomersData(customersQueryResult, currentDate);
+
   useEffect(() => {
     getCoupons({ variables: { businessId: businessState?.businessId } });
     getCustomers({ variables: { businessId: businessState?.businessId }});
