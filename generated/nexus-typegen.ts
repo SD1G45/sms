@@ -265,6 +265,7 @@ export interface NexusGenFieldTypes {
     resetPassword: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    allCustomers: Array<NexusGenRootTypes['Customer'] | null> | null; // [Customer]
     availablePhoneNumbers: Array<NexusGenRootTypes['AvailablePhoneNumber'] | null> | null; // [AvailablePhoneNumber]
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
@@ -409,6 +410,7 @@ export interface NexusGenFieldTypeNames {
     resetPassword: 'User'
   }
   Query: { // field return type name
+    allCustomers: 'Customer'
     availablePhoneNumbers: 'AvailablePhoneNumber'
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
@@ -534,6 +536,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    allCustomers: { // args
+      businessId: string; // String!
+    }
     availablePhoneNumbers: { // args
       areaCode: string; // String!
     }
