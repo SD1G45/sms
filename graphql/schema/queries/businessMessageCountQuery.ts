@@ -26,7 +26,7 @@ export const businessMessageCountQuery = extendType({
           from: business.phoneNumber
         });
 
-        return response.count;
+        return response.messages.count;
       },
     })
   }
