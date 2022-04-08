@@ -92,6 +92,8 @@ const Dashboard = () => {
 
   // Get the current date
   const currentDateTime: Date = new Date();
+  const firstDay = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), 1).toDateString();
+  const lastDay = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth() + 1, 0).toDateString();
   const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
   const currentDate: string = currentDateTimeStr[0];
 
@@ -140,7 +142,7 @@ const Dashboard = () => {
             <BillingCycleColumn
               spentAmount={totalSpent}
               salesAmount="$175.00"
-              billingCycle="10/07/21 - 10/31/21"
+              billingCycle={firstDay + " - " + lastDay}
               billingCycleRoute="/billing"
             />
           </BorderDiv>
