@@ -17,6 +17,7 @@ import BillingCycleColumn from "../components/BillingCycleColumn";
 import { useLazyQuery } from "@apollo/client";
 import { COUPONS_QUERY } from "../page-queries/keywords/create";
 import { ALL_CUSTOMERS_QUERY } from "../page-queries/customers";
+import { MESSAGE_COUNT_QUERY } from "../page-queries/business";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
@@ -87,6 +88,7 @@ const Dashboard = () => {
 
   const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
   const [getCustomers, customersQueryResult] = useLazyQuery(ALL_CUSTOMERS_QUERY);
+  const [getMessageCount, messageCountQueryResult] = useLazyQuery(MESSAGE_COUNT_QUERY);
 
   // Get the current date
   const currentDateTime: Date = new Date();
@@ -96,10 +98,19 @@ const Dashboard = () => {
   // Format the data to place into the graph
   const couponsData = getCouponsData(couponsQueryResult, currentDate);
   const customersData = getCustomersData(customersQueryResult, currentDate);
+  const messageCount: number = messageCountQueryResult.data != undefined ? messageCountQueryResult.data.messageCount : 0;
+  const amountSpent: number = messageCount * 0.5;
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: "currency",
+    currency: "USD",
+  });
+  const totalSpent: string = formatter.format(amountSpent);
 
   useEffect(() => {
     getCoupons({ variables: { businessId: businessState?.businessId } });
     getCustomers({ variables: { businessId: businessState?.businessId }});
+    getMessageCount({ variables: { businessId: businessState?.businessId }});
   }, [businessState]);
 
   const Analytics = () => {
@@ -127,7 +138,7 @@ const Dashboard = () => {
               />
             </ChartDiv>
             <BillingCycleColumn
-              spentAmount="$1,180.00"
+              spentAmount={totalSpent}
               salesAmount="$175.00"
               billingCycle="10/07/21 - 10/31/21"
               billingCycleRoute="/billing"
