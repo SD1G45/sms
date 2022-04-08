@@ -1,1 +1,1 @@
-export { default } from "./CreateKeyword";
+export { default } from "./[couponId]";

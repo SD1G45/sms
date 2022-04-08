@@ -9,6 +9,7 @@ export const CAMPAIGN_QUERY = gql`
       coupon {
         openCount
         redeemCount
+        sentCount
       }
     }
   }
