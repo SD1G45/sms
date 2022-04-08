@@ -16,35 +16,25 @@ import sampleData from "../sampleData/sampleData";
 import BillingCycleColumn from "../components/BillingCycleColumn";
 import { useLazyQuery } from "@apollo/client";
 import { COUPONS_QUERY } from "../page-queries/keywords/create";
-import { Coupon } from "@prisma/client";
-import { initializeApollo } from "../lib/apolloClient";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
 });
 
-const couponData = sampleData.couponData();
 const customersData = sampleData.customersData();
 
 const Dashboard = () => {
   const businessState = useBusinessState();
   const [businessName, setBusinessName] = useState("");
-
   useEffect(() => {
     setBusinessName(businessState?.name || "");
   });
 
   const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
-  // const [couponsData, setCouponsData] = useState(
-  //   sampleData.getPlaceholderForGraph("coupons")
-  // );
-
-  console.log("Coupons Result:", couponsQueryResult);
 
   // Get our data from the coupons query if it's available
   const couponsList =
     couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
-  console.log(couponsList);
 
   // Get all redeemed dates for each coupon
   var redeemed: { day: string; time: string }[] = [];
@@ -55,7 +45,6 @@ const Dashboard = () => {
       redeemed.push({ day: splitDateTime[0], time: splitDateTime[1] });
     });
   });
-  console.log("Redeemed " + redeemed);
 
   // Format the current date
   const currentDateTime: Date = new Date();
@@ -69,21 +58,16 @@ const Dashboard = () => {
   // Key: Time (00 -> 23), Value: coupon total since Time 00
   const redeemedMap: Map<string, number> = new Map<string, number>();
   redeemed.forEach((dateTime) => {
-    console.log("Inside redeem: " + dateTime.day);
     const time = dateTime.time.split(":")[0];
-    console.log(time);
     if (redeemedMap.has(time)) {
       redeemedMap.set(time, redeemedMap.get(time)! + 1);
     } else {
       redeemedMap.set(time, 1);
     }
-    console.log(redeemedMap.get(time));
   });
 
   // Format the data to place into the graph
-  const data = sampleData.getDatesForGraph("coupons", redeemedMap);
-  console.log(data);
-  console.log("Total " + redeemed.length);
+  const couponsData = sampleData.getDatesForGraph("coupons", redeemedMap);
 
   // Execute coupons query
   useEffect(() => {
@@ -99,7 +83,12 @@ const Dashboard = () => {
         <ContainerDiv>
           <BorderDiv>
             <ChartDiv>
-              <LineChart title="Coupons" data={data} height={300} flexure={1} />
+              <LineChart 
+                title="Coupons" 
+                data={couponsData} 
+                height={300} 
+                flexure={1} 
+              />
             </ChartDiv>
             <ChartDiv>
               <LineChart
@@ -221,20 +210,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// export async function getServerSideProps(context: any) {
-//   const client = initializeApollo();
-//   console.log(context.req.headers.cookie);
-//   const { data } = await client.query({
-//     context: {
-//       headers: {
-//         cookie: context.req.headers.cookie,
-//       },
-//     },
-//     query: COUPONS_QUERY,
-//     variables: { businessId: context.req.headers.cookie.businessId },
-//   });
-//   return {
-//     props: {},
-//   };
-// }
