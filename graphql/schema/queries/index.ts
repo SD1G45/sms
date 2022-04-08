@@ -11,6 +11,7 @@ import { customerListCustomerQuery } from "./customerListCustomerQuery";
 import { usersForBusinessQuery } from "./usersForBusinessQuery";
 import { emailResetCodeQuery } from "./emailResetCodeQuery";
 import { allCustomersQuery } from "./allCustomersQuery";
+import { businessMessageCountQuery } from "./businessMessageCountQuery";
 
 export {
   viewerQuery,
@@ -26,4 +27,5 @@ export {
   couponInstanceQuery,
   usersForBusinessQuery,
   allCustomersQuery,
+  businessMessageCountQuery
 };

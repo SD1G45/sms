@@ -278,6 +278,7 @@ export interface NexusGenFieldTypes {
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     emailResetCode: NexusGenRootTypes['EmailResetCode'] | null; // EmailResetCode
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
+    messageCount: number | null; // Int
     usersForBusiness: Array<NexusGenRootTypes['UserBusinessRole'] | null> | null; // [UserBusinessRole]
     viewer: NexusGenRootTypes['User'] | null; // User
   }
@@ -424,6 +425,7 @@ export interface NexusGenFieldTypeNames {
     customerLists: 'CustomerList'
     emailResetCode: 'EmailResetCode'
     keywords: 'Keyword'
+    messageCount: 'Int'
     usersForBusiness: 'UserBusinessRole'
     viewer: 'User'
   }
@@ -570,6 +572,9 @@ export interface NexusGenArgTypes {
       value: string; // String!
     }
     keywords: { // args
+      businessId: string; // String!
+    }
+    messageCount: { // args
       businessId: string; // String!
     }
     usersForBusiness: { // args
