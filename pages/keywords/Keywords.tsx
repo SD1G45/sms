@@ -16,7 +16,7 @@ import { useBusinessState } from "../../context/BusinessContext/BusinessContext"
 import { KEYWORD_QUERY } from "../../page-queries/keywords/create";
 import { useLazyQuery } from "@apollo/client";
 import { HeaderDiv } from "../../page-styles/keywords/create/styles";
-
+import Image from "next/image";
 const parseDate = (date: any) => {
   const dateObj = new Date(date);
   return (
@@ -69,8 +69,12 @@ const Keywords = () => {
       "99%",
       curr.coupon.openCount,
       curr.coupon.redeemCount,
-      `${Math.round((curr.coupon.openCount / (curr.coupon.sentCount || 1)) * 100)}%`,
-      `${Math.round((curr.coupon.redeemCount / (curr.coupon.sentCount || 1)) * 100)}%`,
+      `${Math.round(
+        (curr.coupon.openCount / (curr.coupon.sentCount || 1)) * 100
+      )}%`,
+      `${Math.round(
+        (curr.coupon.redeemCount / (curr.coupon.sentCount || 1)) * 100
+      )}%`,
     ]);
   }
 
@@ -84,14 +88,25 @@ const Keywords = () => {
       <ColumnDiv>
         <RowDiv>
           <HeaderDiv>
-            <StyledHeader>Keyword Analytics</StyledHeader>
+            {" "}
+            <StyledHeader>
+              <Image
+                src="/Dashboard_icons/keyword.svg"
+                width="50"
+                height="40"
+              />
+              Keyword Analytics
+            </StyledHeader>
           </HeaderDiv>
           <SearchDiv>
-            <SearchBar value={search}
-            onValueChange={(s: string) => {
-              setSearch(s);
-              setFilteredData(data.filter(d => d[0].includes(s)));
-            } } id={""} />
+            <SearchBar
+              value={search}
+              onValueChange={(s: string) => {
+                setSearch(s);
+                setFilteredData(data.filter((d) => d[0].includes(s)));
+              }}
+              id={""}
+            />
           </SearchDiv>
           <Button onClick={onClick}>Create New Keyword</Button>
         </RowDiv>

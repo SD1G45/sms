@@ -15,7 +15,7 @@ import { HeaderDiv } from "../../page-styles/campaigns/styles";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
 import { useLazyQuery } from "@apollo/client";
 import { CAMPAIGN_QUERY } from "../../page-queries/campaigns";
-
+import Image from "next/image";
 const parseDate = (date: any) => {
   const dateObj = new Date(date);
   return (
@@ -67,8 +67,12 @@ const Campaigns = () => {
       "100%",
       curr.coupon.openCount,
       curr.coupon.redeemCount,
-      `${Math.round((curr.coupon.openCount / (curr.coupon.sentCount || 1)) * 100)}%`,
-      `${Math.round((curr.coupon.redeemCount / (curr.coupon.sentCount || 1)) * 100)}%`,
+      `${Math.round(
+        (curr.coupon.openCount / (curr.coupon.sentCount || 1)) * 100
+      )}%`,
+      `${Math.round(
+        (curr.coupon.redeemCount / (curr.coupon.sentCount || 1)) * 100
+      )}%`,
     ]);
   }
 
@@ -82,14 +86,24 @@ const Campaigns = () => {
       <ColumnDiv>
         <RowDiv>
           <HeaderDiv>
-            <StyledHeader>Campaign Analytics</StyledHeader>
+            <StyledHeader>
+              <Image
+                src="/Dashboard_icons/campaign.svg"
+                width="50"
+                height="40"
+              />
+              Campaign Analytics
+            </StyledHeader>
           </HeaderDiv>
           <SearchDiv>
-            <SearchBar value={search}
-            onValueChange={(s: string) => {
-              setSearch(s);
-              setFilteredData(data.filter(d => d[0].includes(s)));
-            } } id={""} />
+            <SearchBar
+              value={search}
+              onValueChange={(s: string) => {
+                setSearch(s);
+                setFilteredData(data.filter((d) => d[0].includes(s)));
+              }}
+              id={""}
+            />
           </SearchDiv>
           <Button onClick={onClick}>Create New Campaign</Button>
         </RowDiv>

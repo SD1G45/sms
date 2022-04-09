@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { COUPON_QUERY } from "../../page-queries/coupons";
 import { useLazyQuery } from "@apollo/client";
 import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
-
+import Image from "next/image";
 const Coupons = () => {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState<Array<Array<string>>>([[]]);
@@ -77,7 +77,10 @@ const Coupons = () => {
       <ColumnDiv>
         <RowDiv>
           <HeaderDiv>
-            <StyledHeader>Coupon Analytics</StyledHeader>
+            <StyledHeader>
+              <Image src="/Dashboard_icons/coupon.svg" width="50" height="40" />
+              Coupon Analytics
+            </StyledHeader>
           </HeaderDiv>
           <SearchDiv>
             <SearchBar

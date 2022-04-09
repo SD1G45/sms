@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LoadingDiv from "../components/LoadingDiv";
 import { ParallaxProvider } from "react-scroll-parallax";
+import Head from "next/head";
 
 const Loading = () => {
   const router = useRouter();
@@ -48,22 +49,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <ParallaxProvider>
-        <Loading />
-        <UserProvider>
-          <BusinessProvider>
-            <GlobalStyles />
-            <Theme>
-              <RouteGuard>
-                <Navbar />
-                <Component {...pageProps} />
-              </RouteGuard>
-            </Theme>
-          </BusinessProvider>
-        </UserProvider>
-      </ParallaxProvider>
-    </ApolloProvider>
+    <>
+      <Head>
+        <link rel="shortcut icon" href="/StackedTriangle-1.svg" />
+      </Head>
+      <ApolloProvider client={apolloClient}>
+        <ParallaxProvider>
+          <Loading />
+          <UserProvider>
+            <BusinessProvider>
+              <GlobalStyles />
+              <Theme>
+                <RouteGuard>
+                  <Navbar />
+                  <Component {...pageProps} />
+                </RouteGuard>
+              </Theme>
+            </BusinessProvider>
+          </UserProvider>
+        </ParallaxProvider>
+      </ApolloProvider>
+    </>
   );
 }
 export default MyApp;
