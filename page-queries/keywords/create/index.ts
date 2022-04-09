@@ -9,6 +9,8 @@ export const COUPONS_QUERY = gql`
       description
       primaryColor
       expirationDate
+      redeemedDates
+      redeemCount
     }
   }
 `;

@@ -50,7 +50,12 @@ const index: React.FC<Props> = ({ coupon, redeemed, opened }) => {
   }, []);
 
   const handleRedeem = () => {
-    redeemMutation({ variables: { id: router.query.id } });
+    redeemMutation({ 
+      variables: { 
+        id: router.query.id,
+        redeemedAt: new Date(),
+      } 
+    });
     setRedeemed(true);
   };
 

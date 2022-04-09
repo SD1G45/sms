@@ -5,8 +5,8 @@ export const Customer = objectType({
   definition(t) {
     t.string("id");
     t.string("phoneNumber");
-    t.string("firstName");
-    t.string("lastName");
-    t.string("password");
+    t.string("keywordId");
+    t.string("couponId");
+    t.date("onboardDate");
   },
 });

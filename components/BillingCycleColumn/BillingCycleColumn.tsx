@@ -15,7 +15,7 @@ const BillingCycleColumn: React.FC<BillingCycleColumnProps> = ({
         title="Amount Spent"
         viewLinkText="View billing cycle"
         amount={spentAmount}
-        subtitle={"Billing cycle: " + billingCycle}
+        subtitle={billingCycle}
         linkRoute={billingCycleRoute}
       />
       <SalesDivider/>

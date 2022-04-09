@@ -8,6 +8,7 @@ export const CouponInstance = objectType({
     t.boolean("opened");
     t.string("couponId");
     t.string("customerId");
+    t.date("redeemedAt");
     t.field("customer", {
       type: "Customer",
       resolve: async (root, _args, ctx) => {

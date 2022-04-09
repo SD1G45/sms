@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Card from "../components/Card";
-import SingleCardPage from "../components/SingleCardPage";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-
 import {
   ContainerDiv,
   ColumnDiv,
@@ -17,14 +14,75 @@ import { useBusinessState } from "../context/BusinessContext/BusinessContext";
 import dynamic from "next/dynamic";
 import sampleData from "../sampleData/sampleData";
 import BillingCycleColumn from "../components/BillingCycleColumn";
-import LogoutButton from "../components/LogoutButton";
+import { useLazyQuery } from "@apollo/client";
+import { COUPONS_QUERY } from "../page-queries/keywords/create";
+import { ALL_CUSTOMERS_QUERY } from "../page-queries/customers";
+import { MESSAGE_COUNT_QUERY } from "../page-queries/business";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
 });
 
-const couponData = sampleData.couponData();
-const customersData = sampleData.customersData();
+const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
+  const couponsList =
+    couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
+
+  var redeemed: { day: string; time: string }[] = [];
+
+  couponsList.forEach((coupon: any) => {
+    coupon.redeemedDates.forEach((date: any) => {
+      const formattedDate = new Date(date).toISOString();
+      const splitDateTime = formattedDate.split("T");
+      redeemed.push({ day: splitDateTime[0], time: splitDateTime[1] });
+    });
+  });
+
+  redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
+
+  // Key: Time (00 -> 23), Value: coupons redeemed total since Time 00
+  const redeemedMap: Map<string, number> = new Map<string, number>();
+  redeemed.forEach((dateTime) => {
+    const time = dateTime.time.split(":")[0];
+    if (redeemedMap.has(time)) {
+      redeemedMap.set(time, redeemedMap.get(time)! + 1);
+    } else {
+      redeemedMap.set(time, 1);
+    }
+  });
+
+  return sampleData.getDatesForGraph("coupons", redeemedMap);
+};
+const getCustomersData = (
+  customersQueryResult: any,
+  currentDate: string
+): any => {
+  const customersList =
+    customersQueryResult.data != undefined
+      ? customersQueryResult.data.allCustomers
+      : [];
+
+  var onboarded: { day: string; time: string }[] = [];
+  customersList.forEach((customer: any) => {
+    const formattedDate = new Date(customer.onboardDate).toISOString();
+    const splitDateTime = formattedDate.split("T");
+    onboarded.push({ day: splitDateTime[0], time: splitDateTime[1] });
+  });
+
+  onboarded = onboarded.filter((dateTime) => dateTime.day === currentDate);
+
+  // Key: Time (00 -> 23), Value: customers onboarded total since Time 00
+  const onboardedMap: Map<string, number> = new Map<string, number>();
+  onboarded.forEach((dateTime) => {
+    const time = dateTime.time.split(":")[0];
+    if (onboardedMap.has(time)) {
+      onboardedMap.set(time, onboardedMap.get(time)! + 1);
+    } else {
+      onboardedMap.set(time, 1);
+    }
+  });
+
+  return sampleData.getDatesForGraph("customers", onboardedMap);
+};
 
 const Dashboard = () => {
   const businessState = useBusinessState();
@@ -32,8 +90,57 @@ const Dashboard = () => {
 
   useEffect(() => {
     setBusinessName(businessState?.name || "");
-    console.log(businessName);
   });
+
+  const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
+  const [getCustomers, customersQueryResult] =
+    useLazyQuery(ALL_CUSTOMERS_QUERY);
+  const [getMessageCount, messageCountQueryResult] =
+    useLazyQuery(MESSAGE_COUNT_QUERY);
+
+  // Get the current date
+  const currentDateTime: Date = new Date();
+
+  const firstDay = new Date(
+    currentDateTime.getFullYear(),
+    currentDateTime.getMonth(),
+    1
+  ).toDateString();
+  const lastDay = new Date(
+    currentDateTime.getFullYear(),
+    currentDateTime.getMonth() + 1,
+    0
+  ).toDateString();
+
+  const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+  });
+  const currentDateObj = new Date();
+  const currentDate = new Date(dateFormatter.format(currentDateObj))
+    .toISOString()
+    .split("T")[0];
+
+
+  // Format the data to place into the graph
+  const couponsData = getCouponsData(couponsQueryResult, currentDate);
+  const customersData = getCustomersData(customersQueryResult, currentDate);
+  const messageCount: number =
+    messageCountQueryResult.data != undefined
+      ? messageCountQueryResult.data.messageCount
+      : 0;
+  const amountSpent: number = messageCount * 0.05;
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const totalSpent: string = formatter.format(amountSpent);
+
+  useEffect(() => {
+    getCoupons({ variables: { businessId: businessState?.businessId } });
+    getCustomers({ variables: { businessId: businessState?.businessId } });
+    getMessageCount({ variables: { businessId: businessState?.businessId } });
+  }, [businessState]);
 
   const Analytics = () => {
     return (
@@ -46,7 +153,7 @@ const Dashboard = () => {
             <ChartDiv>
               <LineChart
                 title="Coupons"
-                data={couponData}
+                data={couponsData}
                 height={300}
                 flexure={1}
               />
@@ -60,9 +167,9 @@ const Dashboard = () => {
               />
             </ChartDiv>
             <BillingCycleColumn
-              spentAmount="$1,180.00"
+              spentAmount={totalSpent}
               salesAmount="$175.00"
-              billingCycle="10/07/21 - 10/31/21"
+              billingCycle={firstDay + " - " + lastDay}
               billingCycleRoute="/billing"
             />
           </BorderDiv>
@@ -71,46 +178,9 @@ const Dashboard = () => {
     );
   };
 
-  // Temporary fix - just for demo
-  const AnalyticsMonthly = () => {
-    return (
-      <>
-        <ContainerDiv>
-          <StyledHeader>This Month</StyledHeader>
-        </ContainerDiv>
-        <ContainerDiv>
-          <BorderDiv>
-            <ChartDiv>
-              <LineChart
-                title="Coupons"
-                data={couponData}
-                height={300}
-                flexure={1}
-              />
-            </ChartDiv>
-            <ChartDiv>
-              <LineChart
-                title="Customers"
-                data={customersData}
-                height={300}
-                flexure={1}
-              />
-            </ChartDiv>
-            <BillingCycleColumn
-              spentAmount="$12,325.10"
-              salesAmount="$1952.00"
-              billingCycle="10/07/21 - 10/31/21"
-              billingCycleRoute="/billing"
-            />
-          </BorderDiv>
-        </ContainerDiv>
-      </>
-    );
-  };
   return (
     <>
       <Analytics />
-      <AnalyticsMonthly />
 
       <ContainerDiv>
         <ColumnDiv>

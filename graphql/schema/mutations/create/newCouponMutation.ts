@@ -29,6 +29,7 @@ export const newCouponMutation = extendType({
             redeemed: 0,
             sent: 0,
             opened: 0,
+            redeemedDates: [],
           },
         });
         return newCoupon;

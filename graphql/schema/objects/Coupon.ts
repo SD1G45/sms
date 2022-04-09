@@ -72,5 +72,25 @@ export const Coupon = objectType({
         return business;
       },
     });
+    t.list.date("redeemedDates", {
+      resolve: async (root, _args, ctx) => {
+        if (!root.id) {
+          throw new Error("No coupon id");
+        }
+
+        const redeemedCustomerCoupons = await ctx.prisma.customer_Coupon.findMany({
+          where: {
+            couponId: root.id,
+            redeemed: true,
+          }
+        });
+
+        const dates = redeemedCustomerCoupons.map((customerCoupon) => {
+          return customerCoupon.redeemedAt;
+        });
+
+        return dates;
+      },
+    });
   },
 });

@@ -14,3 +14,13 @@ export const CUSTOMER_QUERY = gql`
         }
     }
 `
+
+export const ALL_CUSTOMERS_QUERY = gql`
+    query AllCustomers($businessId: String!) {
+        allCustomers(businessId: $businessId) {
+            id
+            phoneNumber
+            onboardDate
+        }
+    }
+`;
