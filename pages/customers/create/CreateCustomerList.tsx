@@ -75,9 +75,9 @@ const CreateCustomer: React.FC = () => {
   const Results = () => (
     <StyledCard>
       <Image src="/check.png" width={100} height={100} />
-      <CardHeading>New customer created!</CardHeading>
+      <CardHeading>New customer list created!</CardHeading>
       <CardDescription>
-        You can now use this customer to market and attract new customers
+        You can now use this customer list to market and attract new customers
       </CardDescription>
       <SetupLaterButton id="close" onClick={() => router.push("/customers")}>
         close
