@@ -42,7 +42,7 @@ const index: React.FC<Props> = ({ customer }) => {
   return (
     <Page>
       <Container>
-        <Top>
+        {/* <Top>
           <Name>{coupon.name}</Name>
           <Description>{coupon.description}</Description>
         </Top>
@@ -57,7 +57,7 @@ const index: React.FC<Props> = ({ customer }) => {
         </Middle>
         <Bottom>
           <Timer expirationDate={new Date(coupon.expirationDate)} />
-        </Bottom>
+        </Bottom> */}
       </Container>
     </Page>
   );
