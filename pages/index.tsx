@@ -119,7 +119,6 @@ const Dashboard = () => {
     .toISOString()
     .split("T")[0];
 
-  console.log(currentDate);
 
   // Format the data to place into the graph
   const couponsData = getCouponsData(couponsQueryResult, currentDate);
