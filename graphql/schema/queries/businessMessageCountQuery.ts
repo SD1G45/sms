@@ -8,12 +8,12 @@ export const businessMessageCountQuery = extendType({
       type: "Int",
       args: {
         businessId: nonNull(stringArg()),
-      }, 
+      },
       resolve: async (_, { businessId }, ctx) => {
         const business = await ctx.prisma.business.findFirst({
           where: {
             id: businessId,
-          }
+          },
         });
 
         if (business == null) {
@@ -22,13 +22,13 @@ export const businessMessageCountQuery = extendType({
           console.log("Business has not yet provisioned a phone number");
           return 0;
         }
-        
+
         const response = await client.messages.list({
-          from: business.phoneNumber
+          from: business.phoneNumber,
         });
 
-        return response.messages.count;
+        return response.length;
       },
-    })
-  }
+    });
+  },
 });

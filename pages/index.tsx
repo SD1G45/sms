@@ -27,7 +27,8 @@ const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
   const couponsList =
     couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
 
-  var redeemed: { day: string, time: string }[] = [];
+  var redeemed: { day: string; time: string }[] = [];
+
   couponsList.forEach((coupon: any) => {
     coupon.redeemedDates.forEach((date: any) => {
       const formattedDate = new Date(date).toISOString();
@@ -37,7 +38,7 @@ const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
   });
 
   redeemed = redeemed.filter((dateTime) => dateTime.day === currentDate);
-  
+
   // Key: Time (00 -> 23), Value: coupons redeemed total since Time 00
   const redeemedMap: Map<string, number> = new Map<string, number>();
   redeemed.forEach((dateTime) => {
@@ -50,13 +51,17 @@ const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
   });
 
   return sampleData.getDatesForGraph("coupons", redeemedMap);
-}
-
-const getCustomersData = (customersQueryResult: any, currentDate: string): any => {
+};
+const getCustomersData = (
+  customersQueryResult: any,
+  currentDate: string
+): any => {
   const customersList =
-  customersQueryResult.data != undefined ? customersQueryResult.data.allCustomers : [];
+    customersQueryResult.data != undefined
+      ? customersQueryResult.data.allCustomers
+      : [];
 
-  var onboarded: { day: string, time: string }[] = [];
+  var onboarded: { day: string; time: string }[] = [];
   customersList.forEach((customer: any) => {
     const formattedDate = new Date(customer.onboardDate).toISOString();
     const splitDateTime = formattedDate.split("T");
@@ -77,7 +82,7 @@ const getCustomersData = (customersQueryResult: any, currentDate: string): any =
   });
 
   return sampleData.getDatesForGraph("customers", onboardedMap);
-}
+};
 
 const Dashboard = () => {
   const businessState = useBusinessState();
@@ -87,23 +92,45 @@ const Dashboard = () => {
   });
 
   const [getCoupons, couponsQueryResult] = useLazyQuery(COUPONS_QUERY);
-  const [getCustomers, customersQueryResult] = useLazyQuery(ALL_CUSTOMERS_QUERY);
-  const [getMessageCount, messageCountQueryResult] = useLazyQuery(MESSAGE_COUNT_QUERY);
+  const [getCustomers, customersQueryResult] =
+    useLazyQuery(ALL_CUSTOMERS_QUERY);
+  const [getMessageCount, messageCountQueryResult] =
+    useLazyQuery(MESSAGE_COUNT_QUERY);
 
   // Get the current date
   const currentDateTime: Date = new Date();
-  const firstDay = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth(), 1).toDateString();
-  const lastDay = new Date(currentDateTime.getFullYear(), currentDateTime.getMonth() + 1, 0).toDateString();
-  const currentDateTimeStr: string[] = currentDateTime.toISOString().split("T");
-  const currentDate: string = currentDateTimeStr[0];
+
+  const firstDay = new Date(
+    currentDateTime.getFullYear(),
+    currentDateTime.getMonth(),
+    1
+  ).toDateString();
+  const lastDay = new Date(
+    currentDateTime.getFullYear(),
+    currentDateTime.getMonth() + 1,
+    0
+  ).toDateString();
+
+  const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+  });
+  const currentDateObj = new Date();
+  const currentDate = new Date(dateFormatter.format(currentDateObj))
+    .toISOString()
+    .split("T")[0];
+
+  console.log(currentDate);
 
   // Format the data to place into the graph
   const couponsData = getCouponsData(couponsQueryResult, currentDate);
   const customersData = getCustomersData(customersQueryResult, currentDate);
-  const messageCount: number = messageCountQueryResult.data != undefined ? messageCountQueryResult.data.messageCount : 0;
+  const messageCount: number =
+    messageCountQueryResult.data != undefined
+      ? messageCountQueryResult.data.messageCount
+      : 0;
   const amountSpent: number = messageCount * 0.05;
 
-  const formatter = new Intl.NumberFormat('en-US', {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
@@ -111,8 +138,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     getCoupons({ variables: { businessId: businessState?.businessId } });
-    getCustomers({ variables: { businessId: businessState?.businessId }});
-    getMessageCount({ variables: { businessId: businessState?.businessId }});
+    getCustomers({ variables: { businessId: businessState?.businessId } });
+    getMessageCount({ variables: { businessId: businessState?.businessId } });
   }, [businessState]);
 
   const Analytics = () => {
@@ -124,11 +151,11 @@ const Dashboard = () => {
         <ContainerDiv>
           <BorderDiv>
             <ChartDiv>
-              <LineChart 
-                title="Coupons" 
-                data={couponsData} 
-                height={300} 
-                flexure={1} 
+              <LineChart
+                title="Coupons"
+                data={couponsData}
+                height={300}
+                flexure={1}
               />
             </ChartDiv>
             <ChartDiv>
