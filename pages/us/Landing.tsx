@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import TextArea from "../../components/TextArea";
 import newRouteWithQueries from "../../helpers/newRouteWithQueries";
+import { HeadingDiv } from "../../page-styles/business/team/styles";
 
 import {
   LogoDiv,
@@ -29,6 +30,7 @@ import {
   EmailTextField,
   StyledCard,
   FirstNameTextField,
+  PrismDiv,
 } from "../../page-styles/landingpage/styles";
 import {
   Heading,
@@ -149,11 +151,11 @@ export const Landing = () => {
       </Parallax>
       <div id="why-trism">
         <Parallax speed={10}>
-          <SplitDivTwo>
+          <MainDiv>
             <HeaderDiv>
               <StyledHeader>Why Trism</StyledHeader>
               <BodyContainer>
-                <BodyDiv>
+                <HeaderDiv>
                   <StyledBody>
                     We believe there should be more options for people
                   </StyledBody>
@@ -161,22 +163,81 @@ export const Landing = () => {
                     when it comes to their marketing solutions.
                   </StyledBody>
                   <StyledBody></StyledBody>
-                  <StyledBody>
-                    People shouldn't be locked down because of their POS device
-                  </StyledBody>
-                  <StyledBody>or restricted to a single company.</StyledBody>
-                </BodyDiv>
+                </HeaderDiv>
               </BodyContainer>
+
+              <Image
+                src={"/marketing-at-laptop.png"}
+                width={500}
+                height={500}
+              />
             </HeaderDiv>
-          </SplitDivTwo>
+          </MainDiv>
         </Parallax>
       </div>
+
       <div id="how-it-works">
+        <PrismDiv>
+          <Image
+            src={"/icons/pyramid-transparent.png"}
+            width={150}
+            height={150}
+          />
+        </PrismDiv>
         <Parallax speed={10}>
           <SplitDivTwo>
             <HeaderDiv>
               <StyledHeader>How does it work?</StyledHeader>
+              <BodyContainer>
+                <Image
+                  src={"/provision-phone-number.gif"}
+                  width={"1000"}
+                  height={"600"}
+                />
+              </BodyContainer>
+
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv></HeadingDiv>
+              <Parallax speed={-3}>
+                <Image
+                  src={"/icons/pyramid-transparent.png"}
+                  width={150}
+                  height={150}
+                />
+              </Parallax>
+              <HeadingDiv>
+                <Heading>Create an account and choose a phone number.</Heading>
+              </HeadingDiv>
               <BodyContainer></BodyContainer>
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv></HeadingDiv>
+              <BodyContainer>
+                <Image src={"/couponSMS.png"} width={"340"} height={"700"} />
+                <Image
+                  src={"/redeemedCoupon.png"}
+                  width={"340"}
+                  height={"700"}
+                />
+                <Parallax speed={-20}>
+                  <Image
+                    src={"/icons/pyramid-transparent.png"}
+                    width={150}
+                    height={150}
+                  />
+                </Parallax>
+              </BodyContainer>
+
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv></HeadingDiv>
+              <HeadingDiv>
+                <Heading>
+                  When a customer texts you, automatically send redeemable
+                  coupons and programmtic messaging.
+                </Heading>
+              </HeadingDiv>
             </HeaderDiv>
           </SplitDivTwo>
         </Parallax>
@@ -184,62 +245,65 @@ export const Landing = () => {
       <div id="contact">
         <Parallax speed={10}>
           <SplitDivTwo>
-            <HeaderDiv>
-              <StyledHeader>Need to know more?</StyledHeader>
-              <StyledCard>
-                <Heading>
-                  {!sent ? "Shoot us a message" : "Awesome! We'll be in touch."}
-                </Heading>
-                {!sent && (
-                  <>
-                    <EmailTextField
-                      id="email"
-                      label="Email"
-                      value={email}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setEmail(event.target.value)
-                      }
-                    />
+            <HeadingDiv>
+              <HeaderDiv>
+                <StyledCard>
+                  <Heading>
+                    {!sent
+                      ? "Shoot us a message"
+                      : "Awesome! We'll be in touch."}
+                  </Heading>
+                  {!sent && (
+                    <>
+                      <EmailTextField
+                        id="email"
+                        label="Email"
+                        value={email}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => setEmail(event.target.value)}
+                      />
 
-                    <FirstNameTextField
-                      id="password"
-                      label="Name"
-                      value={firstName}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                        setFirstName(event.target.value)
-                      }
-                    />
+                      <FirstNameTextField
+                        id="password"
+                        label="Name"
+                        value={firstName}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => setFirstName(event.target.value)}
+                      />
 
-                    <TextArea
-                      value={message}
-                      label="Message"
-                      onChange={(
-                        event: React.ChangeEvent<HTMLTextAreaElement>
-                      ) => setMessage(event.target.value)}
-                    ></TextArea>
+                      <TextArea
+                        value={message}
+                        label="Message"
+                        onChange={(
+                          event: React.ChangeEvent<HTMLTextAreaElement>
+                        ) => setMessage(event.target.value)}
+                      ></TextArea>
 
-                    <Button
-                      onClick={() => {
-                        onMessageSend();
-                      }}
+                      <Button
+                        onClick={() => {
+                          onMessageSend();
+                        }}
+                      >
+                        Email us
+                      </Button>
+                    </>
+                  )}
+
+                  <LinkDiv>
+                    <Link
+                      href={newRouteWithQueries("/register", router)}
+                      passHref
                     >
-                      Email us
-                    </Button>
-                  </>
-                )}
-
-                <LinkDiv>
-                  <Link
-                    href={newRouteWithQueries("/register", router)}
-                    passHref
-                  >
-                    <StyledLink id="register">
-                      Ready to sign up? Let's get started.
-                    </StyledLink>
-                  </Link>
-                </LinkDiv>
-              </StyledCard>
-            </HeaderDiv>
+                      <StyledLink id="register">
+                        Ready to sign up? Let's get started.
+                      </StyledLink>
+                    </Link>
+                  </LinkDiv>
+                </StyledCard>
+              </HeaderDiv>
+            </HeadingDiv>
           </SplitDivTwo>
         </Parallax>
       </div>

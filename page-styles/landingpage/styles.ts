@@ -24,6 +24,10 @@ export const EmailTextField = styled(TextField)`
   margin-bottom: 40px;
 `;
 
+export const PrismDiv = styled.div`
+  z-index: 3;
+`;
+
 export const LogoDiv = styled.div`
   height: 100px;
   z-index: -1;
