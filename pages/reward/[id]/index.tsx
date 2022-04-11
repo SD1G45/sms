@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Timer from "../../../components/Timer";
@@ -15,6 +16,7 @@ import {
   RedeemButton,
   Top,
 } from "../../../page-styles/reward/styles";
+import { StyledLink } from "../../../page-styles/settings/styles";
 
 interface Customer {
   phoneNumber: string;
@@ -36,10 +38,11 @@ interface Props {
   opened: boolean;
 }
 
-const index: React.FC<Props> = ({ coupon, redeemed, opened }) => {
+const index: React.FC<Props> = ({ coupon, redeemed, opened, customer }) => {
   const [isRedeemed, setRedeemed] = useState(redeemed);
   const router = useRouter();
 
+  const contactLink = `/customer-info/${customer.phoneNumber}`;
   const [openMutation] = useMutation(OPEN_COUPON);
   const [redeemMutation] = useMutation(REDEEM_COUPON);
 
@@ -50,11 +53,11 @@ const index: React.FC<Props> = ({ coupon, redeemed, opened }) => {
   }, []);
 
   const handleRedeem = () => {
-    redeemMutation({ 
-      variables: { 
+    redeemMutation({
+      variables: {
         id: router.query.id,
         redeemedAt: new Date(),
-      } 
+      },
     });
     setRedeemed(true);
   };
@@ -79,6 +82,9 @@ const index: React.FC<Props> = ({ coupon, redeemed, opened }) => {
         <Bottom>
           <Timer expirationDate={new Date(coupon.expirationDate)} />
         </Bottom>
+        <Link href={contactLink}>
+          <StyledLink>Click here to complete your profile!</StyledLink>
+        </Link>
       </Container>
     </Page>
   );

@@ -7,6 +7,9 @@ import ErrorPopup from "../../../components/ErrorPopup";
 import Timer from "../../../components/Timer";
 import { initializeApollo } from "../../../lib/apolloClient";
 import { OPEN_COUPON, REDEEM_COUPON } from "../../../page-mutations/reward";
+
+import { useLazyQuery } from "@apollo/client";
+import { UPDATE_CUSTOMER_INFO } from "../../../page-mutations/customers/create";
 import { EmailTextField } from "../../../page-styles/landingpage/styles";
 import {
   Bottom,
@@ -30,6 +33,16 @@ interface Props {
   customer: Customer;
 }
 
+const CUSTOMER_QUERY = gql`
+  query CustomerByPhoneNumber($phoneNumber: String!) {
+    customerByPhonenumber(phoneNumber: $phoneNumber) {
+      id
+      firstName
+      lastName
+    }
+  }
+`;
+
 const index: React.FC<Props> = ({ customer }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -40,96 +53,150 @@ const index: React.FC<Props> = ({ customer }) => {
   const [openMutation] = useMutation(OPEN_COUPON);
   const [redeemMutation] = useMutation(REDEEM_COUPON);
 
-  const handleSubmit = () => {
+  const [getCustomers, customerQueryResult] = useLazyQuery(CUSTOMER_QUERY);
+
+  useEffect(() => {
+    if (router.query.id) {
+      getCustomers({
+        variables: {
+          phoneNumber: router.query.id as string,
+        },
+      });
+    }
+  }, [router.query.id]);
+
+  const customerId =
+    customerQueryResult.data != undefined
+      ? customerQueryResult.data.customerByPhonenumber.id
+      : undefined;
+  console.log(customerId);
+
+  const [updateInfoMutation] = useMutation(UPDATE_CUSTOMER_INFO, {
+    errorPolicy: "all",
+  });
+  const handleSubmit = async () => {
+    if (firstName.length < 1 || lastName.length < 1) {
+      setError({
+        ...errorState,
+        error: true,
+        message: "Please enter both fields!",
+      });
+      return;
+    }
+    try {
+      const { data, errors } = await updateInfoMutation({
+        variables: {
+          id: customerId,
+          first: firstName,
+          last: lastName,
+        },
+      });
+    } catch (error) {
+      setLoading(false);
+      setError({ ...errorState, error: true, message: "error" });
+    }
     setSubmitted(true);
   };
 
+  if (customerQueryResult.data != undefined) {
+    if (customerQueryResult.data.customerByPhonenumber.firstName != null) {
+      return (
+        <>
+          {!submitted && (
+            <Page>
+              <Container>
+                <Top>
+                  <Name>
+                    You've already completed your profile,{" "}
+                    {customerQueryResult.data.customerByPhonenumber.firstName}!
+                  </Name>
+                  <Description>Stay tuned for more offers</Description>
+                </Top>
+                <Middle></Middle>
+                <Bottom></Bottom>
+                <ErrorPopup
+                  error={errorState.error}
+                  message={errorState.message}
+                ></ErrorPopup>
+              </Container>
+            </Page>
+          )}{" "}
+          {submitted && (
+            <Page>
+              <Container>
+                <Top>
+                  <Name>Thanks!</Name>
+                  <Description>Stay tuned for more offers</Description>
+                </Top>
+                <Middle></Middle>
+                <Bottom></Bottom>
+              </Container>
+            </Page>
+          )}
+        </>
+      );
+    }
+  }
   return (
-    <Page>
-      <Container>
-        <Top>
-          <Name>Complete your profile</Name>
-          <Description>Let [business] know who you are!</Description>
-        </Top>
-        <Middle>
-          {" "}
-          <Heading>Enter your first and last name</Heading>
-          <EmailTextField
-            label="First name"
-            value={firstName}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setFirstName(event.target.value)
-            }
-          />
-          <EmailTextField
-            label="Last name"
-            value={lastName}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setLastName(event.target.value)
-            }
-          />
-          <ErrorPopup error={errorState.error} message={errorState.message} />
-        </Middle>
-        <Bottom>
-          {" "}
-          <StyledButton disabled={loading} loading={loading}>
-            Complete my profile
-          </StyledButton>
-        </Bottom>
-      </Container>
-    </Page>
+    <>
+      {!submitted && (
+        <Page>
+          <Container>
+            <Top>
+              <Name>Complete your profile</Name>
+              <Description>Let [business] know who you are!</Description>
+            </Top>
+            <Middle>
+              {" "}
+              <Heading>Enter your first and last name</Heading>
+              <EmailTextField
+                label="First name"
+                value={firstName}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setFirstName(event.target.value)
+                }
+              />
+              <EmailTextField
+                label="Last name"
+                value={lastName}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setLastName(event.target.value)
+                }
+              />
+              <ErrorPopup
+                error={errorState.error}
+                message={errorState.message}
+              />
+            </Middle>
+            <Bottom>
+              {" "}
+              <StyledButton
+                onClick={() => {
+                  handleSubmit();
+                }}
+                disabled={loading}
+                loading={loading}
+              >
+                Complete my profile
+              </StyledButton>
+            </Bottom>
+          </Container>
+        </Page>
+      )}
+      {submitted && (
+        <Page>
+          <Container>
+            <Top>
+              <Name>Thanks!</Name>
+              <Description>Stay tuned for more offers</Description>
+            </Top>
+            <Middle></Middle>
+            <Bottom></Bottom>
+          </Container>
+        </Page>
+      )}
+    </>
   );
 };
 
 export default index;
-
-// export async function getServerSideProps(context: any) {
-//   const client = initializeApollo();
-//   const { data } = await client.query({
-//     context: {
-//       headers: {
-//         cookie: context.req.headers.cookie,
-//       },
-//     },
-//     query: gql`
-//       {
-//         couponInstance(id: "${context.query.id}") {
-//           id
-//           redeemed
-//           opened
-//           coupon {
-//             id
-//             name
-//             description
-//             primaryColor
-//             expirationDate
-//             business {
-//               logoUrl
-//             }
-//           }
-//           customer {
-//             phoneNumber
-//           }
-//         }
-//       }
-//     `,
-//   });
-
-//   if (data == null) {
-//     return {
-//       props: {},
-//     };
-//   }
-
-//   return {
-//     props: {
-//       customer: data.couponInstance.customer,
-//       coupon: {
-//         ...data.couponInstance.coupon,
-//         businessLogoUrl: data.couponInstance.coupon.business.logoUrl,
-//       },
-//       redeemed: data.couponInstance.redeemed,
-//       opened: data.couponInstance.opened,
-//     },
-//   };
-// }

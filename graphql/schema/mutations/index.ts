@@ -18,7 +18,7 @@ import { editUserDisplayNameMutation } from "./user/editUserDisplayNameMutation"
 import { editUserEmailMutation } from "./user/editUserEmailMutation";
 import { editEmailCode } from "./user/editEmailCode";
 import { newCustomerCouponMutation } from "./create/newCustomerCouponMutation";
-
+import { addCustomerInfoMutation } from "./create/customerInfoMutation";
 export {
   registerUserMutation,
   loginUserMutation,
@@ -38,6 +38,7 @@ export {
   openCouponMutation,
   editUserDisplayNameMutation,
   editUserEmailMutation,
-  editEmailCode, 
-  newCustomerCouponMutation
+  editEmailCode,
+  newCustomerCouponMutation,
+  addCustomerInfoMutation,
 };

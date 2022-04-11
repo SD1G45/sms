@@ -16,3 +16,19 @@ export const NEW_CUSTOMER_LIST = gql`
     }
   }
 `;
+
+export const UPDATE_CUSTOMER_INFO = gql`
+  mutation addCustomerInfoMutation(
+    $id: String!
+    $first: String!
+    $last: String!
+  ) {
+    addCustomerInfoMutation(
+      customerId: $id
+      firstName: $first
+      lastName: $last
+    ) {
+      firstName
+    }
+  }
+`;
