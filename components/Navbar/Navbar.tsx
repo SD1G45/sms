@@ -87,6 +87,7 @@ const Navbar = () => {
   if (currentPath.startsWith("/business/join")) return <></>;
 
   if (currentPath.startsWith("/reward")) return <></>;
+  if (currentPath.startsWith("/customer-info")) return <></>;
 
   // Navbar if not Logged in
   if (

@@ -1,9 +1,13 @@
 import { gql, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { StyledButton } from "../../../components/Button/styles";
+import { Heading } from "../../../components/CouponPreview/styles";
+import ErrorPopup from "../../../components/ErrorPopup";
 import Timer from "../../../components/Timer";
 import { initializeApollo } from "../../../lib/apolloClient";
 import { OPEN_COUPON, REDEEM_COUPON } from "../../../page-mutations/reward";
+import { EmailTextField } from "../../../page-styles/landingpage/styles";
 import {
   Bottom,
   Container,
@@ -30,8 +34,9 @@ const index: React.FC<Props> = ({ customer }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [errorState, setError] = useState({ error: false, message: "" });
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const [openMutation] = useMutation(OPEN_COUPON);
   const [redeemMutation] = useMutation(REDEEM_COUPON);
 
@@ -42,22 +47,35 @@ const index: React.FC<Props> = ({ customer }) => {
   return (
     <Page>
       <Container>
-        {/* <Top>
-          <Name>{coupon.name}</Name>
-          <Description>{coupon.description}</Description>
+        <Top>
+          <Name>Complete your profile</Name>
+          <Description>Let [business] know who you are!</Description>
         </Top>
         <Middle>
-          <RedeemButton
-            backgroundColor={coupon.primaryColor}
-            disabled={isRedeemed}
-            onClick={handleRedeem}
-          >
-            Redeem
-          </RedeemButton>
+          {" "}
+          <Heading>Enter your first and last name</Heading>
+          <EmailTextField
+            label="First name"
+            value={firstName}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setFirstName(event.target.value)
+            }
+          />
+          <EmailTextField
+            label="Last name"
+            value={lastName}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setLastName(event.target.value)
+            }
+          />
+          <ErrorPopup error={errorState.error} message={errorState.message} />
         </Middle>
         <Bottom>
-          <Timer expirationDate={new Date(coupon.expirationDate)} />
-        </Bottom> */}
+          {" "}
+          <StyledButton disabled={loading} loading={loading}>
+            Complete my profile
+          </StyledButton>
+        </Bottom>
       </Container>
     </Page>
   );
