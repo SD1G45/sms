@@ -19,6 +19,9 @@ import { editUserEmailMutation } from "./user/editUserEmailMutation";
 import { editEmailCode } from "./user/editEmailCode";
 import { newCustomerCouponMutation } from "./create/newCustomerCouponMutation";
 import { addCustomerInfoMutation } from "./create/customerInfoMutation";
+import { editCoupon } from "./coupon/editCoupon";
+import { editKeyword } from "./business/editKeyword";
+
 export {
   registerUserMutation,
   loginUserMutation,
@@ -41,4 +44,6 @@ export {
   editEmailCode,
   newCustomerCouponMutation,
   addCustomerInfoMutation,
+  editCoupon,
+  editKeyword
 };

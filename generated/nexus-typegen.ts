@@ -267,7 +267,9 @@ export interface NexusGenFieldTypes {
     acceptInvitation: boolean | null; // Boolean
     addCustomerInfoMutation: NexusGenRootTypes['Customer'] | null; // Customer
     editBusiness: NexusGenRootTypes['Business'] | null; // Business
+    editCouponMutation: NexusGenRootTypes['Coupon'] | null; // Coupon
     editEmailCode: boolean | null; // Boolean
+    editKeywordMutation: NexusGenRootTypes['Keyword'] | null; // Keyword
     editUserDisplayNameMutation: NexusGenRootTypes['User'] | null; // User
     editUserEmailMutation: boolean | null; // Boolean
     inviteAccount: boolean | null; // Boolean
@@ -426,7 +428,9 @@ export interface NexusGenFieldTypeNames {
     acceptInvitation: 'Boolean'
     addCustomerInfoMutation: 'Customer'
     editBusiness: 'Business'
+    editCouponMutation: 'Coupon'
     editEmailCode: 'Boolean'
+    editKeywordMutation: 'Keyword'
     editUserDisplayNameMutation: 'User'
     editUserEmailMutation: 'Boolean'
     inviteAccount: 'Boolean'
@@ -493,9 +497,25 @@ export interface NexusGenArgTypes {
       id: string; // String!
       name: string; // String!
     }
+    editCouponMutation: { // args
+      description: string; // String!
+      expirationDate: string; // String!
+      id: string; // String!
+      name: string; // String!
+      primaryColor: string; // String!
+      title: string; // String!
+    }
     editEmailCode: { // args
       customerId: string; // String!
       newEmail: string; // String!
+    }
+    editKeywordMutation: { // args
+      couponId: string; // String!
+      customerListId: string; // String!
+      description: string; // String!
+      id: string; // String!
+      keyword: string; // String!
+      message: string; // String!
     }
     editUserDisplayNameMutation: { // args
       firstName: string; // String!
