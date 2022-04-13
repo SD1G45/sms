@@ -20,6 +20,7 @@ beforeAll(async () => {
     defaultViewport: null
   });
   page = await browser.newPage();
+  page.setDefaultTimeout(6000)
 
   await page.goto(rootUrl);
 }, 30_000);
@@ -32,7 +33,7 @@ describe("Register process", () => {
       throw new Error("Error while loading App page");
     }
   
-    await expect(page).toMatch('Login')
+    await expect(page).toMatch('Flexible marketing Fit for anyone')
   });
 
   it("moves to register page on clicking link", async () => {
@@ -40,7 +41,7 @@ describe("Register process", () => {
       throw new Error("Error while loading Register page");
     }
 
-    const linkHandlers = await page.$x("//label[contains(., 'New to us? Create an Account')]");
+    const linkHandlers = await page.$x("//label[contains(., 'Sign Up')]");
 
     if (linkHandlers.length > 0) {
       await Promise.all([

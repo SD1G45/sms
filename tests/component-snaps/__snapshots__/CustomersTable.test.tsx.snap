@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CustomersTable/> renders correctly 1`] = `
-.c6 {
+.c7 {
   width: 100%;
   padding: 12px 14px;
   background-color: #4881F0;
@@ -15,7 +15,7 @@ exports[`<CustomersTable/> renders correctly 1`] = `
   white-space: nowrap;
 }
 
-.c6:hover {
+.c7:hover {
   opacity: 70%;
 }
 
@@ -34,7 +34,6 @@ exports[`<CustomersTable/> renders correctly 1`] = `
 .c3 {
   border-bottom: 2.75px solid #C4C4C4;
   padding-bottom: 15px;
-  padding-left: 300px;
   padding-top: 15px;
   font-size: 14px;
   width: 100%;
@@ -54,32 +53,36 @@ exports[`<CustomersTable/> renders correctly 1`] = `
 
 .c4 {
   border-bottom: 2.75px solid #C4C4C4;
-  padding-bottom: 5px;
-  padding-left: 300px;
-  padding-top: 5px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  padding-right: 200px;
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
-  text-align: center;
+  text-align: left;
+  width: 100%;
 }
 
-.c8 {
+.c6 {
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-right: 0px;
+}
+
+.c9 {
   border-bottom: 2.75px solid #C4C4C4;
-  padding-bottom: 48px;
+  padding-bottom: 46.5px;
   padding-right: 0px;
   font-size: 14px;
   font-weight: 500;
 }
 
 .c5 {
-  padding-left: 0px;
-  padding-right: 210px;
-  font-weight: 500;
   text-align: left;
 }
 
-.c7 {
+.c8 {
   background-color: #4881F0;
   color: white;
   cursor: pointer;
@@ -130,7 +133,7 @@ exports[`<CustomersTable/> renders correctly 1`] = `
           Description of List 1
         </td>
         <td
-          className="c4"
+          className="c4 c6"
         >
           <span
             onClick={[Function]}
@@ -138,7 +141,7 @@ exports[`<CustomersTable/> renders correctly 1`] = `
           >
             69 total customers
             <button
-              className="c6 c7"
+              className="c7 c8"
               disabled={false}
             >
               View Customers
@@ -158,7 +161,7 @@ exports[`<CustomersTable/> renders correctly 1`] = `
           Description of List 2
         </td>
         <td
-          className="c4"
+          className="c4 c6"
         >
           <span
             onClick={[Function]}
@@ -166,7 +169,7 @@ exports[`<CustomersTable/> renders correctly 1`] = `
           >
             42 total customers
             <button
-              className="c6 c7"
+              className="c7 c8"
               disabled={false}
             >
               View Customers
@@ -176,132 +179,132 @@ exports[`<CustomersTable/> renders correctly 1`] = `
       </tr>
       <tr>
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
-        />
-      </tr>
-      <tr>
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
+          className="c9"
         />
       </tr>
       <tr>
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
-        />
-      </tr>
-      <tr>
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
-        />
-        <td
-          className="c8"
+          className="c9"
         />
       </tr>
       <tr>
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
         />
         <td
-          className="c8"
+          className="c9"
+        />
+      </tr>
+      <tr>
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+      </tr>
+      <tr>
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
+        />
+        <td
+          className="c9"
         />
       </tr>
     </tbody>
