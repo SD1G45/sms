@@ -16,6 +16,7 @@ import {
   ListData,
 } from "./styles";
 import Link from "next/link";
+import { EmptyData } from "../Table/styles";
 
 function mapDataToHeaderComponent(data: string[]): JSX.Element[] {
   const mapping: JSX.Element[] = [];
@@ -41,6 +42,10 @@ function mapDataToBodyComponent(
 ): JSX.Element[] {
   const mapping: JSX.Element[] = [];
   const pageIndex = page - 1;
+
+  if (data.length == 0) {
+    return mapping;
+  }
 
   for (let j = 0; j < 7 && pageIndex * 7 + j < data.length; j++) {
     const value = data[pageIndex * 7 + j];
@@ -127,6 +132,7 @@ const CustomersTable: React.FC<CustomersTableProps> = ({ data, ids, view }) => {
         </TableHeader>
         <TableBody>{mapDataToBodyComponent(data, page, ids, view)}</TableBody>
       </DataTable>
+      {data.length == 0 ? <EmptyData>Start creating campaigns to view your customer and marketing data!</EmptyData> : ""}
       {
         // pagination when needed
         numOfPages > 1 ? <PaginationSection /> : null

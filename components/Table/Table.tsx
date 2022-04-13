@@ -12,7 +12,6 @@ import {
   DataLong,
   Data,
   PagePointer,
-  StyledButton,
   EmptyData
 } from "./styles";
 import { TableProps } from "./types";
