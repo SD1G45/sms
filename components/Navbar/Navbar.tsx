@@ -106,7 +106,7 @@ const Navbar = () => {
                 src={"/icons/pyramid-transparent.png"}
               />
             </Link>
-            <BusinessName>{businessName}</BusinessName>
+            <BusinessName>Trism</BusinessName>
           </BusinessInfoSection>
           <ControlsSection>
             {" "}
