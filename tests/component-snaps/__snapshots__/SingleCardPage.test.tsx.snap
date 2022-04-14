@@ -101,52 +101,81 @@ exports[`<SingleCardPage/> renders correctly 1`] = `
       className="c4"
     />
   </div>
-  <div
-    className="c5"
-  >
+  <div>
     <div
-      style={
-        Object {
-          "boxSizing": "border-box",
-          "display": "inline-block",
-          "margin": 0,
-          "maxWidth": "100%",
-          "overflow": "hidden",
-          "position": "relative",
-        }
-      }
+      className="c5"
     >
       <div
         style={
           Object {
             "boxSizing": "border-box",
-            "display": "block",
+            "display": "inline-block",
+            "margin": 0,
             "maxWidth": "100%",
+            "overflow": "hidden",
+            "position": "relative",
           }
         }
       >
-        <img
-          alt=""
-          aria-hidden={true}
-          role="presentation"
-          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+        <div
           style={
             Object {
-              "border": "none",
+              "boxSizing": "border-box",
               "display": "block",
-              "margin": 0,
               "maxWidth": "100%",
-              "padding": 0,
             }
           }
-        />
-      </div>
-      <noscript>
+        >
+          <img
+            alt=""
+            aria-hidden={true}
+            role="presentation"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+            style={
+              Object {
+                "border": "none",
+                "display": "block",
+                "margin": 0,
+                "maxWidth": "100%",
+                "padding": 0,
+              }
+            }
+          />
+        </div>
+        <noscript>
+          <img
+            alt="triangle"
+            decoding="async"
+            src="/StackedTriangle-1.svg"
+            srcSet="/_next/image?url=%2FStackedTriangle-1.svg&w=256&q=75 1x, /_next/image?url=%2FStackedTriangle-1.svg&w=640&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
         <img
           alt="triangle"
           decoding="async"
-          src="/StackedTriangle-1.svg"
-          srcSet="/_next/image?url=%2FStackedTriangle-1.svg&w=256&q=75 1x, /_next/image?url=%2FStackedTriangle-1.svg&w=640&q=75 2x"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           style={
             Object {
               "border": "none",
@@ -170,82 +199,84 @@ exports[`<SingleCardPage/> renders correctly 1`] = `
             }
           }
         />
-      </noscript>
-      <img
-        alt="triangle"
-        decoding="async"
-        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-        style={
-          Object {
-            "border": "none",
-            "bottom": 0,
-            "boxSizing": "border-box",
-            "display": "block",
-            "height": 0,
-            "left": 0,
-            "margin": "auto",
-            "maxHeight": "100%",
-            "maxWidth": "100%",
-            "minHeight": "100%",
-            "minWidth": "100%",
-            "objectFit": undefined,
-            "objectPosition": undefined,
-            "padding": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 0,
-          }
-        }
-      />
+      </div>
     </div>
   </div>
-  <div
-    className="c6"
-  >
+  <div>
     <div
-      style={
-        Object {
-          "boxSizing": "border-box",
-          "display": "inline-block",
-          "margin": 0,
-          "maxWidth": "100%",
-          "overflow": "hidden",
-          "position": "relative",
-        }
-      }
+      className="c6"
     >
       <div
         style={
           Object {
             "boxSizing": "border-box",
-            "display": "block",
+            "display": "inline-block",
+            "margin": 0,
             "maxWidth": "100%",
+            "overflow": "hidden",
+            "position": "relative",
           }
         }
       >
-        <img
-          alt=""
-          aria-hidden={true}
-          role="presentation"
-          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+        <div
           style={
             Object {
-              "border": "none",
+              "boxSizing": "border-box",
               "display": "block",
-              "margin": 0,
               "maxWidth": "100%",
-              "padding": 0,
             }
           }
-        />
-      </div>
-      <noscript>
+        >
+          <img
+            alt=""
+            aria-hidden={true}
+            role="presentation"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+            style={
+              Object {
+                "border": "none",
+                "display": "block",
+                "margin": 0,
+                "maxWidth": "100%",
+                "padding": 0,
+              }
+            }
+          />
+        </div>
+        <noscript>
+          <img
+            alt="circle"
+            decoding="async"
+            src="/StackedCircle.svg"
+            srcSet="/_next/image?url=%2FStackedCircle.svg&w=384&q=75 1x, /_next/image?url=%2FStackedCircle.svg&w=640&q=75 2x"
+            style={
+              Object {
+                "border": "none",
+                "bottom": 0,
+                "boxSizing": "border-box",
+                "display": "block",
+                "height": 0,
+                "left": 0,
+                "margin": "auto",
+                "maxHeight": "100%",
+                "maxWidth": "100%",
+                "minHeight": "100%",
+                "minWidth": "100%",
+                "objectFit": undefined,
+                "objectPosition": undefined,
+                "padding": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "width": 0,
+              }
+            }
+          />
+        </noscript>
         <img
           alt="circle"
           decoding="async"
-          src="/StackedCircle.svg"
-          srcSet="/_next/image?url=%2FStackedCircle.svg&w=384&q=75 1x, /_next/image?url=%2FStackedCircle.svg&w=640&q=75 2x"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           style={
             Object {
               "border": "none",
@@ -269,34 +300,7 @@ exports[`<SingleCardPage/> renders correctly 1`] = `
             }
           }
         />
-      </noscript>
-      <img
-        alt="circle"
-        decoding="async"
-        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-        style={
-          Object {
-            "border": "none",
-            "bottom": 0,
-            "boxSizing": "border-box",
-            "display": "block",
-            "height": 0,
-            "left": 0,
-            "margin": "auto",
-            "maxHeight": "100%",
-            "maxWidth": "100%",
-            "minHeight": "100%",
-            "minWidth": "100%",
-            "objectFit": undefined,
-            "objectPosition": undefined,
-            "padding": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-            "width": 0,
-          }
-        }
-      />
+      </div>
     </div>
   </div>
 </div>

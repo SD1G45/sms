@@ -39,12 +39,13 @@ exports[`<CustomersTable/> renders correctly 1`] = `
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  text-align: center;
+  padding-right: 300px;
 }
 
 .c2 {
   border-bottom: 2.75px solid #C4C4C4;
   padding-bottom: 15px;
-  padding-right: 140px;
   padding-top: 15px;
   font-size: 14px;
   text-align: left;
@@ -309,5 +310,6 @@ exports[`<CustomersTable/> renders correctly 1`] = `
       </tr>
     </tbody>
   </table>
+  
 </div>
 `;
