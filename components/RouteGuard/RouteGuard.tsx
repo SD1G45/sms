@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUserState } from "../../context/UserContext";
-import { route } from "next/dist/next-server/server/router";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import getRootUrl from "../../config/rootUrl";
 
 // const RouteGuard: React.FC = ({ children }) => {
 //   return <div />;
@@ -10,6 +11,7 @@ import { route } from "next/dist/next-server/server/router";
 const RouteGuard: any = ({ children }: any) => {
   const router = useRouter();
   const userState = useUserState();
+  const businessState = useBusinessState();
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
@@ -47,6 +49,20 @@ const RouteGuard: any = ({ children }: any) => {
       setAuthorized(false);
       router.push({
         pathname: "/us",
+      });
+    } else if (
+      !businessState?.businessId &&
+      (path.includes("campaigns") ||
+        path.includes("coupons") ||
+        path.includes("customers") ||
+        path.includes("keywords") ||
+        path.includes("billing") ||
+        path.includes("settings") ||
+        path === "/")
+    ) {
+      const rootUrl = getRootUrl();
+      router.push({
+        pathname: rootUrl + "business/create"
       });
     } else {
       setAuthorized(true);
