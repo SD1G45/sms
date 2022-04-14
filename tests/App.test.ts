@@ -12,7 +12,7 @@ beforeAll(async () => {
   cleanDatabase("Cleaned database - ready for testing.");
 
   browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: [
       '--window-size=1920,1080',
       '--start-maximized',
@@ -33,7 +33,7 @@ describe("Register process", () => {
       throw new Error("Error while loading App page");
     }
   
-    await expect(page).toMatch('Flexible marketing Fit for anyone')
+    await expect(page).toMatch('us')
   });
 
   it("moves to register page on clicking link", async () => {
@@ -41,7 +41,7 @@ describe("Register process", () => {
       throw new Error("Error while loading Register page");
     }
 
-    const linkHandlers = await page.$x("//label[contains(., 'Sign Up')]");
+    const linkHandlers = await page.$x("//label[contains(., 'Register')]");
 
     if (linkHandlers.length > 0) {
       await Promise.all([
