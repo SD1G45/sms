@@ -20,7 +20,6 @@ beforeAll(async () => {
     defaultViewport: null
   });
   page = await browser.newPage();
-  page.setDefaultTimeout(6000)
 
   await page.goto(rootUrl);
 }, 30_000);
@@ -181,14 +180,15 @@ describe("Customers", () => {
     if (!page) {
       throw new Error("Error while loadinga customers/create page");
     }
-
     await page.type("#name", testCustomerList.name);
     await page.type("#description", testCustomerList.description);
     await page.click("#create");
     await sleep(1_000);
-    await page.click("#close"); 
+    await page.click("#close");
     await page.waitForNavigation();
+    await sleep(3_000);
     await expect(page).toMatch("/customers");
+    console.log("6");
   });
 })
 
@@ -281,7 +281,7 @@ describe("Keywords", () => {
     await page.click(customerListId);
     await page.click("#create");
     sleep(2_000);
-    await page.click("#close");
+    await page.$eval("#close", elem => (elem as HTMLElement).click());
     await page.waitForNavigation();
     await expect(page).toMatch("/keywords");
   });
@@ -333,8 +333,8 @@ describe("Campaigns", () => {
     await page.click("#add");
     await page.click(customerListId);
     await page.click("#create");
-    sleep(2_000);
-    await page.click("#close");
+    sleep(3_000);
+    await page.$eval("#close", elem => (elem as HTMLElement).click());
     await page.waitForNavigation();
     await expect(page).toMatch("/campaigns");
   });
@@ -348,7 +348,8 @@ describe("Logout process", () => {
 
     await page.click("#logout");
     await page.waitForNavigation();
-    await expect(page).toMatch("/login");
+    
+    await expect(page).toMatch("/us");
   });
 })
 
@@ -357,6 +358,10 @@ describe("Log back in", () => {
     if (!page) {
       throw  new Error("Eror while loading /login page");
     }
+    
+    await page.click('#logout');
+    await expect(page).toMatch("/login");
+    await sleep(2_000);
 
     await page.type("#email", testUser.email);
     await page.type("#password", testUser.password);

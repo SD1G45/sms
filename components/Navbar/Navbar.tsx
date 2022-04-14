@@ -134,7 +134,7 @@ const Navbar = () => {
 
             <Spacing />
 
-            <LogoutButton variant="header" text="Login" />
+            <LogoutButton variant="header" text="Login" id="logout"/>
           </ControlsSection>
         </PrimaryNavbar>
       </>
