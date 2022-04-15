@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import TextArea from "../../../components/TextArea";
-import TextField from "../../../components/TextField";
+import React, { useEffect, useState } from "react";
+import TextArea from "../../../../components/TextArea";
+import TextField from "../../../../components/TextField";
 import Image from "next/image";
 import { useRouter } from "next/router";
 // import reactCSS from "reactcss";
@@ -21,22 +21,46 @@ import {
   SetupLaterButton,
   CreateButton,
   ColorPicker,
-} from "../../../page-styles/coupons/create/styles";
+} from "../../../../page-styles/coupons/create/styles";
+
 import { TwitterPicker } from "react-color";
-import { Label } from "../../../components/TextField/styles";
-import CouponPreview from "../../../components/CouponPreview";
-import { ColumnDiv, ContainerDiv } from "../../../page-styles/coupons/styles";
-import SideNav from "../../../components/SideNav";
-import { useMutation } from "@apollo/client";
-import { EDIT_COUPON } from "../../../page-mutations/coupons/create";
-import { useBusinessState } from "../../../context/BusinessContext/BusinessContext";
-import ErrorPopup from "../../../components/ErrorPopup";
+import { Label } from "../../../../components/TextField/styles";
+import CouponPreview from "../../../../components/CouponPreview";
+import {
+  ColumnDiv,
+  ContainerDiv,
+} from "../../../../page-styles/coupons/styles";
+import SideNav from "../../../../components/SideNav";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { EDIT_COUPON } from "../../../../page-mutations/coupons/create";
+import { GET_COUPON_BY_ID } from "../../../../page-queries/coupons";
+import { useBusinessState } from "../../../../context/BusinessContext/BusinessContext";
+import ErrorPopup from "../../../../components/ErrorPopup";
 
 const CreateCoupon: React.FC = () => {
   const businessState = useBusinessState();
   const router = useRouter();
+  const couponId = router.query.id as string;
+
+  const [getCoupon, couponQueryResult] = useLazyQuery(GET_COUPON_BY_ID);
+
+  useEffect(() => {
+    if (router.query.id) {
+      getCoupon({
+        variables: {
+          couponId: couponId,
+        },
+      });
+    }
+  }, [router.query.id]);
+  let data = undefined;
+  if (couponQueryResult.data) {
+    console.log(couponQueryResult.data.coupon.name);
+    data = couponQueryResult.data.coupon;
+  }
 
   const [title, setTitle] = useState("");
+
   const [description, setDescription] = useState("");
   const [newCouponId, setNewCouponId] = useState("");
   const [result, setResult] = useState(false);

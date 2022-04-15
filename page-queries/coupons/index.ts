@@ -10,3 +10,15 @@ export const COUPON_QUERY = gql`
     }
   }
 `;
+
+export const GET_COUPON_BY_ID = gql`
+  query Coupon($couponId: String!) {
+    coupon(id: $couponId) {
+      name
+      title
+      description
+      primaryColor
+      expirationDate
+    }
+  }
+`;
