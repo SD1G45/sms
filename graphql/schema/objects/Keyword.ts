@@ -8,10 +8,9 @@ export const Keyword = objectType({
     t.string("message");
     t.string("description");
     t.string("couponId");
-    t.field("keyWordCustomerList", {
-      type: "KeyWord_CustomerList", 
+    t.field("customerListId", {
+      type: "String", 
       resolve: async (root, _args, ctx) => {
-        console.log("here");
         if (!root) 
           throw new Error("missing root for keyword customer list");
 
@@ -23,7 +22,10 @@ export const Keyword = objectType({
           }
         });
 
-        return list;
+        if (!list)
+          throw new Error("No list");
+
+        return list.customerListId;
       }
     })
     t.field("coupon", {

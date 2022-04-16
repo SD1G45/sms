@@ -258,9 +258,9 @@ export interface NexusGenFieldTypes {
   Keyword: { // field return type
     coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     couponId: string | null; // String
+    customerListId: string | null; // String
     description: string | null; // String
     id: string | null; // String
-    keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword: string | null; // String
     message: string | null; // String
   }
@@ -422,9 +422,9 @@ export interface NexusGenFieldTypeNames {
   Keyword: { // field return type name
     coupon: 'Coupon'
     couponId: 'String'
+    customerListId: 'String'
     description: 'String'
     id: 'String'
-    keyWordCustomerList: 'KeyWord_CustomerList'
     keyword: 'String'
     message: 'String'
   }

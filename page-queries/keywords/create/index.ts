@@ -47,9 +47,7 @@ export const GET_KEYWORD_BY_ID = gql`
       description
       message
       couponId
-      keyWordCustomerList {
-        customerListId
-      }
+      customerListId
     }
   }
 `;
