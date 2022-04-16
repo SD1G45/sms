@@ -13,18 +13,23 @@ import {
   DataLong,
   Data,
   PagePointer,
-  EmptyData
+  EmptyData,
 } from "./styles";
 import { TableProps } from "./types";
 
-function mapDataToHeaderComponent(data: string[], tableType: string): JSX.Element[] {
+function mapDataToHeaderComponent(
+  data: string[],
+  tableType: string
+): JSX.Element[] {
   const mapping: JSX.Element[] = [];
 
   data.map((value, i) => {
     const newItem =
-      i == 0 ? <HeaderLong tableType={tableType}>{value}</HeaderLong> 
-      : 
-      <Header>{value}</Header>;
+      i == 0 ? (
+        <HeaderLong tableType={tableType}>{value}</HeaderLong>
+      ) : (
+        <Header>{value}</Header>
+      );
     mapping.push(newItem);
   });
 
@@ -38,25 +43,23 @@ function getDataJSXElement(
   lengthIndex: number,
   id: string
 ): JSX.Element {
-  const newVal = val.length > lengthIndex ? val.slice(0, lengthIndex) + "...." : val;
+  const newVal =
+    val.length > lengthIndex ? val.slice(0, lengthIndex) + "...." : val;
 
-  if (tableType == 'coupon' || tableType == 'keywords') {
-    if (index == 0)
-      return <></>;
-    else if (index == 1) 
+  if (tableType == "coupons" || tableType == "keywords") {
+    if (index == 0) return <></>;
+    else if (index == 1)
       return (
-      <DataLong>
-        <Link href={`http://localhost:3001/${tableType}/edit/${id}`}>
-          {newVal}
-        </Link>
-      </DataLong>);
-    else
-        return <Data>{val}</Data>;
+        <DataLong>
+          <Link href={`http://localhost:3001/${tableType}/edit/${id}`}>
+            {newVal}
+          </Link>
+        </DataLong>
+      );
+    else return <Data>{val}</Data>;
   } else {
-    if (index == 0)
-      return <DataLong>{newVal}</DataLong>;
-    else
-      return <Data>{val}</Data>
+    if (index == 0) return <DataLong>{newVal}</DataLong>;
+    else return <Data>{val}</Data>;
   }
 }
 
@@ -67,7 +70,7 @@ function mapDataToBodyComponent(
 ): JSX.Element[] {
   const mapping: JSX.Element[] = [];
   const pageIndex = page - 1;
-  const lengthIndex = tableType == 'Keyword' ? 5 : 12;
+  const lengthIndex = tableType == "Keyword" ? 5 : 12;
 
   if (data.length == 0) {
     return mapping;
@@ -77,7 +80,13 @@ function mapDataToBodyComponent(
     const value = data[pageIndex * 7 + i];
     const map: JSX.Element[] = [];
     value.map((val, i) => {
-      const newItem = getDataJSXElement(val, i, tableType, lengthIndex, value[0]);
+      const newItem = getDataJSXElement(
+        val,
+        i,
+        tableType,
+        lengthIndex,
+        value[0]
+      );
       map.push(newItem);
     });
     mapping.push(<tr>{map}</tr>);
@@ -94,7 +103,7 @@ function mapDataToBodyComponent(
   return mapping;
 }
 
-const Table: React.FC<TableProps> = ({ headers, data, tableType}) => {
+const Table: React.FC<TableProps> = ({ headers, data, tableType }) => {
   const [page, setPage] = useState(1);
   const numOfEntries = data.length;
   const numOfPages = Math.ceil(numOfEntries / 7);
@@ -129,7 +138,13 @@ const Table: React.FC<TableProps> = ({ headers, data, tableType}) => {
         </TableHeader>
         <TableBody>{mapDataToBodyComponent(data, page, tableType)}</TableBody>
       </DataTable>
-      {data.length == 0 ? <EmptyData>Start creating campaigns to view your customer and marketing data!</EmptyData> : ""}
+      {data.length == 0 ? (
+        <EmptyData>
+          Start creating campaigns to view your customer and marketing data!
+        </EmptyData>
+      ) : (
+        ""
+      )}
       {numOfPages > 1 ? <PaginationSection /> : null}
     </DivContainer>
   );

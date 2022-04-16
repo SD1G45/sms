@@ -95,7 +95,7 @@ const Coupons = () => {
           <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
         <Table
-          tableType="coupon"
+          tableType="coupons"
           headers={headers}
           data={search.length > 0 ? filteredData : data}
         />
