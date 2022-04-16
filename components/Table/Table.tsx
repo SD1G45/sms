@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import { StyledLink } from "../TextField/styles";
 import {
   DivContainer,
   DataEmpty,
@@ -51,9 +52,12 @@ function getDataJSXElement(
     else if (index == 1)
       return (
         <DataLong>
-          <Link href={`http://localhost:3001/${tableType}/edit/${id}`}>
-            {newVal}
-          </Link>
+          <span title="Click to edit coupon">
+            {" "}
+            <Link href={`http://localhost:3001/${tableType}/edit/${id}`}>
+              <StyledLink>{newVal}</StyledLink>
+            </Link>
+          </span>
         </DataLong>
       );
     else return <Data>{val}</Data>;
