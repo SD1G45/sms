@@ -39,3 +39,14 @@ export const KEYWORD_QUERY = gql`
     }
   }
 `;
+
+export const GET_KEYWORD_BY_ID = gql`
+  query Keyword($keywrodId: String!) {
+    keyword(id: $keywrodId) {
+      keyword
+      description
+      message
+      couponId
+    }
+  }
+`;

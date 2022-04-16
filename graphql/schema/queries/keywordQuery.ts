@@ -1,6 +1,6 @@
 import { extendType, nonNull, stringArg } from "nexus";
 
-export const keywrodQuery = extendType({
+export const keywordQuery = extendType({
   type: "Query",
   definition(t) {
     t.field("keyword", {

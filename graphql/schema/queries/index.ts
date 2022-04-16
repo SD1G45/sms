@@ -14,6 +14,7 @@ import { allCustomersQuery } from "./allCustomersQuery";
 import { businessMessageCountQuery } from "./businessMessageCountQuery";
 import { customerByPhoneNumberQuery } from "./customerByPhoneNumberQuery";
 import { couponQuery } from "./couponQuery";
+import { keywordQuery } from "./keywordQuery";
 
 export {
   viewerQuery,
@@ -32,4 +33,5 @@ export {
   businessMessageCountQuery,
   customerByPhoneNumberQuery,
   couponQuery,
+  keywordQuery,
 };

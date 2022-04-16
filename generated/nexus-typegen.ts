@@ -132,6 +132,7 @@ export interface NexusGenObjects {
     id?: string | null; // String
     keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword?: string | null; // String
+    message?: string | null; // String
   }
   Mutation: {};
   Query: {};
@@ -262,6 +263,7 @@ export interface NexusGenFieldTypes {
     id: string | null; // String
     keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword: string | null; // String
+    message: string | null; // String
   }
   Mutation: { // field return type
     acceptInvitation: boolean | null; // Boolean
@@ -301,6 +303,7 @@ export interface NexusGenFieldTypes {
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     emailResetCode: NexusGenRootTypes['EmailResetCode'] | null; // EmailResetCode
+    keyword: NexusGenRootTypes['Keyword'] | null; // Keyword
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
     messageCount: number | null; // Int
     usersForBusiness: Array<NexusGenRootTypes['UserBusinessRole'] | null> | null; // [UserBusinessRole]
@@ -424,6 +427,7 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     keyWordCustomerList: 'KeyWord_CustomerList'
     keyword: 'String'
+    message: 'String'
   }
   Mutation: { // field return type name
     acceptInvitation: 'Boolean'
@@ -463,6 +467,7 @@ export interface NexusGenFieldTypeNames {
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     emailResetCode: 'EmailResetCode'
+    keyword: 'Keyword'
     keywords: 'Keyword'
     messageCount: 'Int'
     usersForBusiness: 'UserBusinessRole'
@@ -640,6 +645,9 @@ export interface NexusGenArgTypes {
     }
     emailResetCode: { // args
       value: string; // String!
+    }
+    keyword: { // args
+      id: string; // String!
     }
     keywords: { // args
       businessId: string; // String!

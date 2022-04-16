@@ -5,6 +5,7 @@ export const Keyword = objectType({
   definition(t) {
     t.string("id");
     t.string("keyword");
+    t.string("message");
     t.string("description");
     t.string("couponId");
     t.field("coupon", {
