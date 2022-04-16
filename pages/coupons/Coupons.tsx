@@ -56,6 +56,7 @@ const Coupons = () => {
   for (let i = 0; i < coupons.length; i++) {
     const curr = coupons[i];
     data.push([
+      curr.id,
       curr.name,
       "02/23/10",
       "02/23/21",

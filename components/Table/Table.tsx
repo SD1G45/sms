@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import {
@@ -30,6 +31,35 @@ function mapDataToHeaderComponent(data: string[], tableType: string): JSX.Elemen
   return mapping;
 }
 
+function getDataJSXElement(
+  val: string,
+  index: number,
+  tableType: string,
+  lengthIndex: number,
+  id: string
+): JSX.Element {
+  const newVal = val.length > lengthIndex ? val.slice(0, lengthIndex) + "...." : val;
+
+  if (tableType == 'coupon' || tableType == 'keywords') {
+    if (index == 0)
+      return <></>;
+    else if (index == 1) 
+      return (
+      <DataLong>
+        <Link href={`http://localhost:3001/${tableType}/edit/${id}`}>
+          {newVal}
+        </Link>
+      </DataLong>);
+    else
+        return <Data>{val}</Data>;
+  } else {
+    if (index == 0)
+      return <DataLong>{newVal}</DataLong>;
+    else
+      return <Data>{val}</Data>
+  }
+}
+
 function mapDataToBodyComponent(
   data: string[][],
   page: number,
@@ -47,10 +77,7 @@ function mapDataToBodyComponent(
     const value = data[pageIndex * 7 + i];
     const map: JSX.Element[] = [];
     value.map((val, i) => {
-      const newItem =
-        i == 0 ? (
-          <DataLong>{val.length > lengthIndex ? val.slice(0, lengthIndex) + "...." : val}</DataLong>
-        ) : <Data>{val}</Data>;
+      const newItem = getDataJSXElement(val, i, tableType, lengthIndex, value[0]);
       map.push(newItem);
     });
     mapping.push(<tr>{map}</tr>);

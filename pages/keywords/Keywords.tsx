@@ -63,6 +63,7 @@ const Keywords = () => {
   for (let i = 0; i < keywords.length; i++) {
     const curr = keywords[i];
     data.push([
+      curr.id,
       curr.keyword,
       "02/23/22",
       curr.coupon.sentCount,
@@ -113,7 +114,7 @@ const Keywords = () => {
         <Table
           headers={tableHeaders}
           data={search.length > 0 ? filteredData : data}
-          tableType={"Keyword"}
+          tableType={"keywords"}
         />
       </ColumnDiv>
     </ContainerDiv>
