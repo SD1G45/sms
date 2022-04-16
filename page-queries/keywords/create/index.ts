@@ -41,8 +41,8 @@ export const KEYWORD_QUERY = gql`
 `;
 
 export const GET_KEYWORD_BY_ID = gql`
-  query Keyword($keywrodId: String!) {
-    keyword(id: $keywrodId) {
+  query Keyword($keywordId: String!) {
+    keyword(id: $keywordId) {
       keyword
       description
       message

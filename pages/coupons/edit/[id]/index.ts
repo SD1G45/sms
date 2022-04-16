@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { GET_COUPON_BY_ID } from "../../../../page-queries/coupons";
-import { useLazyQuery } from "@apollo/client";
+
 import { initializeApollo } from "../../../../lib/apolloClient";
 export { default } from "./EditCoupon";
 
