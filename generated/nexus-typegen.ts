@@ -122,15 +122,14 @@ export interface NexusGenObjects {
     email?: string | null; // String
   }
   KeyWord_CustomerList: { // root type
-    customer_list_id?: string | null; // String
+    customerListId?: string | null; // String
     id?: string | null; // String
-    keyword_id?: string | null; // String
+    keywordId?: string | null; // String
   }
   Keyword: { // root type
     couponId?: string | null; // String
     description?: string | null; // String
     id?: string | null; // String
-    keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword?: string | null; // String
     message?: string | null; // String
   }
@@ -252,9 +251,9 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
-    customer_list_id: string | null; // String
+    customerListId: string | null; // String
     id: string | null; // String
-    keyword_id: string | null; // String
+    keywordId: string | null; // String
   }
   Keyword: { // field return type
     coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
@@ -416,9 +415,9 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
   }
   KeyWord_CustomerList: { // field return type name
-    customer_list_id: 'String'
+    customerListId: 'String'
     id: 'String'
-    keyword_id: 'String'
+    keywordId: 'String'
   }
   Keyword: { // field return type name
     coupon: 'Coupon'
