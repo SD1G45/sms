@@ -23,7 +23,11 @@ const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
 });
 
-const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
+const getCouponsData = (
+  couponsQueryResult: any, 
+  currentDate: string, 
+  formatter: Intl.DateTimeFormat
+): any => {
   const couponsList =
     couponsQueryResult.data != undefined ? couponsQueryResult.data.coupons : [];
 
@@ -31,7 +35,8 @@ const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
 
   couponsList.forEach((coupon: any) => {
     coupon.redeemedDates.forEach((date: any) => {
-      const formattedDate = new Date(date).toISOString();
+      const unformattedDate = new Date(date);
+      const formattedDate = new Date(formatter.format(unformattedDate)).toISOString();
       const splitDateTime = formattedDate.split("T");
       redeemed.push({ day: splitDateTime[0], time: splitDateTime[1] });
     });
@@ -54,7 +59,8 @@ const getCouponsData = (couponsQueryResult: any, currentDate: string): any => {
 };
 const getCustomersData = (
   customersQueryResult: any,
-  currentDate: string
+  currentDate: string,
+  formatter: Intl.DateTimeFormat,
 ): any => {
   const customersList =
     customersQueryResult.data != undefined
@@ -63,7 +69,8 @@ const getCustomersData = (
 
   var onboarded: { day: string; time: string }[] = [];
   customersList.forEach((customer: any) => {
-    const formattedDate = new Date(customer.onboardDate).toISOString();
+    const unformattedDate = new Date(customer.onboardDate);
+    const formattedDate = new Date(formatter.format(unformattedDate)).toISOString();
     const splitDateTime = formattedDate.split("T");
     onboarded.push({ day: splitDateTime[0], time: splitDateTime[1] });
   });
@@ -122,8 +129,8 @@ const Dashboard = () => {
 
 
   // Format the data to place into the graph
-  const couponsData = getCouponsData(couponsQueryResult, currentDate);
-  const customersData = getCustomersData(customersQueryResult, currentDate);
+  const couponsData = getCouponsData(couponsQueryResult, currentDate, dateFormatter);
+  const customersData = getCustomersData(customersQueryResult, currentDate, dateFormatter);
   const messageCount: number =
     messageCountQueryResult.data != undefined
       ? messageCountQueryResult.data.messageCount
