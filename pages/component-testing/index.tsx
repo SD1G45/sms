@@ -86,3 +86,8 @@ const Test = () => {
 };
 
 export default Test;
+
+export async function getServerSideProps(context: any) {
+  console.log("test");
+  return { props: { test: "dog" } };
+}

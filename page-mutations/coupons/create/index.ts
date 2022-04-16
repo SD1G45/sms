@@ -31,7 +31,7 @@ export const EDIT_COUPON = gql`
     $primaryColor: String!
     $expirationDate: String!
   ) {
-    editCoupon(
+    editCouponMutation(
       id: $id
       title: $title
       name: $name

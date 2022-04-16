@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import TextArea from "../../../../components/TextArea";
 import TextField from "../../../../components/TextField";
 import Image from "next/image";
@@ -26,43 +26,26 @@ import {
 import { TwitterPicker } from "react-color";
 import { Label } from "../../../../components/TextField/styles";
 import CouponPreview from "../../../../components/CouponPreview";
-import {
-  ColumnDiv,
-  ContainerDiv,
-} from "../../../../page-styles/coupons/styles";
+import { ContainerDiv } from "../../../../page-styles/coupons/styles";
 import SideNav from "../../../../components/SideNav";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { EDIT_COUPON } from "../../../../page-mutations/coupons/create";
-import { GET_COUPON_BY_ID } from "../../../../page-queries/coupons";
+
 import { useBusinessState } from "../../../../context/BusinessContext/BusinessContext";
 import ErrorPopup from "../../../../components/ErrorPopup";
 
-const CreateCoupon: React.FC = () => {
+export interface CouponProps {
+  coupon: string;
+}
+
+const EditCoupon = (props: any) => {
   const businessState = useBusinessState();
   const router = useRouter();
-  const couponId = router.query.id as string;
 
-  const [getCoupon, couponQueryResult] = useLazyQuery(GET_COUPON_BY_ID);
+  const [title, setTitle] = useState(props.initialTitle);
+  const [description, setDescription] = useState(props.initialDescription);
+  const [color, setColor] = useState(props.initialPrimaryColor);
 
-  useEffect(() => {
-    if (router.query.id) {
-      getCoupon({
-        variables: {
-          couponId: couponId,
-        },
-      });
-    }
-  }, [router.query.id]);
-  let data = undefined;
-  if (couponQueryResult.data) {
-    console.log(couponQueryResult.data.coupon.name);
-    data = couponQueryResult.data.coupon;
-  }
-
-  const [title, setTitle] = useState("");
-
-  const [description, setDescription] = useState("");
-  const [newCouponId, setNewCouponId] = useState("");
   const [result, setResult] = useState(false);
 
   const initDate = new Date();
@@ -70,7 +53,6 @@ const CreateCoupon: React.FC = () => {
   const [date, setDate] = useState(initDate.toISOString().split("T")[0]);
 
   const [time, setTime] = useState("23:59");
-  const [color, setColor] = useState("#4881F0");
 
   const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({ error: false, message: "" });
@@ -91,7 +73,6 @@ const CreateCoupon: React.FC = () => {
   );
 
   const Search = () => {
-    const [showCards, setShowCards] = React.useState(false);
     return (
       <>
         <CreateButton
@@ -102,7 +83,7 @@ const CreateCoupon: React.FC = () => {
           disabled={loading}
           loading={loading}
         >
-          Create Coupon
+          Edit Coupon
         </CreateButton>
         {result ? <Results /> : null}
       </>
@@ -112,32 +93,14 @@ const CreateCoupon: React.FC = () => {
   const Results = () => (
     <StyledCard>
       <Image src="/check.png" width={100} height={100} />
-      <CardHeading>New coupon created!</CardHeading>
+      <CardHeading>Your coupon {title} has been updated</CardHeading>
       <CardDescription>
-        You can now use "{title}" in a campaign message or an auto response via
-        a keyword.
+        The changes to {title} will show up on all future instances of the
+        coupon.
       </CardDescription>
-      <div>
-        <ConnectButton
-          id="to-campaigns"
-          onClick={() =>
-            router.push(`/campaigns/create?couponId=${newCouponId}`)
-          }
-        >
-          Connect to campaign
-        </ConnectButton>
-        <ConnectButton
-          id="to-keywords"
-          onClick={() =>
-            router.push(`/keywords/create?couponId=${newCouponId}`)
-          }
-        >
-          Connect to keyword
-        </ConnectButton>
-      </div>
 
       <SetupLaterButton id="close" onClick={() => router.push("/coupons")}>
-        Setup later
+        Back to Coupons
       </SetupLaterButton>
     </StyledCard>
   );
@@ -169,12 +132,12 @@ const CreateCoupon: React.FC = () => {
       console.log(dateTime);
       const { data, errors } = await editCouponMutation({
         variables: {
+          id: router.query.id,
           name: title,
           title,
           description,
           expirationDate: dateTime,
           primaryColor: color,
-          businessId: businessState?.businessId,
         },
       });
 
@@ -185,7 +148,6 @@ const CreateCoupon: React.FC = () => {
       }
       setResult(true);
       setLoading(false);
-      setNewCouponId(data.newCoupon.id);
     } catch (error) {
       setError({
         ...errorState,
@@ -201,7 +163,7 @@ const CreateCoupon: React.FC = () => {
       <SideNav items={list} routes={routes} heading={"Coupons"} />
       <FlexContainer>
         <HalfPage>
-          <Heading>Create new coupon</Heading>
+          <Heading>Edit {props.initialTitle}</Heading>
           <SubHeading>Information</SubHeading>
           <TextField
             id="title"
@@ -279,4 +241,4 @@ const CreateCoupon: React.FC = () => {
   );
 };
 
-export default CreateCoupon;
+export default EditCoupon;
