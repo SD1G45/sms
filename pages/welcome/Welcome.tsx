@@ -19,8 +19,11 @@ const Welcome = () => {
   useEffect(() => {
     if (Cookies.get("businessId")) {
       router.push("/");
+      console.log("ran");
     }
-  });
+    console.log("in use effect");
+  }, []);
+
   return (
     <SingleCardPage>
       <StyledCard>
