@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SingleCardPage from "../../components/SingleCardPage";
 import {
   Heading,
@@ -9,9 +9,18 @@ import {
 } from "../../page-styles/welcome/styles";
 import Link from "next/link";
 import { useUserState } from "../../context/UserContext";
+import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import router from "next/router";
+import Cookies from "js-cookie";
 
 const Welcome = () => {
   const userState = useUserState();
+
+  useEffect(() => {
+    if (Cookies.get("businessId")) {
+      router.push("/");
+    }
+  });
   return (
     <SingleCardPage>
       <StyledCard>
