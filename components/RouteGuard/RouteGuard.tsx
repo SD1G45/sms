@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUserState } from "../../context/UserContext";
-import { useBusinessState } from "../../context/BusinessContext/BusinessContext";
+import {
+  useBusinessDispatch,
+  useBusinessState,
+} from "../../context/BusinessContext/BusinessContext";
 import getRootUrl from "../../config/rootUrl";
+import { useLazyQuery } from "@apollo/client";
+import { BUSINESS_LIST_QUERY } from "../Navbar/queries";
+import Cookies from "js-cookie";
 
 // const RouteGuard: React.FC = ({ children }) => {
 //   return <div />;
@@ -13,7 +19,41 @@ const RouteGuard: any = ({ children }: any) => {
   const userState = useUserState();
   const businessState = useBusinessState();
   const [authorized, setAuthorized] = useState(false);
+  const [getBusinesses, businessQueryResult] =
+    useLazyQuery(BUSINESS_LIST_QUERY);
 
+  useEffect(() => {
+    getBusinesses();
+  }, [userState]);
+
+  const businessList: {
+    id: string;
+    name: string;
+    logoUrl: string;
+    phoneNumber: string;
+  }[] =
+    businessQueryResult.data != undefined &&
+    businessQueryResult.data.viewer != undefined
+      ? businessQueryResult.data.viewer.businesses
+      : [];
+
+  const businessDispatch = useBusinessDispatch();
+
+  if (businessList.length > 0 && businessState?.businessId == null) {
+    businessDispatch({
+      type: "setActiveBusiness",
+      payload: {
+        businessId: businessList[0].id,
+        name: businessList[0].name,
+        logoUrl: businessList[0].logoUrl,
+        phoneNumber: businessList[0].phoneNumber,
+      },
+    });
+  }
+
+  const filteredBusinessList = businessList.filter(
+    ({ id }) => id !== businessState?.businessId
+  );
   useEffect(() => {
     // on initial load - run auth check
     authCheck(router.asPath);
@@ -51,7 +91,7 @@ const RouteGuard: any = ({ children }: any) => {
         pathname: "/us",
       });
     } else if (
-      !businessState?.businessId &&
+      !Cookies.get("businessId") &&
       (path.includes("campaigns") ||
         path.includes("coupons") ||
         path.includes("customers") ||
@@ -62,7 +102,7 @@ const RouteGuard: any = ({ children }: any) => {
     ) {
       const rootUrl = getRootUrl();
       router.push({
-        pathname: rootUrl + "business/create"
+        pathname: rootUrl + "welcome",
       });
     } else {
       setAuthorized(true);
