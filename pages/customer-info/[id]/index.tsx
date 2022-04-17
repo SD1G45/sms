@@ -68,7 +68,6 @@ const index: React.FC<Props> = ({ customer }) => {
     customerQueryResult.data != undefined
       ? customerQueryResult.data.customerByPhonenumber.id
       : undefined;
-  console.log(customerId);
 
   const [updateInfoMutation] = useMutation(UPDATE_CUSTOMER_INFO, {
     errorPolicy: "all",

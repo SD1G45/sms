@@ -117,7 +117,6 @@ const EditCoupon = (props: any) => {
 
     const today = new Date();
     if (dateTime.getTime() < today.getTime()) {
-      console.log(dateTime.getTime());
       setError({
         ...errorState,
         error: true,
@@ -129,7 +128,6 @@ const EditCoupon = (props: any) => {
     setLoading(true);
 
     try {
-      console.log(dateTime);
       const { data, errors } = await editCouponMutation({
         variables: {
           id: router.query.id,

@@ -299,6 +299,7 @@ export interface NexusGenFieldTypes {
     couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerByPhonenumber: NexusGenRootTypes['Customer'] | null; // Customer
+    customerList: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     emailResetCode: NexusGenRootTypes['EmailResetCode'] | null; // EmailResetCode
@@ -463,6 +464,7 @@ export interface NexusGenFieldTypeNames {
     couponInstance: 'CouponInstance'
     coupons: 'Coupon'
     customerByPhonenumber: 'Customer'
+    customerList: 'CustomerList'
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     emailResetCode: 'EmailResetCode'
@@ -635,6 +637,9 @@ export interface NexusGenArgTypes {
     }
     customerByPhonenumber: { // args
       phoneNumber: string; // String!
+    }
+    customerList: { // args
+      customerListId: string; // String!
     }
     customerListCustomers: { // args
       customerListId: string; // String!

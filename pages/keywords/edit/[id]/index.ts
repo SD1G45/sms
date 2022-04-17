@@ -9,11 +9,12 @@ export async function getServerSideProps(context: any) {
     query: GET_KEYWORD_BY_ID,
     variables: { keywordId: context.query.id },
   });
-  console.log(data);
+
   const initialKeyword = data.keyword.keyword;
   const initialDescription = data.keyword.description;
   const initialMessage = data.keyword.message;
   const initialCouponId = data.keyword.couponId;
+  const initialCustomerListId = data.keyword.customerListId;
 
   return {
     props: {
@@ -21,6 +22,7 @@ export async function getServerSideProps(context: any) {
       initialDescription,
       initialMessage,
       initialCouponId,
+      initialCustomerListId,
     },
   };
 }

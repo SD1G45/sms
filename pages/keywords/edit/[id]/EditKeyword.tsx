@@ -16,7 +16,7 @@ import Button from "../../../../components/Button";
 import { ContainerDiv } from "../../../../page-styles/coupons/styles";
 import SideNav from "../../../../components/SideNav";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { NEW_KEYWORD } from "../../../../page-mutations/keywords/create";
+import { EDIT_KEYWORD } from "../../../../page-mutations/keywords/create";
 import { useBusinessState } from "../../../../context/BusinessContext/BusinessContext";
 import {
   COUPONS_QUERY,
@@ -77,7 +77,7 @@ const EditKeyword = (props: any) => {
   const list: string[] = ["Analytics", "Create New", "FAQ"];
   const routes: string[] = ["/keywords", "/keywords/create", "/keywords/faq"];
 
-  const [newKeywordMutation] = useMutation(NEW_KEYWORD, {
+  const [editKeywordMutation] = useMutation(EDIT_KEYWORD, {
     errorPolicy: "all",
   });
 
@@ -109,12 +109,20 @@ const EditKeyword = (props: any) => {
       customerListQueryResult.data.customerLists) ||
     [];
 
+  useEffect(() => {
+    customerListOptions.forEach((e: any) => {
+      if (e.id === props.initialCustomerListId) {
+        handleSelect(props.initialCustomerListId, e.name);
+      }
+    });
+  }, [customerListOptions]);
+
   const filteredOptions = customerListOptions.filter(
     ({ id: id1 }: { id: string }) =>
       !selectedCustomerLists.some(({ id: id2 }) => id2 === id1)
   );
 
-  const handleCreate = () => {
+  const handleEdit = () => {
     if (keyword.length == 0 || message.length == 0 || description.length == 0) {
       setError({ ...errorState, error: true, message: "Missing information." });
       return;
@@ -136,8 +144,9 @@ const EditKeyword = (props: any) => {
     setLoading(true);
 
     try {
-      newKeywordMutation({
+      editKeywordMutation({
         variables: {
+          id: router.query.id,
           keyword,
           message,
           description,
@@ -161,19 +170,11 @@ const EditKeyword = (props: any) => {
   const Results = () => (
     <StyledCard>
       <Image src="/check.png" width={100} height={100} />
-      <CardHeading>New keyword created!</CardHeading>
+      <CardHeading>{keyword} has been updated!</CardHeading>
       <CardDescription>
-        You can now use this keyword to market and attract new customers
+        Changes will take effect immediatley. Customers that have already been
+        onboarded will not be affected.
       </CardDescription>
-      {/* <div>
-        <ConnectButton onClick={() => router.push("/campaigns")}>
-          Connect to campaign
-        </ConnectButton>
-        <ConnectButton onClick={() => router.push("/keywords")}>
-          Connect to keyword
-        </ConnectButton>
-      </div>
-      */}
 
       <SetupLaterButton id="close" onClick={() => router.push("/keywords")}>
         close
@@ -203,7 +204,7 @@ const EditKeyword = (props: any) => {
       <SideNav items={list} routes={routes} heading={"Keywords"} />
       <FlexContainer>
         <HalfPage>
-          <Heading>Create new keyword</Heading>
+          <Heading>Edit {props.initialKeyword}</Heading>
           <SubHeading>Information</SubHeading>
           <TextField
             id="keyword"
@@ -254,11 +255,11 @@ const EditKeyword = (props: any) => {
             <Button
               id="create"
               style={{ width: 250 }}
-              onClick={() => handleCreate()}
+              onClick={() => handleEdit()}
               disabled={loading}
               loading={loading}
             >
-              Create Keyword
+              Edit Keyword
             </Button>
             {result ? <Results /> : ""}
           </ButtonContainer>

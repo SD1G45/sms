@@ -22,3 +22,26 @@ export const NEW_KEYWORD = gql`
     }
   }
 `;
+
+export const EDIT_KEYWORD = gql`
+  mutation editKeyword(
+    $id: String!
+    $keyword: String!
+    $description: String!
+    $message: String!
+    $customerListId: String!
+    $couponId: String!
+  ) {
+    editKeywordMutation(
+      id: $id
+      keyword: $keyword
+      couponId: $couponId
+      message: $message
+      description: $description
+      customerListId: $customerListId
+    ) {
+      id
+      keyword
+    }
+  }
+`;
