@@ -56,6 +56,7 @@ const Coupons = () => {
   for (let i = 0; i < coupons.length; i++) {
     const curr = coupons[i];
     data.push([
+      curr.id,
       curr.name,
       "02/23/10",
       "02/23/21",
@@ -94,7 +95,7 @@ const Coupons = () => {
           <Button onClick={onClick}>Create new coupon</Button>
         </RowDiv>
         <Table
-          tableType="coupon"
+          tableType="coupons"
           headers={headers}
           data={search.length > 0 ? filteredData : data}
         />

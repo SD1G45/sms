@@ -165,12 +165,6 @@ export const Landing = () => {
                   <StyledBody></StyledBody>
                 </HeaderDiv>
               </BodyContainer>
-
-              <Image
-                src={"/marketing-at-laptop.png"}
-                width={500}
-                height={500}
-              />
             </HeaderDiv>
           </MainDiv>
         </Parallax>

@@ -122,16 +122,16 @@ export interface NexusGenObjects {
     email?: string | null; // String
   }
   KeyWord_CustomerList: { // root type
-    customer_list_id?: string | null; // String
+    customerListId?: string | null; // String
     id?: string | null; // String
-    keyword_id?: string | null; // String
+    keywordId?: string | null; // String
   }
   Keyword: { // root type
     couponId?: string | null; // String
     description?: string | null; // String
     id?: string | null; // String
-    keyWordCustomerList?: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword?: string | null; // String
+    message?: string | null; // String
   }
   Mutation: {};
   Query: {};
@@ -251,17 +251,18 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
   }
   KeyWord_CustomerList: { // field return type
-    customer_list_id: string | null; // String
+    customerListId: string | null; // String
     id: string | null; // String
-    keyword_id: string | null; // String
+    keywordId: string | null; // String
   }
   Keyword: { // field return type
     coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     couponId: string | null; // String
+    customerListId: string | null; // String
     description: string | null; // String
     id: string | null; // String
-    keyWordCustomerList: NexusGenRootTypes['KeyWord_CustomerList'] | null; // KeyWord_CustomerList
     keyword: string | null; // String
+    message: string | null; // String
   }
   Mutation: { // field return type
     acceptInvitation: boolean | null; // Boolean
@@ -294,12 +295,15 @@ export interface NexusGenFieldTypes {
     business: NexusGenRootTypes['Business'] | null; // Business
     businessInviteCode: NexusGenRootTypes['BusinessInviteCode'] | null; // BusinessInviteCode
     campaign: Array<NexusGenRootTypes['Campaign'] | null> | null; // [Campaign]
+    coupon: NexusGenRootTypes['Coupon'] | null; // Coupon
     couponInstance: NexusGenRootTypes['CouponInstance'] | null; // CouponInstance
     coupons: Array<NexusGenRootTypes['Coupon'] | null> | null; // [Coupon]
     customerByPhonenumber: NexusGenRootTypes['Customer'] | null; // Customer
+    customerList: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     customerListCustomers: Array<NexusGenRootTypes['Customer_CustomerList'] | null> | null; // [Customer_CustomerList]
     customerLists: Array<NexusGenRootTypes['CustomerList'] | null> | null; // [CustomerList]
     emailResetCode: NexusGenRootTypes['EmailResetCode'] | null; // EmailResetCode
+    keyword: NexusGenRootTypes['Keyword'] | null; // Keyword
     keywords: Array<NexusGenRootTypes['Keyword'] | null> | null; // [Keyword]
     messageCount: number | null; // Int
     usersForBusiness: Array<NexusGenRootTypes['UserBusinessRole'] | null> | null; // [UserBusinessRole]
@@ -412,17 +416,18 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
   }
   KeyWord_CustomerList: { // field return type name
-    customer_list_id: 'String'
+    customerListId: 'String'
     id: 'String'
-    keyword_id: 'String'
+    keywordId: 'String'
   }
   Keyword: { // field return type name
     coupon: 'Coupon'
     couponId: 'String'
+    customerListId: 'String'
     description: 'String'
     id: 'String'
-    keyWordCustomerList: 'KeyWord_CustomerList'
     keyword: 'String'
+    message: 'String'
   }
   Mutation: { // field return type name
     acceptInvitation: 'Boolean'
@@ -455,12 +460,15 @@ export interface NexusGenFieldTypeNames {
     business: 'Business'
     businessInviteCode: 'BusinessInviteCode'
     campaign: 'Campaign'
+    coupon: 'Coupon'
     couponInstance: 'CouponInstance'
     coupons: 'Coupon'
     customerByPhonenumber: 'Customer'
+    customerList: 'CustomerList'
     customerListCustomers: 'Customer_CustomerList'
     customerLists: 'CustomerList'
     emailResetCode: 'EmailResetCode'
+    keyword: 'Keyword'
     keywords: 'Keyword'
     messageCount: 'Int'
     usersForBusiness: 'UserBusinessRole'
@@ -618,6 +626,9 @@ export interface NexusGenArgTypes {
     campaign: { // args
       businessId: string; // String!
     }
+    coupon: { // args
+      id: string; // String!
+    }
     couponInstance: { // args
       id: string; // String!
     }
@@ -627,6 +638,9 @@ export interface NexusGenArgTypes {
     customerByPhonenumber: { // args
       phoneNumber: string; // String!
     }
+    customerList: { // args
+      customerListId: string; // String!
+    }
     customerListCustomers: { // args
       customerListId: string; // String!
     }
@@ -635,6 +649,9 @@ export interface NexusGenArgTypes {
     }
     emailResetCode: { // args
       value: string; // String!
+    }
+    keyword: { // args
+      id: string; // String!
     }
     keywords: { // args
       businessId: string; // String!

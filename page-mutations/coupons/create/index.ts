@@ -21,3 +21,25 @@ export const NEW_COUPON = gql`
     }
   }
 `;
+
+export const EDIT_COUPON = gql`
+  mutation EditCoupon(
+    $id: String!
+    $title: String!
+    $name: String!
+    $description: String!
+    $primaryColor: String!
+    $expirationDate: String!
+  ) {
+    editCouponMutation(
+      id: $id
+      title: $title
+      name: $name
+      description: $description
+      primaryColor: $primaryColor
+      expirationDate: $expirationDate
+    ) {
+      id
+    }
+  }
+`;

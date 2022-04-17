@@ -13,6 +13,9 @@ import { emailResetCodeQuery } from "./emailResetCodeQuery";
 import { allCustomersQuery } from "./allCustomersQuery";
 import { businessMessageCountQuery } from "./businessMessageCountQuery";
 import { customerByPhoneNumberQuery } from "./customerByPhoneNumberQuery";
+import { couponQuery } from "./couponQuery";
+import { keywordQuery } from "./keywordQuery";
+import { customerListByIdQuery } from "./customerListByIdQuery";
 
 export {
   viewerQuery,
@@ -20,6 +23,7 @@ export {
   availablePhoneNumbersQuery,
   couponsQuery,
   customerListQuery,
+  customerListByIdQuery,
   customerListCustomerQuery,
   campaignQuery,
   emailResetCodeQuery,
@@ -30,4 +34,6 @@ export {
   allCustomersQuery,
   businessMessageCountQuery,
   customerByPhoneNumberQuery,
+  couponQuery,
+  keywordQuery,
 };

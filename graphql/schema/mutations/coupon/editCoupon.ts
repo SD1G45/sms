@@ -1,10 +1,10 @@
 import { extendType, nonNull, stringArg } from "nexus";
 
 export const editCoupon = extendType({
-  type: 'Mutation',
+  type: "Mutation",
   definition(t) {
     t.field("editCouponMutation", {
-      type: "Coupon", 
+      type: "Coupon",
       args: {
         id: nonNull(stringArg()),
         title: nonNull(stringArg()),
@@ -13,25 +13,25 @@ export const editCoupon = extendType({
         primaryColor: nonNull(stringArg()),
         expirationDate: nonNull(stringArg()),
       },
-      resolve: async(
+      resolve: async (
         _,
-        {id, name, description, primaryColor, expirationDate, title},
+        { id, name, description, primaryColor, expirationDate, title },
         ctx
       ) => {
         const coupon = await ctx.prisma.coupon.update({
           where: {
-            id
-          }, 
+            id,
+          },
           data: {
-            name, 
-            description, 
-            primaryColor, 
-            expirationDate: new Date(expirationDate), 
-            title
-          }
+            name,
+            description,
+            primaryColor,
+            expirationDate: new Date(expirationDate),
+            title,
+          },
         });
         return coupon;
-      }
-    })
-  }
+      },
+    });
+  },
 });

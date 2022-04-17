@@ -30,11 +30,24 @@ export const KEYWORD_QUERY = gql`
   query Keyword($businessId: String!) {
     keywords(businessId: $businessId) {
       keyword
+      id
       coupon {
         sentCount
         openCount
         redeemCount
       }
+    }
+  }
+`;
+
+export const GET_KEYWORD_BY_ID = gql`
+  query Keyword($keywordId: String!) {
+    keyword(id: $keywordId) {
+      keyword
+      description
+      message
+      couponId
+      customerListId
     }
   }
 `;

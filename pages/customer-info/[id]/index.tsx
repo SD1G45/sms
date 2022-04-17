@@ -7,7 +7,6 @@ import ErrorPopup from "../../../components/ErrorPopup";
 import Timer from "../../../components/Timer";
 import { initializeApollo } from "../../../lib/apolloClient";
 import { OPEN_COUPON, REDEEM_COUPON } from "../../../page-mutations/reward";
-
 import { useLazyQuery } from "@apollo/client";
 import { UPDATE_CUSTOMER_INFO } from "../../../page-mutations/customers/create";
 import { EmailTextField } from "../../../page-styles/landingpage/styles";
@@ -69,7 +68,6 @@ const index: React.FC<Props> = ({ customer }) => {
     customerQueryResult.data != undefined
       ? customerQueryResult.data.customerByPhonenumber.id
       : undefined;
-  console.log(customerId);
 
   const [updateInfoMutation] = useMutation(UPDATE_CUSTOMER_INFO, {
     errorPolicy: "all",
