@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import getRootUrl from "../../config/rootUrl";
 import { StyledLink } from "../TextField/styles";
 import {
   DivContainer,
@@ -46,7 +47,7 @@ function getDataJSXElement(
 ): JSX.Element {
   const newVal =
     val.length > lengthIndex ? val.slice(0, lengthIndex) + "...." : val;
-
+  const rootUrl = getRootUrl();
   if (tableType == "coupons" || tableType == "keywords") {
     if (index == 0) return <></>;
     else if (index == 1)
@@ -54,7 +55,7 @@ function getDataJSXElement(
         <DataLong>
           <span title="Click to edit coupon">
             {" "}
-            <Link href={`http://localhost:3001/${tableType}/edit/${id}`}>
+            <Link href={`${rootUrl}${tableType}/edit/${id}`}>
               <StyledLink>{newVal}</StyledLink>
             </Link>
           </span>
