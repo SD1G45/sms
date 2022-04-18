@@ -1,7 +1,7 @@
 import React from "react";
 import SideNav from "../../../components/SideNav";
 import { FlexContainer } from "../../../page-styles/keywords/faq/styles";
-import { ContainerDiv } from "../../../page-styles/coupons/styles";
+import { ContainerDiv, FaqDiv } from "../../../page-styles/coupons/styles";
 import AccordionMenu from "../../../components/Accordion/AccordionMenu";
 
 const FAQ = () => {
@@ -15,7 +15,7 @@ const FAQ = () => {
     {
       title: "How to Create a Customer List",
       content: (
-        <div>
+        <FaqDiv>
           {/* <strong>Body Header</strong> Body text <u>underline tag</u>,{" "} */}
           {/* <i>italic</i> */}
           Click <b>Create New</b> on the menu under the Customers.
@@ -29,13 +29,13 @@ const FAQ = () => {
           </div>
           If you wish to continue, press the blue <b>Create Customer List</b>{" "}
           button
-        </div>
+        </FaqDiv>
       ),
     },
     {
       title: "How to Check Analytics",
       content: (
-        <div>
+        <FaqDiv>
           {/* <strong>Body Header</strong> Body text <u>underline tag</u>,{" "} */}
           {/* <i>italic</i> */}
           <ul>
@@ -53,7 +53,7 @@ const FAQ = () => {
               <b>Customers</b> shows the customers data in the customer list
             </li>
           </ul>
-        </div>
+        </FaqDiv>
       ),
     },
   ];
