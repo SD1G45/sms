@@ -19,45 +19,11 @@ const RouteGuard: any = ({ children }: any) => {
   const userState = useUserState();
   const businessState = useBusinessState();
   const [authorized, setAuthorized] = useState(false);
-  const [getBusinesses, businessQueryResult] =
-    useLazyQuery(BUSINESS_LIST_QUERY);
 
-  useEffect(() => {
-    getBusinesses();
-  }, [userState]);
-
-  const businessList: {
-    id: string;
-    name: string;
-    logoUrl: string;
-    phoneNumber: string;
-  }[] =
-    businessQueryResult.data != undefined &&
-    businessQueryResult.data.viewer != undefined
-      ? businessQueryResult.data.viewer.businesses
-      : [];
-
-  const businessDispatch = useBusinessDispatch();
-
-  if (businessList.length > 0 && businessState?.businessId == null) {
-    businessDispatch({
-      type: "setActiveBusiness",
-      payload: {
-        businessId: businessList[0].id,
-        name: businessList[0].name,
-        logoUrl: businessList[0].logoUrl,
-        phoneNumber: businessList[0].phoneNumber,
-      },
-    });
-  }
-
-  const filteredBusinessList = businessList.filter(
-    ({ id }) => id !== businessState?.businessId
-  );
   useEffect(() => {
     // on initial load - run auth check
     authCheck(router.asPath);
-
+    // console.log(businessState);
     // on route change start - hide page content by setting authorized to false
     const hideContent = () => setAuthorized(false);
     router.events.on("routeChangeStart", hideContent);
@@ -70,7 +36,7 @@ const RouteGuard: any = ({ children }: any) => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-  }, [userState]);
+  }, [userState, businessState]);
 
   async function authCheck(url: string) {
     // redirect to login page if accessing a private page and not logged in
@@ -91,7 +57,7 @@ const RouteGuard: any = ({ children }: any) => {
         pathname: "/us",
       });
     } else if (
-      !Cookies.get("businessId") &&
+      !businessState?.businessId &&
       (path.includes("campaigns") ||
         path.includes("coupons") ||
         path.includes("customers") ||
