@@ -52,9 +52,9 @@ export const HeaderLong = styled.th<stylesProps>`
 
 export const Data = styled.td`
   border-bottom: 2.75px solid #c4c4c4;
-  padding-bottom: 15px;
+  padding-bottom: 11.5px;
   padding-left: 58px;
-  padding-top: 15px;
+  padding-top: 11.5px;
   font-size: 14px;
   font-weight: 500;
   overflow: hidden;
