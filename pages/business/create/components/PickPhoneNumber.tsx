@@ -10,11 +10,13 @@ import { AVAILABLE_PHONE_NUMBERS_QUERY } from "../../../../page-queries/create-b
 import {
   ButtonContainer,
   ButtonDivider,
+  HeadingDiv,
   PhoneNumber,
   PhoneNumberContainer,
   PhoneNumberList,
   PhoneSearchFlex,
   StyledButton,
+  Subheading,
 } from "../../../../page-styles/create-business/styles";
 
 interface PickPhoneNumberProps {
@@ -61,6 +63,12 @@ const PickPhoneNumber: React.FC<PickPhoneNumberProps> = ({ onBack }) => {
 
   return (
     <div>
+      <HeadingDiv>
+        <Subheading>
+          Type in the area code you would like and select from the available
+          phone numbers
+        </Subheading>
+      </HeadingDiv>
       <PhoneSearchFlex>
         <SearchBar
           id="search"
@@ -87,7 +95,6 @@ const PickPhoneNumber: React.FC<PickPhoneNumberProps> = ({ onBack }) => {
             )
           )}
       </PhoneNumberList>
-
       <ButtonContainer>
         <StyledButton id="back" onClick={onBack} invert>
           Back

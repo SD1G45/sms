@@ -4,6 +4,7 @@ import BusinessLogoEditor from "../../../components/BusinessLogoEditor";
 import SingleCardPage from "../../../components/SingleCardPage";
 import {
   Heading,
+  HeadingDiv,
   StyledCard,
   StyledStepper,
 } from "../../../page-styles/create-business/styles";
@@ -47,7 +48,9 @@ const CreateBusiness: React.FC<CreateBusinessProps> = ({ business }) => {
           <BusinessLogoEditor onClose={() => setLogoEditorOpen(false)} />
         ) : (
           <>
-            <Heading>Create your new business account</Heading>
+            <HeadingDiv>
+              <Heading>Create your new business account</Heading>
+            </HeadingDiv>
             <StyledStepper steps={steps} activeIndex={activeStepperIndex} />
             {activeStepperIndex === 0 ? (
               <SetBusinessName

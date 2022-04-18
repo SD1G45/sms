@@ -10,9 +10,26 @@ export const StyledCard = styled(Card)`
   margin-right: 125px;
 `;
 
+export const ResultsDiv = styled.div`
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+export const NextStep = styled.h3`
+  color: #4881f0;
+`;
 export const Heading = styled.h1`
   font-size: 1.4rem;
   margin-bottom: 20px;
+`;
+
+export const Subheading = styled.h2`
+  font-size: 1.2rem;
+`;
+
+export const HeadingDiv = styled.div`
+  text-align: center;
+  margin-bottom: 50px;
 `;
 
 export const StyledStepper = styled(Stepper)`

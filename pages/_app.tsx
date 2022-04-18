@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import LoadingDiv from "../components/LoadingDiv";
 import { ParallaxProvider } from "react-scroll-parallax";
 import Head from "next/head";
+import { isMobile } from "react-device-detect";
 
 const Loading = () => {
   const router = useRouter();

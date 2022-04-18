@@ -4,8 +4,16 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import TextField from "../../../../components/TextField";
 import { useBusinessDispatch } from "../../../../context/BusinessContext/BusinessContext";
-import { CREATE_BUSINESS_MUTATION, EDIT_BUSINESS_MUTATION } from "../../../../page-mutations/create-business";
-import { StyledButton, ErrorMessage } from "../../../../page-styles/create-business/styles";
+import {
+  CREATE_BUSINESS_MUTATION,
+  EDIT_BUSINESS_MUTATION,
+} from "../../../../page-mutations/create-business";
+import {
+  StyledButton,
+  ErrorMessage,
+  HeadingDiv,
+  Subheading,
+} from "../../../../page-styles/create-business/styles";
 
 interface SetBusinessNameProps {
   businessName: string;
@@ -107,6 +115,9 @@ const SetBusinessName: React.FC<SetBusinessNameProps> = ({
 
   return (
     <>
+      <HeadingDiv>
+        <Subheading>What is the name of your business?</Subheading>
+      </HeadingDiv>
       <TextField
         id="business-name"
         value={businessName}

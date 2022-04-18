@@ -82,6 +82,7 @@ const Navbar = () => {
   );
 
   if (currentPath.startsWith("/welcome")) return <></>;
+  if (currentPath.startsWith("/mobile")) return <></>;
 
   if (currentPath.startsWith("/business/create")) return <></>;
 
@@ -135,7 +136,7 @@ const Navbar = () => {
 
             <Spacing />
 
-            <LogoutButton variant="header" text="Login" id="logout"/>
+            <LogoutButton variant="header" text="Login" id="logout" />
           </ControlsSection>
         </PrimaryNavbar>
       </>

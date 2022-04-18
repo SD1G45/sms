@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { 
-  ButtonContainer, 
-  ButtonDivider, 
-  LogoCircle, 
-  LogoPickerContainer, 
-  StyledButton, 
-  UploadLogoButton 
+import {
+  ButtonContainer,
+  ButtonDivider,
+  HeadingDiv,
+  LogoCircle,
+  LogoPickerContainer,
+  StyledButton,
+  Subheading,
+  UploadLogoButton,
 } from "../../../../page-styles/create-business/styles";
 
 interface SetBusinessLogoProps {
@@ -24,6 +26,12 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
   const { business_id } = router.query;
   return (
     <>
+      <HeadingDiv>
+        <Subheading>
+          Upload your business logo. This image will be displayed on materials
+          you send to your customers.
+        </Subheading>
+      </HeadingDiv>
       <LogoPickerContainer>
         <LogoCircle
           src={`https://smsmp-business-logos-local.s3.amazonaws.com/${business_id}.png`}
@@ -31,13 +39,16 @@ const SetBusinessLogo: React.FC<SetBusinessLogoProps> = ({
         <UploadLogoButton id="upload" invert onClick={() => openLogoEditor()}>
           Upload logo
         </UploadLogoButton>
+        * please upload a PNG or JPEG file
       </LogoPickerContainer>
       <ButtonContainer>
         <StyledButton id="back" onClick={onBack} invert>
           Back
         </StyledButton>
         <ButtonDivider />
-        <StyledButton id="next" onClick={onNext}>Next</StyledButton>
+        <StyledButton id="next" onClick={onNext}>
+          Next
+        </StyledButton>
       </ButtonContainer>
     </>
   );

@@ -9,7 +9,7 @@ import getRootUrl from "../../config/rootUrl";
 import { useLazyQuery } from "@apollo/client";
 import { BUSINESS_LIST_QUERY } from "../Navbar/queries";
 import Cookies from "js-cookie";
-
+import { isMobile } from "react-device-detect";
 // const RouteGuard: React.FC = ({ children }) => {
 //   return <div />;
 // };
@@ -42,6 +42,15 @@ const RouteGuard: any = ({ children }: any) => {
     // redirect to login page if accessing a private page and not logged in
     const path = url.split("?")[0];
     if (
+      isMobile &&
+      path !== "/mobile" &&
+      path !== "/reward" &&
+      path !== "/customer-info"
+    ) {
+      router.push({ pathname: "/mobile" });
+    } else if (!isMobile && path === "/mobile") {
+      router.push({ pathname: "/us" });
+    } else if (
       !userState?.jid &&
       (path.includes("campaigns") ||
         path.includes("coupons") ||
