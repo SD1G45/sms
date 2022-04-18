@@ -15,12 +15,13 @@ import Cookies from "js-cookie";
 
 const Welcome = () => {
   const userState = useUserState();
-
+  const businessState = useBusinessState();
   useEffect(() => {
-    if (Cookies.get("businessId")) {
+    if (businessState?.businessId) {
       router.push("/");
     }
-  });
+  }, [businessState]);
+
   return (
     <SingleCardPage>
       <StyledCard>
