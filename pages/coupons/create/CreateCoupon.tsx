@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextArea from "../../../components/TextArea";
 import TextField from "../../../components/TextField";
 import Image from "next/image";
@@ -58,6 +58,13 @@ const CreateCoupon: React.FC = () => {
     errorPolicy: "all",
   });
 
+  useEffect(() => {
+    setTimeout(
+      () => setError({ ...errorState, error: false, message: "" }),
+      8000
+    );
+  });
+
   const dateTime = new Date(
     Number(date.split("-")[0]),
     Number(date.split("-")[1]) - 1,
@@ -94,10 +101,20 @@ const CreateCoupon: React.FC = () => {
         a keyword.
       </CardDescription>
       <div>
-        <ConnectButton id="to-campaigns" onClick={() => router.push(`/campaigns/create?couponId=${newCouponId}`)}>
+        <ConnectButton
+          id="to-campaigns"
+          onClick={() =>
+            router.push(`/campaigns/create?couponId=${newCouponId}`)
+          }
+        >
           Connect to campaign
         </ConnectButton>
-        <ConnectButton id="to-keywords" onClick={() => router.push(`/keywords/create?couponId=${newCouponId}`)}>
+        <ConnectButton
+          id="to-keywords"
+          onClick={() =>
+            router.push(`/keywords/create?couponId=${newCouponId}`)
+          }
+        >
           Connect to keyword
         </ConnectButton>
       </div>
@@ -177,7 +194,9 @@ const CreateCoupon: React.FC = () => {
             value={title}
             style={{ marginBottom: 30 }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setTitle(event.target.value.length > 25 ? title : event.target.value)
+              setTitle(
+                event.target.value.length > 25 ? title : event.target.value
+              )
             }
           />
           <TextArea

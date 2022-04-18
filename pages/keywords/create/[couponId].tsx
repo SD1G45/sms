@@ -52,7 +52,9 @@ const CreateKeyword: React.FC = () => {
   const [result, setResult] = useState(false);
 
   const [selectorSearch, setSelectorSearch] = useState<string | null>(null);
-  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(couponId == null ? null : couponId as string);
+  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(
+    couponId == null ? null : (couponId as string)
+  );
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedCustomerLists, setSelectedCustomerLists] = useState<
@@ -78,6 +80,13 @@ const CreateKeyword: React.FC = () => {
   const [newKeywordMutation] = useMutation(NEW_KEYWORD, {
     errorPolicy: "all",
   });
+
+  useEffect(() => {
+    setTimeout(
+      () => setError({ ...errorState, error: false, message: "" }),
+      10000
+    );
+  }, [errorState]);
 
   const [getCoupons, couponQueryResult] = useLazyQuery(COUPONS_QUERY);
   const [getCustomerLists, customerListQueryResult] =
@@ -123,12 +132,14 @@ const CreateKeyword: React.FC = () => {
       return;
     }
 
-    if (selectedCouponId.length < 1) {
+    if (selectedCustomerLists.length < 1) {
+      console.log("error");
       setError({
         ...errorState,
         error: true,
         message: "No customer list(s) selected.",
       });
+      return;
     }
 
     setLoading(true);
