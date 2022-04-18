@@ -4,7 +4,7 @@ import {
   StyledAccordion,
   FlexContainer,
 } from "../../../page-styles/coupons/faq/styles";
-import { ContainerDiv } from "../../../page-styles/coupons/styles";
+import { ContainerDiv, FaqDiv } from "../../../page-styles/coupons/styles";
 import AccordionMenu from "../../../components/Accordion/AccordionMenu";
 
 const FAQ = () => {
@@ -14,7 +14,7 @@ const FAQ = () => {
     {
       title: "How to Create a Coupon",
       content: (
-        <div>
+        <FaqDiv>
           {/* <strong>Body Header</strong> Body text <u>underline tag</u>,{" "} */}
           {/* <i>italic</i> */}
           Click <b>Analytics</b> on the menu under the Coupons.
@@ -30,13 +30,13 @@ const FAQ = () => {
           </div>
           The preview will show on the right side of your screen. If you wish to
           continue, press the blue <b>Create Coupon</b> button.
-        </div>
+        </FaqDiv>
       ),
     },
     {
       title: "How to Check Analytics",
       content: (
-        <div>
+        <FaqDiv>
           {/* <strong>Body Header</strong> Body text <u>underline tag</u>,{" "} */}
           {/* <i>italic</i> */}
           <ul>
@@ -64,7 +64,7 @@ const FAQ = () => {
               coupons created).
             </li>
           </ul>
-        </div>
+        </FaqDiv>
       ),
     },
   ];

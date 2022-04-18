@@ -18,6 +18,7 @@ import { useLazyQuery } from "@apollo/client";
 import { COUPONS_QUERY } from "../page-queries/keywords/create";
 import { ALL_CUSTOMERS_QUERY } from "../page-queries/customers";
 import { MESSAGE_COUNT_QUERY } from "../page-queries/business";
+import { initializeApollo } from "../lib/apolloClient";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
@@ -95,7 +96,7 @@ const getCustomersData = (
   return sampleData.getDatesForGraph("customers", onboardedMap);
 };
 
-const Dashboard = () => {
+const Dashboard = (props: any) => {
   const businessState = useBusinessState();
   const [businessName, setBusinessName] = useState("");
 
