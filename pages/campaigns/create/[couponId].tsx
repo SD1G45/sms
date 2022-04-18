@@ -51,7 +51,9 @@ const CreateCampaign: React.FC = () => {
   const [result, setResult] = useState(false);
 
   const [selectorSearch, setSelectorSearch] = useState<string | null>(null);
-  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(couponId ? couponId as string : null);
+  const [selectedCouponId, setSelectedCouponId] = useState<string | null>(
+    couponId ? (couponId as string) : null
+  );
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [selectedCustomerLists, setSelectedCustomerLists] = useState<
@@ -60,6 +62,13 @@ const CreateCampaign: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorState, setError] = useState({ error: false, message: "" });
+
+  useEffect(() => {
+    setTimeout(
+      () => setError({ ...errorState, error: false, message: "" }),
+      10000
+    );
+  }, [errorState]);
 
   const handleRemove = (id: string) => {
     setSelectedCustomerLists(
@@ -92,7 +101,6 @@ const CreateCampaign: React.FC = () => {
         businessId: businessState?.businessId,
       },
     });
-
   }, [getCoupons, businessState]);
 
   useEffect(() => {
@@ -101,12 +109,10 @@ const CreateCampaign: React.FC = () => {
         businessId: businessState?.businessId,
       },
     });
-
   }, [getCustomerLists, businessState]);
 
   const couponOptions: Coupon[] =
     (couponQueryResult.data && couponQueryResult.data.coupons) || [];
-  
 
   const customerListOptions =
     (customerListQueryResult.data &&
@@ -129,12 +135,13 @@ const CreateCampaign: React.FC = () => {
       return;
     }
 
-    if (selectedCouponId.length < 1) {
+    if (selectedCustomerLists.length < 1) {
       setError({
         ...errorState,
         error: true,
         message: "No customer list(s) selected.",
       });
+      return;
     }
 
     setLoading(true);
@@ -195,8 +202,7 @@ const CreateCampaign: React.FC = () => {
       couponDescription = currentCoupon.description;
       couponPrimaryColor = currentCoupon.primaryColor;
       couponExpirationDate = currentCoupon.expirationDate;
-      if (selectorSearch == null)
-        setSelectorSearch(currentCoupon.title);
+      if (selectorSearch == null) setSelectorSearch(currentCoupon.title);
     }
   }
 
