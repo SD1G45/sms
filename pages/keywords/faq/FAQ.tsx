@@ -1,7 +1,7 @@
 import React from "react";
 import SideNav from "../../../components/SideNav";
 import { FlexContainer } from "../../../page-styles/keywords/faq/styles";
-import { ContainerDiv } from "../../../page-styles/coupons/styles";
+import { ContainerDiv, FaqDiv } from "../../../page-styles/coupons/styles";
 import AccordionMenu from "../../../components/Accordion/AccordionMenu";
 
 const FAQ = () => {
@@ -11,7 +11,7 @@ const FAQ = () => {
     {
       title: "How to Create a Keyword",
       content: (
-        <div>
+        <FaqDiv>
           {/* <strong>Body Header</strong> Body text <u>underline tag</u>,{" "} */}
           {/* <i>italic</i> */}
           Click <b>Create New</b> on the menu under the Keywords.
@@ -26,13 +26,13 @@ const FAQ = () => {
             </ul>
           </div>
           If you wish to continue, press the blue <b>Create Keyword</b> button
-        </div>
+        </FaqDiv>
       ),
     },
     {
       title: "How to Check Analytics",
       content: (
-        <div>
+        <FaqDiv>
           {/* <strong>Body Header</strong> Body text <u>underline tag</u>,{" "} */}
           {/* <i>italic</i> */}
           <ul>
@@ -65,7 +65,7 @@ const FAQ = () => {
               coupons created)"
             </li>
           </ul>
-        </div>
+        </FaqDiv>
       ),
     },
   ];

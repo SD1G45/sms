@@ -28,3 +28,7 @@ export const SearchDiv = styled.div`
   padding-right: 75px;
   padding-top: 8px;
 `;
+
+export const FaqDiv = styled.div`
+  color: white;
+`
