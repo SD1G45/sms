@@ -43,14 +43,15 @@ const RouteGuard: any = ({ children }: any) => {
     const path = url.split("?")[0];
     if (
       isMobile &&
-      path !== "/mobile" &&
-      path !== "/reward" &&
-      path !== "/customer-info"
+      !path.includes("reward") &&
+      !path.includes("customer-info") &&
+      path !== "/mobile"
     ) {
-      router.push({ pathname: "/mobile" });
-    } else if (!isMobile && path === "/mobile") {
-      router.push({ pathname: "/us" });
-    } else if (
+      setAuthorized(false);
+      router.push("/mobile");
+    }
+
+    if (
       !userState?.jid &&
       (path.includes("campaigns") ||
         path.includes("coupons") ||
