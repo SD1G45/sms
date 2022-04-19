@@ -104,6 +104,11 @@ const Settings = () => {
                 <StyledLink>Invite a Team Member</StyledLink>
               </Link>
             </LinkDiv>
+            <LinkDiv>
+              <Link href={newRouteWithQueries("/business/create", router)}>
+                <StyledLink>Create a new business</StyledLink>
+              </Link>
+            </LinkDiv>
           </Box>
 
           <Box>
