@@ -204,10 +204,10 @@ const Dashboard = (props: any) => {
         <ColumnDiv>
           <RowDiv>
             <StyledCard>
-              <StyledHeader>Coupons</StyledHeader>
-              <Link href="/coupons">
+              <StyledHeader>Customers</StyledHeader>
+              <Link href="/customers">
                 <Image
-                  src="/Dashboard_icons/coupon.svg"
+                  src="/Dashboard_icons/customer.svg"
                   width={250}
                   height={250}
                 />
@@ -218,10 +218,10 @@ const Dashboard = (props: any) => {
         <ColumnDiv>
           <RowDiv>
             <StyledCard>
-              <StyledHeader>Campaigns</StyledHeader>
-              <Link href="/campaigns">
+              <StyledHeader>Coupons</StyledHeader>
+              <Link href="/coupons">
                 <Image
-                  src="/Dashboard_icons/campaign.svg"
+                  src="/Dashboard_icons/coupon.svg"
                   width={250}
                   height={250}
                 />
@@ -246,10 +246,10 @@ const Dashboard = (props: any) => {
         <ColumnDiv>
           <RowDiv>
             <StyledCard>
-              <StyledHeader>Customers</StyledHeader>
-              <Link href="/customers">
+              <StyledHeader>Campaigns</StyledHeader>
+              <Link href="/campaigns">
                 <Image
-                  src="/Dashboard_icons/customer.svg"
+                  src="/Dashboard_icons/campaign.svg"
                   width={250}
                   height={250}
                 />
