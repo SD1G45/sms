@@ -2,9 +2,15 @@ import { gql, useMutation } from "@apollo/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+
 import Timer from "../../../components/Timer";
 import { initializeApollo } from "../../../lib/apolloClient";
 import { OPEN_COUPON, REDEEM_COUPON } from "../../../page-mutations/reward";
+import {
+  HeadingDiv,
+  NextStep,
+  StyledButton,
+} from "../../../page-styles/create-business/styles";
 import {
   Bottom,
   Container,
@@ -45,7 +51,7 @@ const index: React.FC<Props> = ({ coupon, redeemed, opened, customer }) => {
   const contactLink = `/customer-info/${customer.phoneNumber}`;
   const [openMutation] = useMutation(OPEN_COUPON);
   const [redeemMutation] = useMutation(REDEEM_COUPON);
-
+  const [firstRedeem, setFirstRedeem] = useState(false);
   useEffect(() => {
     if (!opened) {
       openMutation({ variables: { id: router.query.id } });
@@ -59,7 +65,21 @@ const index: React.FC<Props> = ({ coupon, redeemed, opened, customer }) => {
         redeemedAt: new Date(),
       },
     });
+    setFirstRedeem(false);
     setRedeemed(true);
+  };
+
+  const RedeemPopUp = () => {
+    return (
+      <>
+        <NextStep>Are you sure you want to redeem?</NextStep>
+        <HeadingDiv>This cannot be undone.</HeadingDiv>
+
+        <StyledButton invert={true} onClick={handleRedeem}>
+          Yes, I'm sure I want to redeem
+        </StyledButton>
+      </>
+    );
   };
 
   return (
@@ -74,13 +94,20 @@ const index: React.FC<Props> = ({ coupon, redeemed, opened, customer }) => {
           <RedeemButton
             backgroundColor={coupon.primaryColor}
             disabled={isRedeemed}
-            onClick={handleRedeem}
+            onClick={() => setFirstRedeem(true)}
           >
             Redeem
           </RedeemButton>
         </Middle>
+        {firstRedeem && <RedeemPopUp />}
         <Bottom>
-          <Timer expirationDate={new Date(coupon.expirationDate)} />
+          {!isRedeemed ? (
+            <Timer expirationDate={new Date(coupon.expirationDate)} />
+          ) : (
+            <HeadingDiv>
+              <NextStep>Redeemed! Stay tuned for more offers.</NextStep>
+            </HeadingDiv>
+          )}
         </Bottom>
         <Link href={contactLink}>
           <StyledLink>Click here to complete your profile!</StyledLink>
