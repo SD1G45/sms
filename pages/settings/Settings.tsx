@@ -101,7 +101,7 @@ const Settings = () => {
             </LinkDiv>
             <LinkDiv>
               <Link href={newRouteWithQueries("/business/invite", router)}>
-                <StyledLink>Invite a Team Member</StyledLink>
+                <StyledLink>Invite a new Team Member</StyledLink>
               </Link>
             </LinkDiv>
             <LinkDiv>
