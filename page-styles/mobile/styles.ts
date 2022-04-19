@@ -15,6 +15,12 @@ export const ImageDiv = styled.div`
   height: 850px;
 `;
 
+export const PyramidDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
