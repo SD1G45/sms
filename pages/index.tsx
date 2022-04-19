@@ -186,7 +186,7 @@ const Dashboard = (props: any) => {
             </ChartDiv>
             <BillingCycleColumn
               spentAmount={totalSpent}
-              salesAmount="$175.00"
+              salesAmount="$00.00"
               billingCycle={firstDay + " - " + lastDay}
               billingCycleRoute="/billing"
             />
