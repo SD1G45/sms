@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   ContainerDiv,
@@ -18,7 +18,6 @@ import { useLazyQuery } from "@apollo/client";
 import { COUPONS_QUERY } from "../page-queries/keywords/create";
 import { ALL_CUSTOMERS_QUERY } from "../page-queries/customers";
 import { MESSAGE_COUNT_QUERY } from "../page-queries/business";
-import { initializeApollo } from "../lib/apolloClient";
 
 const LineChart = dynamic(() => import("../components/LineChart"), {
   ssr: false,
@@ -205,18 +204,6 @@ const Dashboard = (props: any) => {
         <ColumnDiv>
           <RowDiv>
             <StyledCard>
-              <StyledHeader>Campaigns</StyledHeader>
-              <Link href="/campaigns">
-                <Image
-                  src="/Dashboard_icons/campaign.svg"
-                  width={250}
-                  height={250}
-                />
-              </Link>
-            </StyledCard>
-          </RowDiv>
-          <RowDiv>
-            <StyledCard>
               <StyledHeader>Coupons</StyledHeader>
               <Link href="/coupons">
                 <Image
@@ -228,25 +215,41 @@ const Dashboard = (props: any) => {
             </StyledCard>
           </RowDiv>
         </ColumnDiv>
-        <ColumnDiv style={{ margin: "auto" }}>
+        <ColumnDiv>
           <RowDiv>
             <StyledCard>
-              <StyledHeader>Customers</StyledHeader>
-              <Link href="/customers">
+              <StyledHeader>Campaigns</StyledHeader>
+              <Link href="/campaigns">
                 <Image
-                  src="/Dashboard_icons/customer.svg"
+                  src="/Dashboard_icons/campaign.svg"
                   width={250}
                   height={250}
                 />
               </Link>
             </StyledCard>
           </RowDiv>
+        </ColumnDiv>
+        <ColumnDiv>
           <RowDiv>
             <StyledCard>
               <StyledHeader>Keywords</StyledHeader>
               <Link href="/keywords">
                 <Image
                   src="/Dashboard_icons/keyword.svg"
+                  width={250}
+                  height={250}
+                />
+              </Link>
+            </StyledCard>
+          </RowDiv>
+        </ColumnDiv>
+        <ColumnDiv>
+          <RowDiv>
+            <StyledCard>
+              <StyledHeader>Customers</StyledHeader>
+              <Link href="/customers">
+                <Image
+                  src="/Dashboard_icons/customer.svg"
                   width={250}
                   height={250}
                 />
