@@ -45,16 +45,7 @@ const Mobile = () => {
               <div ref={parallax.ref}>
                 <StyledHeader>Sorry we're not ready</StyledHeader>
 
-                <StyledHeader>
-                  for you yet.
-                  <span
-                    style={{ "font-size": 25, marginLeft: 4, marginRight: 5 }}
-                  >
-                    {" "}
-                    &#128553;
-                  </span>{" "}
-                  We're{" "}
-                </StyledHeader>
+                <StyledHeader>for you yet. We're </StyledHeader>
                 <StyledHeader>working on improving</StyledHeader>
                 <StyledHeader>your mobile experience.</StyledHeader>
               </div>
