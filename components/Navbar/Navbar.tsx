@@ -180,6 +180,9 @@ const Navbar = () => {
           <Link href="/">
             <StyledImage src="/icons/home.svg" width={130} height={130} />
           </Link>
+          <Link href="/help">
+            <StyledImage src="/icons/help.svg" width={50} height={50} />
+          </Link>
           <Spacing />
           <Link href="/settings">
             <StyledImage src="/icons/settings.svg" width={50} height={50} />
